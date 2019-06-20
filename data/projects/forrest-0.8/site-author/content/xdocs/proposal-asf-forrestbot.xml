@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN"
+"http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Draft: Proposal for ASF-wide Forrestbot</title>
+  </header>
+  <body>
+    <warning>
+      This is a draft proposal document. It is not yet the consensus of ASF nor
+      the Infrastructure committee.
+    </warning>
+    <section id="overview">
+      <title>Overview</title>
+      <p>
+        All ASF projects need to be able to concentrate on their projects and
+        the content of their websites, rather than get tangled up in arcane
+        website publication procedures.
+      </p>
+      <p>
+        A proposal is currently being discussed for
+        <a href="http://people.apache.org/~crossley/proposal-asf-publish.html">ASF-wide
+        documentation staging and publishing</a>.
+      </p>
+      <p>
+        The context of this Forrestbot proposal is at Item C through to Item G
+        of that infrastructure, the "staging server". This does not preclude
+        other mechanisms - some projects might choose to use Forrestbot.
+      </p>
+    </section>
+    <section id="forrestbot">
+      <title>About Forrestbot</title>
+      <p>
+        The Forrestbot enables the automated building and deployment of
+        websites. It will retrieve the source from SVN or CVS, build the
+        website, and then deploy it. Notifications can be sent. It keeps a log
+        of the build process. See more <a href="site:forrestbot">detailed
+        explanation</a>.
+      </p>
+      <p>
+        There is also a "web interface" component to Forrestbot to enable the
+        project committers to easily trigger their website build, view the
+        result, and deploy it to the staging server. See more
+        <a href="site:forrestbot-web-interface">detailed explanation</a>.
+      </p>
+    </section>
+    <section id="requirements">
+      <title>Requirements</title>
+      <p>
+        The staging server (e.g. stage.apache.org) would be a virtual server. A
+        stable version of "forrest" and "forrestbot" would be installed there.
+        Each project that uses forrestbot would have a forrestbot configuration
+        file. This defines the SVN or CVS repository to get the source from,
+        where to deploy the built site, and various other parameters.
+      </p>
+      <p>
+        The Forrestbot web interface requires a servlet container (e.g.
+        <a href="http://jakarta.apache.org/tomcat/">Apache Tomcat</a>) and an
+        <a href="http://httpd.apache.org/">Apache HTTP Server</a> would be used
+        to view the staging sites.
+      </p>
+    </section>
+    <section id="demo">
+      <title>Demonstration</title>
+      <p>
+        The recent demonstration on brutus is now gone. Soon we will set up a
+        new demo on our zone machine.
+      </p>
+    </section>
+  </body>
+</document>

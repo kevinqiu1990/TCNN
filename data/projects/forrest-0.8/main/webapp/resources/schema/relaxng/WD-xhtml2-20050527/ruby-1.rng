@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XHTML2: http://www.w3.org/TR/2005/WD-xhtml2-20050527
+Copyright © 1999-2004 World Wide Web Consortium, (Massachusetts Institute of Technology,
+European Research Consortium for Informatics and Mathematics, Keio University).
+All Rights Reserved. This work is distributed under the W3C® Software Licens [1]
+in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+         xmlns:x="http://www.w3.org/1999/xhtml"
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+
+  <x:h1>Ruby Module in RELAX NG</x:h1>
+
+  <x:pre>
+    Ruby Elements
+
+      ruby, rbc, rtc, rb, rt, rp
+
+    This module defines grammars to support ruby annotation markup.
+    This module is based on the W3C Ruby Annotation Specification:
+
+      http://www.w3.org/TR/ruby
+
+    Copyright &#xA9;2003 W3C&#xAE; (MIT, ERCIM, Keio), All Rights Reserved.
+
+      Editor:   Masayasu Ishikawa &lt;mimasa@w3.org&gt;
+      Revision: $Id: ruby-1.rng,v 1.9 2004/07/21 09:46:41 mimasa Exp $
+
+    Permission to use, copy, modify and distribute this RELAX NG schema
+    for Ruby Annotation and its accompanying documentation for any purpose
+    and without fee is hereby granted in perpetuity, provided that the above
+    copyright notice and this paragraph appear in all copies. The copyright
+    holders make no representation about the suitability of this RELAX NG
+    schema for any purpose.
+
+    It is provided "as is" without expressed or implied warranty.
+    For details, please refer to the W3C software license at:
+
+      <x:a href="http://www.w3.org/Consortium/Legal/copyright-software"
+      >http://www.w3.org/Consortium/Legal/copyright-software</x:a>
+  </x:pre>
+
+  <div>
+    <x:h2>patterns for the content model of the ruby element</x:h2>
+
+    <define name="Ruby.content.simple">
+      <x:p>Content model of simple ruby</x:p>
+      <group>
+        <ref name="rb"/>
+        <choice>
+          <ref name="rt-simple"/>
+          <group>
+            <ref name="rp"/>
+            <ref name="rt-simple"/>
+            <ref name="rp"/>
+          </group>
+        </choice>
+      </group>
+    </define>
+
+    <define name="Ruby.content.complex">
+      <x:p>Content model of complex ruby</x:p>
+      <group>
+        <ref name="rbc"/>
+        <ref name="rtc"/>
+        <optional>
+          <ref name="rtc"/>
+        </optional>
+      </group>
+    </define>
+
+    <define name="Ruby.content">
+      <x:p>Simple ruby is used by default</x:p>
+      <ref name="Ruby.content.simple"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>Ruby Elements</x:h2>
+
+    <x:h3>ruby element</x:h3>
+
+    <define name="ruby">
+      <element name="ruby">
+        <ref name="Ruby.content"/>
+        <ref name="Ruby.common.attrib"/>
+      </element>
+    </define>
+
+    <x:h3>rbc (ruby base component) element</x:h3>
+
+    <define name="rbc">
+      <element name="rbc">
+        <oneOrMore>
+          <ref name="rb"/>
+        </oneOrMore>
+        <ref name="Ruby.common.attrib"/>
+      </element>
+    </define>
+
+    <x:h3>rtc (ruby text component) element</x:h3>
+
+    <define name="rtc">
+      <element name="rtc">
+        <oneOrMore>
+          <ref name="rt-complex"/>
+        </oneOrMore>
+        <ref name="Ruby.common.attrib"/>
+      </element>
+    </define>
+
+    <x:h3>rb (ruby base) element</x:h3>
+
+    <define name="rb">
+      <element name="rb">
+        <ref name="NoRuby.content"/>
+        <ref name="Ruby.common.attrib"/>
+      </element>
+    </define>
+
+    <x:h3>rt (ruby text) element</x:h3>
+
+    <define name="rt-simple">
+      <x:p>grammar for simple ruby</x:p>
+      <x:p>rbspan attribute is not allowed in simple ruby</x:p>
+      <element name="rt">
+        <ref name="NoRuby.content"/>
+        <ref name="Ruby.common.attrib"/>
+      </element>
+    </define>
+
+    <define name="rt-complex">
+      <x:p>grammar for complex ruby</x:p>
+      <element name="rt">
+        <ref name="NoRuby.content"/>
+        <ref name="Ruby.common.attrib"/>
+        <optional>
+          <attribute name="rbspan" a:defaultValue="1">
+            <data type="positiveInteger">
+              <param name="pattern">[1-9][0-9]*</param>
+            </data>
+          </attribute>
+        </optional>
+      </element>
+    </define>
+
+    <x:h3>rp (ruby parenthesis) element</x:h3>
+
+    <define name="rp">
+      <element name="rp">
+        <text/>
+        <ref name="Ruby.common.attrib"/>
+      </element>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>Ruby Common Attributes</x:h2>
+
+    <x:p>Ruby elements are intended to have common attributes of its
+      parent markup language. The pattern "Common.attrib" MUST be
+      defined to integrate this module.</x:p>
+
+    <define name="Ruby.common.attrib">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:p>Content models of the rb and the rt elements are intended to
+      allow other inline-level elements of its parent markup language,
+      but it should not include ruby descendent elements. This RELAX NG
+      module itself doesn't check nesting of ruby elements.
+      The patterns "Inline.class" and "Inline.model" MUST be defined
+      to integrate this module.</x:p>
+
+    <define name="Inline.class" combine="choice">
+      <ref name="ruby"/>
+    </define>
+
+    <define name="NoRuby.content">
+      <ref name="Inline.model"/>
+    </define>
+  </div>
+
+</grammar>

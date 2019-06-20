@@ -1,0 +1,470 @@
+/*
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+*/
+
+/* Import statement as suggested in
+   http://www.xmlmind.com/xmleditor/_distrib/doc/configure/configure.pdf,
+   Chapter 4/page 12.
+   Provides default rendering of tables. */
+@import url(xxe-config:xhtml/css/xhtml_table.imp);
+
+/*===============================================================
+  General definitions
+  ===============================================================*/
+/* A person is a general human entity */
+person {
+    content: paragraph(attr(name) ' <' attr(email) '>');
+}
+
+/*===============================================================
+  General definitions
+  ===============================================================*/
+  
+    /*====================================================
+       Phrase Markup
+      ====================================================*/
+
+/* Code (typically monospaced) */
+code { 
+    font-family: monospace;
+}
+
+/* Strong (typically bold) */
+strong { 
+    font-weight: bold; 
+}
+
+/* Emphasis (typically italic) */
+em { 
+    font-style: italic; 
+}
+
+/* Superscript (typically smaller and higher) */
+sup {
+    font-size: .83em;
+    vertical-align: super;
+}
+
+/* Subscript (typically smaller and lower) */
+sub { 
+    font-size: .83em;
+    vertical-align: sub;
+}
+
+/* Anchor point (equivalent of <a name="...">) */
+anchor:after { 
+    content: icon(right-target); 
+    color: olive;
+    vertical-align: text-top;
+}
+
+/* Soft link between processed pages (no equivalent in HTML) */
+connect {
+    color: #0086b2;
+    text-decoration: underline;
+}
+
+connect:after {
+    font-style: italic;
+    content: ' [connect:' attr(href) '] '
+}
+
+    /*====================================================
+       Specials
+      ====================================================*/
+
+/* Breakline Object (typically forces line break) */
+br:before { 
+    content: "\A"; 
+    color: olive;
+}
+
+/* Image Object (typically an inlined image) */
+img {
+    content: image(attr(src), attr(width), attr(height)) ' [' attr(src) ' - ' attr(alt) ']';
+}
+
+/* Image Icon (typically an inlined image placed as graphical item) */
+icon {
+    content: image(attr(src), attr(width), attr(height));
+}
+
+/*===============================================================
+   Blocks definitions
+  ===============================================================*/
+
+    /*====================================================
+       Paragraphs
+      ====================================================*/
+
+/* Text Paragraph (normally vertically space delimited) */
+p {
+    display: block;
+    margin-top: 1.33ex;
+    margin-bottom: 1.33ex;
+}
+
+/* Source Paragraph (normally space is preserved) */
+/* need to center this block !! */
+source { 
+    display: block;
+    white-space: pre;
+    background-color: white;
+    border: thin solid #0086b2;
+	border-color: gray;
+    font-family: monospace;
+    margin-left: 10ex;
+    margin-right: 10ex;
+}
+
+/* Note Paragraph (normally shown encapsulated) */
+note {
+    display: block;
+	border-color: blue;
+	border-width: 2px;
+	border-style: solid;
+    /*font-style: italic;*/
+}
+
+note:before {
+    font-weight: bold;
+    content: 'Note : ';
+}
+
+/* warning Paragraph (normally shown encapsulated) */
+warning {
+    display: block;
+	border-color: red;
+	border-width: 2px;
+	border-style: solid;
+    /*font-style: italic;*/
+}
+
+warning:before {
+    font-weight: bold;
+    content: 'Warning : ';
+}
+
+/* Fixme Paragraph (normally shown encapsulated) */
+fixme {
+    display: block;
+    /*font-style: italic;*/
+	border-color: yellow;
+	border-width: 2px;
+	border-style: solid;
+}
+
+fixme:before {
+    font-weight: bold;
+    /*font-style: italic;*/
+    color: green;
+    content: 'FIXME [' attr(author) '] ';
+}
+
+    /*====================================================
+       Tables
+      ====================================================*/
+
+/* Table element */
+table { 
+    display: table;
+    border: 1 outset gray;
+    margin-top: 1.33ex;
+    margin-bottom: 1.33ex;
+}
+
+/* The table title */
+caption { 
+    display: table-caption;
+    font-style: italic;
+    text-align: center;
+    margin-left: 2ex;
+    margin-right: 2ex;
+    margin-top: 2;
+    margin-bottom: 2;
+}
+
+/* The table row element */
+tr { 
+    display: table-row;
+    /*text-align: eval(attr(align));*/
+}
+
+/* The table row header element */
+/* The table row description element */
+th, td {
+    display: table-cell;
+    text-align: concatenate(attr(align));
+    vertical-align: concatenate(attr(valign));
+    row-span: concatenate(attr(rowspan));
+    column-span: concatenate(attr(colspan));    
+    border: 1 inset gray;
+    padding: 2;
+}
+th {
+    font-weight: bold;
+	text-align: center;
+}
+
+    /*====================================================
+       Lists
+      ====================================================*/
+
+/* Unordered list (typically bulleted) */
+/* Ordered list (typically numbered) */
+/* Simple list (typically with no mark) */
+ul, ol, sl { 
+    display: block;
+    margin-top: 1.33ex;
+    margin-bottom: 1.33ex;
+}
+
+/* List item */
+li {
+    display: block;
+}
+
+ul > li {
+    margin-left: 2.5ex;
+}
+ul > li:before {
+    display: marker;
+    content: disc;
+}
+
+ol > li {
+    margin-left: 6ex;
+}
+ol > li:before {
+    display: marker;
+    content: counter(n, decimal);
+    font-weight: bold;
+}
+
+/* Nested lists */
+ul ul, ul ol, ul sl,
+ol ul, ol ol, ol sl,
+sl ul, sl ol, sl sl { 
+    margin-top: 0; 
+    margin-bottom: 0; 
+}
+
+/* Definition list (typically two-column) */
+dl {
+    display: block;
+    margin-left: 2ex;
+    margin-top: 1.33ex;
+    margin-bottom: 1.33ex;
+}
+
+/* Definition term */
+dt {
+    display: block;
+    font-weight: bold; 
+}
+
+/* Definition description */
+dd { 
+    display: block;
+    margin-left: 4ex;
+}
+
+    /*====================================================
+       Special Blocks
+      ====================================================*/
+
+/* Image Block (typically a separated and centered image) */
+/*
+figure {
+    display: block;
+    text-align: center;
+     XXE can display images, but unfortunaltely not concatenate strings to
+       handle the organisation of images in the documentation directory
+      content: url('../'attr(src), attr(width), attr(height)) '\A[' attr(alt) ']';
+	  
+	  content: image(attr(src), -400, -200);
+	  
+	  
+	  
+    
+    content: image(attr(src));
+}
+*/
+figure {
+    display: block;
+    collapsible: yes;
+	collapsed: yes;
+    not-collapsible-head: 1;
+    margin: 0;
+    padding: 2;
+}
+
+figure:before {
+    display: inline;
+    content: division(content(paragraph(content(" ", 
+					collapser(collapsed-icon, 
+							  icon(pop-right), 
+							  expanded-icon, 
+							  icon(pop-down)),
+							  
+					  paragraph(image(attr(src)),
+								text-align, center,
+								margin-top, 5,
+								margin-bottom, 5)
+												)),
+					file-name-field(
+						   columns, 30,
+						   attribute, src, 
+						   font-weight, normal,
+					   background-color, white,
+						   color, black)
+		));
+    font-weight: bold;
+    color: #0000A0;
+}
+
+/*===============================================================
+   Document
+  ===============================================================*/
+document {
+    display: block;
+}
+
+    /*====================================================
+       Header
+      ====================================================*/
+
+header {
+    border: thick solid black;
+    display: block;
+	background-color: #0086b2;
+    /*margin-top: .5ex;*/
+}
+
+title { 
+    display: block;
+    color: #ffffff;
+    background-color: #0086b2;
+    text-align: left;
+    font-weight: bold;
+    font-size: 2em;
+	margin-top: 1.33ex;
+	margin-bottom: 1.33ex;
+}
+
+subtitle {
+    display: block;
+    color: #ffffff;
+    background-color: #0086b2;
+    text-align: left;
+    font-weight: bold;
+    font-size: 1.5em;
+	margin-top: 1.33ex;
+    margin-bottom: 1.33ex;
+	border-color: black;
+	border-width: 2;
+}
+
+version {
+    display: block;
+    margin-bottom: .8ex;
+}
+version:before {
+    content: 'Version : ';
+}
+
+type {
+    display: block;
+    margin-bottom: .8ex;
+}
+type:before {
+    content: 'Type : ';
+}
+
+authors {
+    display: block;
+    margin-bottom: .8ex;
+}
+authors:before {
+    text-align: left;
+    content: paragraph('Authors : ');
+}
+/* 'person' in 'authors' */
+authors > person {
+    display: block;
+    margin-left: 5ex;
+}
+
+notice {
+    display: block;
+    margin-left: 5ex;
+    margin-bottom: .8ex;
+}
+notice:before {
+    display: block;
+    content: 'Notice :';
+}
+
+abstract {
+    display: block;
+    margin-left: 5ex;
+    margin-bottom: .8ex;
+}
+abstract:before {
+    display: block;
+    content: 'Abstract :';
+}
+
+    /*====================================================
+       Body
+      ====================================================*/
+body {
+    display: block;
+    font-family: sans-serif;
+}
+
+section {
+    display:block;
+    margin-left:10pt;
+}
+section:before { 
+    margin-top:0.5em;
+    display: block;
+	text-align: left;
+    font-weight: bold; 
+	color: #0086b2;
+    content: paragraph(attr(title));
+    font-size:2em;
+    border: thin solid white;
+/*    border-bottom-color: #0086b2; */
+}
+
+
+    /*====================================================
+       Footer
+      ====================================================*/
+footer {
+    display: block;
+    border: thin solid white;
+    border-top-color: #0086b2;
+    text-align: center;
+    margin-top: 2em;
+}
+
+legal {
+    color: #0086b2;
+}
+

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN"
+"http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Template for Document DTD v13</title>
+  </header>
+  <body>
+    <p>
+      This is a template.
+    </p>
+  </body>
+</document>

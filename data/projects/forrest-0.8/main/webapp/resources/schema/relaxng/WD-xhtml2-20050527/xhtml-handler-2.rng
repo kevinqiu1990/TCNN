@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XHTML2: http://www.w3.org/TR/2005/WD-xhtml2-20050527
+Copyright © 1999-2004 World Wide Web Consortium, (Massachusetts Institute of Technology,
+European Research Consortium for Informatics and Mathematics, Keio University).
+All Rights Reserved. This work is distributed under the W3C® Software Licens [1]
+in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:x="http://www.w3.org/1999/xhtml">
+
+  <x:h1>Handler Module</x:h1>
+
+  <div>
+    <x:h2>The handler element</x:h2>
+
+    <define name="handler">
+      <element name="handler">
+        <ref name="handler.attlist"/>
+        <choice>
+          <text/>
+          <ref name="handler"/>
+        </choice>
+      </element>
+    </define>
+
+    <define name="handler.attlist">
+      <ref name="CommonTypeRequired.attrib"/>
+      <optional>
+        <attribute name="charset">
+          <ref name="Charset.datatype"/>
+        </attribute>
+      </optional>
+       <optional>
+        <attribute name="declare">
+          <value>declare</value>
+        </attribute>
+      </optional>
+    </define>
+  </div>
+
+  <define name="head.misc" combine="choice">
+    <ref name="handler"/>
+  </define>
+
+  <define name="Handler.class">
+    <ref name="handler"/>
+  </define>
+
+  <define name="Text.class" combine="choice">
+    <ref name="Handler.class"/>
+  </define>
+
+  <define name="Structural.class" combine="choice">
+    <ref name="Handler.class"/>
+  </define>
+
+</grammar>

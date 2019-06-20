@@ -1,0 +1,49 @@
+
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+function-bits or short fct-bits are capsulated functions that can be used in the site.
+
+A fct-bit contains following parts:
+<contract name="{name-of-the-function}-fct" nc="{css-contract}" tlc="{topLevelContainer}">
+  <description>
+    This functions ...
+  </description>
+  <xhtml>
+    <head>
+      <script type="text/javascript" language="javascript" 
+        src="{$root}skin/{script}.js"></script>
+    </head>
+    <body onload="init()">
+      <script type="text/javascript">something();</script>
+      <div id="{css-contract-name}">
+            CONTENT
+      </div>
+    </body>
+  </xhtml>
+  <pdf/>
+</contract>
+
+@name = name of the function contract
+@nc = name of the css-contract
+@tlc = the top level container to which this function semanticly belongs
+<xhtml/> = this code will be used in xhtml
+<pdf/> = this code will be used in pdf
+<head/> = if functions need to place code into the xhtml-head it has to go into this container
+<body/> = if functions need to place code into the xhtml-body it has to go into this container
+<script/> = the script, that has to be placed into 
+<div> = the actual div that should be used in the code

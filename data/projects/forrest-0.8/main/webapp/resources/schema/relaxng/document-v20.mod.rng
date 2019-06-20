@@ -1,0 +1,1014 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!--
+  ===================================================================
+  
+       Apache Common Documentation elements (Version 2.0)
+  
+  PURPOSE:
+    This DTD was developed to create a simple yet powerful document
+    type for software documentation for use with the Apache projects.
+  
+  TYPICAL INVOCATION:
+  
+    <!ENTITY % document PUBLIC
+        "-//APACHE//ENTITIES Documentation Vxy//EN"
+        "document-vxy.mod">
+    %document;
+  
+    where
+  
+      x := major version
+      y := minor version
+  
+  NOTES:
+  
+  FIXME:
+  
+  CHANGE HISTORY:
+  [Version 2.0a]
+    20030505  Add a meta element to the header, for generic metadata
+    20030505  Zap jump and fork, and rename 'link' to 'a' for better HTMLness
+    20030510  Fix bug which allowed nested lists like <ol><ol>. Now lists can only contain li's.
+  
+  ====================================================================
+-->
+<!-- =============================================================== -->
+<!-- Useful entities for increased DTD readability -->
+<!-- =============================================================== -->
+<grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <define name="text">
+    <text/>
+  </define>
+  <!-- Entities referred to later on are defined up front -->
+  <define name="markup">
+    <choice>
+      <ref name="strong"/>
+      <ref name="em"/>
+      <ref name="code"/>
+      <ref name="sub"/>
+      <ref name="sup"/>
+    </choice>
+  </define>
+  <define name="special-inline">
+    <choice>
+      <ref name="br"/>
+      <ref name="img"/>
+      <ref name="icon"/>
+      <ref name="acronym"/>
+      <ref name="map"/>
+    </choice>
+  </define>
+  <define name="links">
+    <ref name="a"/>
+  </define>
+  <define name="paragraphs">
+    <choice>
+      <ref name="p"/>
+      <ref name="source"/>
+      <ref name="note"/>
+      <ref name="warning"/>
+      <ref name="fixme"/>
+    </choice>
+  </define>
+  <define name="tables">
+    <ref name="table"/>
+  </define>
+  <define name="lists">
+    <choice>
+      <ref name="ol"/>
+      <ref name="ul"/>
+      <ref name="dl"/>
+    </choice>
+  </define>
+  <define name="special-blocks">
+    <choice>
+      <ref name="figure"/>
+      <ref name="anchor"/>
+    </choice>
+  </define>
+  <!-- these are used for image maps -->
+  <define name="Shape">
+    <choice>
+      <value>rect</value>
+      <value>circle</value>
+      <value>poly</value>
+      <value>default</value>
+    </choice>
+  </define>
+  <define name="Coords">
+    <data type="string" datatypeLibrary=""/>
+  </define>
+  <!-- =============================================================== -->
+  <!-- Entities for general XML compliance -->
+  <!-- =============================================================== -->
+  <!--
+    Common attributes
+    Every element has an ID attribute (sometimes required,
+    but usually optional) for links. %common.att;
+    is for common attributes where the ID is optional, and
+    %common-idreq.att; is for common attributes where the
+    ID is required.
+  -->
+  <define name="common.att">
+    <optional>
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="class">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="xml:lang">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="common-idreq.att">
+    <attribute name="id">
+      <data type="ID"/>
+    </attribute>
+    <optional>
+      <attribute name="class">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="xml:lang">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    xml:space attribute ===============================================
+            Indicates that the element contains white space
+            that the formatter or other application should retain,
+            as appropriate to its function.
+    ====================================================================
+  -->
+  <define name="xmlspace.att">
+    <optional>
+      <attribute name="xml:space" a:defaultValue="preserve">
+        <value>preserve</value>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    def attribute =====================================================
+            Points to the element where the relevant definition can be
+            found, using the IDREF mechanism.  %def.att; is for optional
+            def attributes, and %def-req.att; is for required def
+            attributes.
+    ====================================================================
+  -->
+  <!--
+    ref attribute =====================================================
+            Points to the element where more information can be found,
+            using the IDREF mechanism.  %ref.att; is for optional
+            ref attributes, and %ref-req.att; is for required ref
+            attributes.
+    ==================================================================
+  -->
+  <!-- =============================================================== -->
+  <!-- Entities for general usage -->
+  <!-- =============================================================== -->
+  <!--
+    Key attribute =====================================================
+            Optionally provides a sorting or indexing key, for cases when
+            the element content is inappropriate for this purpose.
+    ====================================================================
+  -->
+  <!--
+    Title attributes ==================================================
+            Indicates that the element requires to have a title attribute.
+    ====================================================================
+  -->
+  <!--
+    Name attributes ==================================================
+            Indicates that the element requires to have a name attribute.
+    ====================================================================
+  -->
+  <define name="name.att">
+    <attribute name="name"/>
+  </define>
+  <!--
+    Email attributes ==================================================
+            Indicates that the element requires to have an email attribute.
+    ====================================================================
+  -->
+  <define name="email.att">
+    <attribute name="email"/>
+  </define>
+  <!--
+    Link attributes ===================================================
+            Indicates that the element requires to have hyperlink attributes.
+    ====================================================================
+  -->
+  <define name="link.att">
+    <attribute name="href"/>
+    <optional>
+      <attribute name="title"/>
+    </optional>
+  </define>
+  <!-- =============================================================== -->
+  <!-- General definitions -->
+  <!-- =============================================================== -->
+  <!-- A person is a general unparsed human entity -->
+  <define name="person">
+    <element name="person">
+      <ref name="person.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="person.attlist" combine="interleave">
+    <ref name="common.att"/>
+    <ref name="name.att"/>
+    <ref name="email.att"/>
+  </define>
+  <!-- =============================================================== -->
+  <!-- Content definitions -->
+  <!-- =============================================================== -->
+  <define name="local.inline">
+    <notAllowed/>
+  </define>
+  <define name="link-content.mix">
+    <choice>
+      <ref name="text"/>
+      <ref name="markup"/>
+      <ref name="special-inline"/>
+      <ref name="local.inline"/>
+    </choice>
+  </define>
+  <define name="content.mix">
+    <choice>
+      <ref name="link-content.mix"/>
+      <ref name="links"/>
+    </choice>
+  </define>
+  <!-- ==================================================== -->
+  <!-- Phrase Markup -->
+  <!-- ==================================================== -->
+  <!-- Strong (typically bold) -->
+  <define name="strong">
+    <element name="strong">
+      <ref name="strong.attlist"/>
+      <zeroOrMore>
+        <ref name="content.mix"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="strong.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- Emphasis (typically italic) -->
+  <define name="em">
+    <element name="em">
+      <ref name="em.attlist"/>
+      <zeroOrMore>
+        <ref name="content.mix"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="em.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- Code (typically monospaced) -->
+  <define name="code">
+    <element name="code">
+      <ref name="code.attlist"/>
+      <ref name="text"/>
+    </element>
+  </define>
+  <define name="code.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- Superscript (typically smaller and higher) -->
+  <define name="sup">
+    <element name="sup">
+      <ref name="sup.attlist"/>
+      <ref name="text"/>
+    </element>
+  </define>
+  <define name="sup.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- Subscript (typically smaller and lower) -->
+  <define name="sub">
+    <element name="sub">
+      <ref name="sub.attlist"/>
+      <ref name="text"/>
+    </element>
+  </define>
+  <define name="sub.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- ==================================================== -->
+  <!-- Hypertextual Links -->
+  <!-- ==================================================== -->
+  <!-- hyperlink (equivalent of <a ...>) -->
+  <!-- http://www.w3.org/TR/xhtml2/mod-hypertext.html#s_hypertextmodule -->
+  <define name="a">
+    <element name="a">
+      <ref name="a.attlist"/>
+      <zeroOrMore>
+        <ref name="link-content.mix"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="a.attlist" combine="interleave">
+    <ref name="common.att"/>
+    <ref name="link.att"/>
+  </define>
+  <!-- ==================================================== -->
+  <!-- Specials -->
+  <!-- ==================================================== -->
+  <!-- Breakline Object (typically forces line break) -->
+  <define name="br">
+    <element name="br">
+      <ref name="br.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="br.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- Image Object (typically an inlined image) -->
+  <define name="img">
+    <element name="img">
+      <ref name="img.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="img.attlist" combine="interleave">
+    <attribute name="src"/>
+    <attribute name="alt"/>
+    <optional>
+      <attribute name="height"/>
+    </optional>
+    <optional>
+      <attribute name="width"/>
+    </optional>
+    <optional>
+      <attribute name="usemap"/>
+    </optional>
+    <optional>
+      <attribute name="ismap">
+        <choice>
+          <value>ismap</value>
+        </choice>
+      </attribute>
+    </optional>
+    <ref name="common.att"/>
+  </define>
+  <!-- support the img usemap attribute -->
+  <define name="map">
+    <element name="map">
+      <ref name="map.attlist"/>
+      <oneOrMore>
+        <ref name="area"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="map.attlist" combine="interleave">
+    <optional>
+      <attribute name="name"/>
+    </optional>
+  </define>
+  <define name="area">
+    <element name="area">
+      <ref name="area.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="area.attlist" combine="interleave">
+    <optional>
+      <attribute name="shape" a:defaultValue="rect">
+        <ref name="Shape"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="coords">
+        <ref name="Coords"/>
+      </attribute>
+    </optional>
+    <ref name="link.att"/>
+    <optional>
+      <attribute name="nohref">
+        <choice>
+          <value>nohref</value>
+        </choice>
+      </attribute>
+    </optional>
+    <attribute name="alt"/>
+  </define>
+  <!-- Image Icon (typically an inlined image placed as graphical item) -->
+  <define name="icon">
+    <element name="icon">
+      <ref name="icon.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="icon.attlist" combine="interleave">
+    <attribute name="src"/>
+    <attribute name="alt"/>
+    <optional>
+      <attribute name="height"/>
+    </optional>
+    <optional>
+      <attribute name="width"/>
+    </optional>
+    <ref name="common.att"/>
+  </define>
+  <!-- Acronym (in modern browsers, will have rollover text) -->
+  <define name="acronym">
+    <element name="acronym">
+      <ref name="acronym.attlist"/>
+      <zeroOrMore>
+        <ref name="text"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="acronym.attlist" combine="interleave">
+    <attribute name="title"/>
+    <ref name="common.att"/>
+  </define>
+  <!-- =============================================================== -->
+  <!-- Blocks definitions -->
+  <!-- =============================================================== -->
+  <define name="local.blocks">
+    <notAllowed/>
+  </define>
+  <define name="blocks">
+    <choice>
+      <ref name="paragraphs"/>
+      <ref name="tables"/>
+      <ref name="lists"/>
+      <ref name="special-blocks"/>
+      <ref name="local.blocks"/>
+    </choice>
+  </define>
+  <!-- Flow mixes block and inline -->
+  <define name="flow">
+    <choice>
+      <ref name="content.mix"/>
+      <ref name="blocks"/>
+    </choice>
+  </define>
+  <!-- ==================================================== -->
+  <!-- Paragraphs -->
+  <!-- ==================================================== -->
+  <!-- Text Paragraph (normally vertically space delimited. Space can be preserved.) -->
+  <define name="p">
+    <element name="p">
+      <ref name="p.attlist"/>
+      <zeroOrMore>
+        <ref name="content.mix"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="p.attlist" combine="interleave">
+    <ref name="common.att"/>
+    <optional>
+      <attribute name="xml:space">
+        <choice>
+          <value>default</value>
+          <value>preserve</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!-- Source Paragraph (normally space is preserved) -->
+  <define name="source">
+    <element name="source">
+      <ref name="source.attlist"/>
+      <zeroOrMore>
+        <ref name="content.mix"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="source.attlist" combine="interleave">
+    <ref name="common.att"/>
+    <ref name="xmlspace.att"/>
+  </define>
+  <!-- Note Paragraph (normally shown encapsulated) -->
+  <define name="note">
+    <element name="note">
+      <ref name="note.attlist"/>
+      <zeroOrMore>
+        <ref name="content.mix"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="note.attlist" combine="interleave">
+    <optional>
+      <attribute name="label"/>
+    </optional>
+    <ref name="common.att"/>
+  </define>
+  <!-- Warning Paragraph (normally shown with eye-catching colors) -->
+  <define name="warning">
+    <element name="warning">
+      <ref name="warning.attlist"/>
+      <zeroOrMore>
+        <ref name="content.mix"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="warning.attlist" combine="interleave">
+    <optional>
+      <attribute name="label"/>
+    </optional>
+    <ref name="common.att"/>
+  </define>
+  <!-- Fixme Paragraph (normally not shown) -->
+  <define name="fixme">
+    <element name="fixme">
+      <ref name="fixme.attlist"/>
+      <zeroOrMore>
+        <ref name="content.mix"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="fixme.attlist" combine="interleave">
+    <attribute name="author"/>
+    <ref name="common.att"/>
+  </define>
+  <!-- ==================================================== -->
+  <!-- Tables -->
+  <!-- ==================================================== -->
+  <!-- Attributes that indicate the spanning of the table cell -->
+  <define name="cell.span">
+    <optional>
+      <attribute name="colspan" a:defaultValue="1"/>
+    </optional>
+    <optional>
+      <attribute name="rowspan" a:defaultValue="1"/>
+    </optional>
+  </define>
+  <!-- Table element -->
+  <define name="table">
+    <element name="table">
+      <ref name="table.attlist"/>
+      <optional>
+        <ref name="caption"/>
+      </optional>
+      <oneOrMore>
+        <ref name="tr"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="table.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- The table title -->
+  <define name="caption">
+    <element name="caption">
+      <ref name="caption.attlist"/>
+      <zeroOrMore>
+        <ref name="content.mix"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="caption.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- The table row element -->
+  <define name="tr">
+    <element name="tr">
+      <ref name="tr.attlist"/>
+      <oneOrMore>
+        <choice>
+          <ref name="th"/>
+          <ref name="td"/>
+        </choice>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="tr.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- The table row header element -->
+  <define name="th">
+    <element name="th">
+      <ref name="th.attlist"/>
+      <zeroOrMore>
+        <ref name="flow"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="th.attlist" combine="interleave">
+    <ref name="common.att"/>
+    <ref name="cell.span"/>
+  </define>
+  <!-- The table row description element -->
+  <define name="td">
+    <element name="td">
+      <ref name="td.attlist"/>
+      <zeroOrMore>
+        <ref name="flow"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="td.attlist" combine="interleave">
+    <ref name="common.att"/>
+    <ref name="cell.span"/>
+  </define>
+  <!-- ==================================================== -->
+  <!-- Lists -->
+  <!-- ==================================================== -->
+  <!-- List item -->
+  <define name="li">
+    <element name="li">
+      <ref name="li.attlist"/>
+      <zeroOrMore>
+        <ref name="flow"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="li.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- Unordered list (typically bulleted) -->
+  <define name="ul">
+    <element name="ul">
+      <ref name="ul.attlist"/>
+      <oneOrMore>
+        <ref name="li"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <!--
+    spacing attribute:
+    Use "normal" to get normal vertical spacing for items;
+    use "compact" to get less spacing.  The default is dependent
+    on the stylesheet.
+  -->
+  <define name="ul.attlist" combine="interleave">
+    <ref name="common.att"/>
+    <optional>
+      <attribute name="spacing">
+        <choice>
+          <value>normal</value>
+          <value>compact</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!-- Ordered list (typically numbered) -->
+  <define name="ol">
+    <element name="ol">
+      <ref name="ol.attlist"/>
+      <oneOrMore>
+        <ref name="li"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <!--
+    spacing attribute:
+    Use "normal" to get normal vertical spacing for items;
+    use "compact" to get less spacing.  The default is dependent
+    on the stylesheet.
+  -->
+  <define name="ol.attlist" combine="interleave">
+    <ref name="common.att"/>
+    <optional>
+      <attribute name="spacing">
+        <choice>
+          <value>normal</value>
+          <value>compact</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!-- Definition list (typically two-column) -->
+  <define name="dl">
+    <element name="dl">
+      <ref name="dl.attlist"/>
+      <oneOrMore>
+        <ref name="dt"/>
+        <ref name="dd"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="dl.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- Definition term -->
+  <define name="dt">
+    <element name="dt">
+      <ref name="dt.attlist"/>
+      <zeroOrMore>
+        <ref name="content.mix"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="dt.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- Definition description -->
+  <define name="dd">
+    <element name="dd">
+      <ref name="dd.attlist"/>
+      <zeroOrMore>
+        <ref name="flow"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="dd.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- ==================================================== -->
+  <!-- Special Blocks -->
+  <!-- ==================================================== -->
+  <!-- Image Block (typically a separated and centered image) -->
+  <define name="figure">
+    <element name="figure">
+      <ref name="figure.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="figure.attlist" combine="interleave">
+    <attribute name="src"/>
+    <attribute name="alt"/>
+    <optional>
+      <attribute name="height"/>
+    </optional>
+    <optional>
+      <attribute name="width"/>
+    </optional>
+    <optional>
+      <attribute name="usemap"/>
+    </optional>
+    <optional>
+      <attribute name="ismap">
+        <choice>
+          <value>ismap</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="align"/>
+    </optional>
+    <ref name="common.att"/>
+  </define>
+  <!-- anchor point (equivalent of <a name="...">, typically not rendered) -->
+  <define name="anchor">
+    <element name="anchor">
+      <ref name="anchor.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="anchor.attlist" combine="interleave">
+    <ref name="common-idreq.att"/>
+  </define>
+  <!-- =============================================================== -->
+  <!-- Document -->
+  <!-- =============================================================== -->
+  <define name="document">
+    <element name="document">
+      <ref name="document.attlist"/>
+      <ref name="header"/>
+      <ref name="body"/>
+      <optional>
+        <ref name="footer"/>
+      </optional>
+    </element>
+  </define>
+  <define name="document.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- ==================================================== -->
+  <!-- Header -->
+  <!-- ==================================================== -->
+  <define name="local.headers">
+    <empty/>
+  </define>
+  <define name="header">
+    <element name="header">
+      <ref name="header.attlist"/>
+      <ref name="title"/>
+      <optional>
+        <ref name="subtitle"/>
+      </optional>
+      <optional>
+        <ref name="version"/>
+      </optional>
+      <optional>
+        <ref name="type"/>
+      </optional>
+      <optional>
+        <ref name="authors"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="notice"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="abstract"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="meta"/>
+      </zeroOrMore>
+      <ref name="local.headers"/>
+    </element>
+  </define>
+  <define name="header.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <define name="title">
+    <element name="title">
+      <ref name="title.attlist"/>
+      <zeroOrMore>
+        <choice>
+          <ref name="text"/>
+          <ref name="markup"/>
+          <ref name="links"/>
+          <ref name="special-inline"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="title.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <define name="subtitle">
+    <element name="subtitle">
+      <ref name="subtitle.attlist"/>
+      <zeroOrMore>
+        <choice>
+          <ref name="text"/>
+          <ref name="markup"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="subtitle.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <define name="version">
+    <element name="version">
+      <ref name="version.attlist"/>
+      <ref name="text"/>
+    </element>
+  </define>
+  <define name="version.attlist" combine="interleave">
+    <ref name="common.att"/>
+    <optional>
+      <attribute name="major"/>
+    </optional>
+    <optional>
+      <attribute name="minor"/>
+    </optional>
+    <optional>
+      <attribute name="fix"/>
+    </optional>
+    <optional>
+      <attribute name="tag"/>
+    </optional>
+  </define>
+  <define name="type">
+    <element name="type">
+      <ref name="type.attlist"/>
+      <ref name="text"/>
+    </element>
+  </define>
+  <define name="type.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <define name="authors">
+    <element name="authors">
+      <ref name="authors.attlist"/>
+      <oneOrMore>
+        <ref name="person"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="authors.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <define name="notice">
+    <element name="notice">
+      <ref name="notice.attlist"/>
+      <zeroOrMore>
+        <ref name="content.mix"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="notice.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <define name="abstract">
+    <element name="abstract">
+      <ref name="abstract.attlist"/>
+      <zeroOrMore>
+        <ref name="content.mix"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="abstract.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- See http://www.w3.org/TR/xhtml2/mod-meta.html#s_metamodule -->
+  <define name="meta">
+    <element name="meta">
+      <ref name="meta.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="meta.attlist" combine="interleave">
+    <attribute name="name">
+      <data type="NMTOKEN"/>
+    </attribute>
+    <ref name="common.att"/>
+  </define>
+  <!-- ==================================================== -->
+  <!-- Body -->
+  <!-- ==================================================== -->
+  <define name="local.sections">
+    <notAllowed/>
+  </define>
+  <define name="sections">
+    <choice>
+      <ref name="section"/>
+      <ref name="local.sections"/>
+    </choice>
+  </define>
+  <define name="body">
+    <element name="body">
+      <ref name="body.attlist"/>
+      <oneOrMore>
+        <choice>
+          <ref name="sections"/>
+          <ref name="blocks"/>
+        </choice>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="body.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <define name="section">
+    <element name="section">
+      <ref name="section.attlist"/>
+      <ref name="title"/>
+      <zeroOrMore>
+        <choice>
+          <ref name="sections"/>
+          <ref name="blocks"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="section.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+  <!-- ==================================================== -->
+  <!-- Footer -->
+  <!-- ==================================================== -->
+  <define name="local.footers">
+    <notAllowed/>
+  </define>
+  <define name="footer">
+    <element name="footer">
+      <ref name="footer.attlist"/>
+      <choice>
+        <ref name="legal"/>
+        <ref name="local.footers"/>
+      </choice>
+    </element>
+  </define>
+  <define name="footer.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="legal">
+    <element name="legal">
+      <ref name="legal.attlist"/>
+      <zeroOrMore>
+        <ref name="content.mix"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="legal.attlist" combine="interleave">
+    <ref name="common.att"/>
+  </define>
+</grammar>
+<!-- =============================================================== -->
+<!-- End of DTD -->
+<!-- =============================================================== -->

@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- =================================================
+'plugins' pipeline.  
+
+Provides access to the plugins descriptor files.
+
+==================================================== -->
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  <map:components>
+    <map:generators default="file">
+      <map:generator name="xpathdirectory"  src="org.apache.cocoon.generation.XPathDirectoryGenerator" />
+    </map:generators>
+    <map:serializers default="html"/>
+    <map:transformers default="xslt"/>
+    <map:matchers default="wildcard"/>
+  </map:components>
+  <map:pipelines>
+    <map:pipeline>
+      <map:match pattern="corePlugins.xml">
+        <map:generate type="xpathdirectory" src="{forrest:forrest.plugins-src}">
+          <map:parameter name="depth" value="2"/>
+          <map:parameter name="xpath" value="/project"/>
+          <map:parameter name="xmlFiles" value="build\.xml$"/>
+        </map:generate>
+        <map:transform src="{lm:transform.pluginBuildFiles.pluginDescriptor}">
+          <map:parameter name="type" value="released"/>
+        </map:transform>
+        <map:serialize type="xml"/>
+      </map:match>
+      <map:match pattern="whiteboardPlugins.xml">
+        <map:generate type="xpathdirectory" src="{forrest:forrest.whiteboard-plugins-src}">
+          <map:parameter name="depth" value="2"/>
+          <map:parameter name="xpath" value="/project"/>
+          <map:parameter name="xmlFiles" value="build\.xml$"/>
+        </map:generate>
+        <map:transform src="{lm:transform.pluginBuildFiles.pluginDescriptor}">
+          <map:parameter name="type" value="whiteboard"/>
+        </map:transform>
+        <map:serialize type="xml"/>
+      </map:match>
+      <map:match pattern="pluginDocs/plugins_(.*)/index(|\.source).xml" type="regexp">
+        <map:generate src="cocoon:/plugins.xml"/>
+        <map:transform src="{lm:transform.plugins.xdoc}">
+          <map:parameter name="pluginDocsVersion" value="{1}"/>
+        </map:transform>
+        <map:serialize type="xml"/>
+      </map:match>
+<!-- This match is used if we want to generate the plugins.xml
+            from the plugin build.xml files. However, it is currently
+            disabled since the 0.8 release will not bundle the plugin
+            sources so this match will not work.
+            
+            See FOR-533
+            
+       <map:match pattern="plugins.xml">
+         <map:aggregate element="pluginList">
+           <map:part src="cocoon:/corePlugins.xml"/>
+           <map:part src="cocoon:/whiteboardPlugins.xml"/>
+         </map:aggregate>
+         <map:serialize type="xml"/>
+       </map:match>
+       -->
+      <map:match pattern="plugins.xml">
+        <map:aggregate element="pluginList">
+          <map:part src="{lm:plugin.descriptor.forrest}"/>
+          <map:part src="{lm:plugin.descriptor.whiteboard}"/>
+        </map:aggregate>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+  </map:pipelines>
+</map:sitemap>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XHTML2: http://www.w3.org/TR/2005/WD-xhtml2-20050527
+Copyright © 1999-2004 World Wide Web Consortium, (Massachusetts Institute of Technology,
+European Research Consortium for Informatics and Mathematics, Keio University).
+All Rights Reserved. This work is distributed under the W3C® Software Licens [1]
+in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:x="http://www.w3.org/1999/xhtml">
+
+  <x:h1>Text Module</x:h1>
+
+  <div>
+    <x:h2>The abbr element</x:h2>
+
+    <define name="abbr">
+      <element name="abbr">
+        <ref name="abbr.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="abbr.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The cite element</x:h2>
+
+    <define name="cite">
+      <element name="cite">
+        <ref name="cite.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="cite.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The code element</x:h2>
+
+    <define name="code">
+      <element name="code">
+        <ref name="code.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="code.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The dfn element</x:h2>
+
+    <define name="dfn">
+      <element name="dfn">
+        <ref name="dfn.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="dfn.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The em element</x:h2>
+
+    <define name="em">
+      <element name="em">
+        <ref name="em.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="em.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The kbd element</x:h2>
+
+    <define name="kbd">
+      <element name="kbd">
+        <ref name="kbd.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="kbd.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The l element</x:h2>
+
+    <define name="l">
+      <element name="l">
+        <ref name="l.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="l.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The quote element</x:h2>
+
+    <define name="quote">
+      <element name="quote">
+        <ref name="quote.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="quote.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The samp element</x:h2>
+
+    <define name="samp">
+      <element name="samp">
+        <ref name="samp.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="samp.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The span element</x:h2>
+
+    <define name="span">
+      <element name="span">
+        <ref name="span.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="span.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The strong element</x:h2>
+
+    <define name="strong">
+      <element name="strong">
+        <ref name="strong.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="strong.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The sub element</x:h2>
+
+    <define name="sub">
+      <element name="sub">
+        <ref name="sub.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="sub.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The sup element</x:h2>
+
+    <define name="sup">
+      <element name="sup">
+        <ref name="sup.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="sup.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The var element</x:h2>
+
+    <define name="var">
+      <element name="var">
+        <ref name="var.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="var.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:p>these can occur at block or inline level</x:p>
+
+    <define name="Misc.class">
+      <empty/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>Content Model</x:h2>
+
+    <define name="Text.class">
+      <choice>
+        <ref name="abbr"/>
+        <ref name="cite"/>
+        <ref name="code"/>
+        <ref name="dfn"/>
+        <ref name="em"/>
+        <ref name="kbd"/>
+        <ref name="l"/>
+        <ref name="quote"/>
+        <ref name="samp"/>
+        <ref name="span"/>
+        <ref name="strong"/>
+        <ref name="sub"/>
+        <ref name="sup"/>
+        <ref name="var"/>
+      </choice>
+    </define>
+
+    <define name="Text.model">
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="Text.class"/>
+          <ref name="Misc.class"/>
+        </choice>
+      </zeroOrMore>
+    </define>
+  </div>
+
+</grammar>

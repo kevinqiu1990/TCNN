@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html>
+<head>
+  <title>Embedded HTML demonstration page</title>
+</head>
+<body>
+
+<h1><a name="intro" />Embedded HTML demonstration page</h1>
+		
+<p>An HTML document is used as the source for this page, and translated
+to the intermediate Apache Forrest xdocs document structure. The sitemap then
+does the normal aggregation with the navigation content and application of
+the skin.
+</p>
+
+<p>
+The html is being interpreted by Forrest and transformed to the
+intermediate Apache xdocs document structure. That stylesheet cannot deal
+with every possibility in unstructured html, so it tries to guess how to
+build &lt;section&gt; elements and such.
+It needs &lt;h1&gt; (&lt;h2&gt; etc.) headings in the source html
+in order to identify sections. Patches are welcome to enhance
+that transformer.
+</p>
+
+<p>
+You can still take advantage of Forrest's
+<a href="http://forrest.apache.org/docs/linking.html">"<b>site:<b>"
+method of linking</a>, for example:
+<a href="site:index">&lt;a href="site:index"&gt;</a>
+</p>
+
+<hr>
+<p class="note">XHTML can also be used, but it is just treated as interpreted
+html. Future versions of Forrest will take much more advantage of XHTML.
+</p>
+<hr>
+
+<h1><a name="examples" />Some example uses of HTML</h1>
+<p>
+There are situations when the Apache Forrest xdocs DTD is not sufficient.
+The use of embedded HTML enables you to use HTML code in these situations.
+</p>
+
+<h2><a name="js" />Embedded applets and Javascript</h2>
+      
+<p>
+See the
+<a href="javascript:alert('Opened with Javascript via the body of the source html.')">Javascript alert pop-up</a>
+</p>
+
+<h2><a name="forms" />HTML forms for user interaction</h2>
+<p>
+Search the Forrest website via Google:
+<!-- Search Google -->
+<form target="_blank" action="http://www.google.com/search" method="get" id="google-demo">
+<input value="forrest.apache.org" name="as_sitesearch" type="hidden">
+<input type="hidden" name="ie" value="UTF-8">
+<input type="hidden" name="oe" value="UTF-8">
+<a href="http://www.google.com/">
+<img src="http://www.google.com/logos/Logo_40wht.gif" 
+border="0" alt="Google Search" align="middle" width="150" height="55"></a>
+<input type="text" name="as_q" size="25" maxlength="255" value="HTML">
+&nbsp;
+<input type="submit" name="btnG" value="Google Search">
+</form>
+<!-- Search Google -->
+</p>
+
+<p>
+See a demonstration of "html" and "html forms" with our 
+<a name="mirror-example" href="http://forrest.apache.org/mirrors.cgi">Forrest download mirror</a>
+facility and the
+<a href="http://forrest.apache.org/howto/howto-asf-mirror.html">explanation</a> howto document.
+</p>
+
+<h2>Potentially Invalid XDocs</h2>
+
+<p>
+As shown above, you can add various different non-standard elements to enable
+other processing and abilities.
+However, it should also be noted that the resultant intermediate XML is not a valid document
+since it contains the additional HTML elements. If you are intending to use
+the intermediate XDocs for any purpose, then be aware of this fact.</p>
+
+<h2><a name="invalid" />Auto-correction of invalid HTML</h2>
+<p>
+This paragraph has a missing closing tag for the &lt;p&gt; element. If you look
+at the <a href="embedded_html.xml" title="view intermediate xml in separate window" target="_blank">intermediate XML created by Forrest</a> you'll notice that 
+Forrest has fixed this.
+
+<h2><a name="blink" />Other non-standard html-type abilities</h2>
+<p>
+Use other HTML <blink>delights (???) and tricks</blink>.
+</p>
+</body>
+</html>

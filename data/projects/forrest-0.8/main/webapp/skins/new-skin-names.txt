@@ -1,0 +1,31 @@
+Before inventing a dull name for a skin or trying to discuss it on
+the dev list, remember that we have already lost time on it. We decided
+to use names akin to 'skin' and stay completely away from trying to
+invent names based on functionality or fanciful names.
+
+Just pick one of these, it's easy.
+
+If you still cannot decide, toss a dice 3 times, sum up the numbers,
+and get the name that comes out.
+
+1 fleece
+2 rind
+3 fur
+4 hide
+5 coat -> taken
+6 pelt -> taken
+7 peel
+8 bark
+9 exo
+10 husk
+11 dermis
+12 corium -> taken
+13 calyx
+14 scale -> taken
+15 leather -> taken
+16 patina
+17 crust -> taken
+18 hull
+
+We may be unable to come out with a decent name, but we sure know how 
+to eliminate the problem for the next occasions in a hacky way. :-P

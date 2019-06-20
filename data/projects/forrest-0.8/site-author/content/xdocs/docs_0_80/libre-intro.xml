@@ -1,0 +1,664 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd">
+<document>
+  <header>
+    <title>Libre QuickStart</title>
+    <abstract>
+      This document is the current full documentation on the "libre" generator
+      that was implanted into xml-forrest.
+    </abstract>
+  </header>
+  <body>
+    <section>
+      <title>Intro</title>
+      <warning>
+        This document is still relevant for ideas and potential solutions.
+        However, the experimental code for Libre was removed from the scratchpad
+        on 2003-04-18 during spring cleaning. If you want to resurrect it, then
+        use the cvs tag "before_libre_departure".
+      </warning>
+      <p>
+        The libre idea was born out of the cocoon book.xml itch. The actual need
+        to start scratching was introduced by the higher volume of
+        book.xml-editing-work that came along with the cocoon documentation and
+        xml-forrest efforts.
+      </p>
+      <p>
+        The single idea behind it in fact is trying to automatically generate
+        part of the navigation tree which is held now in the different book.xml
+        's. This automation effort however is held back by the lack of meta-data
+        you can extract from the filesystem itself. This is why the libre
+        approach still requires you to add this extra metadata using some
+        libre.xml file. This libre.xml however has the following main advantages
+        over the book.xml:
+      </p>
+      <ul>
+        <li>The settings are 'inherited' down the directory tree, so you do not
+          need a libre.xml on each directory level. You only need it to change
+          the subdir traversing strategy from its parent dir.</li>
+        <li>It combines some 'filesystem-introspection'-like declarations
+          that are used in run-time filtering, sorting and attributing decisions.
+          Introspection strategies are currently based on either (1) reading properties
+          of the java.io.File object at hand, or (2) executing xpath expressions on the
+          pointed at XML file. </li>
+      </ul>
+    </section>
+    <section>
+      <title>Using Libre now (0.0 alfa)</title>
+      <warning>
+        Disclaimer: most of what you read below is 'how it was intended' . To
+        what extent that matches the actual execution process is largely
+        dependent on my programming skills and thoroughness of testing.
+        <br/>
+        In other words: don't expect a thing unless you've seen it work. (at
+        this time)
+      </warning>
+      <section>
+        <title>Generated Output</title>
+        <p>
+          The XML output that comes out of the generator largely follows this
+          example:
+        </p>
+        <source>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;collection xmlns="http://outerx.org/yer/hierarchy/0.1"&gt;
+  &lt;collection label="content"&gt;
+    &lt;collection label="xdocs"&gt;
+      &lt;item label="dreams.xml" 
+               href="src/documentation/content/xdocs/dreams.xml" 
+               title="Forrest dream list"/&gt;
+      &lt;item label="faq.xml" 
+               href="src/documentation/content/xdocs/faq.xml"/&gt;
+      &lt;item label="book.xml" 
+               href="src/documentation/content/xdocs/book.xml"/&gt;
+      &lt;item label="contrib.xml" 
+               href="src/documentation/content/xdocs/contrib.xml" 
+               title="Contribution to Forrest"/&gt;
+      &lt;item label="mail-archives.xml" 
+               href="src/documentation/content/xdocs/mail-archives.xml" 
+               title="Mail Archives"/&gt;
+      &lt;item label="mail-lists.xml" 
+               href="src/documentation/content/xdocs/mail-lists.xml" 
+               title="Mailing Lists"/&gt;
+      &lt;item label="license.xml" 
+               href="src/documentation/content/xdocs/license.xml" 
+               title="The Apache Software License"/&gt;
+      &lt;item label="index.xml" 
+               href="src/documentation/content/xdocs/index.xml" 
+               title="Welcome to Forrest"/&gt;
+      &lt;item label="who.xml" 
+               href="src/documentation/content/xdocs/who.xml" 
+               title="Who we are"/&gt;
+    &lt;/collection&gt;
+  &lt;/collection&gt;
+&lt;/collection&gt;</source>
+        <p>
+          And it's not getting any harder in fact: only 2 elements,
+          <code>&lt;collection&gt;</code> and <code>&lt;item&gt;</code> and that
+          should do. The first maps to a menu-group in the navigation, guess
+          what the second maps to?
+        </p>
+        <p>
+          The number and value (and its meaning) of the attributes on these
+          elements are specified in the libre.xml file.
+        </p>
+      </section>
+      <section>
+        <title><code>libre.xml</code> Contents</title>
+        <p>
+          That libre.xml file follows the
+          src/resources/schema/dtd/libre-v10.dtd. In fact the current release
+          allows for some extra elements (I'll explain where) and some
+          unrestricted attribute CDATA types that cause some extensible xml
+          output resp. some java-introspection to be triggered. So basically the
+          DTD will be limiting you more than the runtime interpretation. (future
+          versions will try to narrow this down seriously, main reason is that a
+          more elaborate DTD allows for more XML-editor assistance in editing
+          the files.)
+        </p>
+        <p>
+          The dtd:
+        </p>
+        <source>&lt;!ELEMENT libre (entry | auto)*&gt;
+&lt;!ELEMENT entry (label?, href?)&gt;
+&lt;!ATTLIST entry
+  location CDATA #REQUIRED
+&gt;
+&lt;!ELEMENT auto (filter?, sorter?, label?, href?)&gt;
+&lt;!ELEMENT label (xpath | property)&gt;
+&lt;!ELEMENT href (xpath | property)&gt;
+&lt;!ELEMENT filter (xpath | property)&gt;
+&lt;!ATTLIST filter
+  logic (inverse | normal) "normal"
+  clear (yes | no) "no"
+&gt;
+&lt;!ELEMENT sorter (xpath | property)&gt;
+&lt;!ATTLIST sorter
+  order (ascending | descending) "ascending"
+  clear (yes | no) "no"
+&gt;
+&lt;!ELEMENT xpath EMPTY&gt;
+&lt;!ATTLIST xpath
+  expression CDATA #REQUIRED
+&gt;
+&lt;!ELEMENT property EMPTY&gt;
+&lt;!ATTLIST property
+  name CDATA #REQUIRED
+  mask CDATA #IMPLIED
+  regex CDATA #IMPLIED
+  substitute CDATA #IMPLIED
+&gt;</source>
+        <section>
+          <title>Building Blocks</title>
+          <p>
+            The following elements get the following meaning when interpreted by
+            the LibreConfigBuilder
+          </p>
+          <source>&lt;libre xmlns="http://outerx.org/libre/config/0.1"&gt;</source>
+          <ul>
+            <li>This is one of those libre.xml files, that will configure how
+              items are filteres, sorted and attributed</li>
+          </ul>
+          <source>&lt;entry location="[relative location path]" /&gt;</source>
+          <ul>
+            <li>Allows to manually sort out specific files or directories.</li>
+            <li>Comparable to standard book.xml behaviour, except for the fact
+              that </li>
+            <ul>
+              <li>libre doesn't yet support external hrefs (should be easy
+              though)</li>
+              <li>there is no difference between <code>&lt;menu&gt;</code> and
+              <code>&lt;menu-item&gt;</code>, there just is <code>&lt;entry&gt;</code>. It
+              will become a <code>&lt;collection&gt;</code> or <code>&lt;item&gt;</code> in
+              the output based on the fact if the location points to a directory resp. a
+              file.</li>
+              <li>For locations that point to a filter it doesn't make sense, but
+              when it points to a directory it is nested <code>&lt;filter&gt;</code> and
+              <code>&lt;sort&gt;</code> elements get inherited down to the next level. </li>
+            </ul>
+          </ul>
+          <fixme author="mpo">
+            This last remarks actually means (1) I need to update the DTD to
+            reflect this and (2) check the code for actually doing this.
+          </fixme>
+          <source>&lt;auto&gt;</source>
+          <ul>
+            <li>Automatically generates more <code>&lt;collection&gt;</code>
+              and <code>&lt;item&gt;</code> elements in the output, based on the
+              specifications of the nested elements: <code>&lt;filter&gt;</code> (which
+              resources?) and <code>&lt;sort&gt;</code> (in which order?).</li>
+          </ul>
+          <source>&lt;filter logic="inverse" clear="no"&gt;</source>
+          <ul>
+            <li>This element wraps a so-called AttributeReader (there are
+              currently two of them: <code>&lt;xpath&gt;</code> and
+              <code>&lt;property&gt;</code>)</li>
+            <li>The AttributeReader is going to specify which
+              information-element is going to be retrieved from the file or directory it is
+              pointing at. Depending on which one is used this wrapping filter will test for
+              presence or regex match of the resource being read. Based on the outcome of
+              this test (true or false) the passed file will be accepted or not in the
+              list.</li>
+            <li>This wrapping filter element allows to inverse the
+              acceptance-logic (accept what normally should be rejected and vice versa).</li>
+            <li>Using the <code>clear="yes"</code> attribute stops the
+              inheritance of the used filter strategy from the parent directory. Instead the
+              default filter strategy (which is to accept all files) is slided in at this
+              level.</li>
+          </ul>
+          <source>&lt;sort order="descending" clear="no"&gt;</source>
+          <ul>
+            <li>This element wraps a so called AttributeReader (there are
+              currently two of them: <code>&lt;xpath&gt;</code> and
+              <code>&lt;property&gt;</code>).</li>
+            <li>The AttributeReader is going to specify which
+              information-element is going to be retrieved from the file or directory it is
+              pointing at. This information element will be considered to be a simple
+              Key-String and <code>&lt;collection&gt;</code> and <code>&lt;item&gt;</code>
+              elements in the output will appear in the order defined by the alphabetic
+              sorting of these keys.</li>
+            <li>This wrapping sort element allows to reverse the order.
+              (z-&gt;a instead of a-&gt;z)</li>
+            <li>Using the <code>clear="yes"</code> attribute stops the
+              inheritance of the used sort strategy from the parent directory. Instead the
+              default sort strategy (which is to use default filesystem sorting, alphabetic
+              on filename) is slided in at this level.</li>
+          </ul>
+          <source>&lt;label&gt;, &lt;href&gt;, &lt;YOURTAG&gt;.... {AttributeDefinitions}</source>
+          <ul>
+            <li>The remainder of the elements inside the
+              <code>&lt;auto&gt;</code> tag specify the attributes that need to be applied to
+              the generated <code>&lt;collection&gt;</code> and <code>&lt;item&gt;</code>
+              elements in the output: <code>&lt;item label=".." href=".." YOURTAG=".."
+              /&gt;</code></li>
+            <li>There is currently only support for adding attributes, not
+              nested elements.</li>
+            <li>These elements all wrap a so called AttributeReader (there are
+              currently two of them: &lt;xpath&gt; and &lt;property&gt;)</li>
+            <li>In these cases the wrapped AttributeReader is going to specify
+              which information-element is going to be retrieved from the file or directory
+              it is pointing at. This information element will be considered to be a simple
+              String-value that gets slided in as the corresponding output attribute
+              value.</li>
+          </ul>
+          <source>&lt;xpath expression="/document/header/title/text()"&gt;</source>
+          <ul>
+            <li>This element specifies an xpath AttributeReader to use inside
+              <code>&lt;filter&gt;</code>, <code>&lt;sort&gt;</code> or
+              {AttributeDefinitions}.</li>
+            <li>It allows to specify an xpath expression that should result in
+              one single text node to be returned when applied to the root node of the xml
+              file at the location of any given entry. The contents of this text-node is the
+              string value to sort (<code>&lt;sort&gt;</code> usage) or to fill in the
+              specified attribute (<code>&lt;label&gt;</code>, <code>&lt;href&gt;</code>...
+              use). When inside a <code>&lt;filter&gt;</code>: the presence of the node
+              results in passing the test.</li>
+          </ul>
+          <warning>
+            This currently breaks for non xml (<code>*.gif</code>) files, so get
+            your filter right please, and in the mean time: sorry for not being
+            able to use it in the filter yet <code>:-(</code>.
+          </warning>
+          <source>&lt;property name="path" regex="(\.[\\/])*(.*)" substitute="$2"/&gt;
+&lt;property name="name"  mask="CVS"/&gt;</source>
+          <ul>
+            <li>This element specifies an xpath AttributeReader to use inside
+              <code>&lt;filter&gt;</code>, <code>&lt;sort&gt;</code> or
+              {AttributeDefinitions}.</li>
+            <li>It allows to specify a JavaBean-like property to read (this
+              introspection behavior will probably not survive the future release) on the
+              file at the 'location' of any given entry. The (object-)value of this property
+              is automatically converted to a String (toString()) that becomes the value to
+              sort (<code>&lt;sort&gt;</code> usage) or to fill in the specified attribute
+              (<code>&lt;label&gt;</code>, <code>&lt;href&gt;</code>... use). When inside a
+              <code>&lt;filter&gt;</code>, the test passes if the read property is not null
+              or "".</li>
+            <li>Furthermore this element allows to express more elaborate
+              true-false tests (filter use) or regex substitution (other use)
+              attributes:</li>
+            <ul>
+              <li>combination of @regex with @substitute accounts for a
+              s/{regex}/{substitute}/ kind of operation on the string property.</li>
+              <li>while @mask or @regex by their own (filter use) allow for a
+              glob-mask or regex test to be applied on the read property.</li>
+            </ul>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <title>Important Side Effects</title>
+        <p>
+          There are some things that libre is doing that you should be aware of.
+        </p>
+        <section>
+          <title>No libre.xml</title>
+          <p>
+            When using an <code>&lt;auto&gt; </code>section, the filter will
+            NEVER accept the <code>libre.xml</code> file to be in the generated
+            output. You can however include a manual <code>&lt;entry&gt;</code>
+            to point to the <code>libre.xml</code> file if needed.
+          </p>
+        </section>
+        <section>
+          <title>No Duplicates</title>
+          <p>
+            You can combine multiple <code>&lt;entry&gt;</code> and
+            <code>&lt;auto&gt;</code> elements after each other. The system will
+            make sure that the resulting list of <code>&lt;collection&gt;</code>
+            and <code>&lt;item&gt;</code> will not contain duplicates. So the
+            filters in <code>&lt;auto&gt;</code> sections lower down the
+            <code>libre.xml</code> file can include already accepted files or
+            directories, they will only show up once in the output.
+          </p>
+        </section>
+      </section>
+      <section>
+        <title>Example Constructs</title>
+        <p>
+          Adding sorting and filtering to the filesystem with libre becomes a
+          subtle play with editable filesystem properties, smart XML content and
+          <code>libre.xml</code> configs. This should be considered as the
+          'extended' contract between the following roles in the documentation
+          system: the one choosing (or creating) the DTDs, the one applying
+          those to create content and give the resulting files a name, the one
+          that sets up the directories to store those files and writes the
+          <code>libre.xml</code> files.
+        </p>
+        <section>
+          <title>Sorting your files or your menu entries?</title>
+          <p>
+            In every case the very pragmatic approach can become something like
+            this:
+          </p>
+          <source>+ content
+  + xdocs
+    + 010Topic
+      + 010Foo
+      + 111Bar
+    + 050Aspect
+    + NotInList</source>
+          <p>
+            In combination with something that lives by the introduced
+            alphabetic order, but yet hides the ugly number-prefixes:
+          </p>
+          <source>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE libre PUBLIC "-//Outerthought//DTD Libre Configuration V0.1//EN" "libre-v01.dtd" &gt;
+&lt;libre xmlns="http://outerx.org/libre/config/0.1"&gt;
+  &lt;auto&gt;
+    &lt;filter logic="normal"&gt;
+      &lt;property name="name" regex="\d{3}(.*)"/&gt;
+    &lt;/filter&gt;
+    &lt;label&gt;
+      &lt;property name="name" regex="\d{3}(.*)" substitute="$1"/&gt;
+    &lt;/label&gt;
+  &lt;/auto&gt;
+&lt;/libre&gt;</source>
+          <p>
+            Will produce an automatic list of entries (collections and items in
+            the output) that
+          </p>
+          <ul>
+            <li><code>&lt;filter&gt;</code>: only resources which name starts
+              with a 3-digit pattern</li>
+            <li>No <code>&lt;sort&gt;</code>: in their natural filesystem order
+              assured by the digit-prefix</li>
+            <li><code>&lt;label&gt;</code>: hold a label attribute that strips
+              of the ugly number prefix</li>
+          </ul>
+          <p>
+            Of course the advantage over book.xml only comes when more menu
+            items should be easily slided in later on, and/or deeply nested
+            directory structures can all benefit from this same
+            filenaming/sorting strategy.
+          </p>
+        </section>
+        <section>
+          <title>Naming your files or asking them their name?</title>
+          <p>
+            Given the poor expressiveness of the filesystem, the labels that
+            need to show up in the menu can hardly remain the filenames they are
+            now (specially if we're adding these ugly number prefixes). Instead
+            we can sign a contract with the content writer to also provide the
+            navigation system with a sensible name for his entry using XML
+            metadata that the system will pick up using an xpath expression.
+          </p>
+          <source>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE libre PUBLIC "-//Outerthought//DTD Libre Configuration V0.1//EN" "libre-v01.dtd" &gt;
+&lt;libre xmlns="http://outerx.org/libre/config/0.1"&gt;
+  &lt;entry location="dreams.xml" &gt;
+      &lt;label&gt;
+         &lt;xpath expression="/document/header/title/text()"/&gt;
+      &lt;/label&gt;
+  &lt;/entry&gt;
+  &lt;auto&gt;
+    &lt;filter&gt;
+      &lt;property name="name" regex="\.xml$" /&gt;
+    &lt;/filter&gt;
+    &lt;sorter&gt;
+         &lt;xpath expression="/document/header/title/text()"/&gt;
+    &lt;/sorter&gt;
+      &lt;label&gt;
+          &lt;xpath expression="/document/header/title/text()"/&gt;
+      &lt;/label&gt;
+  &lt;/auto&gt;
+&lt;/libre&gt;</source>
+        </section>
+      </section>
+    </section>
+    <section>
+      <title>Next Libre (0.1)</title>
+      <note>
+        Next libre is in fact largely in your hands... just drop the forrest-dev
+        <link href="site:mail-lists">mail list</link> a line, and see what
+        happens...
+      </note>
+      <section>
+        <title>Itches</title>
+        <p>
+          There is quite a number of fast code patches that can/need to happen
+        </p>
+        <ul>
+          <li>package renaming and restructuring (ideas welcome, but not top of
+            mind)</li>
+          <li>on same level: possible xmlns and/or elms/atts renaming on the
+            generated output and the libre.xml file</li>
+          <li>when compiling you currently get 4 stupid deprecation warnings
+            that should be removed, in fact:</li>
+          <li>LibreConfigHelper has a silly test in it to switch to own parser
+            and resolver if there is no avalon component manager in the neighborhoud
+            (historical reason is the testing outside cocoon with the command line util,
+            which should become some kind of avalon based junit task: if you have a clue
+            how to start this, throw it at us please.)</li>
+          <li>xpath property reader needs to survive working on a non-xml
+            document (by returning nothing rather then breaking on the exception)</li>
+          <li>general robustness and resilience towards
+            mis-configurations</li>
+          <li>filestreams need to get closed and avalon resources need to be
+            released properly</li>
+          <li>caching at the level of the generator needs to be set up</li>
+          <li>in fact general performance has not been subject to loads of
+            early optimizations :-P</li>
+        </ul>
+      </section>
+      <section>
+        <title>Upcoming Features</title>
+        <p>
+          More importantly however there is a major set of new features that is
+          waiting to get in there. It all boils down in fact to having a more
+          expressive libre.xml file... some of the thoughts:
+        </p>
+        <section>
+          <title>Combinations of filter logic</title>
+          <p>
+            Some itching stuff:
+          </p>
+          <ul>
+            <li>logic="inverse" on the &lt;filter&gt; element seems a bit
+              awkward</li>
+            <li><em>n</em>th degree of slickness in the regexes will only bring
+              us so far, combinatory filter logic seems to be the way to go...:</li>
+          </ul>
+          <source>&lt;!ELEMENT filter (xpath | property | and | or | not)&gt;
+&lt;!ELEMENT not    (xpath | property | and | or | not)&gt;
+&lt;!ELEMENT and    (xpath | property | and | or | not)+&gt;
+&lt;!ELEMENT or     (xpath | property | and | or | not)+&gt;</source>
+          <p>
+            So we can make up some richer:
+          </p>
+          <source>
+&lt;filter&gt;
+  &lt;not&gt;
+      &lt;and&gt;
+      &lt;xpath .../&gt;
+      &lt;not&gt;&lt;property ..../&gt;&lt;/not&gt;
+      &lt;or&gt;
+         ...
+      &lt;/or&gt;
+    &lt;/and&gt;
+  &lt;/not&gt;
+&lt;/filter&gt;
+    </source>
+        </section>
+        <section>
+          <title>Separating property-retrieval from formatting and
+            testing</title>
+          <p>
+            Playing around with the attributes in <code>&lt;property&gt;</code>:
+          </p>
+          <ul>
+            <li>poses hard to explain combinatory effects (@regex with
+              @substitute vs without, @regex can't be combined with @mask, different
+              behaviour inside &lt;filter&gt;== test or &lt;sort&gt;==formatting)</li>
+            <li>which in fact are hard (if not impossible) to rule out by
+              modifying the DTD</li>
+            <li>makes you wonder why it's not available on the &lt;xpath&gt;
+              ?</li>
+          </ul>
+          <p>
+            So maybe an example more down the lines of the following would be
+            easier to use:
+          </p>
+          <source>&lt;label&gt;&lt;!-- same applies for the sort context --&gt;
+  &lt;regexformatter exp="..." substitute="...."&gt;
+    &lt;property name="absoluteLocation" /&gt;
+  &lt;/regexformatter&gt;
+&lt;/label&gt;</source>
+          <p>
+            Allowing the formatter to be used around the xpath reader as well.
+            And opening up the possibility to maybe format other stuff than
+            Strings: <code>&lt;dateformat format="dd/mmm/yy"&gt; </code>
+          </p>
+          <p>
+            It would also clearly distinguish the semantical difference of
+            applying a test in the <code>&lt;filter&gt;</code> context:
+          </p>
+          <source>&lt;filter&gt;
+  &lt;regextest match="..."&gt;
+    &lt;property ... /&gt;
+  &lt;/regextest&gt;
+&lt;/filter&gt;</source>
+          <p>
+            And more logically introduce other tests like <code>&lt;globtest
+            match="..."&gt;</code> or <code>&lt;availabletest&gt;</code> or...
+          </p>
+        </section>
+        <section>
+          <title>Replace the introspection with semantically richer named
+            properties to read.</title>
+          <p>
+            Currently the <code>&lt;property name="someJavaBeanProp"&gt;</code>
+            is applied in a java introspection for the
+            <code>getSomeJavaBeanProp()</code> on the <code>java.io.File</code>
+            object that is actually representing the node in the hierarchy at
+            any given time. The DTD declares the attribute as of type CDATA.
+            These decisions however:
+          </p>
+          <ul>
+            <li>lead to a lesser user guidance for the libre.xml writer using
+              an XML (and DTD) savvy editor </li>
+            <li>leads to assuming the <code>libre.xml</code> editor has access
+              to and knows how to interpret jdk javadoc</li>
+            <li>leads to poor semantical support and thus more possible RUNTIME
+              errors for those just filling in some valid CDATA value that is not mapping any
+              getter.</li>
+            <li>leads to confusion for all, since who actually knows the subtle
+              difference between all the get*Path methods on java.io.File?</li>
+          </ul>
+          <p>
+            So the big idea here would be to go for an upfront declared list of
+            sensible and clearly defined properties that we would like to
+            read... Today's ideas about that list:
+          </p>
+          <ul>
+            <li>name</li>
+            <li>isDirectory (isCollection?)</li>
+            <li>abs and relPath (or abs/rel Location? why would we need
+              abs?)</li>
+            <li>canRead</li>
+            <li>canWrite</li>
+            <li>lastModified</li>
+            <li>length</li>
+          </ul>
+          <p>
+            The DTD would then list the possible attributeValues.
+          </p>
+        </section>
+      </section>
+      <section>
+        <title>Avalonising</title>
+        <p>
+          There are a number of perceived opportunities in taking up a stronger
+          dependecy towards Avalon. Some of the possibilities become clear when
+          looking into the current design...
+        </p>
+        <ul>
+          <li>Currently the EntryFactory is a abstract factory, the factory
+            part could be done by an Avalon Component manager. Which would also allow the
+            EntryFactory to become a cleaner component interface then it is now.</li>
+          <li>Some investigation/feedback on the current hacker-way of using
+            the Composables could be nice</li>
+          <li>The current cli part in the package is only there for testing
+            (avoiding the cocoon webapp cycle when developing/testing) it should be
+            replaced by a more formal test class that actually would take up the role
+            (probably delegate to ECM or the like) of the componentmanager to give the
+            HierarchyReader the (avalon) environment he needs.</li>
+        </ul>
+      </section>
+      <section>
+        <title>Unresolved Discussions</title>
+        <ul>
+          <li>do we need support for nested elements inside
+            <code>&lt;item&gt;</code> output (retrieved by e.g. xpath expressions)?</li>
+          <li>do we need an extra <code>&lt;constant&gt;</code> like
+            attributereader that would allow like book.xml to add fixed values for
+            expressed attributes</li>
+          <li>clear set out inheritance rules, just doing 'something' now
+            :-(</li>
+          <li>votes on needed file properties to replace the current (limiting
+            and semantically poor) Java-introspection</li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <title>Libre Design</title>
+      <p>
+        So why is that silly 'yer' package name in there? Yer originally was
+        some all-hierarchy-structures to SAX event thing, and since some of that
+        is in here as well, we kind of picked that idea up out of the dustbin.
+      </p>
+      <p>
+        So reflecting the current packagenames we kind of have these sets of
+        responsibilities
+      </p>
+      <ul>
+        <li><em>*.yer.hierarchy</em>: describe in a formal way how hierarchies
+          should be built up in order to have them dumped to XML using the
+          HierarchyReader.</li>
+        <li><em>*.yer.use.cocoon</em>:house of the generator. It basically just
+          gets a reader and subscribes the next ContentHandler in the cocoon pipeline to
+          the HierarchyReader that it is using.</li>
+        <li><em>*.yer.impl</em>: hold the different implementations of the
+          *.yer.hierarchy API </li>
+        <li><em>*.yer.impl.fs</em>: (only current impl) Build the described
+          filesystem oriented implementation of the hierarchy. It is using the libre
+          configuration strategy.</li>
+        <li><em>*.yer.libre</em>: provide a generic strategy for adding
+          filtering, sorting and attributing information to a hierarchy through the use
+          of XML config files (in an XML configuration/declarative manner)</li>
+      </ul>
+      <p>
+        ... hope this somewhat clarifies how things have been setup for now.
+      </p>
+      <section>
+        <title>Dependencies</title>
+        <ul>
+          <li>The regex stuff inside libre adds the dependency upon the oro
+            package. Basically I failed to find substitution support inside the regex
+            package (which is already in cocoon) in a timeframe comparable to just get on
+            with this using oro.</li>
+          <li>The HierarchyGenerator is the first one in the chain (and the
+            last in fact) that actually needs the cocoon package (at least it was intended
+            this way, could be that there are some glitches on this statement)</li>
+          <li>There is a sort of false dependency on Avalon right now (some
+            Composables in there, no real container stuff though). As expressed higher
+            there are some plans to stronger benefit from this dependency. </li>
+        </ul>
+      </section>
+    </section>
+  </body>
+</document>

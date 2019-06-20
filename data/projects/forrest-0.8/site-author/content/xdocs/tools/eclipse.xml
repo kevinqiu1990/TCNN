@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>
+          Apache Forrest: Eclipse Plugin
+        </title>
+  </header>
+  <body>
+    <section id="overview">
+      <title>
+          Eclipse Plugin
+        </title>
+      <warning>
+        The Forrest plugin for Eclipse is new and under development.
+      </warning>
+    </section>
+    <section id="install">
+      <title>
+          Installation notes
+        </title>
+      <p>
+        To get you started while the documentation is being developed, see this
+        forrest-dev mail thread:
+        <a href="http://marc.theaimsgroup.com/?t=112059632000001"> [eclipse] How
+        to install? </a> .
+      </p>
+    </section>
+    <section>
+      <title>Wizards</title>
+      <p>
+        A number of wizards are provided for performing common tasks. This
+        section briefly describes the available wizards.
+      </p>
+      <section id="newProject">
+        <title>Creating a new Forrest Project</title>
+        <p>
+          To create a new Forrest project select "New Project" from either the
+          context menu in the package explorer or the "New" menu and select
+          Forrest -> Seed New Project.
+        </p>
+        <p>
+          <strong>Project Name and Location</strong>
+        </p>
+        <p>
+          A wizard will ask you for the name of the project and the location in
+          which the project files are to be created (by default the files will
+          be in your current workspace). When you are done, click on Next
+        </p>
+        <p>
+          <strong>Site options</strong>
+        </p>
+        <p>
+          Here you will see the Site Options page. This is where you can specify
+          certain options for your new site. Currently the available options
+          are:
+        </p>
+        <ul>
+          <li>Group Name</li>
+          <li>Project Name</li>
+          <li>Vendor</li>
+          <li>Copyright link</li>
+          <li>Disable PDF link</li>
+          <li>Disable POD link</li>
+          <li>Disable Print link</li>
+          <li>Disable Text link</li>
+          <li>Disable XML link</li>
+        </ul>
+        <p>
+          There is also an option to save these sselections as your default
+          settings. If this is done, the next time you create a project it will
+          have the same seelections that you have specified here. When you are
+          finished with this page, click on Next
+        </p>
+        <p>
+          <strong>Activate Plugins</strong>
+        </p>
+        <p>
+          This page allows you to select the plugins that you would like your
+          project to use. The list of available plugins is on the left and list
+          of plugins that you have chosen for your project is on the right. Once
+          you have selected those plugins click on Finish to create your new
+          Site Project.
+        </p>
+      </section>
+      <section id="newXDoc">
+        <title>Creating a new XDoc</title>
+        <p>
+          To create a new XDoc within yout Forrest project select "New ->
+          Other..." and then select "New XDoc" from the Forrest node.
+        </p>
+      </section>
+    </section>
+    <section id="editors">
+      <title>Editors</title>
+      <p>
+        A number of editors are provided for Forrest configuration files. This
+        section describes those editors.
+      </p>
+      <section id="siteXMLEditor">
+        <title>
+            site.xml Editor
+          </title>
+        <p>
+          First, you need to activate the Site.xml view. This can be done by:
+          <code> Window -> Show View -> Other... -> Forrest -> SiteXML -> OK
+          </code> Now you will see the the view open up in Eclipse. To view a
+          tree, click on the project you are working and you should see the
+          structure of the site.xml as a tree in the view.
+        </p>
+        <p>
+          There are two ways to add the note to the site.xml file.
+        </p>
+        <ol>
+          <li>
+                Drag a file from the Package Explorer to the tree. This will create a new element 
+                with references to that dropped file(s).
+              </li>
+          <li>
+                Right click on an element in the site.xml tree and select "Add Element". A wizard will come up which will allow you to enter the HREF, Description, Label and Element name for the new element that is being added.
+              </li>
+        </ol>
+        <p>
+          To delete an element, right click on the element in the tree and click
+          on "Delete Element".
+        </p>
+        <warning>
+          For the changes to show up when you run a test site for your project,
+          you must save the changes. Right click on the tree and select "Save".
+          In a later version of the plugin this step will not be necessary.
+        </warning>
+        <fixme author="Anil Ramnanan">
+          Currently there is no easy way to edit an existing element. The
+          element will be linked to the Properties View in Eclipse to allow for
+          easy editing
+        </fixme>
+      </section>
+      <section id="tabsXMLEditor">
+        <title>
+          tabs.xml Editor
+        </title>
+        <p>
+          First, you need to activate the Tab.xml view. This can be done by:
+          <code> Window -> Show View -> Other... -> Forrest -> TabXML -> OK
+          </code> Now you will see the the view open up in Eclipse. To view a
+          tree, click on the project you are working and you should see the
+          structure of the tabs.xml as a tree in the view.
+        </p>
+        <p>
+          To add a new element to the tabs.xml file right click on an element in
+          the tabs.xml tree and select "Add Element". A wizard will come up
+          which will allow you to enter the Id, Dir, Label and Index File for
+          the new tab element that is being added.
+        </p>
+        <p>
+          To delete an element, right click on the element in the tree and click
+          on Delete Element
+        </p>
+        <warning>
+          For the changes to show up when you run a test site for your project,
+          you must save the changes. Right click on the tree and select "Save".
+          In a later version of the plugin this step will not be necessary.
+        </warning>
+        <fixme author="Anil Ramnanan">
+          Currently there is no easy way to edit an element. The element will be
+          linked to the Properties View in Eclipse to allow for easy editing
+        </fixme>
+      </section>
+      <section id="LocationmapEditor">
+        <title>
+          Locationmap.xml Editor
+        </title>
+        <p>
+          First, you need to activate the Locationmap view. This can be done by:
+        </p>
+        <p>
+          Window -> Show View -> Other... -> Forrest -> Locationmap -> OK
+        </p>
+        <p>
+          Now you will see the the view open up in Eclipse. To view a tree,
+          click on the project you are working and you should see the structure
+          of the Locationmap.xml as a tree in the view.
+        </p>
+        <p>
+          To add a match, you must rich click on the locater element and click
+          on "Add Match". A wizard will come up asking you to enter the Pattern
+          or the Match.
+        </p>
+        <p>
+          Right click on the match you just created and click on "Add Location".
+          This will allow you to enter the Location Source.
+        </p>
+        <p>
+          To delete an element, right click on the element in the tree and click
+          on Delete Element
+        </p>
+        <p>
+          For the changes to show up when you run a test site for your project,
+          you must save the changes. Right click on the tree and select "Save".
+        </p>
+        <fixme author="Anil Ramnanan">
+          Currently there is no easy way to edit an element. The element will be
+          linked to the Properties View in Eclipse to allow for easy editing
+        </fixme>
+      </section>
+      <section id="ForrestViews">
+        <title>
+          Activate Forrest:Views for a project
+        </title>
+        <p>
+          To activate views when seeding a new project:
+        </p>
+        <p >
+          File -> New -> Project -> Forrest -> Seed New Project -> Next
+        </p>
+        <p>
+          Type in the name of the project and click on Next. To Activate views
+          for the new project, check off "Activate Views" and click on Finish.
+          When "Activate Views" is selected, the new project has
+          project.skin=leather-dev uncommented and the relevant plugins for
+          views are added to project.required.plugins
+        </p>
+        <p>
+          To add a new View doc (*.fv), click on New -> Other -> Forrest -> View
+          Doc. Enter the file name of the view document and click on Finish.
+        </p>
+      </section>
+      <section id="RepositoryBrowser">
+        <title>
+          Browse a remote Repostory
+        </title>
+        <p>
+          The Repository Browser allows you to browse a a remote repository and
+          include the documents in a Forrest Project. To show the Repository
+          Browser view go to Window -> Show View - >Other. Expand the Forrest
+          Tree and select Repository Browser.
+        </p>
+        <note>
+          Currently the repository Browser only has support for the Daisy
+          repository but support for other repoisotries can be easily added. If
+          you have specific need pleae join us on the dev list where we will be
+          happy to assist.
+        </note>
+        <section>
+          <title>Daisy Repository</title>
+          <p>
+            For the Repository Browser to work with the
+            <a href="http://www.cocoondev.org/daisy">Daisy repository</a>, the
+            settings for the daisy repository must be configured.
+          </p>
+          <p>
+            Go to Windows -> Preferences. Chose Daisy. Here you will see a
+            number of options to set for the daisy repository.
+          </p>
+          <ul>
+            <li>Repository Location - this is the http location of the repoistory browser. This can be a domain name or an IP address  e.g. localhost or 127.0.0.1</li>
+            <li>Repository Port - This is the port that the repository runs on e.g. 9623</li>
+            <li>Repository Username - This is the username that is set for the repository</li>
+            <li>Repository Password - This is the password that is used to authenticate the user for the repository</li>
+          </ul>
+        </section>
+        <p>
+          To include a document from a Repository in a Forrest Project, click on
+          the document in the Document list of the repository browser and drag
+          it to locator section in the Locationmap View.
+        </p>
+      </section>
+    </section>
+    <section id="ModifyandBuild">
+      <title>
+          Modify and Build Forrest Sites
+        </title>
+      <p>
+        Once a Forrest Project has been created the user can access the context
+        menus to modify and build the site.
+      </p>
+      <section id="ModifySettings">
+        <title>
+          Modify Settings
+        </title>
+        <p>
+          In order to modify the settings of a project, right click on the
+          project in the Package Explorer. At the bottom of the menu you will
+          find two meny items.
+        </p>
+        <ul>
+          <li>Modify Plugins Selection - This will let you add and remove Forrest plugins from your project</li>
+          <li>Modify Configurations - This allows you to modify the Site Option settings that were selected when the project was created.</li>
+        </ul>
+      </section>
+      <section id="BuildSettings">
+        <title>
+          Build Site Options
+        </title>
+        <p>
+          In order to build a project, right click on the project in the Package
+          Explorer. At the bottom of the menu you will find the Site menu item.
+          This menu item has a number of sub items.
+        </p>
+        <ul>
+          <li>Start Test Server - This will start the project as a local webapp and open a browser window that will allow you to preview it.</li>
+          <li>Stop Test Server - This will stop the local webapp.</li>
+          <li>Build WAR File - This will build the site as a webapp in a war file located in the build folder of your project.</li>
+          <li>Build Site - This will build a static site from your project in the Build folder of your project.</li>
+        </ul>
+      </section>
+    </section>
+  </body>
+</document>

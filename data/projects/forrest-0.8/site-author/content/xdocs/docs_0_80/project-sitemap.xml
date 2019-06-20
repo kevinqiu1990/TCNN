@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd">
+<document>
+  <header>
+    <title>Using project sitemaps</title>
+  </header>
+  <body>
+    <section id="introduction">
+      <title>Introduction</title>
+      <p>
+        After Forrest 0.6 it is now possible for projects to intercept the core
+        sitemaps, without needing to copy the main sitemaps and keep them
+        synchonised. This will enable hassle-free update to future Forrest
+        versions.
+      </p>
+      <note>
+        We advise you to spend time to understand the Apache Cocoon sitemap. See
+        <link href="ext:cocoon/sitemap">Cocoon sitemap</link> and
+        <link href="ext:cocoon/concepts">Cocoon concepts</link> and related
+        component documentation. The Forrest sitemap is broken into multiple
+        files. The main one is <strong>sitemap.xmap</strong> which delegates to
+        others. See the <link href="site:sitemap-ref">Sitemap Reference</link>
+        for a tour of the default sitemap.
+      </note>
+    </section>
+    <section id="how">
+      <title>How does it work?</title>
+      <p>
+        If a project has a <code>sitemap.xmap</code> file in it's documentation
+        dir, that gets mounted automatically by Forrest and becomes part of the
+        processing: it is a preprocessing step, and is the first one to handle
+        the request. Because of this it can serve any file directly. If it does
+        not want to serve a file, it can simply not match the URL and Forrest
+        will take care of it as usual.
+      </p>
+      <p>
+        The cool thing is that if that pipeline serves an xml representation,
+        Forrest will provide a skinned version of it.
+      </p>
+      <p>
+        So if the project sitemap matches test.xml and transforms that to a
+        correctly structured Forrest intermediate "document-v*", then the user
+        will see test.html fully rendered by Forrest.
+      </p>
+      <p>
+        Of course, to resolve the directories in your sitemap it is important to
+        use the 'project:' and 'forrest:' variables to prevent any possible
+        issue in the future.
+      </p>
+    </section>
+    <section id="examples">
+      <title>Example uses of this technique</title>
+      <section id="download">
+        <title>Adding a new content type</title>
+        <p>
+          See the section "Advanced customizations: sitemap.xmap" in the
+          <link href="site:your-project">Using Forrest</link> document and then
+          follow the <link href="site:your-project/new_content_type">Example:
+          Adding a new content type</link>.
+        </p>
+      </section>
+    </section>
+  </body>
+</document>

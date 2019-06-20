@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- vi: set et sw=2 ts=2 tw=75: -->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>SourceTypeAction (content aware pipelines)</title>
+  </header>
+  <body>
+    <section>
+      <title>Introduction</title>
+      <p>
+        SourceTypeAction assigns a "type" (a string) to an XML file. This is
+        done based on information occuring in the header of the XML file, up to
+        the document (root) element. This type is then returned to the sitemap
+        as a variable with the name 'sourcetype'. If no matching sourcetype
+        could be be found, null is returned and thus the contents of the action
+        element will not be executed.
+      </p>
+      <p>
+        SourceTypeAction works by pull-parsing the document and collecting
+        information such as the Public Id, the processing instructions, the
+        document element local name and namespace, and the xsi:schemaLocation
+        and xsi:noNamespaceSchemaLocation attributes. This information is then
+        compared with the rules described in the configuration of the
+        SourceTypeAction.
+      </p>
+    </section>
+    <section>
+      <title>Configuration</title>
+      <p>
+        The action should be declared and configured in the map:actions section
+        of your sitemap. Example:
+      </p>
+      <source>
+<![CDATA[<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+ <map:components>
+  <...>]]><strong>
+<![CDATA[<map:actions>
+   <map:action name="sourcetype"
+      src="org.apache.forrest.sourcetype.SourceTypeAction">
+    <sourcetype name="download-v1.0">
+     <document-declaration
+        public-id="-//Acme//DTD Download Documentation V1.0//EN" />
+    </sourcetype>      
+   </map:action>
+  </map:actions>]]></strong>
+<![CDATA[
+ </map:components>
+ <...>
+</map:sitemap>]]>
+      </source>
+      <p>
+        There are other examples in <code>main/webapp/forrest.xmap</code>
+      </p>
+      <p>
+        Each sourcetype-tag declares a source type. Inside the sourcetype-tag a
+        number of rules can be defined, described below. The sourcetypes will be
+        checked in the same order as they are defined in the configuration, the
+        first sourcetype of which all rules match will be used.
+      </p>
+      <p>
+        These are the available rules:
+      </p>
+      <dl>
+        <dt>document-declaration</dt>
+        <dd>This rule checks the public ID. It takes one attribute
+          <code>public-id</code>.</dd>
+        <dt>document-element</dt>
+        <dd>This rule checks the local name and/or namespace of the document
+          element. These are specified with the attributes <code>local-name</code> and
+          <code>namespace</code>. At least one of these two is required.</dd>
+        <dt>processing-instruction</dt>
+        <dd>This rule checks a processing instruction. It can take two
+          attributes: <code>target</code> and <code>data</code>. The target attribute is
+          always required, the data attribute is optional.</dd>
+        <dt>w3c-xml-schema</dt>
+        <dd>This rule checks the value of the xsi:schemaLocation and
+          xsi:noNamespaceSchemaLocation attributes on the document element. These are
+          specified with the attributes <code>schema-location</code> and
+          <code>no-namespace-schema-location</code>.</dd>
+      </dl>
+      <p>
+        Perhaps you need other methods. Please enhance the source at
+        <code>main/java/org/apache/forrest/sourcetype</code>
+      </p>
+    </section>
+    <section>
+      <title>Usage</title>
+      <p>
+        The source of which the sourcetype must be defined must be specified
+        using the 'src' attribute on the map:act element.
+      </p>
+      <source>
+<![CDATA[<map:act type="sourcetype" src="{1}">
+...
+</map:act>]]>
+      </source>
+      <p>
+        See a real-life example in the advanced section of the
+        <link href="your-project.html#adding_new_content_type_2">Using
+        Forrest</link> document.
+      </p>
+    </section>
+  </body>
+</document>

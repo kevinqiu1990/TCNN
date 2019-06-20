@@ -1,0 +1,65 @@
+<?xml version="1.0"?> 
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- FIXME - should be forrestbar.css ... -->
+<?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
+
+<dialog xmlns:html="http://www.w3.org/1999/xhtml"
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+      onload="initForrestBarOptions();"
+      ondialogaccept="setForrestBarOptions();"
+      title="Forrest Bar Options">
+
+      <html:script language="javascript" src="chrome://forrestbar/content/forrestbarOverlay.js" />
+
+  <tabbox>
+    <tabs>
+      <tab label="Forrest Run Options"/>
+    </tabs>
+ 
+    <tabpanels>
+      <tabpanel>
+        <vbox>
+        <groupbox>
+          <caption label="Host"/>
+          <description>Indicate here the name of the host runing Forrest Run.</description>
+          <hbox align="center"> 
+            <label control="forresthost" value="Host"/>
+	    <menulist id="forrestbar.run.host">
+              <menupopup>
+                <menuitem label="localhost" value="localhost"/>
+                <menuitem label="127.0.0.1" value="127.0.0.1"/>
+              </menupopup>
+            </menulist>
+          </hbox>
+	  <hbox align="center">
+            <label control="forrestport" value="Port"/>
+            <textbox id="forrestbar.run.port" 
+              pref="true"
+              preftype="string"
+              prefstring="forrestbar.run.port"
+              size="15"
+            /> 
+          </hbox>
+	</groupbox>
+        </vbox>
+      </tabpanel>
+    </tabpanels>
+  </tabbox>
+</dialog>
+

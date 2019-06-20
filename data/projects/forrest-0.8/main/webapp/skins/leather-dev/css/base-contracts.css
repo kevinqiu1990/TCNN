@@ -1,0 +1,309 @@
+/*
+* Licensed to the Apache Software Foundation (ASF) under one or more
+* contributor license agreements.  See the NOTICE file distributed with
+* this work for additional information regarding copyright ownership.
+* The ASF licenses this file to You under the Apache License, Version 2.0
+* (the "License"); you may not use this file except in compliance with
+* the License.  You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+/*
+CSS-Contracts
+*/
+
+#container {
+/* Page container makes it possible to have an overall sourrounding box in the pages.
+*/
+background-color: #7099C5;
+padding: 10px;
+border-top: solid 1px black;
+border-bottom: solid 1px black;
+border-right: solid 1px black;
+border-left: solid 1px black;
+margin: 5px;
+}
+
+/**
+* Round corner
+*/
+.roundtop { 
+background-image: url(images/rc-t-r-15-1body-2menu-3menu.png);
+background-repeat: no-repeat;
+background-position: top right;
+}
+
+.roundbottom {
+background-image: url(images/rc-b-r-15-1body-2menu-3menu.png);
+background-repeat: no-repeat;
+background-position: bottom right;
+}
+.roundbottom-left {
+background-image: url(images/rc-b-l-15-1body-2menu-3menu.png);
+background-repeat: no-repeat;
+background-position: bottom left;
+}
+.roundtopsmall { 
+background-image: url(images/rc-t-r-5-1header-2searchbox-3searchbox.png);
+background-repeat: no-repeat;
+background-position: top right;
+}
+
+.roundbottomsmall {
+background-image: url(images/rc-b-r-5-1header-2tab-selected-3tab-selected.png);
+background-repeat: no-repeat;
+background-position: top right;
+}
+/*
+#search
+Related to search interface and search results
+
+#search-input
+Search form container
+*/
+html>body .search-input {
+bottom: 0px;
+}
+.search-input {
+/*Related to search interface and search results
+*/
+border: solid 1px black;
+clear: both;
+position: relative;
+float: right;
+top: -75px;
+/*right: 20px;*/
+height: 42px;
+font-size: 70%;
+white-space: nowrap;
+/*text-align: right;*/
+color: white;
+background-color: #000;
+z-index:100;
+background-image: url(images/rc-t-l-5-1header-2searchbox-3searchbox.png);
+background-repeat: no-repeat;
+background-position: top left;
+/*bottom: -1px; */ /* compensate for IE rendering issue */
+}
+
+.search-input form {
+padding: 5px 10px;
+margin: 0;
+}
+
+.search-input p {
+padding: 0 0 2px 0;
+margin: 0;
+}
+
+#content-main{
+/*The main content area
+*/
+padding: 20px 20px 0px 180px;
+margin: 0;
+font : small Verdana, Helvetica, sans-serif;  
+font-size : 80%; 
+background-color: #fff;
+/* */
+/*border-style: solid;
+border-color: #000;
+border-left: 2px;
+border-right: 2px;*/
+border: solid 1px black;
+}
+
+#siteinfo-credits{
+/*Designer or other credits
+*/
+margin: 10px;
+padding: 5px;
+text-align: center;
+border-style: dashed;
+border-width: medium;/* sets border width on all sides */
+border-color: black;
+}
+
+#siteinfo{
+/*A supplementary list of links
+*/
+clear: both;
+/*position: relative; *//* IE bugfix (http://www.dracos.co.uk/web/css/ie6floatbug/) */
+width: 100%;
+background-color: #CFDCED;
+border: solid 1px black;
+color: black;
+font-size: 90%;
+padding: 0px;
+margin: 0px;
+}
+
+#siteinfo .siteinfo-legal{
+/*Copyright information etc.
+*/
+/*position: relative; *//* IE bugfix cont'd */
+/*padding: 5px;*/
+margin-top: 5px;
+margin-left: 5px;
+width: 45%;
+/*background: yellow;*/
+/*float: left;*/
+}
+
+#siteinfo .lastmodified{
+/*position: relative;*/ /* IE bugfix cont'd */
+float: right;
+/*width: 45%;*/
+/*padding: 5px;*/
+margin-top: 5px;
+margin-right:5px;
+padding-right: 5px;
+text-align: right;
+}
+
+#feedback {
+color: #fff;
+background-color: #294563;
+text-align:center;
+margin-top: 5px;
+}
+
+#feedback #feedbackto {
+font-size: 90%;
+color: #fff;
+}
+
+#content-pdf{
+/*The pdf link for the content*/
+float: right;
+margin: 0;
+padding: 0;
+}
+
+#content-pdf br {
+margin-top: -10px;
+padding-left: 1px;
+}
+
+#content-pdf a {
+display: block;
+font-size: 90%;
+text-align: center;
+margin: 0;
+padding: 0;
+}
+
+#content-pdf img {
+display: block;
+height: 32px;
+width: 32px;
+}
+/*
+#nav-section-current
+Navigation to page within the current site section that is currently 
+selected.
+*/
+
+/*
+#nav-main
+Main or primary navigation AKA tabs.
+
+#nav-main-current
+Main or primary navigation that is currently selected.
+
+#nav-main-sub
+Secondary navigation AKA level2.
+
+
+#search-input-ax
+Search form container in alternativ location. x stands for a variable 
+that represents the number of the alternativ.
+
+#branding-logo-project
+Used for the projectlogo.
+
+#branding-logo-project-ax
+Used for the projectlogo in alternativ location. x stands for a variable 
+that represents the number of the alternativ.
+
+#branding-tagline
+Used for a strapline or tagline to define the site's purpose. Can be as 
+well used for site slogans.
+
+#branding-trail
+Used for a trail or tagline to define the site's purpose
+
+#branding-published-ax
+Used for the last published note of the site in alternativ location. x 
+stands for a variable that represents the number of the alternativ.
+
+
+#search-output
+Search results which could include a <div> or other markup
+including definition lists
+
+#nav or #navigation
+Used to contain the navigation devices
+
+#nav-main
+Main or primary navigation AKA tabs.
+
+#nav-main-current
+Main or primary navigation that is currently selected.
+
+#nav-main-sub
+Secondary navigation AKA level2.
+
+#nav-section
+Navigation to pages within the current site section AKA menu.
+
+#nav-section-current
+Navigation to page within the current site section that is currently 
+selected.
+
+#nav-supplementary or #nav-supp
+A supplementary list of links, perhaps in a footer. This can
+replace the common, but presentational #footer
+
+#nav-supp-feedback
+A feedback link like mentioned in 
+http://issues.apache.org/eyebrowse/ReadMsg?listName=forrest-user@xml.apache.org&msgNo=71.
+
+#content
+Used for content rather than for another purpose such as navigation
+
+#content-main
+The main content area
+
+#content-pdf
+The pdf link for the content
+
+#content-xml
+The xml link for the content
+
+#content-fixme
+Fixme related content
+
+#content-warning
+Warning related content
+
+#content-note
+Note related content
+
+#content-code
+Code related content
+
+#siteinfo
+Used for various site related information
+
+#siteinfo-legal
+Copyright information etc.
+
+#siteinfo-credits
+Designer or other credits
+*/

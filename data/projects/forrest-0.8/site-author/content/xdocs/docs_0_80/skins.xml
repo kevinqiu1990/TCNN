@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Default skins</title>
+  </header>
+  <body>
+    <section id="introduction">
+      <title>Introduction</title>
+      <p>
+        Forrest supplies a collection of default skins which are configurable
+        and so should meet the needs of most projects. The aim is to provide
+        many capabilities so that extra skins are not needed.
+      </p>
+      <p>
+        Note that the new Dispatcher capability will be a better solution. See
+        <a href="site:status-themes">Status of Themes: Skins and Dispatcher</a>.
+      </p>
+    </section>
+    <section id="names">
+      <title>Convention for choosing skin names</title>
+      <p>
+        The skin names are based on playing with the word "skin". See our
+        technique for
+        <a href="http://svn.apache.org/repos/asf/forrest/trunk/main/webapp/skins/new-skin-names.txt">choosing
+        skin names</a>. A name with "-dev" extension signifies that it is under
+        development. There is no concept of versions of default skins. New skins
+        have new names.
+      </p>
+    </section>
+    <section id="skins">
+      <title>Skin descriptions and examples</title>
+      <section id="pelt">
+        <title>pelt</title>
+        <p>
+          Uses CSS "div" and no HTML tables.
+        </p>
+        <p>
+          Examples: <a href="site:forrest">Apache Forrest</a> |
+          <a href="ext:lenya">Apache Lenya</a>
+        </p>
+      </section>
+      <section id="tigris">
+        <title>tigris</title>
+        <p>
+          This skin is based on version 1.1 of the
+          <a href="http://style.tigris.org/">style.tigris.org</a> project. (It
+          deliberately contravenes our skin naming convention.)
+        </p>
+        <p>
+          Examples: <a href="http://www.core.gen.tr/">Core Computer Security
+          Group</a>
+        </p>
+      </section>
+      <section id="plain-dev">
+        <title>plain-dev</title>
+        <p>
+          This is a very minimal skin to produce plain HTML documents. Such
+          capability might be useful to generate a collection of documents for
+          some off-line product's user help system.
+        </p>
+        <p>
+          Examples: <a href="images/snapshot-plain-dev.png">snapshot</a>
+        </p>
+      </section>
+    </section>
+    <section id="old">
+      <title>Old and deprecated skins</title>
+      <p>
+        The following skins are retained for a little while longer, but are
+        deprecated, so please move to one of the other skins.
+      </p>
+      <section id="forrest-site">
+        <title>forrest-site</title>
+        <p>
+          This is the old skin that we have been dragging around since early
+          days. Uses HTML tables.
+        </p>
+        <p>
+          Examples: <a href="ext:xml.apache.org">Apache XML</a>
+        </p>
+      </section>
+      <section id="krysalis-site">
+        <title>krysalis-site</title>
+        <p>
+          Uses HTML tables.
+        </p>
+        <p>
+          Examples:
+        </p>
+      </section>
+    </section>
+  </body>
+</document>

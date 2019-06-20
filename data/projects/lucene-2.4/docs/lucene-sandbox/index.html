@@ -1,0 +1,461 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.8">
+<meta name="Forrest-skin-name" content="pelt">
+<title>
+	Apache Lucene - Lucene Sandbox
+		</title>
+<link type="text/css" href="../skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="../skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="../skin/print.css" rel="stylesheet">
+<link type="text/css" href="../skin/profile.css" rel="stylesheet">
+<script src="../skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="../skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="../skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="../images/favicon.ico">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">Apache</a> &gt; <a href="http://lucene.apache.org/">Lucene</a><script src="../skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://lucene.apache.org/"><img class="logoImage" alt="Lucene" src="http://www.apache.org/images/asf_logo_simple.png" title="Apache Lucene"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://lucene.apache.org/java/"><img class="logoImage" alt="Lucene" src="http://lucene.apache.org/images/lucene_green_300.gif" title="Apache Lucene is a high-performance, full-featured text search engine library written entirely in
+      Java. It is a technology suitable for nearly any application that requires full-text search, especially cross-platform."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="lucene.apache.org" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li class="current">
+<a class="selected" href="http://lucene.apache.org/java/docs/">Main</a>
+</li>
+<li>
+<a class="unselected" href="http://wiki.apache.org/lucene-java">Wiki</a>
+</li>
+<li class="current">
+<a class="selected" href="../index.html">Lucene 2.4.0 Documentation</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+
+             &nbsp;
+           </div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_selected_1.1', '../skin/')" id="menu_selected_1.1Title" class="menutitle" style="background-image: url('../skin/images/chapter_open.gif');">Documentation</div>
+<div id="menu_selected_1.1" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="../index.html">Overview</a>
+</div>
+<div onclick="SwitchMenu('menu_1.1.2', '../skin/')" id="menu_1.1.2Title" class="menutitle">Javadocs</div>
+<div id="menu_1.1.2" class="menuitemgroup">
+<div class="menuitem">
+<a href="../api/index.html">All</a>
+</div>
+<div class="menuitem">
+<a href="../api/core/index.html">Core</a>
+</div>
+<div class="menuitem">
+<a href="../api/demo/index.html">Demo</a>
+</div>
+<div onclick="SwitchMenu('menu_1.1.2.4', '../skin/')" id="menu_1.1.2.4Title" class="menutitle">Contrib</div>
+<div id="menu_1.1.2.4" class="menuitemgroup">
+<div class="menuitem">
+<a href="../api/contrib-analyzers/index.html">Analyzers</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-ant/index.html">Ant</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-bdb/index.html">Bdb</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-bdb-je/index.html">Bdb-je</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-benchmark/index.html">Benchmark</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-highlighter/index.html">Highlighter</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-lucli/index.html">Lucli</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-memory/index.html">Memory</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-misc/index.html">Miscellaneous</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-queries/index.html">Queries</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-regex/index.html">Regex</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-snowball/index.html">Snowball</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-spellchecker/index.html">Spellchecker</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-surround/index.html">Surround</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-swing/index.html">Swing</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-wikipedia/index.html">Wikipedia</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-wordnet/index.html">Wordnet</a>
+</div>
+<div class="menuitem">
+<a href="../api/contrib-xml-query-parser/index.html">XML Query Parser</a>
+</div>
+</div>
+</div>
+<div class="menuitem">
+<a href="../benchmarks.html">Benchmarks</a>
+</div>
+<div class="menuitem">
+<a href="../contributions.html">Contributions</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/lucene-java/LuceneFAQ">FAQ</a>
+</div>
+<div class="menuitem">
+<a href="../fileformats.html">File Formats</a>
+</div>
+<div class="menuitem">
+<a href="../gettingstarted.html">Getting Started</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">Lucene Sandbox</div>
+</div>
+<div class="menuitem">
+<a href="../queryparsersyntax.html">Query Syntax</a>
+</div>
+<div class="menuitem">
+<a href="../scoring.html">Scoring</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/lucene-java">Wiki</a>
+</div>
+</div>
+<div id="credit">
+<hr>
+<a href="http://forrest.apache.org/"><img border="0" title="Built with Apache Forrest" alt="Built with Apache Forrest - logo" src="../images/built-with-forrest-button.png" style="width: 88px;height: 31px;"></a>
+</div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="../skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="index.pdf"><img alt="PDF -icon" src="../skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<h1>
+	Apache Lucene - Lucene Sandbox
+		</h1>
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#Lucene Sandbox">Lucene Sandbox</a>
+<ul class="minitoc">
+<li>
+<a href="#Snowball Stemmers for Lucene">Snowball Stemmers for Lucene</a>
+</li>
+<li>
+<a href="#Analyzers, Tokenizers, Filters">Analyzers, Tokenizers, Filters</a>
+</li>
+<li>
+<a href="#Ant">Ant</a>
+</li>
+<li>
+<a href="#WordNet/Synonyms">WordNet/Synonyms</a>
+</li>
+<li>
+<a href="#Lucli - Lucene Command-line Interface">Lucli - Lucene Command-line Interface</a>
+</li>
+<li>
+<a href="#Term Highlighter">Term Highlighter</a>
+</li>
+<li>
+<a href="#Javascript Query Constructor">Javascript Query Constructor</a>
+</li>
+<li>
+<a href="#Javascript Query Validator">Javascript Query Validator</a>
+</li>
+<li>
+<a href="#High Frequency Terms">High Frequency Terms</a>
+</li>
+<li>
+<a href="#GData-Server">GData-Server</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+        
+<a name="N10012"></a><a name="Lucene Sandbox"></a>
+<h2 class="boxed">Lucene Sandbox</h2>
+<div class="section">
+<p>
+                Lucene project also contains a workspace, Lucene Sandbox, that is open to all Lucene committers, as well
+                as a few other developers.  The purpose of the Sandbox is to host various third party contributions,
+                and to serve as a place to try out new ideas and prepare them for inclusion into the core Lucene
+                distribution.<br>
+                Users are free to experiment with the components developed in the Sandbox, but Sandbox components will
+                not necessarily be maintained, particularly in their current state.
+            </p>
+<p>
+                You can access the Lucene Sandbox repository at
+                <a href="http://svn.apache.org/repos/asf/lucene/java/trunk/contrib/">http://svn.apache.org/repos/asf/lucene/java/trunk/contrib/</a>.
+            </p>
+<a name="N10023"></a><a name="Snowball Stemmers for Lucene"></a>
+<h3 class="boxed">Snowball Stemmers for Lucene</h3>
+<p>
+                    This project provides pre-compiled versions of the Snowball stemmers
+                    for Lucene.
+                </p>
+<p>
+                    
+<a href="http://svn.apache.org/repos/asf/lucene/java/trunk/contrib/snowball">The
+                        repository for the Snowball contribution.</a>
+                
+</p>
+<p>
+                    
+<a href="http://snowball.tartarus.org/">Background information on Snowball</a>,
+                    which is a language for stemmers developed by Martin Porter.
+                </p>
+<a name="N1003A"></a><a name="Analyzers, Tokenizers, Filters"></a>
+<h3 class="boxed">Analyzers, Tokenizers, Filters</h3>
+<p>
+                  Contributed Analyzers, Tokenizers, and Filters for various languages.
+                </p>
+<p>
+                    
+<a href="http://svn.apache.org/repos/asf/lucene/java/trunk/contrib/analyzers/">The
+                        repository for the Analyzers contribution.</a>
+                
+</p>
+<a name="N1004A"></a><a name="Ant"></a>
+<h3 class="boxed">Ant</h3>
+<p>
+                    The Ant project is a useful Ant task that creates a Lucene index out of an Ant fileset.  It also
+                    contains an example HTML parser that uses JTidy.
+                </p>
+<p>
+                    
+<a href="http://svn.apache.org/repos/asf/lucene/java/trunk/contrib/ant/">The
+                        repository for the Ant contribution.</a>
+                
+</p>
+<a name="N1005A"></a><a name="WordNet/Synonyms"></a>
+<h3 class="boxed">WordNet/Synonyms</h3>
+<p>
+                    The Lucene WordNet code consists of a single class which parses a prolog file
+                    from the WordNet site that contains a list of English words and synonyms.
+                    The class builds a Lucene index from the synonyms file.  Your querying code could
+                    hit this index to build up a set of synonyms for the terms in the
+                    search query.
+                </p>
+<p>
+                    More information on the <a href="http://www.tropo.com/techno/java/lucene/wordnet.html">Lucene WordNet package</a>.
+                    <a href="http://wordnet.princeton.edu/">WordNet</a> is an online database of English language words that contains
+                    synonyms, definitions, and various relationships between synonym sets.
+                </p>
+<p>
+                    
+<a href="http://svn.apache.org/repos/asf/lucene/java/trunk/contrib/wordnet/">The
+                        repository for the WordNet module.</a>
+                
+</p>
+<a name="N10075"></a><a name="Lucli - Lucene Command-line Interface"></a>
+<h3 class="boxed">Lucli - Lucene Command-line Interface</h3>
+<p>
+                  The Lucli application allows index manipulation from the
+                    command-line.
+                </p>
+<p>
+                    
+<a href="http://svn.apache.org/repos/asf/lucene/java/trunk/contrib/lucli/">The
+                        repository for the Lucli contribution.</a>
+                
+</p>
+<a name="N10085"></a><a name="Term Highlighter"></a>
+<h3 class="boxed">Term Highlighter</h3>
+<p>
+                  A small set of classes for highlighting matching terms in
+                    search results.
+                </p>
+<a href="http://svn.apache.org/repos/asf/lucene/java/trunk/contrib/highlighter/">The
+                        repository for the Highlighter contribution.</a><a name="N10092"></a><a name="Javascript Query Constructor"></a>
+<h3 class="boxed">Javascript Query Constructor</h3>
+<p>
+                    Javascript library to support client-side query-building. Provides support for a user interface similar to
+                    <a href="http://www.google.com.sg/advanced_search">Google's Advanced Search</a>.
+                </p>
+<p>
+
+                    
+<a href="http://svn.apache.org/repos/asf/lucene/java/trunk/contrib/javascript/queryConstructor/">The
+                        repository for the Javascript Query Constructor files.</a>
+                
+</p>
+<a name="N100A6"></a><a name="Javascript Query Validator"></a>
+<h3 class="boxed">Javascript Query Validator</h3>
+<p>
+                    Javascript library to support client-side query validation. Lucene doesn't like malformed queries and tends to
+                    throw ParseException, which are often difficult to interpret and pass on to the user. This library hopes to
+                    alleviate that problem.
+                </p>
+<p>
+
+                    
+<a href="http://svn.apache.org/repos/asf/lucene/java/trunk/contrib/javascript/queryValidator/">The
+                        repository for the Javascript Query Validator files.</a>
+                
+</p>
+<a name="N100B6"></a><a name="High Frequency Terms"></a>
+<h3 class="boxed">High Frequency Terms</h3>
+<p>
+                    The miscellaneous package is for classes that don't fit anywhere else. The only class in it right now determines
+                    what terms occur the most inside a Lucene index.  This could be useful for analyzing which terms may need to go
+                    into a custom stop word list for better search results.
+                </p>
+<p>
+
+                    
+<a href="http://svn.apache.org/repos/asf/lucene/java/trunk/contrib/miscellaneous/">The
+                        repository for miscellaneous classes.</a>
+                
+</p>
+<a name="N100C6"></a><a name="GData-Server"></a>
+<h3 class="boxed">GData-Server</h3>
+<p>
+                     Apache - Lucene based serverside implementation of <a href="http://code.google.com/apis/gdata/">Google's GData</a> protocol. GData-Server provides an extendable
+                     full featured gdata feed server to add, remove, update ATOM 1.0 and RSS 2.0 feeds.
+                     Feeds are searchable via a defined HTTP GET parameter based query language like the Lucnene query syntax.
+                    </p>
+<p>
+
+                    
+<a href="http://svn.apache.org/repos/asf/lucene/java/trunk/contrib/gdata-server/" title="Source repositiory">The
+                         repository for GData-server files and sources.</a>
+                    
+<br>
+                    
+<br>
+
+                    
+<a href="http://wiki.apache.org/lucene-java/GdataServer" title="GData-Server wiki">GData - Server wiki</a>
+
+                
+</p>
+</div>
+
+    
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         2006 <a href="http://www.apache.org/licenses/">The Apache Software Foundation.</a>
+</div>
+<div id="logos"></div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

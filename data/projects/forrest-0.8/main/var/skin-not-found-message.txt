@@ -1,0 +1,12 @@
+------------------------------------------------
+Error: The skin '${project.skin}' could not be found in:
+
+${skins-dir}
+
+And is not provided by Forrest in
+
+${forrest.home}/context/skins
+
+Please check the $${skins-dir} and $${project.skin} properties in
+forrest.properties.
+------------------------------------------------

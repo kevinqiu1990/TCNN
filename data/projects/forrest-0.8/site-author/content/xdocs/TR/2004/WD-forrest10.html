@@ -1,0 +1,390 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE>Forrest 1.0</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.2  (Win32)">
+	<META NAME="CREATED" CONTENT="20041116;13330320">
+	<META NAME="CHANGEDBY" CONTENT="Nicola Ken Barozzi">
+	<META NAME="CHANGED" CONTENT="20041129;10484471">
+	<STYLE>
+	<!--
+		@page { size: 8.5in 11in }
+		TD P { color: #000000; font-family: sans-serif }
+		H1 { color: #005a9c; font-family: sans-serif; font-style: normal; font-weight: medium; text-align: left }
+		P { color: #000000; font-family: sans-serif }
+		H2 { color: #005a9c; font-family: sans-serif; font-style: normal; font-weight: medium; text-align: left }
+		H3 { color: #005a9c; font-family: sans-serif; font-style: normal; font-weight: medium; text-align: left }
+		H4 { color: #000000; font-family: sans-serif; font-style: normal; text-align: left }
+		PRE { color: #000000; font-family: monospace }
+		DT { color: #000000; font-family: sans-serif; font-weight: bold }
+		DD { color: #000000; font-family: sans-serif }
+		BLOCKQUOTE { color: #000000; font-family: sans-serif }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" TEXT="#000000" BGCOLOR="#ffffff" DIR="LTR" STYLE="border: none; padding: 0in">
+<H1>Forrest 1.0 - Working Draft</H1>
+<H2><A NAME="abstract"></A>Abstract</H2>
+<P>Forrest 1.0 is the first specification of Forrest (the product),
+intended to be the reference point for developers and users in the
+road to making a first stable Forrest release.</P>
+<H2><A NAME="status"></A>Status of this Document</H2>
+<P><EM>This section describes the status of this document at the time
+of its publication. Other documents may supersede this document.</EM></P>
+<P>This document is under development, and will not be considered
+final until Forrest 1.0 is released.</P>
+<P>This is the <A HREF="http://www.w3.org/2004/02/Process-20040205/tr.html#first-wd">First
+Public Working Draft</A> of the Forrest 1.0 specification. This
+document has been produced by the Apache Forrest Project developer
+community as part of the Apache Forrest Project. The authors of this
+document are the Apache Forrest Project participants.</P>
+<P>Publication as a Working Draft does not imply endorsement by the
+Apache Forrest Project Membership. This is a draft document and may
+be updated, replaced or obsoleted by other documents at any time. It
+is inappropriate to cite this document as other than work in
+progress.</P>
+<P>Comments on this document are welcome. Please send issues to the
+public mailing list dev@forrest.apache.org (link to archive). It is
+appropriate to send discussion email to this address. Please note
+that comments that you make will be <STRONG>publicly</STRONG>
+archived and available, do not send information you would not want to
+see distributed, such as private data.</P>
+<HR>
+<H2><A NAME="intro"></A>1 Introduction</H2>
+<H3><A NAME="intro-reading"></A>1.1 Reading the Specification</H3>
+<P>The specification has been written with various modes of
+presentation in mind. In case of a discrepancy, the online electronic
+version is considered the authoritative version of the document.</P>
+<P>This document uses the terms <B>must</B>, <B>must not</B>,
+<B>required</B>, <B>shall</B>, <B>shall not</B>, <B>recommended</B>,
+<B>should</B>, <B>should not</B>, <B>may</B>, and <B>optional</B> in
+accord with <A HREF="http://www.w3.org/TR/2004/WD-xforms11-20041115/#ref-rfc-2119">[RFC
+2119]</A>.</P>
+<H3><A NAME="intro-org"></A>1.2 How the Specification is Organized</H3>
+<P>Chapters are arranged by topic.</P>
+<H3><A NAME="intro-conventions"></A>1.3 Documentation Conventions</H3>
+<P>Throughout this document, the following namespace prefixes and
+corresponding namespace identifiers are used:</P>
+<BLOCKQUOTE><B>xhtml2:</B> The XHTML 2.0 namespace<BR><B>my:</B> Any
+user defined namespace</BLOCKQUOTE>
+<P>This is only a convention; any namespace prefix may be used in
+practice.</P>
+<P>The following typographical conventions are used to present
+technical material in this document.</P>
+<P>Examples are set off typographically:</P>
+<P>Example: Example item</P>
+<PRE STYLE="margin-bottom: 0.2in">Example Item</PRE><P>
+References to external documents appear as follows: <A HREF="http://www.w3.org/TR/2004/WD-xforms11-20041115/#ref-example">[Sample
+Reference]</A> with links to the references section of this document.</P>
+<DL>
+	<DT><A NAME="ref-example"></A>Sample Reference 
+	</DT><DD STYLE="margin-bottom: 0.2in">
+	<CITE>Reference</CITE> - linked to from above. 
+	</DD></DL>
+<P>
+The following typesetting convention is used for non-normative
+commentary:</P>
+<P><B>Note:</B></P>
+<P>A gentle explanation to readers.</P>
+<TABLE BORDER=1 CELLPADDING=2 CELLSPACING=2>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P ALIGN=LEFT><B>Editorial note: Editorial Note Name</B></P>
+		</TD>
+		<TD WIDTH=50%>
+			<P ALIGN=RIGHT>&nbsp;</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD COLSPAN=2 VALIGN=TOP>
+			<P ALIGN=LEFT>Editorial commentary, not intended for final
+			publication.</P>
+		</TD>
+	</TR>
+</TABLE>
+<P><A NAME="sample-implementation-issue"></A><B>Issue
+(sample-implementation-issue):</B></P>
+<P><B>Issue-Name</B></P>
+<P>A specific issue for which input from implementors is requested,
+for example as part of the Candidate Recommendation phase.</P>
+<P><B>Resolution:</B></P>
+<P>None recorded.</P>
+<P><BR><BR>
+</P>
+<H2>Forrest Core</H2>
+<TABLE WIDTH=748 BORDER=1 CELLPADDING=2 CELLSPACING=3>
+	<COL WIDTH=366>
+	<COL WIDTH=363>
+	<TR VALIGN=TOP>
+		<TD WIDTH=366>
+			<P ALIGN=LEFT><B>Editorial note: TODOs</B></P>
+		</TD>
+		<TD WIDTH=363>
+			<P ALIGN=RIGHT>&nbsp;</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD COLSPAN=2 WIDTH=736 VALIGN=TOP>
+			<DL>
+				<DD>raw files 
+				</DD><DD>
+				project directory layout 
+				</DD><DD>
+				config file formats 
+				</DD><DD>
+				internationalization</DD></DL>
+		</TD>
+	</TR>
+</TABLE>
+<H3>Processing pipeline</H3>
+<P>This is the conceptual processing pipeline offered by Forrest.</P>
+<P>All references to actual source dirs and internal or external
+formats is generic and are specified elsewhere in this spec. 
+</P>
+<H4>Step 1: Resolution (content)</H4>
+<P>Forrest has a single conceptual source space, that can initially
+be thought of as a single directory, the current xdocs dir. Every
+file that is outside of this directory has to be resolved by a
+locationmap, so that Forrest sees it all as a single directory in any
+case.</P>
+<P>This source space contains files that a filename and an extension.
+There should be only one file with a certain name in a certain
+directory, which will be the main source of our transformation. 
+</P>
+<P>For each URL that is requested, there shall be only one source
+file resolved, which will be our main source. 
+</P>
+<H4>Step 2: Format Transformation (content) 
+</H4>
+<P>In the second step, Forrest transforms the main source to the
+intermediate format, which is XHTML2 (also automatic transforms from
+XHTML1 and HTML will be supported). Transformations from HTML and
+XHTML will be done in the core, while all others will be done by
+plugins (input plugins). 
+</P>
+<P>Multiple formats can be asked for the same source: the filename
+asked will be in the following manner. 
+</P>
+<PRE STYLE="margin-bottom: 0.2in">name.type.format</PRE><P>
+Example:</P>
+<PRE>myfile.content.html 
+myfile.javadocs.html 
+myfile.html </PRE><H4>
+Step 3: Filtering (content)</H4>
+<P>This is a new step, that adds navigation, metadata, extra content,
+functionality and transformations to the content stream.</P>
+<P>The filtering stages should use different filtering files to not
+produce markup that is not needed by the view.</P>
+<P>Navigation is the addition of the 'tab' and 'linkmap' information
+to the stream. 
+</P>
+<P>Metadata about a page can be added, like the date, page size, etc.
+</P>
+<P>Nuggets of information can be added based on the URL and on the
+contents of the main source. For example, newsfeeds about the page
+being processed.</P>
+<P>Fbits should be insert only as placeholder that the view can
+populate them with the actual functionality</P>
+<P>Filtering on the main content can be done, like the automatic
+creation of links based on the site.xml linkmap or footnote
+processing.</P>
+<P>These filtering steps are to be done by plugins (filtering
+plugins). 
+</P>
+<H4>Step 4: Viewing (presentation)</H4>
+<P>Based on the view specified, the content is transformed in a
+format that contains presentation information. Example formats are
+html, fo (formatting objects) and svg.</P>
+<P>Note that this part adds functionality implementation to the
+content. For example, a search item can be displayed, or widgets can
+be used. These are fbits, or functionality bits, and are different
+from nuggets, which are extra content. 
+</P>
+<P>Note that fbits are view dependant, so that a view can decide to
+implement them or not. The configuration of these bits are to be done
+with the new generic skinconf format and a new templating language.</P>
+<P>Example of current fbits are the search pane, the page format
+selector, etc.</P>
+<P>This new templating language will be forrest:templates, which
+contains forrest:view and forrest:template.</P>
+<H4>Step 5: Theming (presentation)</H4>
+<P>The view is creating the html-skelleton that is used for <EM>theming</EM>.
+Themes are view dependend but e.g. you can write <EM>one</EM> theme
+for <EM>x</EM> view derivatives. Theming adds colors and general
+appearance info. In html it's css files for example, or the skinconf
+color information.</P>
+<H4>Step 6: Serializing (presentation)</H4>
+<P>The presentation is transformed to the actual final format with
+output plugins. For example a fo presentation can be outputted as
+xhtml, pdf, rtf, doc, ps, etc. 
+</P>
+<H3>Forrest:templates</H3>
+<P>Forrest:templates or short f:t is a templating language to create
+views on forrest input-data.</P>
+<P><B>Definition - Forrest-View:</B> View = content (nuggets) +
+functionality (fbit) + design (style) 
+</P>
+<P>We will refer to incoming content as nuggets. Nuggets are pure
+content (without any information about fct., style,...). 
+</P>
+<P>fbits can (but do not have to) use nuggets to implemend (or
+populate) the actual functionality needed in the requested view. 
+</P>
+<DL>
+	<DD STYLE="margin-bottom: 0.2in">fbit containing nuggets (I mean it
+	contains e.g. captions -&gt;i18n nuggets) &lt;forrest:fbit
+	name=&quot;fontsize&quot;/&gt; 
+	</DD></DL>
+<P>
+pure fbit (no content just functionality -&gt; IMO very rare, the
+example tag would as well contain i18n: close-schliessen-cerrar)
+&lt;forrest:fbit name=&quot;close-window&quot;/&gt; 
+</P>
+<P>pure fbit *using* nuggets (e.g. profiling data for the actual
+view.) &lt;forrest:fbit name=&quot;searchbox&quot; type=&quot;sport&quot;/&gt;
+</P>
+<P>Normally the nuggets and fbits will be implemented in an overall
+design. The design is a container concept of storing fbits and
+nuggets in graphical container (template + hooks). Templates can be
+used to create the overall design in different media (xhtml, fo,...)
+of the document. 
+</P>
+<P>This design state should only use registered contracts for fbits
+and nuggets but still have absolute controll over the style.</P>
+<H2><A NAME="dt"></A>A Schemas for Forrest 1.0 config files</H2>
+<P><EM>To be added.</EM></P>
+<H2><A NAME="references"></A>B References</H2>
+<H3><A NAME="references-norm"></A>B.1 Normative References</H3>
+<DL>
+	<DT><A NAME="ref-html4"></A><STRONG>[HTML]</STRONG> 
+	</DT><DD>
+	&quot;<CITE><A HREF="http://www.w3.org/TR/1999/REC-html401-19991224">HTML
+	4.01 Specification</A></CITE>&quot;, D. Raggett, A. Le&nbsp;Hors, I.
+	Jacobs, 24 December 1999.<BR><A HREF="http://www.w3.org/TR/html401">Latest
+	version</A> available at: http://www.w3.org/TR/html401 
+	</DD><DT>
+	<A NAME="ref-rfc2119"></A><STRONG>[RFC2119]</STRONG> 
+	</DT><DD>
+	&quot;<CITE><A HREF="http://www.ietf.org/rfc/rfc2119.txt">RFC2119:
+	Key words for use in RFCs to Indicate Requirement Levels</A></CITE>&quot;,
+	S. Bradner, March 1997.<BR>Available at:
+	http://www.ietf.org/rfc/rfc2119.txt 
+	</DD><DT>
+	<A NAME="ref-rfc2396"></A><STRONG>[RFC2396]</STRONG> 
+	</DT><DD>
+	&quot;<CITE><A HREF="http://www.ietf.org/rfc/rfc2396.txt">RFC2396:
+	Uniform Resource Identifiers (URI): Generic Syntax</A></CITE>&quot;,
+	T. Berners-Lee, R. Fielding, L. Masinter, August 1998.<BR>This
+	document updates RFC1738 and RFC1808.<BR>Available at:
+	http://www.ietf.org/rfc/rfc2396.txt 
+	</DD><DT>
+	<A NAME="ref-rfc2854"></A><STRONG>[RFC2854]</STRONG> 
+	</DT><DD>
+	&quot;<CITE><A HREF="http://www.ietf.org/rfc/rfc2854.txt">RFC2854:
+	The text/html Media Type</A></CITE>&quot;, D. Conolly, L. Masinter,
+	June 2000.<BR>Available at: http://www.ietf.org/rfc/rfc2854.txt 
+	</DD><DT>
+	<A NAME="ref-rfc3023"></A><STRONG>[RFC3023]</STRONG> 
+	</DT><DD>
+	&quot;<CITE><A HREF="http://www.ietf.org/rfc/rfc3023.txt">RFC3023:
+	XML Media Types</A></CITE>&quot;, M. Murata, S. St.Laurent, D. Kohn,
+	January 2001.<BR>This document obsoletes [<A HREF="http://www.w3.org/TR/xhtml1/#ref-rfc2376">RFC2376</A>].<BR>Available
+	at: http://www.ietf.org/rfc/rfc3023.txt 
+	</DD><DT>
+	<A NAME="ref-rfc3066"></A><STRONG>[RFC3066]</STRONG> 
+	</DT><DD>
+	&quot;<A HREF="http://www.ietf.org/rfc/rfc3066.txt">Tags for the
+	Identification of Languages</A>&quot;, H. Alvestrand, January
+	2001.<BR>Available at: http://www.ietf.org/rfc/rfc3066.txt 
+	</DD><DT>
+	<A NAME="ref-rfc3236"></A><STRONG>[RFC3236]</STRONG> 
+	</DT><DD>
+	&quot;<A HREF="http://www.ietf.org/rfc/rfc3236.txt">The
+	'application/xhtml+xml' Media Type</A>&quot;, M. Baker, P. Stark,
+	January 2002.<BR>Available at: http://www.ietf.org/rfc/rfc3236.txt 
+	</DD><DT>
+	<A NAME="ref-xml"></A><STRONG>[XML]</STRONG> 
+	</DT><DD>
+	&quot;<A HREF="http://www.w3.org/TR/2000/REC-xml-20001006">Extensible
+	Markup Language (XML) 1.0 Specification (Second Edition)</A>&quot;,
+	T. Bray, J. Paoli, C. M. Sperberg-McQueen, E. Maler, 6 October
+	2000.<BR><A HREF="http://www.w3.org/TR/REC-xml">Latest version</A>
+	available at: http://www.w3.org/TR/REC-xml 
+	</DD><DT>
+	<A NAME="ref-xmlns"></A><STRONG>[XMLNS]</STRONG> 
+	</DT><DD>
+	&quot;<A HREF="http://www.w3.org/TR/1999/REC-xml-names-19990114">Namespaces
+	in XML</A>&quot;, T. Bray, D. Hollander, A. Layman, 14 January
+	1999.<BR>XML namespaces provide a simple method for qualifying names
+	used in XML documents by associating them with namespaces identified
+	by URI.<BR><A HREF="http://www.w3.org/TR/REC-xml-names">Latest
+	version</A> available at: http://www.w3.org/TR/REC-xml-names 
+	</DD><DT>
+	<A NAME="ref-xmlc14n"></A><STRONG>[XMLC14N]</STRONG> 
+	</DT><DD STYLE="margin-bottom: 0.2in">
+	&quot;<A HREF="http://www.w3.org/TR/2001/REC-xml-c14n-20010315">Canonical
+	XML Version 1.0</A>&quot;, J. Boyer, 15 March 2001.<BR>This document
+	describes a method for generating a physical representation, the
+	canonical form, of an XML document.<BR><A HREF="http://www.w3.org/TR/xml-c14n">Latest
+	version</A> available at: http://www.w3.org/TR/xml-c14n 
+	</DD></DL>
+<H3>
+<A NAME="references-inform"></A>B.2 Informative References</H3>
+<DL>
+	<DT><A NAME="ref-xhtml-mod"></A>XHTML Modularization 
+	</DT><DD>
+	<CITE><A HREF="http://www.w3.org/TR/xhtml-modularization/">Modularization
+	of XHTML</A></CITE>, M. Altheim, et. al., 2001. W3C Recommendation
+	available at http://www.w3.org/TR/xhtml-modularization/. 
+	</DD><DT>
+	<A NAME="ref-xml-events"></A>XML Events 
+	</DT><DD STYLE="margin-bottom: 0.2in">
+	<CITE><A HREF="http://www.w3.org/TR/xml-events/">XML Events - An
+	events syntax for XML</A></CITE>, Steven Pemberton, T. V. Raman,
+	Shane P. McCarron, 2003. W3C Recommendation available at:
+	http://www.w3.org/TR/xml-events/. 
+	</DD></DL>
+<H2>
+<A NAME="changes"></A>C Changes (Non-Normative)</H2>
+<P><EM>To be added.</EM></P>
+<H2><A NAME="acknowledgements"></A>D Acknowledgements (Non-Normative)</H2>
+<P>This document was produced with the participation of current
+Apache Forrest Project members and of all participants to the public
+discussion.</P>
+<H2><A NAME="prodnotes"></A>E Development Notes (Non-Normative)</H2>
+<H3><EM><SPAN STYLE="font-style: normal">Decisions and threads</SPAN></EM></H3>
+<H4><EM><A HREF="http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=110145900227224&amp;w=2"><U><SPAN STYLE="font-style: normal">[RT]
+RAW content</SPAN></U></A></EM></H4>
+<P><EM><SPAN STYLE="font-style: normal">Raw content is to be gotten
+like this:</SPAN></EM></P>
+<UL>
+	<LI><P><EM><SPAN STYLE="font-style: normal">for single files one can
+	ask for myfile.<B>source.</B><SPAN STYLE="font-weight: medium">extension</SPAN></SPAN></EM></P>
+	<LI><P><EM><SPAN STYLE="font-weight: medium"><SPAN STYLE="font-style: normal">for
+	whole dirs, the thing has to be declared in some sitewide metadata</SPAN></SPAN></EM></P>
+</UL>
+<H4><A HREF="http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=110172138119333&amp;w=2">[RT]
+Directory structure and configuration</A>   
+</H4>
+<P>To be discussed</P>
+<P><BR><BR>
+</P>
+</BODY>
+</HTML>

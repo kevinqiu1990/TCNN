@@ -1,0 +1,130 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+The problem for a designer with the semantic-container approach is that
+he has to place all elements with absolute position in the page what is quite ugly.
+Designer should have the freedom to use graphical hooks for reasons of design [2].
+
+The solution could be to use the contracts we have and introduce a templating file 
+that designer can use to place the elements whithin graphical container. 
+This would make it easy to create new styles without programming xsl and still 
+keeping the concept of "dropping in" new functions.
+
+The following template shows the pelt skin using leather naming conventions and 
+graphical hooks. I will refer to this template as forrest-template (ft).
+
+<forrest-template>
+  <contract name="branding-trail-path"/>
+  <hook name="intro">
+    <contract name="grouplogo"/>
+    <contract name="projectlogo"/>
+    <contract name="search-input"/>
+    <contract name="nav-main"/>
+    <contract name="nav-main-sub"/>
+  </hook>
+  <hook name="main">
+    <contract name="published-a1"/>
+    <contract name="branding-trail-path-a1"/>
+    <contract name="nav-section">
+      <contract name="nav-section-current"/>
+    </contract>
+    <contract name="content">
+      <contract name="content-pdf"/>
+      <contract name="content-xml"/>
+      <contract name="content-txt"/>
+      <contract name="font-size"/>
+      <contract name="minitoc"/>
+    </contract>
+  </hook>
+  <hook name="clear"/>
+  <hook name="outro">
+    <contract name="siteinfo-legal"/>
+    <contract name="published"/>
+    <hook name="outro-feedback">
+      <contract name="feedback"/>
+    </hook>
+  </hook>
+</forrest-template>
+
+This template file contains all the information of how the new skin can look like. 
+Now let us see the big picture.
+
+1) pipeline A - use the values of the skinconf to determine which elements and 
+functions are used and where.
+****************   ***********   *********************************
+* skinconf.xml * + * leather * = * customized set of elements CE *
+****************   ***********   *********************************
+
+2) pipeline B - transform the customized elements with the forrest-template to 
+create the final page.
+******   ******
+* CE * + * FT * = final skin output
+******   ******
+
+What happen in pipeline A and B is that first we will use the information of the 
+skinconf to customize the elements we need to put in the skin. 
+e.g. <disable-xml>true</disable-xml> would mean that we do not going to 
+include the xml to our actual output CE.
+
+The pipeline B will now use the forrest-template informations and the CE 
+elements to produce the final output.
+
+*Roadmap*
+- Having this concept in the back in my head I will now implemend all functions 
+that are missing in leather now and drop them into their semantic containers.
+- I will then write down all contracts that we have in a xml-file. This file will 
+contain the name of the contract and a description of it. This way it will be easy 
+to know which element designers can implement in skins and what the outcome of 
+the elements are.
+- In the meantime we can implement a basic css-style for leather to finish the 
+skin. BTW this maybe will not be necessary if we use it as internal only format 
+but I would love to see a style.
+
+This work let us then enter the road of Corium. The forrest-template can be used 
+to imitate e.g. zen-css-garden. I would like to use this concept to create Corium, 
+our skin bot.
+
+*Advantages*
+- We will have pure semantic container (SOC).
+- One big advantage is that all new functions would be introduced to only leather.
+- All skins using leather as internal format can use new features by adding only 
+one line of code to their forrest-template.
+- We can imitate more all less all known html-skelletons that are out there.
+- We have a document where all contracts are declared.
+- We can use the concept of ft as well for pdf et. al. 
+
+*Disadvantages*
+- We have to keep the contract document *always* up to date (one more document to take care of)
+-...
+
+*Open Questions*
+I have some issues that are not 100% clear to me right now:
+- Some element like the published note can be used in different locations. Right 
+now there are be copied and placed with into the alternativ location via ~-a1. 
+That is not really efficent. Can we thing about a method that is better (more copyless)?
+- The common skin and leather are having then more or less the same function. 
+Should they be consolidated?
+- Should leather have css-stylesheets at all?
+- I used now some naming conventions for graphical hooks. Should we as well try to introduce this conventions?
+-...
+
+*Recent scale-dev*
+I can imagine that we can have the scale-dev as first second generation skin and as example for the new skin concept.
+
+
+Reference
+[1] http://marc.theaimsgroup.com/?l=forrest-dev&m=109699727312801&w=2
+[2] http://marc.theaimsgroup.com/?l=forrest-dev&m=109535294600667&w=2

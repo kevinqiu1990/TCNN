@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XHTML2: http://www.w3.org/TR/2005/WD-xhtml2-20050527
+Copyright © 1999-2004 World Wide Web Consortium, (Massachusetts Institute of Technology,
+European Research Consortium for Informatics and Mathematics, Keio University).
+All Rights Reserved. This work is distributed under the W3C® Software Licens [1]
+in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:x="http://www.w3.org/1999/xhtml">
+
+  <x:h1>List Module</x:h1>
+
+  <div>
+    <x:h2>The dl element</x:h2>
+
+    <define name="dl">
+      <element name="dl">
+        <ref name="dl.attlist"/>
+        <optional>
+          <ref name="label"/>
+        </optional>
+        <choice>
+          <oneOrMore>
+            <choice>
+              <ref name="dt"/>
+              <ref name="dd"/>
+            </choice>
+          </oneOrMore>
+          <oneOrMore>
+            <ref name="di"/>
+          </oneOrMore>
+        </choice>
+      </element>
+    </define>
+
+    <define name="dl.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The di element</x:h2>
+
+    <define name="di">
+      <element name="di">
+        <ref name="di.attlist"/>
+        <oneOrMore>
+          <ref name="dt"/>
+        </oneOrMore>
+        <zeroOrMore>
+          <ref name="dd"/>
+        </zeroOrMore>
+      </element>
+    </define>
+
+    <define name="di.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The dt element</x:h2>
+
+    <define name="dt">
+      <element name="dt">
+        <ref name="dt.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="dt.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The dd element</x:h2>
+
+    <define name="dd">
+      <element name="dd">
+        <ref name="dd.attlist"/>
+        <ref name="Flow.model"/>
+      </element>
+    </define>
+
+    <define name="dd.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The label element</x:h2>
+
+    <define name="label">
+      <element name="label">
+        <ref name="label.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="label.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The nl element</x:h2>
+
+    <define name="nl">
+      <element name="nl">
+        <ref name="nl.attlist"/>
+        <ref name="label"/>
+        <oneOrMore>
+          <ref name="li"/>
+        </oneOrMore>
+      </element>
+    </define>
+
+    <define name="nl.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The ol element</x:h2>
+
+    <define name="ol">
+      <element name="ol">
+        <ref name="ol.attlist"/>
+        <optional>
+          <ref name="label"/>
+        </optional>
+        <oneOrMore>
+          <ref name="li-in-ol"/>
+        </oneOrMore>
+      </element>
+    </define>
+
+    <define name="ol.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The ul element</x:h2>
+
+    <define name="ul">
+      <element name="ul">
+        <ref name="ul.attlist"/>
+        <optional>
+          <ref name="label"/>
+        </optional>
+        <oneOrMore>
+          <ref name="li"/>
+        </oneOrMore>
+      </element>
+    </define>
+
+    <define name="ul.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The li element</x:h2>
+
+    <define name="li">
+      <element name="li">
+        <ref name="li.attlist"/>
+        <ref name="Flow.model"/>
+      </element>
+    </define>  
+
+    <define name="li.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+
+    <define name="li-in-ol">
+      <element name="li">
+        <ref name="li-in-ol.attlist"/>
+        <ref name="Flow.model"/>
+      </element>
+    </define>  
+
+    <define name="li-in-ol.attlist">
+      <ref name="Common.attrib"/>
+      <ref name="value.attrib"/>
+    </define>
+
+    <define name="value.attrib">
+      <optional>
+        <attribute name="value">
+          <ref name="Number.datatype"/>
+        </attribute>
+      </optional>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>List Content Set</x:h2>
+
+    <define name="List.class">
+      <choice>
+        <ref name="ul"/>
+        <ref name="nl"/>
+        <ref name="ol"/>
+        <ref name="dl"/>
+      </choice>
+    </define>
+  </div>
+
+</grammar>

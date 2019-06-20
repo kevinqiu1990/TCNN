@@ -1,0 +1,51 @@
+# NOTE: The source for this file is at site-author/content/.htaccess
+
+# FIXME: The version-specific entries need to be updated after each release.
+
+# FIXME: Do we still need this? See FOR-877
+AddDefaultCharset UTF-8
+
+# Some old documents need special handling
+RedirectMatch ^/mail-archives(.*) http://forrest.apache.org/mail-lists$1
+RedirectMatch .*proposal-asf-publish.html http://people.apache.org/~crossley/proposal-asf-publish.html
+RedirectMatch ^/0.7/events(.*) http://forrest.apache.org/events$1
+RedirectMatch ^/docs\.html http://forrest.apache.org/versions/
+RedirectMatch ^/build(.*) http://forrest.apache.org/dev/build$1
+Redirect /plugins/0.8-dev http://forrest.apache.org/plugins/0.8
+
+# Maintain some old URLs to point to current release
+Redirect /docs/plugins http://forrest.apache.org/pluginDocs/plugins_0_70
+
+# Some convenience URLs.
+Redirect /docs/dev http://forrest.apache.org/docs_0_80
+Redirect /pluginDocs/dev http://forrest.apache.org/pluginDocs/plugins_0_80
+
+# Some special docs need to point to the development version
+RedirectMatch ^/faq(.*) http://forrest.apache.org/docs_0_80/faq$1
+RedirectMatch ^/docs/faq(.*) http://forrest.apache.org/docs_0_80/faq$1
+RedirectMatch ^/changes(.*) http://forrest.apache.org/docs_0_80/changes$1
+
+Options -MultiViews
+
+# Some convenience URLs.
+Redirect /docs http://forrest.apache.org/docs_0_70
+Redirect /howto http://forrest.apache.org/docs_0_70/howto
+
+# Some moved documents
+RedirectMatch ^/docs/docs_0_80/howto/howto-structurer-install(.*) http://forrest.apache.org/docs_0_80/howto/howto-dispatcher-install$1
+RedirectMatch ^/docs_0_80/howto/howto-dispatcher-install(.*) http://forrest.apache.org/pluginDocs/plugins_0_80/org.apache.forrest.plugin.internal.dispatcher/how/howto-dispatcher-quickstart$1
+RedirectMatch ^/docs_0_80/howto/howto-structurer-dsl(.*) http://forrest.apache.org/pluginDocs/plugins_0_80/org.apache.forrest.plugin.internal.dispatcher/how/howto-dispatcher-structurer$1
+RedirectMatch ^/docs_0_80/howto/howto-dispatcher-quickstart(.*) http://forrest.apache.org/pluginDocs/plugins_0_80/org.apache.forrest.plugin.internal.dispatcher/how/howto-dispatcher-quickstart$1
+RedirectMatch ^/docs_0_80/howto/howto-structurer-contracts(.*) http://forrest.apache.org/pluginDocs/plugins_0_80/org.apache.forrest.plugin.internal.dispatcher/how/howto-dispatcher-contracts.html
+RedirectMatch ^/docs_0_80/compliance(.*) http://forrest.apache.org/compliance$1
+RedirectMatch ^/docs_0_80/forrest-contract(.*) http://forrest.apache.org/forrest-contract$1
+RedirectMatch ^/docs_0_80/howto/howto-howto(.*) http://forrest.apache.org/howto-howto$1
+RedirectMatch ^/docs_0_80/howto/howto-dev(.*) http://forrest.apache.org/howto-dev$1
+
+# handle all DTDs etc.
+<Files ~ "\.(dtd|mod)$">
+  ForceType application/xml-dtd
+</Files>
+<Files ~ "\.(pen|ent)$">
+  ForceType application/xml-external-parsed-entity
+</Files>

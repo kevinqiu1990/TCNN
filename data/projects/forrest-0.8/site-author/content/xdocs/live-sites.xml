@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd">
+<document>
+  <header>
+    <title>Examples Built-With-Forrest</title>
+  </header>
+  <body>
+    <p>
+      These are some of the sites that were created using Apache Forrest
+      technology.
+    </p>
+    <p>
+      If you want your site added to the list, then please send a request to the
+      <link href="site:mail-lists">mailing lists</link> or to the
+      <link href="site:bugs">Issue tracker</link>. Tell us the URL, Name, and
+      catch-phrase.
+    </p>
+    <section id="skinned">
+      <title>Skinned Sites</title>
+      <p>
+        These sites use the skinning system that was part of all releases up to
+        and including 0.7 release. This system is expected to be deprecated soon
+        in favour of a more flexible system called Dispatcher. See the next
+        section for some examples of such sites.
+      </p>
+      <ul>
+        <li><link href="ext:xml.apache.org">Apache XML Project (xml.apache.org)</link></li>
+        <li><link href="ext:forrest">Apache Forrest</link></li>
+        <li><link href="site:references/cocoon">Apache Cocoon</link></li>
+        <li><link href="site:references/lenya">Apache Lenya</link></li>
+        <li><link href="http://aft.sourceforge.net/">Anteater</link> - Ant-based functional testing</li>
+        <li><link href="http://chaperon.sourceforge.net">Chaperon</link> - text parser</li>
+        <li><link href="http://www.iasandcb.pe.kr/3g/">IAS&amp;CB</link></li>
+        <li>Some <link href="http://www.apache.org/~coar/people.html">Apache
+        Committer</link> personal pages</li>
+        <li><link href="ext:fop">Apache FOP</link>
+        (Formatting Objects Processor)</li>
+        <li><link href="http://www.dream-models.com/">Dream Models</link>
+        - gather information about electric radio controlled helicopters</li>
+        <li><link href="http://people.apache.org/~vgritsenko/stats/">Apache Stats (Vadim's Home Page)</link> - some web statistics</li>
+        <li><link href="http://www.indexgeo.net/zalarm/">Z-alarm - Ensure
+        information server integrity</link></li>
+        <li><link href="http://jakarta.apache.org/poi/">Apache Jakarta POI</link></li>
+        <li><link href="http://terra-intl.com/">Terra-International, Inc. (Japanese)</link></li>
+        <li><link href="http://jakarta.terra-intl.com/poi/">Apache Jakarta POI (Japanese Translation)</link></li>
+        <li><link href="http://xfp.sourceforge.net/">XFP</link> - eXtensible Filtering Pipelines</li>
+        <li><link href="http://www.atlassian.com/software/jira/docs/latest">JIRA bugtracker documentation</link></li>
+        <li><link href="http://www.phpopentracker.de/">phpOpenTracker</link> - A framework solution for the analysis of website traffic and visitor analysis</li>
+        <li><link href="http://ws.apache.org/">Apache Web Services Project</link></li>
+        <li><link href="http://ws.apache.org/wsif/">Apache WSIF Project</link> - Web Services Invocation Framework</li>
+        <li><link href="http://xml.apache.org/xmlbeans/">Apache XMLBeans</link> - An XML-Java binding tool</li>
+        <li><link href="http://druid.sourceforge.net/">Druid: The Database Manager</link> - GUI tool to create databases (GPL)</li>
+        <li><link href="http://ws.apache.org/axis/">Apache Axis</link> - an implementation of the SOAP ("Simple Object Access Protocol")</li>
+        <li><link href="http://ws.apache.org/soap/">Apache SOAP</link> - an implementation of the SOAP submission</li>
+        <li><link href="http://www.kanaputs.org/">Kanaputs</link> - an interpreter for Java</li>
+        <li><link href="http://cese.sourceforge.net/">Cell Electrophysiology Simulation Environment (CESE)</link>
+        - a framework for computational electrophysiological simulations</li>
+        <li><link href="ext:gump">Apache Gump</link></li>
+        <li><link href="http://www.agssa.net/">AG Software</link></li>
+        <li><link href="http://jdbc.postgresql.org/">PostgreSQL JDBC Driver</link></li>
+        <li><link href="http://www.sbbi.net/">SuperBonBon Industries</link></li>
+        <li><link href="http://learnlinux.tsf.org.za/">Learn Linux</link> - developing Free/Open Source GNU/Linux Training Materials</li>
+        <li><link href="http://computerdictionary.tsf.org.za">Computer Dictionary Project</link> - develop a DocBook XML computer nomenclature glossary database</li>
+        <li><link href="http://www.softoutfit.com/">Ca&#241;ones Software Outfitter</link></li>
+        <li><link href="http://www.cirquedigital.com/">Cirque|Digital, LLC</link></li>
+        <li><link href="http://db.apache.org/derby/">Apache Derby</link>
+        - a zero admin, embeddable java rdbms</li>
+        <li><link href="http://www.atbymjm.com/">ATbyMJM</link>
+        - Assistive Technology, using augmentive communication devices, by Martha Jane McLellan</li>
+        <li><link href="http://www.cccp-project.org/">CCCP Common Clan Portal</link>
+         - Primarily a J2EE website application for game clans</li>
+        <li><link href="http://www.verit.de/">verit Informationssysteme GmbH</link></li>
+        <li><link href="http://www.sello-propio.com/">Sello Propio</link> - Feng Shui in Columbia</li>
+        <li><link href="http://www.divvun.no/">S&aacute;mi proofing tools development project</link></li>
+        <li><link href="http://www.risten.no/">S&aacute;mi terminology portal</link> 
+        - (background documentation uses Forrest, the main page uses eXist+Cocoon)</li>
+        <li><link href="http://www.discountdracula.com/">DisCountDracula</link>
+        - bargains/deals on various products and services</li>
+        <li><link href="http://www.cfas.org/">Central Florida Astronomical
+          Society</link>
+        - The Central Florida Astronomical Society, Inc.
+        (CFAS) is a 501(c)(3) organization operating in the Greater Orlando Metropolitan 
+        area and surrounding communities.</li>
+        <li><link href="http://uml2svg.sourceforge.net/">uml2svg</link>
+        - an
+        XSLT-based tool for converting XMI-compliant UML Diagrams into
+        SVG</li>
+        <li><link href="http://www.technicat.com/">technicat</link>
+        - consulting
+        and development expertise to the Internet, educational software,
+        computer graphics and video game industries</li>
+        <li><link href="http://icdl.tsf.org.za/">OpenICDL</link>
+        - training materials for International Computer Driving License certification</li>
+        <li><link href="http://www.thesummitjournal.com/">The Summit Journal</link> -
+        A global, free, translated and syndicated Adventure and Exploration publication. </li>
+        <li><link href="http://www.xprime.com.au/">X'Prime</link>
+        - Software company specialising in optimisation techniques
+        using evolutionary algorithms
+      </li>
+        <li><link href="http://www.art-painter.com/">Snjezana Vidovic - Art Painter</link>
+        - Virtual Gallery
+      </li>
+        <li><link href="http://www.j2world.net/">j2world</link>
+              - smart solutions for a mobile world</li>
+        <li><link href="http://j2ee.by.ru/">J2EE Quick Start</link></li>
+        <li><link href="http://javaworkshop.sourceforge.net ">Java Workshop</link> online web book - show cases some of the tools that every java developer should have in his / her toolbox </li>
+        <li><link href="http://www.krabbelkaefer.de">Die Krabbelkäfer</link> - 
+        homepage of the association for the promotion of child care in Usingen 
+        (Germany).</li>
+        <li><link href="http://www.solvkroken.no/ekat/produkter/HK_00/">Produktkatalog for S&oslash;lvkroken</link>
+        - biggest supplier of sports fishing equipment in Norway, with export all over the world.
+      </li>
+        <li><link href="http://www.apwebco.com">Design Patterns</link> - GoF Design Patterns Tutorial</li>
+        <li><link href="http://www.usefuldomains.co.uk">Generic Domain 
+        Names</link> - Domain sales site specialising in industrial, business 
+        and home themed generic domains.</li>
+        <li><link href="http://www.travelvisas.eu/">travel visas</link>
+        - travel information for backpackers and other travellers in Europe and
+beyond
+      </li>
+        <li><link href="http://www.xmlmath.org">XMLMath</link> - XML-Based Mathematical Expression Evaluator</li>
+        <li><link href="http://g11ntoolkit.sourceforge.net/">Globalization Tool Kit</link>
+        - Introduction to the G11NToolKit.</li>
+        <li><link href="http://barcode4j.krysalis.org/">Barcode4J</link>
+        - a flexible generator for barcodes written in Java.</li>
+        <li><link href="http://maemo.org/">Maemo</link> - 
+          open development platform to create applications
+          for Nokia 770 Internet Tablet and other maemo compliant
+          handheld devices in the future.</li>
+        <li><link href="http://www.primordion.com/Xholon/">Xholon</link>
+        - A Java framework for developing UML 2.0 and other event-driven systems.
+      </li>
+        <li><link href="http://www.primordion.com/Cellontro/">Cellontro</link>
+        - Modeling and simulation of cells, other biological entities, and
+        biochemical networks, using Xholon.
+      </li>
+        <li><link href="http://www.erbox.org/">ER/Box Site</link> An all Java, open source ERP system built on Compiere and Apache Derby. Some customisations have been <link href="http://www.erbox.org/documentation/Other/ForrestNotes/forrestNotesOverview.html">documented</link>.</li>
+        <li><link href="http://apfw.sourceforge.net/">Apparatus Framework</link> -
+          An object-oriented software framework written in C++ for
+          embedded applications.</li>
+        <li><link href="http://www.skiclub-troisdorf.de/">Skiclub 
+      Troisdorf-Sieglar e.V.</link> The skiclub aims to provide ski related
+      activities and social events for our members in and around Troisdorf area 
+      (near Cologne and Bonn).</li>
+        <li><link href="http://scriptella.javaforge.com">Scriptella ETL</link> Open source ETL (Extract-Transform-Load) and script execution tool. </li>
+        <li><link href="http://open.controltier.com/">open.controltier.com</link> Open Source tools for automating the build and deployment of complex applications.</li>
+        <li><link href="http://antdepo.org/">antdepo.org</link> Open Source automation harness built on top of Apache Ant</li>
+<!--  <li><link href=""></link></li> -->
+      </ul>
+    </section>
+    <section id="dispatcher">
+      <title>Sites using upcoming Dispatcher</title>
+      <p>
+        The skinning system in versions of Forrest up to and including 0.7 was
+        great, however, it proved to be too inflexible. Soon we will have brand
+        new system called Dispatcher. The following sites are examples.
+      </p>
+      <note>
+        The Dispatcher is still in development (as of 0.8-dev cycle), please
+        only use them if you know what you are doing. We expect to include them
+        in an upcoming release at which point we will be encouraging their use.
+      </note>
+      <ul>
+        <li><link href="http://floatingsun.net/">Floating Sun</link> - Diwaker Gupta :: Web/Blog/Gallery</li>
+        <li><link href="http://www.ourlittlestars.org/">Our Little Stars</link> - A non-profit toy library site.
+        This site is interesting because it pulls content from many locations including a Daisy CMS system and 
+        the Amazon ECS service.</li>
+        <li><link href="http://cyriaque.dupoirieux.free.fr/">Cyriaque</link> family website...</li>
+        <li><link href="http://lenya.zones.apache.org/">Apache Lenya 
+          Zone</link> - this site is using v2 with some nice demonstrations of 
+          new features like the theme switcher.</li>
+        <li><link href="http://www.target-x.de/">tarGET-X - know the unknown</link> 
+          by thorsten.</li>
+        <li><link href="http://www.criaturitas.org/">CDK - club deportivo kriaturitas</link>.
+          Website of the basketball club CDK located in Sevilla, España.</li>
+        <li><link href="http://www.varietee.com.au/">varietee&trade; adjustable golf practice platforms</link></li>
+<!--  <li><link href=""></link></li> -->
+      </ul>
+    </section>
+  </body>
+</document>

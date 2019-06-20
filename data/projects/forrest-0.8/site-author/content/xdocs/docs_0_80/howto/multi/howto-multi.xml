@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE howto PUBLIC "-//APACHE//DTD How-to V1.2//EN" "http://forrest.apache.org/dtd/howto-v12.dtd">
+<howto>
+  <header>
+    <title>Example of a multi-page how-to</title>
+    <abstract>
+      This is the shell of a multi-page how-to. Add your own content.
+    </abstract>
+    <last-modified-content-date date="2003-09-10"/>
+  </header>
+  <audience title="Intended audience">
+    <p>
+      Describe the audience here.
+    </p>
+  </audience>
+  <purpose title="Purpose">
+    <p>
+      Explain the purpose of the howto here.
+    </p>
+  </purpose>
+  <prerequisites title="Prerequisites">
+    <p>
+      Configuration requirements:
+    </p>
+    <ul>
+      <li>This.</li>
+      <li>That.</li>
+    </ul>
+    <p>
+      Requisite skills:
+    </p>
+    <ul>
+      <li>These.</li>
+      <li>Those.</li>
+    </ul>
+  </prerequisites>
+  <steps title="Various Steps">
+    <p>
+      After this brief introductory paragraph, the steps are described in
+      separate documents:
+    </p>
+    <ul>
+      <li><link href="step1.html">Step 1: Do foo</link></li>
+      <li><link href="step2.html">Step 2: Do foobar</link></li>
+      <li><link href="step3.html">Step 3: Finish up</link></li>
+    </ul>
+  </steps>
+  <extension title="Real World Extension">
+    <p>
+      Briefly describe some relevant extensions that go beyond these basics.
+    </p>
+  </extension>
+  <tips title="Tips">
+    <p>
+      If you have a problem running the example, then you can try the following
+      tips:
+    </p>
+    <ul>
+      <li>Tip #1</li>
+      <li>Tip #2</li>
+    </ul>
+  </tips>
+  <references title="Related Resources">
+    <p>
+      Cocoon resources:
+    </p>
+    <ul>
+      <li>For all Cocoon basics see the
+        <link href="ext:cocoon">Cocoon Web site</link>.
+      </li>
+    </ul>
+  </references>
+  <feedback title="Feedback">
+    <p>
+      If you find any faults in this How-to or can see any improvements, please
+      contact the <link href="site:mail-lists">project mail lists</link> with
+      them.
+    </p>
+  </feedback>
+</howto>

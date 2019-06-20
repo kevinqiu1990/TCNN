@@ -1,0 +1,116 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- ===================================================================
+
+     Forrest Skinconf DTD (Version 0.6)
+
+PURPOSE:
+  This DTD was developed to create a simple Skin configuration 
+  for the Forrest skins.
+
+TYPICAL INVOCATION:
+
+  <!DOCTYPE skinconfig PUBLIC
+       "-//APACHE//DTD Skin Configuration Vx.y//EN"
+       "skinconf-vxy.dtd">
+  where
+    x := major version
+    y := minor version
+
+NOTES:
+ 
+==================================================================== -->
+
+  <!ENTITY % links.att 'name CDATA #REQUIRED 
+                        href CDATA #REQUIRED' >  
+
+  <!ELEMENT skinconfig (search?, disable-print-link?, disable-pdf-link?, 
+   disable-xml-link?, disable-external-link-image?, 
+   disable-compliance-links?, obfuscate-mail-links?, 
+   project-name?, project-description?, project-url?, project-logo,
+   group-name?, group-description?, group-url?, group-logo?,
+   host-url?, host-logo?, favicon-url?, year?, vendor?, copyright-link?, trail?, 
+   toc?, headings?, extra-css?, colors?, pdf?, credits?)>
+
+  <!ELEMENT search EMPTY>
+  <!ATTLIST search name     CDATA #IMPLIED
+                   domain   CDATA #IMPLIED
+                   provider CDATA #IMPLIED>
+  <!ELEMENT disable-print-link (#PCDATA)>
+  <!ELEMENT disable-pdf-link (#PCDATA)>
+  <!ELEMENT disable-xml-link (#PCDATA)>
+  <!ELEMENT disable-external-link-image (#PCDATA)>
+  <!ELEMENT disable-compliance-links (#PCDATA)>
+  <!ELEMENT obfuscate-mail-links (#PCDATA)>
+  <!ELEMENT project-name (#PCDATA)>
+  <!ELEMENT project-description (#PCDATA)>
+  <!ELEMENT project-url (#PCDATA)>
+  <!ELEMENT project-logo (#PCDATA)>
+  <!ELEMENT group-name (#PCDATA)>
+  <!ELEMENT group-description (#PCDATA)>
+  <!ELEMENT group-url (#PCDATA)>
+  <!ELEMENT group-logo (#PCDATA)>
+  <!ELEMENT host-url (#PCDATA)>
+  <!ELEMENT host-logo (#PCDATA)>
+  <!ELEMENT favicon-url (#PCDATA)>
+  <!ELEMENT year (#PCDATA)>
+  <!ELEMENT vendor (#PCDATA)>
+  <!ELEMENT copyright-link (#PCDATA)>
+  <!ELEMENT trail (link1, link2, link3)>
+  <!ELEMENT link1 EMPTY>
+  <!ATTLIST link1 %links.att;>
+  <!ELEMENT link2 EMPTY>
+  <!ATTLIST link2 %links.att;>
+  <!ELEMENT link3 EMPTY>
+  <!ATTLIST link3 %links.att;>
+ 
+  <!ELEMENT credits (credit*)>
+   <!ELEMENT credit (name, url, image?, width?, height?)>
+  <!-- id uniquely identifies the tool, and role indicates its function -->
+  <!ATTLIST credit id   CDATA #IMPLIED
+                   role CDATA #IMPLIED>
+  <!ELEMENT name (#PCDATA)>
+  <!ELEMENT url (#PCDATA)>
+  <!ELEMENT image (#PCDATA)>
+  <!ELEMENT width (#PCDATA)>
+  <!ELEMENT height (#PCDATA)>
+  <!ELEMENT toc EMPTY>
+  <!ATTLIST toc max-depth CDATA #IMPLIED>
+  <!ATTLIST toc min-sections CDATA #IMPLIED>
+  <!ATTLIST toc location CDATA #IMPLIED>
+  <!ELEMENT headings EMPTY>
+  <!ATTLIST headings type CDATA #REQUIRED>
+  <!ELEMENT colors (color*)>
+  <!ELEMENT color EMPTY>
+  <!ATTLIST color name   CDATA #IMPLIED
+                  value  CDATA #IMPLIED
+                  font   CDATA #IMPLIED
+                  link   CDATA #IMPLIED
+                  vlink  CDATA #IMPLIED
+                  hlink  CDATA #IMPLIED>
+  <!ELEMENT extra-css (#PCDATA)>
+  <!ELEMENT pdf (page, margins?)>
+  <!ELEMENT page EMPTY>
+  <!ATTLIST page size (a0|a1|a2|a3|a4|a5|executive|folio|legal|ledger|letter|quarto|tabloid) "letter"
+            orientation (portrait|landscape) "portrait">
+
+  <!ELEMENT margins (top?, bottom?, inner?, outer?)>
+  <!ATTLIST margins double-sided (true | false) "false">
+  <!ELEMENT top (#PCDATA)>
+  <!ELEMENT bottom (#PCDATA)>
+  <!ELEMENT inner (#PCDATA)>
+  <!ELEMENT outer (#PCDATA)>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="http://www.w3.org/2001/xml-events"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:ev="http://www.w3.org/2001/xml-events"
+         xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+         xmlns:x="http://www.w3.org/1999/xhtml"
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+
+  <x:h1>XML Events Module in RELAX NG</x:h1>
+
+  <x:pre>
+    Copyright &#xA9;2003 W3C&#xAE; (MIT, ERCIM, Keio), All Rights Reserved.
+
+      Editor:   Masayasu Ishikawa &lt;mimasa@w3.org&gt;
+      Revision: $Id: xml-events-1.rng,v 1.6 2003/04/30 06:50:03 mimasa Exp $
+
+    Permission to use, copy, modify and distribute this RELAX NG schema
+    for XML Events and its accompanying documentation for any purpose and
+    without fee is hereby granted in perpetuity, provided that the above
+    copyright notice and this paragraph appear in all copies. The copyright
+    holders make no representation about the suitability of this RELAX NG
+    schema for any purpose.
+
+    It is provided "as is" without expressed or implied warranty.
+    For details, please refer to the W3C software license at:
+
+      <x:a href="http://www.w3.org/Consortium/Legal/copyright-software"
+      >http://www.w3.org/Consortium/Legal/copyright-software</x:a>
+  </x:pre>
+
+  <define name="listener">
+    <element name="listener">
+      <ref name="listener.attlist"/>
+    </element>
+  </define>
+
+  <define name="listener.attlist">
+    <optional>
+      <attribute name="event">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="observer">
+        <data type="IDREF"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="target">
+        <data type="IDREF"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="handler">
+        <data type="anyURI"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="phase" a:defaultValue="default">
+        <choice>
+          <value>capture</value>
+          <value>default</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="propagate" a:defaultValue="continue">
+        <choice>
+          <value>stop</value>
+          <value>continue</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="defaultAction" a:defaultValue="perform">
+        <choice>
+          <value>cancel</value>
+          <value>perform</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+    </optional>
+  </define>
+
+</grammar>

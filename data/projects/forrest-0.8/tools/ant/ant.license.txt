@@ -1,0 +1,2 @@
+The ant-*-x.y.jar are from the Apache Ant project
+and are licensed as Apache License 2.0 (See ../LICENSE.txt).

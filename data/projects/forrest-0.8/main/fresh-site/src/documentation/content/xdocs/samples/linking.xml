@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://apache.org/forrest/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Demonstration of linking</title>
+  </header>
+  <body>
+    <section id="overview">
+      <title>Overview</title>
+      <p>
+        Forrest has many powerful techniques for linking between documents and
+        for managing the site navigation. This document demonstrates those
+        techniques. The document "<a href="ext:linking">Menus and Linking</a>"
+        has the full details.
+      </p>
+    </section>
+    <section id="uri-space">
+      <title>Building and maintaining consistent URI space</title>
+      <p>
+        When Forrest builds your site, it starts from the front page. Like a
+        robot, it traverses all of the links that it finds in the documents and
+        builds the corresponding pages. Any new links are further traversed.
+      </p>
+      <p>
+        Sometimes those links lead to documents that are generated directly from
+        xml source files, sometimes they are generated from other source via an
+        intermediate xml format. Other times the links lead to raw un-processed
+        content.
+      </p>
+      <p>
+        The site navigation configuration file "<code>site.xml</code>" provides
+        a way to manage this URI space. In the future, when documents are
+        re-arranged and renamed, the site.xml configuration will enable this
+        smoothly.
+      </p>
+    </section>
+    <section id="resource-space">
+      <title>Mapping the local resource space to the final URI space</title>
+      <p>
+        For both generated and raw (un-processed) files, the top-level of the
+        URI space corresponds to the "<code>content/xdocs/</code>" directory,
+        i.e. the location of the "<code>site.xml</code>" configuration file.
+      </p>
+      <note>
+        In versions prior to 0.7 raw un-processed content was stored in the
+        "<code>content/</code>" directory. In 0.7 onwards, raw un-processed data
+        is stored alongside the xdocs. In addition, in 0.6 and earlier, HTML
+        documents could be stored in the xdocs directory and served without
+        processing. If you you wish to emulate the behaviour of 0.6 and earlier
+        see the next section.
+      </note>
+      <p>
+        A diagram will help.
+      </p>
+      <source>
+<![CDATA[
+The resource space          ==============>    The final URI space
+------------------                             -------------------
+Generated content ...
+ content/xdocs/index.xml                       index.html
+ content/xdocs/samples/index.xml               samples/index.html
+ content/xdocs/samples/faq.xml                 samples/faq.html
+ content/xdocs/test1.html                      test1.html
+ content/xdocs/samples/test3.html              samples/test3.html
+ content/xdocs/samples/subdir/test4.html       samples/subdir/test4.html
+
+Raw un-processed content ...
+ content/xdocs/hello.pdf                       hello.pdf
+ content/xdocs/hello.sxw                       hello.sxw
+ content/xdocs/subdir/hello.sxw                subdir/hello.sxw
+]]>
+      </source>
+      <section>
+        <title>How Plugins May Affect The URI Space</title>
+        <p>
+          By using <a href="site:plugins">Forrest Input Plugins</a> you can
+          process some file formats, such as OpenOffice.org documents and
+          produce processed content from them. For example, the file
+          <code>content/xdocs/hello.sxw</code> can be used to produce a skinned
+          version of the document at with the name <code>hello.html</code>.
+          Similarly, you can use <a href="site:plugins">Forrest Output
+          Plugins</a> to create different output formats such as PDF, in this
+          case <code>content/xdocs/hello.sxw</code> can produce
+          <code>hello.pdf</code>.
+        </p>
+        <p>
+          However, this does not affect the handling of raw content. That is,
+          you can still retrieve the raw un-processed version with, for example,
+          <code>hello.sxw</code>. If you want to prevent the user retrieving the
+          un-processed version you will have to create matchers that intercept
+          these requests within your project sitemap.
+        </p>
+      </section>
+    </section>
+    <section id="generated">
+      <title>Basic link to internal generated pages</title>
+      <p>
+        When this type of link is encountered, Forrest will look for a
+        corresponding xml file, relative to this document (i.e. in
+        <code>content/xdocs/samples/</code>).
+      </p>
+      <p>
+        A generated document in the current directory, which corresponds to
+        <code>content/xdocs/samples/sample.html</code> ...
+      </p>
+      <source>
+<![CDATA[<a href="sample.html">]]><a href="sample.html">sample.html</a>
+<![CDATA[</a>]]>
+      </source>
+      <p>
+        In a sub-directory, which corresponds to
+        <code>content/xdocs/samples/subdir/index.html</code> ...
+      </p>
+      <source>
+<![CDATA[<a href="subdir/index.html">]]><a href="subdir/index.html">subdir/index.html</a>
+<![CDATA[</a>]]>
+      </source>
+    </section>
+    <section id="raw">
+      <title>Basic link to raw un-processed content</title>
+      <p>
+        Raw content files are not intended for any processing, they are just
+        linked to (e.g. pre-prepared PDFs, zip archives). These files are placed
+        alongside your normal content in the "<code>content/xdocs</code>"
+        directory.
+      </p>
+      <p>
+        A raw document in the current directory, which corresponds to
+        <code>content/xdocs/samples/helloAgain.pdf</code> ...
+      </p>
+      <source>
+<![CDATA[<a href="helloAgain.pdf">]]><a href="helloAgain.pdf">helloAgain.pdf</a>
+<![CDATA[</a>]]>
+      </source>
+      <p>
+        A raw document in a sub-directory, which corresponds to
+        <code>content/xdocs/samples/subdir/hello.zip</code> ...
+      </p>
+      <source>
+<![CDATA[<a href="subdir/hello.zip">]]><a href="subdir/hello.zip">subdir/hello.zip</a>
+<![CDATA[</a>]]>
+      </source>
+      <p>
+        A raw document at the next level up, which corresponds to
+        <code>content/hello.pdf</code> ...
+      </p>
+      <source>
+<![CDATA[<a href="../hello.pdf">]]><a href="../hello.pdf">../hello.pdf</a>
+<![CDATA[</a>]]>
+      </source>
+      <section id="no-decoration">
+        <title>Serving (X)HTML content without Skinning</title>
+        <p>
+          Prior to version 0.7, the raw un-processed content was stored in the
+          "<code>content/</code>" directory. In 0.7 onwards, raw un-processed
+          data is stored alongside the xdocs. In addition in 0.6 and earlier,
+          HTML files could be stored in the xdocs directory and they would be
+          served without further processing. As described above, this is not the
+          case in 0.7 where HTML files are, by default, skinned by Forrest.
+        </p>
+        <p>
+          If you you wish to emulate the behaviour of 0.6 and earlier then you
+          must add the following to your project sitemap.
+        </p>
+        <source>
+&lt;map:match pattern="**.html"&gt;
+ &lt;map:select type="exists"&gt;
+  &lt;map:when test="{properties:content}{0}"&gt;
+    &lt;map:read src="{properties:content}/{0}" mime-type="text/html"/&gt;
+    &lt;!--
+      Use this instead if you want JTidy to clean up your HTML
+      &lt;map:generate type="html" src="{properties:content}/{0}" /&gt;
+      &lt;map:serialize type="html"/&gt;
+    --&gt;
+  &lt;/map:when&gt;
+  &lt;map:when test="{properties:content.xdocs}{0}"&gt;
+    &lt;map:read src="{properties:content.xdocs}/{0}" mime-type="text/html"/&gt;
+    &lt;!--
+      Use this instead if you want JTidy to clean up your HTML
+      &lt;map:generate type="html" src="{properties:content.xdocs}/{0}" /&gt;
+      &lt;map:serialize type="html"/&gt;
+    --&gt;
+  &lt;/map:when&gt;
+ &lt;/map:select&gt;
+&lt;/map:match&gt;
+        </source>
+        <p>
+          The above allows us to create links to un-processed skinned files
+          stored in the <code>{properties:content}</code> or
+          <code>{properties:content.xdocs}</code> directory. For example: &lt;a
+          href="/test1.html"&gt;HTML content&lt;/a&gt;. However, it will break
+          the 0.7 behaviour of skinning HTML content. For this reason the old
+          ".ehtml" extension can be used to embed HTML content in a Forrest
+          skinned site
+        </p>
+        <p>
+          Note that you can change the matchers above to selectively serve some
+          content as raw un-processed content, whilst still serving other
+          content as skinned documents. For example, the following snippet would
+          allow you to serve the content of an old, deprecated site without
+          processing from Forrest, whilst still allowing all other content to be
+          processed by Forrest in the normal way:
+        </p>
+        <source>
+&lt;map:match pattern="old_site/**.html"&gt;
+ &lt;map:select type="exists"&gt;
+  &lt;map:when test="{properties:content}{1}.html"&gt;
+    &lt;map:read src="{properties:content}/{1}.html" mime-type="text/html"/&gt;
+    &lt;!--
+      Use this instead if you want JTidy to clean up your HTML
+      &lt;map:generate type="html" src="{properties:content}/{0}" /&gt;
+      &lt;map:serialize type="html"/&gt;
+    --&gt;
+  &lt;/map:when&gt;
+&lt;/map:match&gt;
+        </source>
+        <p>
+          For example, <a href="/old_site/test1.html">HTML content</a>.
+        </p>
+      </section>
+    </section>
+    <section id="url">
+      <title>Full URL to external documents</title>
+      <p>
+        A full URL ...
+      </p>
+      <source>
+<![CDATA[<a href="http://forrest.apache.org/">]]><a href="http://forrest.apache.org/">http://forrest.apache.org/</a>
+<![CDATA[</a>]]>
+      </source>
+      <p>
+        A full URL with a fragment identifier ...
+      </p>
+      <source>
+<![CDATA[<a href="http://forrest.apache.org/faq.html#link_raw">]]><a href="http://forrest.apache.org/faq.html#link_raw">http://forrest.apache.org/faq.html#link_raw</a>
+<![CDATA[</a>]]>
+      </source>
+      <p>
+        Note that Forrest does not traverse external links to look for other
+        links.
+      </p>
+    </section>
+    <section id="site">
+      <title>Using site.xml to manage the links</title>
+      <p>
+        As you will have discovered, using pathnames with ../../ etc. will get
+        very nasty. Real problems occur when you use a smart text editor that
+        tries to manage the links for you. For example, it will have trouble
+        linking to the raw content files which are not yet in their final
+        location.
+      </p>
+      <p>
+        Links and filenames are bound to change and re-arrange. It is essential
+        to only change those links in one central place, not in every document.
+      </p>
+      <p>
+        The "<code>site.xml</code>" configuration file to the rescue. It maps
+        symbolic names to actual resources.
+      </p>
+      <section id="site-simple">
+        <title>Basic link to internal generated pages</title>
+        <p>
+          This single entry ...
+        </p>
+        <source>
+<![CDATA[<index label="Index" href="index.html"/>]]>
+        </source>
+        <p>
+          enables a simple link to a generated document, which corresponds to
+          <code>content/xdocs/index.xml</code> ...
+        </p>
+        <source>
+<![CDATA[<a href="site:index">]]><a href="site:index">site:index</a>
+<![CDATA[</a>]]>
+        </source>
+      </section>
+      <section id="site-compound">
+        <title>Group some items</title>
+        <p>
+          This compound entry ...
+        </p>
+        <source>
+<![CDATA[
+  <samples label="Samples" href="samples/" tab="samples">
+    <faq label="FAQ" href="faq.html"/>
+    ...
+  </samples>
+]]>
+        </source>
+        <p>
+          enables a link to a generated document, which corresponds to
+          <code>content/xdocs/samples/index.xml</code> ...
+        </p>
+        <source>
+<![CDATA[<a href="site:samples">]]><a href="site:samples">site:samples</a>
+<![CDATA[</a>]]>
+        </source>
+        <p>
+          and a link to a generated document, which corresponds to
+          <code>content/xdocs/samples/faq.xml</code> ...
+        </p>
+        <source>
+<![CDATA[<a href="site:faq">]]><a href="site:faq">site:faq</a>
+<![CDATA[</a>]]>
+which can also be a complete reference
+<![CDATA[<a href="site:samples/faq">]]><a href="site:samples/faq">site:samples/faq</a>
+<![CDATA[</a>]]>
+        </source>
+      </section>
+      <section id="site-fragment">
+        <title>Fragment identifiers</title>
+        <p>
+          This compound entry ...
+        </p>
+        <source>
+<![CDATA[
+  <samples label="Samples" href="samples/" tab="samples">
+    <sample label="Apache document" href="sample.html">
+      <top href="#top"/>
+      <section href="#section"/>
+    </sample>
+    ...
+  </samples>
+]]>
+        </source>
+        <p>
+          enables a link to a fragment identifier within the
+          <code>samples/sample.html</code> document ...
+        </p>
+        <source>
+<![CDATA[<a href="site:samples/sample/section">]]><a href="site:samples/sample/section">site:samples/sample/section</a>
+<![CDATA[</a>]]>
+        </source>
+      </section>
+      <section id="site-raw">
+        <title>Define items for raw content</title>
+        <p>
+          This entry ...
+        </p>
+        <source>
+<![CDATA[<hello_print href="hello.pdf"/>]]>
+        </source>
+        <p>
+          enables a link to a raw document, which corresponds to
+          <code>content/hello.pdf</code> ...
+        </p>
+        <source>
+<![CDATA[<a href="site:hello_print">]]><a href="site:hello_print">site:hello_print</a>
+<![CDATA[</a>]]>
+        </source>
+      </section>
+      <section id="site-ext">
+        <title>External links</title>
+        <p>
+          This compound entry ...
+        </p>
+        <source>
+<![CDATA[
+  <external-refs>
+    <forrest href="http://forrest.apache.org/">
+      <linking href="docs/linking.html"/>
+      <webapp href="docs/your-project.html#webapp"/>
+    </forrest>
+  </external-refs>
+]]>
+        </source>
+        <p>
+          enables a link to an external URL ...
+        </p>
+        <source>
+<![CDATA[<a href="ext:forrest">]]><a href="ext:forrest">ext:forrest</a>
+<![CDATA[</a>]]>
+        </source>
+        <p>
+          and a link to another external URL ...
+        </p>
+        <source>
+<![CDATA[<a href="ext:linking">]]><a href="ext:linking">ext:linking</a>
+<![CDATA[</a>]]>
+which can also be a complete reference
+<![CDATA[<a href="ext:forrest/linking">]]><a href="ext:forrest/linking">ext:forrest/linking</a>
+<![CDATA[</a>]]>
+        </source>
+        <p>
+          and a link to another external URL with a fragment identifier ...
+        </p>
+        <source>
+<![CDATA[<a href="ext:webapp">]]><a href="ext:webapp">ext:webapp</a>
+<![CDATA[</a>]]>
+which can also be a complete reference
+<![CDATA[<a href="ext:forrest/webapp">]]><a href="ext:forrest/webapp">ext:forrest/webapp</a>
+<![CDATA[</a>]]>
+        </source>
+      </section>
+    </section>
+    <section id="images">
+      <title>Images</title>
+      <p>
+        Images (and other resources) are handled by the
+        main/webapp/resource.xmap sitemap. It uses the
+        main/webapp/locationmap.xml to look in various locations for images. As
+        usual, the first match wins.
+      </p>
+      <p>
+        Here is the locationmap snippet ...
+      </p>
+      <source>
+<![CDATA[
+    <match pattern="project.images.**.*">
+      <select>
+        <location src="{properties:resources.images}{1}.{2}" />
+        <location src="{properties:content}../resources/images/{1}.{2}" />
+        <location src="{properties:content.xdocs}images/{1}.{2}" />
+        <location src="{properties:content.xdocs}{1}.{2}" />
+      </select>
+    </match>
+]]>
+      </source>
+      <p>
+        Which means look first in a project-defined images directory, then in
+        the default location (which is usually
+        src/documentation/resources/images/), then in the old default location
+        (src/documentation/content/xdocs/images/), then relative to the root of
+        your xdocs.
+      </p>
+      <p>
+        The document author specifies the final image locations with these
+        various "<code>src=</code>" links. Behind-the-scenes Cocoon handles the
+        requests using the sitemap and locationmap.
+      </p>
+      <p>
+        This sample has the following image locations:
+      </p>
+      <source>
+<![CDATA[
+    src/documentation/resources/images/ellipse-2.svg
+    src/documentation/resources/images/icon-a.png
+    src/documentation/resources/images/icon-b.png
+    src/documentation/resources/images/sub-dir/icon-c.png
+    src/documentation/content/xdocs/images/icon-e.png
+    src/documentation/content/xdocs/samples/icon-d.png
+    src/documentation/content/xdocs/samples/ellipse.svg
+    src/documentation/content/xdocs/samples/cocoon-pyramid.aart
+]]>
+      </source>
+      <p>
+        Here is the effect of the various image links ...
+      </p>
+      <ol>
+        <li><img src="/images/icon-a.png" alt="Icon" /><code>&lt;img src="/images/icon-a.png"</code>
+          ... The source file is found in src/documentation/resources/images/ directory.
+        </li>
+        <li><img src="/images/sub-dir/icon-c.png" alt="Icon" /><code>&lt;img src="/images/sub-dir/icon-c.png"</code>
+          ... The source file is found in src/documentation/resources/images/sub-dir/ directory.
+        </li>
+        <li><img src="/images/icon-e.png" alt="Icon" /><code>&lt;img src="/images/icon-e.png"</code>
+          ... The source file is not found in the normal src/documentation/resources/images/
+          so Cocoon looks in the next location and finds the source in
+          src/documentation/content/xdocs/images/ directory.
+          This supports backward-compatibility for this old default location.
+        </li>
+        <li><img src="images/icon-a.png" alt="Icon" /><code>&lt;img src="images/icon-a.png"</code>
+          ... same as example 1 above. Except this time the generated image is relative to the document.
+        </li>
+        <li><img src="../images/icon-a.png" alt="Icon" /><code>&lt;img src="../images/icon-a.png"</code>
+          ... Relative reference. Forrest "absolutizes" the URLs to be like the URLs
+          in examples 1 and 2 and 3. Then Cocoon looks in the normal locations as described above.
+          The source file is found in src/documentation/resources/images/ directory.
+        </li>
+        <li><img src="../../images/icon-b.png" alt="Icon" /><code>&lt;img src="../../images/icon-b.png"</code>
+          ... Broken relative reference (it points up beyond the document root).
+          Never mind, Forrest "absolutizes" the URLs to be like the URLs in examples 1 and 2 and 3. 
+          The source file is found in src/documentation/resources/images/ directory.
+          However there is a problem here. When using Forrest in command-line mode,
+          the image will be generated outside the document directory.
+          It is better to use absolute /image/ URLs or be very careful about using
+          such relative links (Forrest will not report an error).
+        </li>
+        <li><img src="/images/ellipse-2.png" alt="Icon" />
+          <br /><code>&lt;img src="/images/ellipse-2.png"</code>
+        ... Cocoon tried the various locations for a PNG image called
+        ellipse-2.png but did not find one anywhere. So the next sitemap match
+        looks for a corresponding
+        ellipse-2.svg and generates the PNG image on-the-fly.
+        The source file is found in src/documentation/resources/images/ directory.
+      </li>
+<!-- Remove this sample.
+  See: http://marc.theaimsgroup.com/?t=114925130200003
+        <li>
+          <img src="/icon-b.png" alt="Icon" />
+          <code>&lt;img src="/icon-b.png"</code>
+          ... Magic.
+          The source file is found in src/documentation/resources/images/ directory.
+        </li>
+-->
+      </ol>
+      <p>
+        The image links shown above are handled by the resources.xmap using
+        special matches for the "images" directory in the URI.
+      </p>
+      <p>
+        The main/webapp/resources.xmap has another section to deal specifically
+        with PNG images. It looks first for an SVG source file which will be
+        used to generate the PNG image. If that is not found then it looks for
+        an ASCII art source file. Then looks for a pre-prepared PNG image.
+      </p>
+      <ol>
+        <li><img src="ellipse.png" alt="Icon" />
+          <br /><code>&lt;img src="ellipse.png"</code>
+        ... Cocoon tried the various locations for a PNG image called
+        ellipse-2.png but did not find one anywhere. So the next sitemap match
+        looks for a corresponding
+        ellipse-2.svg and generates the PNG image on-the-fly.
+        The source file is found in the current directory src/documentation/content/xdocs/samples/
+      </li>
+        <li><img src="cocoon-pyramid.png" alt="Icon"/>
+          <br /><code>&lt;img src="cocoon-pryamid.png"</code>
+        ... ASCII Art. Cocoon did not find a PNG image, nor an SVG file.
+        So the next sitemap match looks for a corresponding
+        cocoon-pryamid.aart and generates the PNG image on-the-fly.
+        The source file is found in the current directory src/documentation/content/xdocs/samples/
+        </li>
+        <li><img src="icon-d.png" alt="Icon" /><code>&lt;img src="icon-d.png"</code>
+          ... Relative to this document.
+          The source file is found in the current directory src/documentation/content/xdocs/samples/
+        </li>
+      </ol>
+      <note>
+        You might wonder why the above images all show correctly in dynamic
+        'forrest run' mode, but some appear to be broken during static docs
+        generation 'forrest site' mode. The latter is for generating a set of
+        static docs for deployment to a server. If you used URLs beginning with
+        a slash, "/images/...", then that is their location. So the generated
+        docs on the "<a href="ext:forrest-zone">forrest zone</a>" demos appear
+        to be broken.
+      </note>
+    </section>
+  </body>
+</document>

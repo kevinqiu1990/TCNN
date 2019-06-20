@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE howto PUBLIC "-//APACHE//DTD How-to V1.2//EN" "http://forrest.apache.org/dtd/howto-v12.dtd">
+<howto>
+  <header>
+    <title>How to deploy your site with the forrestbot via a cron job</title>
+    <abstract>
+      This How-To describes the deployment of a forrest documentation with the
+      help of the forrestbot. This deployment task will then be automated via a
+      cron tab.
+    </abstract>
+    <last-modified-content-date date="2005-07-19"/>
+  </header>
+  <audience title="Intended Audience">
+    <p>
+      Users who need to deploy a forrest documentation on a regular basis and
+      want to automate this task.
+    </p>
+  </audience>
+  <purpose title="Purpose">
+    <p>
+      If you are administrate a forrest documentation and have to deploy it on a
+      regular basis the process is sometimes quite time consuming. One feature
+      of forrest is the forrestbot. This bot can build the documentation and
+      later on deploy it to a server of your choice. You will learn how to use
+      this forrestbot and how to mae programmed deployments.
+    </p>
+  </purpose>
+  <prerequisites title="Prerequisites">
+    <ul>
+      <li>Understand how the forrestbot works in following the 
+      <link href="site:forrestbot">Forrestbot</link> document.</li>
+    </ul>
+  </prerequisites>
+  <steps title="Steps">
+    <section id="sitemap">
+      <title>Create your project's main sitemap.xmap</title>
+      <p>
+        In the <link href="site:forrestbot">Forrestbot</link> document you have
+        seen an example of a buildfile for a cvs source. We will now use a local
+        source.
+      </p>
+      <source>
+<![CDATA[<project name="mysampleproject" default="main" >
+	<property name="notify.email.host" value="smtp.myhost.com"/>
+	<property name="notify.email.to" value="me@domain.com"/>
+	<property name="notify.administrator" value="Your Name &lt;me@domain.com>"/>
+	<property name="getsrc.local.root-dir" value="/path/to/project/dir"/>
+	<property name="deploy.scp.dest" value="user@deploy-host:/path/to/project/www-docs"/>
+
+	<!-- ant targets -->
+	<target name="notify" depends="notify.local, notify.email"/>
+	<target name="deploy" depends="deploy.scp"/>
+	<target name="getsrc" depends="getsrc.local"/>
+
+	<!-- assumes FORREST_HOME has been set as an environment variable -->
+	<property environment="env"/>
+	<import file="${env.FORREST_HOME}/../forrestbot/core/forrestbot.xml"/>
+</project> ]]>
+      </source>
+    </section>
+  </steps>
+  <feedback title="Feedback and further development of this How-To">
+    <p>
+      Please provide feedback about this document via the
+      <link href="site:mail-lists">mailing lists</link>.
+    </p>
+  </feedback>
+</howto>

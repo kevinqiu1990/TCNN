@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE catalog PUBLIC "-//OASIS//DTD Entity Resolution XML Catalog V1.0//EN"
+"http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd">
+<!-- OASIS XML Catalog for Forrest Documents -->
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog"
+         prefer="public">
+<!-- Document Type Definitions (current) -->
+  <public publicId="-//APACHE//DTD Documentation V2.0//EN"
+        uri="dtd/document-v20.dtd"/>
+  <public publicId="-//APACHE//DTD FAQ V2.0//EN"
+        uri="dtd/faq-v20.dtd"/>
+  <public publicId="-//APACHE//DTD Changes V2.0//EN"
+        uri="dtd/changes-v20.dtd"/>
+  <public publicId="-//APACHE//DTD Todo V2.0//EN"
+        uri="dtd/todo-v20.dtd"/>
+  <public publicId="-//APACHE//DTD How-to V2.0//EN"
+        uri="dtd/howto-v20.dtd"/>
+  <public publicId="-//APACHE//DTD Documentation V1.3//EN"
+        uri="dtd/document-v13.dtd"/>
+  <public publicId="-//APACHE//DTD FAQ V1.3//EN"
+        uri="dtd/faq-v13.dtd"/>
+  <public publicId="-//APACHE//DTD Changes V1.3//EN"
+        uri="dtd/changes-v13.dtd"/>
+  <public publicId="-//APACHE//DTD Todo V1.3//EN"
+        uri="dtd/todo-v13.dtd"/>
+  <public publicId="-//APACHE//DTD How-to V1.3//EN"
+        uri="dtd/howto-v13.dtd"/>
+  <public publicId="-//APACHE//DTD Status V1.3//EN"
+        uri="dtd/status-v13.dtd"/>
+  <public publicId="-//APACHE//DTD Cocoon Documentation Book V1.0//EN"
+        uri="dtd/book-cocoon-v10.dtd"/>
+  <public publicId="-//APACHE//DTD Cocoon Documentation Tab V1.0//EN"
+        uri="dtd/tab-cocoon-v10.dtd"/>
+  <public publicId="-//APACHE//DTD Cocoon Documentation Tab V1.1//EN"
+        uri="dtd/tab-cocoon-v11.dtd"/>
+<!-- Sets of symbols. e.g. for string replacements -->
+  <public publicId="-//Apache Forrest//ENTITIES Symbols Core v1.0//EN"
+        uri="entity/symbols-core-v10.ent"/>
+
+-- Various other resources --
+<public publicId="-//Apache Forrest//ENTITIES Skin Configuration common plugins V0.7-1//EN"
+        uri="entity/skinconf-common-plugins-07-1.xml"/>
+<!-- New unfinished DTDs -->
+  <public publicId="-//APACHE//DTD Skin Configuration V0.8-1//EN"
+        uri="dtd/skinconfig-v08-1.dtd"/>
+  <public publicId="-//APACHE//DTD Skin Configuration V0.7-1//EN"
+        uri="dtd/skinconfig-v07-1.dtd"/>
+  <public publicId="-//APACHE//DTD Skin Configuration V0.6-3//EN"
+        uri="dtd/skinconfig-v06-3.dtd"/>
+<!-- Reusable modules -->
+  <public publicId="-//APACHE//ENTITIES Documentation V2.0//EN"
+        uri="dtd/document-v20.mod"/>
+  <public publicId="-//APACHE//ENTITIES Changes V2.0//EN"
+        uri="dtd/changes-v20.mod"/>
+  <public publicId="-//APACHE//ENTITIES FAQ V2.0//EN"
+        uri="dtd/faq-v20.mod"/>
+  <public publicId="-//APACHE//ENTITIES Todo V2.0//EN"
+        uri="dtd/todo-v20.mod"/>
+  <public publicId="-//APACHE//ENTITIES Status V1.3//EN"
+        uri="dtd/status-v13.mod"/>
+  <public publicId="-//APACHE//ENTITIES Documentation V1.3//EN"
+        uri="dtd/document-v13.mod"/>
+  <public publicId="-//APACHE//ENTITIES Documentation V1.2//EN"
+        uri="dtd/document-v12.mod"/>
+  <public publicId="-//APACHE//ENTITIES Documentation V1.1//EN"
+        uri="dtd/document-v11.mod"/>
+  <public publicId="-//APACHE//ENTITIES FAQ V1.1//EN"
+        uri="dtd/faq-v11.mod"/>
+  <public publicId="-//APACHE//ENTITIES FAQ V1.2//EN"
+        uri="dtd/faq-v12.mod"/>
+  <public publicId="-//APACHE//ENTITIES FAQ V2.0//EN"
+        uri="dtd/faq-v20.mod"/>
+  <public publicId="-//APACHE//ENTITIES Changes V1.1//EN"
+        uri="dtd/changes-v11.mod"/>
+  <public publicId="-//APACHE//ENTITIES Todo V1.1//EN"
+        uri="dtd/todo-v11.mod"/>
+  <public publicId="-//APACHE//ENTITIES Common Elements V1.0//EN"
+        uri="dtd/common-elems-v10.mod"/>
+  <public publicId="-//APACHE//ENTITIES Common Character Entity Sets V1.0//EN"
+        uri="dtd/common-charents-v10.mod"/>
+<!-- ISO public identifiers for sets of character entities -->
+  <public publicId="ISO 8879-1986//ENTITIES Added Latin 1//EN//XML"
+        uri="entity/ISOlat1.pen"/>
+  <public publicId="ISO 9573-15:1993//ENTITIES Greek Letters//EN//XML"
+        uri="entity/ISOgrk1.pen"/>
+  <public publicId="ISO 8879:1986//ENTITIES Publishing//EN//XML"
+        uri="entity/ISOpub.pen"/>
+  <public publicId="ISO 8879:1986//ENTITIES General Technical//EN//XML"
+        uri="entity/ISOtech.pen"/>
+  <public publicId="ISO 8879:1986//ENTITIES Numeric and Special Graphic//EN//XML"
+        uri="entity/ISOnum.pen"/>
+  <public publicId="ISO 8879:1986//ENTITIES Diacritical Marks//EN//XML"
+        uri="entity/ISOdia.pen"/>
+  <public publicId="ISO 8879:1986//ENTITIES Added Latin 1//EN//XML"
+        uri="entity/ISOlat1.pen"/>
+<!-- Old DTDs -->
+  <public publicId="-//APACHE//DTD Skin Configuration V0.6-2//EN"
+        uri="dtd/skinconfig-v06-2.dtd"/>
+  <public publicId="-//APACHE//DTD Skin Configuration V0.6-1//EN"
+        uri="dtd/skinconfig-v06-1.dtd"/>
+  <public publicId="-//APACHE//DTD Skin Configuration V0.6//EN"
+        uri="dtd/skinconfig-v06.dtd"/>
+  <public publicId="-//APACHE//DTD Documentation V2.0a//EN"
+        uri="dtd/v20a/document-v20.dtd"/>
+  <public publicId="-//APACHE//ENTITIES Documentation V2.0a//EN"
+        uri="dtd/v20a/document-v20.mod"/>
+  <public publicId="-//APACHE//DTD FAQ V2.0a//EN"
+        uri="dtd/v20a/faq-v20.dtd"/>
+  <public publicId="-//APACHE//ENTITIES FAQ V2.0a//EN"
+        uri="dtd/v20a/faq-v20.mod"/>
+  <public publicId="-//APACHE//DTD Documentation V1.2//EN"
+        uri="dtd/document-v12.dtd"/>
+  <public publicId="-//APACHE//DTD FAQ V1.2//EN"
+        uri="dtd/faq-v12.dtd"/>
+  <public publicId="-//APACHE//DTD Changes V1.2//EN"
+        uri="dtd/changes-v12.dtd"/>
+  <public publicId="-//APACHE//DTD Todo V1.2//EN"
+        uri="dtd/todo-v12.dtd"/>
+  <public publicId="-//APACHE//DTD How-to V1.2//EN"
+        uri="dtd/howto-v12.dtd"/>
+  <public publicId="-//APACHE//DTD Documentation V1.1//EN"
+        uri="dtd/document-v11.dtd"/>
+  <public publicId="-//APACHE//DTD Specification V1.1//EN"
+        uri="dtd/specification-v11.dtd"/>
+  <public publicId="-//APACHE//DTD FAQ V1.1//EN"
+        uri="dtd/faq-v11.dtd"/>
+  <public publicId="-//APACHE//DTD Changes V1.1//EN"
+        uri="dtd/changes-v11.dtd"/>
+  <public publicId="-//APACHE//DTD Todo V1.1//EN"
+        uri="dtd/todo-v11.dtd"/>
+  <public publicId="-//APACHE//DTD How-to V1.0//EN"
+        uri="dtd/howto-v10.dtd"/>
+  <public publicId="-//APACHE//DTD Gump Descriptor V1.0//EN"
+        uri="dtd/xgump-draft.dtd"/>
+  <public publicId="-//APACHE//DTD JavaDoc V1.0//EN"
+        uri="dtd/javadoc-v04draft.dtd"/>
+  <public publicId="-//APACHE//DTD Contributors V1.0//EN"
+        uri="dtd/contributors-v10.dtd"/>
+  <public publicId="-//APACHE//DTD Documentation V1.0//EN"
+        uri="dtd/v10/document-v10.dtd"/>
+  <public publicId="-//APACHE//DTD FAQ V1.0//EN"
+        uri="dtd/v10/faq-v10.dtd"/>
+  <public publicId="-//APACHE//DTD Changes V1.0//EN"
+        uri="dtd/v10/changes-v10.dtd"/>
+  <public publicId="-//APACHE//DTD Todo V1.0//EN"
+        uri="dtd/v10/todo-v10.dtd"/>
+</catalog>

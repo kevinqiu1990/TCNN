@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE glossary PUBLIC "-//Apache Forrest//DTD Glossary V1.0//EN"
+"glossary-v10.dtd">
+<glossary>
+  <title>Forrest Glossary</title>
+  <introduction>
+    <p>
+      This is a glossary of terms and their definitions for the Apache Forrest
+      project. Some plugins also have a glossary, for example
+      <link href="http://forrest.apache.org/pluginDocs/dev/org.apache.forrest.plugin.internal.dispatcher/">Dispatcher</link>.
+    </p>
+  </introduction>
+  <part id="a">
+    <title>A</title>
+    <item id="AddContent">
+      <term>Add content to this Glossary</term>
+      <definitions>
+        <definition>This glossary is incomplete, please help where you can by adding definitions to
+        existing items where needed. Also, add new Items to the glossary as
+        appropriate.</definition>
+      </definitions>
+    </item>
+    <item id="acronyms-mail">
+      <term>Abbreviations in electronic mail</term>
+      <definitions>
+        <definition>Abbreviations and acronyms are often used as shorthand in email, e.g. AFAIK "As Far As I Know", IMO "In My Opinion".
+        </definition>
+      </definitions>
+      <notes>
+        <item-note>See Apache Cocoon
+        <link href="http://wiki.apache.org/cocoon/AbbreviationsInMails">Abbreviations In Mails</link>
+        </item-note>
+      </notes>
+    </item>
+    <item id="ASF">
+      <term>The Apache Software Foundation</term>
+      <acronym title="The Apache Software Foundation">ASF</acronym>
+      <definitions>
+        <definition><link href="http://apache.org/">The Apache Software Foundation</link> is the home of Apache
+        Forrest.</definition>
+      </definitions>
+    </item>
+  </part>
+  <part id="c">
+    <title>C</title>
+    <item id="CSS">
+      <term>Cascading Style Sheets</term>
+      <acronym title="Cascading Style Sheets">CSS</acronym>
+      <definitions>
+        <definition>A simple mechanism for adding style (e.g. fonts, colors, spacing) to Web
+        documents. Source: 
+        <link href="http://www.w3.org/Style/CSS/">W3C</link>.</definition>
+      </definitions>
+      <notes>
+        <item-note>See 
+        <link href="http://www.w3.org/Style/CSS/">W3C</link>
+        </item-note>
+        <item-note>See 
+        <link href="http://www.csszengarden.com/">css Zen Garden</link>
+        </item-note>
+      </notes>
+    </item>
+  </part>
+  <part id="r">
+    <title>R</title>
+    <item id="ReleaseCandidate">
+      <term>Release Candidate</term>
+      <definitions>
+        <definition>A temporary Forrest package build from trunk during the <link href="site:howToRelease">release process</link> to be tested and evaluated.</definition>
+      </definitions>
+    </item>
+  </part>
+  <part id="s">
+    <title>S</title>
+    <item id="SoC">
+      <term>Separation of Concerns</term>
+      <acronym title="Separation of Concerns">SoC</acronym>
+      <definitions>
+        <definition>Different people, different skills, different purposes different code. Each can
+        concentrate on their separate, but well-integrated, area of concern.</definition>
+      </definitions>
+      <notes>
+        <item-note><link href="http://cocoon.apache.org/2.1/introduction.html#Separation+of+Concerns+(SoC)">
+          Introducing Apache Cocoon</link>
+        </item-note>
+        <item-note><link href="http://excalibur.apache.org/developing/introduction.html#Separation_of_Concerns">
+          Apache Excalibur Introduction and Overview</link>
+        </item-note>
+      </notes>
+    </item>
+    <item id="Skins">
+      <term>Skins</term>
+      <definitions>
+        <definition></definition>
+      </definitions>
+    </item>
+    <item id="StandardDocumentFormat">
+      <term>Standard Document Format</term>
+      <definitions>
+        <definition>Forrests <em>internal</em> document format (defined by an XML-grammar). This format ist the common denominator 
+                for all things going into or coming out of Forrest's core processing. All input-plugins will translate their supported documents into this
+                format, all output-plugins will create the output by transforming this format into something else. Currently Forrest uses <link href="site:document-v13-dtd">document-v13-dtd</link> as its internal format.
+            </definition>
+      </definitions>
+    </item>
+  </part>
+  <part id="x">
+    <title>X</title>
+    <item id="xdoc">
+      <term>xdoc</term>
+      <definitions>
+        <definition>"xdoc" is an xml documentation stucture that started life at some other ASF
+        projects. Apache Forrest adopted it and enhanced it to be similar to xhtml2. "xdoc" is
+        currently the internal xml structure of Forrest (someday will be xhtml2). "xdocs" can be
+        used as an input source format.</definition>
+      </definitions>
+      <notes>
+        <item-note><link href="site:dtd-docs">Reference docs</link>
+        </item-note>
+        <item-note><link href="site:samples-container/document-v20">Sample xdoc</link>
+        </item-note>
+      </notes>
+    </item>
+  </part>
+</glossary>

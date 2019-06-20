@@ -1,0 +1,8 @@
+To: dev@forrest.apache.org,user@forrest.apache.org,announce@apache.org,announcements@xml.apache.org
+Subject: [Announce] Apache Forrest X.Y.Z
+
+     !! Always refer them to the mirror facility
+     !! Never mention the URL www.apache.org/ dist/ in email or web pages.
+   Use the template at etc/announcement.txt
+   Use your spelling checker!
+   Sign the email (e.g. GPG) if possible.

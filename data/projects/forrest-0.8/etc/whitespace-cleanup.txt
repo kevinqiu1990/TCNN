@@ -1,0 +1,670 @@
+This file tracks the whitespace cleanup effort.
+See http://issues.apache.org/jira/browse/FOR-644
+------------------------------------------------------------------------
+Codes in the left-hand column:
+C = Cleaning Completed
+X = Currently being worked on - DO NOT EDIT or COMMIT
+T = To be cleaned
+N = Not applicable
+------------------------------------------------------------------------
+     .
+N    |-- bin
+T    |-- etc
+T    |   `-- cocoon_upgrade
+N    |-- lib
+N    |   |-- core
+N    |   |-- endorsed
+N    |   `-- optional
+T    |-- main
+T    |   |-- fresh-site
+T    |   |   `-- src
+T    |   |       `-- documentation
+T    |   |           |-- classes
+T    |   |           |-- conf
+T    |   |           |-- content
+T    |   |           |   `-- xdocs
+T    |   |           |       |-- images
+T    |   |           |       `-- samples
+T    |   |           |           |-- locationmap
+T    |   |           |           `-- subdir
+T    |   |           |-- resources
+T    |   |           |   |-- schema
+T    |   |           |   |-- stylesheets
+T    |   |           |   `-- templates
+T    |   |           `-- translations
+T    |   |-- java
+T    |   |   `-- org
+T    |   |       `-- apache
+T    |   |           |-- cocoon
+T    |   |           |   `-- components
+T    |   |           |       `-- source
+T    |   |           |           `-- impl
+T    |   |           `-- forrest
+T    |   |               |-- conf
+T    |   |               |-- locationmap
+T    |   |               |   `-- lm
+T    |   |               |-- log
+T    |   |               |-- sourceexists
+T    |   |               |-- sourcetype
+T    |   |               |-- util
+T    |   |               `-- xni
+T    |   |-- targets
+T    |   |-- tasks
+T    |   |   `-- org
+T    |   |       `-- apache
+T    |   |           `-- forrest
+T    |   |-- template-sites
+T    |   |   |-- basic
+T    |   |   |   `-- src
+T    |   |   |       `-- documentation
+T    |   |   |           |-- classes
+T    |   |   |           |-- conf
+T    |   |   |           |-- content
+T    |   |   |           |   `-- xdocs
+T    |   |   |           |       `-- images
+T    |   |   |           |-- resources
+T    |   |   |           |   |-- schema
+T    |   |   |           |   |-- stylesheets
+T    |   |   |           |   `-- templates
+T    |   |   |           `-- translations
+T    |   |   `-- business
+T    |   |       `-- src
+T    |   |           `-- documentation
+T    |   |               |-- classes
+T    |   |               |-- conf
+T    |   |               |-- content
+T    |   |               |   `-- xdocs
+T    |   |               |       |-- about
+T    |   |               |       |-- images
+T    |   |               |       |-- product
+T    |   |               |       `-- team
+T    |   |               |           `-- resume
+T    |   |               |-- resources
+T    |   |               |   |-- schema
+T    |   |               |   |-- stylesheets
+T    |   |               |   `-- templates
+T    |   |               `-- translations
+T    |   |-- var
+T    |   `-- webapp
+T    |       |-- resources
+T    |       |   |-- chaperon
+T    |       |   |   |-- grammars
+T    |       |   |   `-- stylesheets
+T    |       |   |-- schema
+T    |       |   |   |-- docbook
+N    |       |   |   |   |-- 4.1.2
+N    |       |   |   |   |   `-- ent
+N    |       |   |   |   `-- 4.2
+N    |       |   |   |       `-- ent
+T    |       |   |   |-- dtd
+T    |       |   |   |   |-- v10
+T    |       |   |   |   `-- v20a
+T    |       |   |   |-- entity
+T    |       |   |   |-- open-office
+T    |       |   |   |-- relaxng
+T    |       |   |   |   `-- unstable
+T    |       |   |   |-- sdocbook
+N    |       |   |   |   `-- 1.0
+T    |       |   |   `-- w3c-dtd  [only touch catalog and catalog.xcat]
+T    |       |   `-- stylesheets
+T    |       |       |-- aggregates
+T    |       |       |-- external
+T    |       |       `-- search
+T    |       |-- skins
+T    |       |   |-- common
+T    |       |   |   |-- css
+T    |       |   |   |-- images
+T    |       |   |   |-- scripts
+T    |       |   |   |-- translations
+T    |       |   |   `-- xslt
+T    |       |   |       |-- fo
+T    |       |   |       |-- html
+T    |       |   |       `-- svg
+T    |       |   |-- corium
+T    |       |   |-- forrest-site
+T    |       |   |   |-- css
+T    |       |   |   |-- images
+T    |       |   |   `-- xslt
+T    |       |   |       |-- fo
+T    |       |   |       `-- html
+T    |       |   |-- krysalis-site
+T    |       |   |   |-- css
+T    |       |   |   |-- images
+T    |       |   |   `-- xslt
+T    |       |   |       |-- fo
+T    |       |   |       `-- html
+T    |       |   |-- leather-dev
+T    |       |   |   |-- css
+T    |       |   |   |-- images
+T    |       |   |   |-- templates
+T    |       |   |   `-- xslt
+T    |       |   |       |-- fo
+T    |       |   |       |-- html
+T    |       |   |       `-- xml
+T    |       |   |           `-- fct-bits
+T    |       |   |-- pelt
+T    |       |   |   |-- css
+T    |       |   |   |-- images
+T    |       |   |   `-- xslt
+T    |       |   |       |-- fo
+T    |       |   |       `-- html
+T    |       |   |-- plain-dev
+T    |       |   |   `-- xslt
+T    |       |   |       `-- html
+T    |       |   `-- tigris
+T    |       |       |-- css
+T    |       |       |-- images
+T    |       |       |-- scripts
+T    |       |       `-- xslt
+T    |       |           |-- fo
+T    |       |           `-- html
+T    |       `-- WEB-INF
+T    |           |-- classes
+T    |           |   `-- org
+T    |           |       `-- apache
+T    |           |           `-- cocoon
+T    |           |               `-- util
+T    |           `-- xconf
+T    |-- plugins
+T    |   |-- org.apache.forrest.plugin.input.dtdx
+T    |   |   |-- lib
+T    |   |   |-- resources
+T    |   |   |   `-- stylesheets
+T    |   |   `-- src
+T    |   |       `-- documentation
+T    |   |           `-- content
+T    |   |               `-- xdocs
+T    |   |                   `-- images
+T    |   |-- org.apache.forrest.plugin.input.excel
+T    |   |   |-- resources
+T    |   |   |   `-- stylesheets
+T    |   |   `-- src
+T    |   |       `-- documentation
+T    |   |           |-- content
+T    |   |           |   `-- xdocs
+T    |   |           |       |-- images
+T    |   |           |       `-- samples
+T    |   |           `-- resources
+T    |   |               `-- images
+T    |   |-- org.apache.forrest.plugin.input.feeder
+T    |   |   |-- resources
+T    |   |   |   `-- stylesheets
+T    |   |   `-- src
+T    |   |       `-- documentation
+T    |   |           |-- content
+T    |   |           |   `-- xdocs
+T    |   |           |       |-- images
+T    |   |           |       `-- samples
+T    |   |           `-- translations
+T    |   |-- org.apache.forrest.plugin.input.listLocations
+T    |   |   |-- resources
+T    |   |   |   |-- schema
+T    |   |   |   `-- stylesheets
+T    |   |   `-- src
+T    |   |       `-- documentation
+T    |   |           `-- content
+T    |   |               `-- xdocs
+T    |   |                   `-- images
+T    |   |-- org.apache.forrest.plugin.input.OpenOffice.org
+T    |   |   |-- resources
+T    |   |   |   `-- stylesheets
+T    |   |   |       `-- aggregates
+T    |   |   `-- src
+T    |   |       `-- documentation
+T    |   |           |-- content
+T    |   |           |   `-- xdocs
+T    |   |           |       |-- images
+T    |   |           |       `-- samples
+T    |   |           `-- translations
+T    |   |-- org.apache.forrest.plugin.input.PhotoGallery
+T    |   |   |-- resources
+T    |   |   |   |-- images
+T    |   |   |   `-- stylesheets
+T    |   |   `-- src
+T    |   |       `-- documentation
+T    |   |           `-- content
+T    |   |               `-- xdocs
+T    |   |                   `-- images
+T    |   |                       `-- gallery
+T    |   |                           `-- demo
+T    |   |                               |-- big
+T    |   |                               |-- preview
+T    |   |                               `-- small
+T    |   |-- org.apache.forrest.plugin.input.projectInfo
+T    |   |   |-- resources
+T    |   |   |   `-- stylesheets
+T    |   |   `-- src
+T    |   |       `-- documentation
+T    |   |           `-- content
+T    |   |               `-- xdocs
+T    |   |                   `-- images
+T    |   |-- org.apache.forrest.plugin.input.simplifiedDocbook
+T    |   |   |-- docs
+T    |   |   |-- resources
+T    |   |   |   `-- stylesheets
+T    |   |   `-- src
+T    |   |       `-- documentation
+T    |   |           |-- content
+T    |   |           |   `-- xdocs
+T    |   |           |       |-- images
+T    |   |           |       `-- samples
+T    |   |           `-- translations
+T    |   |-- org.apache.forrest.plugin.input.wiki
+T    |   |   |-- lib
+T    |   |   |-- resources
+T    |   |   |   |-- chaperon
+T    |   |   |   |   |-- grammars
+T    |   |   |   |   |-- misc
+T    |   |   |   |   |-- stylesheets
+T    |   |   |   |   `-- wiki
+T    |   |   |   `-- stylesheets
+T    |   |   `-- src
+T    |   |       `-- documentation
+T    |   |           `-- content
+T    |   |               `-- xdocs
+T    |   |                   |-- images
+T    |   |                   `-- samples
+T    |   |-- org.apache.forrest.plugin.internal.IMSManifest
+T    |   |   |-- build
+T    |   |   |-- resources
+T    |   |   |   `-- stylesheets
+T    |   |   `-- src
+T    |   |       |-- documentation
+T    |   |       |   `-- content
+T    |   |       |       `-- xdocs
+T    |   |       |           `-- images
+T    |   |       `-- resources
+T    |   |           `-- schema
+T    |   |-- org.apache.forrest.plugin.output.pdf
+T    |   |   |-- build
+T    |   |   |-- resources
+T    |   |   |   `-- stylesheets
+T    |   |   `-- src
+T    |   |       `-- documentation
+T    |   |           `-- content
+T    |   |               `-- xdocs
+T    |   |                   `-- images
+T    |   |-- org.apache.forrest.plugin.output.POD
+T    |   |   |-- resources
+T    |   |   |   `-- stylesheets
+T    |   |   |       `-- pod
+T    |   |   `-- src
+T    |   |       `-- documentation
+T    |   |           `-- content
+T    |   |               `-- xdocs
+T    |   |                   `-- images
+T    |   |-- org.apache.forrest.plugin.output.Text
+T    |   |   |-- resources
+T    |   |   |   `-- stylesheets
+T    |   |   |       |-- common
+T    |   |   |       `-- txt
+T    |   |   `-- src
+T    |   |       `-- documentation
+T    |   |           |-- content
+T    |   |           |   `-- xdocs
+T    |   |           |       `-- images
+T    |   |           `-- translations
+T    |   `-- pluginTemplate
+T    |       |-- lib
+T    |       `-- src
+T    |           |-- documentation
+T    |           |   `-- content
+T    |           |       `-- xdocs
+T    |           |           `-- images
+T    |           `-- java
+T    |-- site-author
+T    |   |-- classes
+T    |   |-- conf
+T    |   |-- content
+T    |   |   |-- skins
+T    |   |   `-- xdocs
+T    |   |       |-- docs_0_60
+T    |   |       |   `-- howto
+T    |   |       |       |-- bugzilla-patch
+T    |   |       |       |   `-- my-images
+T    |   |       |       `-- multi
+T    |   |       |-- docs_0_70
+T    |   |       |   |-- howto
+T    |   |       |   |   |-- bugzilla-patch
+T    |   |       |   |   |   `-- my-images
+T    |   |       |   |   |-- cvs-ssh
+T    |   |       |   |   `-- multi
+T    |   |       |   `-- images
+T    |   |       |-- docs_0_80
+T    |   |       |   |-- howto
+T    |   |       |   |   |-- bugzilla-patch
+T    |   |       |   |   |   `-- my-images
+T    |   |       |   |   |-- cvs-ssh
+T    |   |       |   |   `-- multi
+T    |   |       |   `-- images
+T    |   |       |-- dtdx
+T    |   |       |-- pluginDocs
+T    |   |       |   |-- plugins_0_70
+T    |   |       |   `-- plugins_0_80
+T    |   |       |-- tools
+T    |   |       |-- TR
+T    |   |       |   `-- 2004
+T    |   |       |-- trash
+T    |   |       |   `-- docs_0_50
+T    |   |       `-- versions
+T    |   `-- resources
+T    |       `-- images
+T    |-- tools
+T    |   |-- ant
+T    |   |   |-- bin
+T    |   |   `-- lib
+T    |   |-- anttasks
+T    |   |-- dtdconverters
+T    |   |-- eclipse
+T    |   |   |-- features
+T    |   |   |   `-- org.apache.forrest.eclipse.feature
+T    |   |   `-- plugins
+T    |   |   |   |-- org.apache.forrest
+T    |   |   |   |   |-- conf
+T    |   |   |   |   |-- icons
+T    |   |   |   |   |-- lib
+T    |   |   |   |   |-- META-INF
+T    |   |   |   |   `-- src
+T    |   |   |   |       `-- org
+T    |   |   |   |           `-- apache
+T    |   |   |   |               `-- forrest
+T    |   |   |   |                   |-- eclipse
+T    |   |   |   |                   |   |-- actions
+T    |   |   |   |                   |   |-- job
+T    |   |   |   |                   |   |-- popup
+T    |   |   |   |                   |   |   `-- actions
+T    |   |   |   |                   |   |-- preference
+T    |   |   |   |                   |   |-- views
+T    |   |   |   |                   |   `-- wizards
+T    |   |   |   |                   `-- template
+T    |   |   |   `-- org.apache.forrest.eclipse.servletEngine
+T    |   |   |       |-- lib
+T    |   |   |       |-- META-INF
+T    |   |   |       `-- src
+T    |   |   |           `-- org
+T    |   |   |               `-- apache
+T    |   |   |                   `-- forrest
+T    |   |   |                       `-- eclipse
+T    |   |   |                           `-- servletEngine
+T    |   |   `-- updateSite
+T    |   |-- forrestbar
+T    |   |   `-- xpi
+T    |   |       `-- content
+T    |   |           `-- forrestbar
+T    |   |               `-- images
+T    |   |-- forrestbot
+T    |   |   |-- core
+T    |   |   |-- lib
+T    |   |   `-- webapp
+T    |   |       |-- lib
+T    |   |       `-- src
+T    |   |           |-- conf
+T    |   |           |-- java
+T    |   |           |   `-- org
+T    |   |           |       `-- apache
+T    |   |           |           `-- forrest
+T    |   |           |               `-- forrestbot
+T    |   |           |                   `-- webapp
+T    |   |           |                       |-- action
+T    |   |           |                       |-- dto
+T    |   |           |                       |-- form
+T    |   |           |                       `-- util
+T    |   |           `-- webapp
+T    |   |               |-- common
+T    |   |               `-- WEB-INF
+T    |   |                   `-- tld
+T    |   |-- jetty
+T    |   |-- logos
+T    |   |   |-- etc
+T    |   |   |-- resources
+T    |   |   `-- templates
+T    |   |-- targets
+T    |   `-- xxe
+T    |       |-- css
+T    |       |-- icons
+T    |       `-- template
+T    `-- whiteboard
+T        |-- charts
+T        |-- convert
+T        |   `-- anakiaNmaven
+T        |-- forrestdoc
+T        |   |-- legal
+T        |   |-- lib
+T        |   `-- src
+T        |       |-- ant
+T        |       |   `-- org
+T        |       |       `-- apache
+T        |       |           `-- forrest
+T        |       |               `-- tools
+T        |       |                   `-- taskdefs
+T        |       |-- java
+T        |       |   `-- org
+T        |       |       `-- apache
+T        |       |           `-- forrest
+T        |       |               `-- forrestdoc
+T        |       |                   |-- ant
+T        |       |                   |   `-- doc
+T        |       |                   |-- java
+T        |       |                   |   |-- doc
+T        |       |                   |   `-- src
+T        |       |                   |       |-- symtab
+T        |       |                   |       |-- util
+T        |       |                   |       `-- xref
+T        |       |                   `-- js
+T        |       |                       `-- doc
+T        |       |-- resources
+T        |       |   |-- common
+T        |       |   |   `-- resources
+T        |       |   |-- javadoc
+T        |       |   |-- javasrc
+T        |       |   |-- touchgraph
+T        |       |   |-- vizant
+T        |       |   `-- ws
+T        |       `-- test
+T        |           |-- java
+T        |           |   `-- org
+T        |           |       `-- apache
+T        |           |           `-- alexandria
+T        |           |               `-- vizant
+T        |           `-- resources
+T        |               |-- javasrc
+T        |               |   |-- packA
+T        |               |   |-- packB
+T        |               |   |-- packC
+T        |               |   |-- packD
+T        |               |   |-- packE
+T        |               |   |-- packF
+T        |               |   `-- packG
+T        |               |       |-- a
+T        |               |       `-- b
+T        |               `-- jsdoc
+T        |-- layout
+T        |   |-- resources
+T        |   `-- xml.apache.org
+T        |       `-- images
+T        |-- plugins
+T        |   |-- org.apache.forrest.plugin.Database
+T        |   |   |-- conf
+T        |   |   |-- lib
+T        |   |   |-- resources
+T        |   |   |   `-- stylesheets
+T        |   |   `-- src
+T        |   |       |-- documentation
+T        |   |       |   `-- content
+T        |   |       |       `-- xdocs
+T        |   |       |           |-- images
+T        |   |       |           `-- samples
+T        |   |       |-- java
+T        |   |       |   `-- org
+T        |   |       |       `-- apache
+T        |   |       |           `-- cocoon
+T        |   |       |               |-- components
+T        |   |       |               |   `-- database
+T        |   |       |               `-- transformation
+T        |   |       `-- mocks
+T        |   |           |-- com
+T        |   |           |   `-- informix
+T        |   |           |       `-- jdbc
+T        |   |           `-- oracle
+T        |   |               |-- jdbc
+T        |   |               `-- sql
+T        |   |-- org.apache.forrest.plugin.input.Daisy
+T        |   |   |-- lib
+T        |   |   |-- resources
+T        |   |   |   `-- stylesheets
+T        |   |   |-- src
+T        |   |   |   `-- documentation
+T        |   |   |       `-- content
+T        |   |   |           `-- xdocs
+T        |   |   |               `-- images
+T        |   |   `-- WEB-INF
+T        |   |-- org.apache.forrest.plugin.input.logs
+T        |   |   |-- resources
+T        |   |   |   `-- stylesheets
+T        |   |   |-- src
+T        |   |   |   `-- documentation
+T        |   |   |       `-- content
+T        |   |   |           `-- xdocs
+T        |   |   |               |-- images
+T        |   |   |               `-- samples
+T        |   |   `-- WEB-INF
+T        |   |-- org.apache.forrest.plugin.input.Resume
+T        |   |   |-- lib
+T        |   |   |-- resources
+T        |   |   |   |-- schema
+T        |   |   |   `-- stylesheets
+T        |   |   `-- src
+T        |   |       |-- documentation
+T        |   |       |   `-- content
+T        |   |       |       `-- xdocs
+T        |   |       |           `-- images
+T        |   |       `-- java
+T        |   |           `-- org
+T        |   |               `-- apache
+T        |   |                   `-- forrest
+T        |   |                       `-- generation
+T        |   |-- org.apache.forrest.plugin.input.viewHelper.xhtml.ls
+T        |   |   |-- lib
+T        |   |   |-- resources
+T        |   |   |   `-- stylesheets
+T        |   |   `-- src
+T        |   |       |-- documentation
+T        |   |       |   `-- content
+T        |   |       |       `-- xdocs
+T        |   |       |           `-- images
+T        |   |       `-- java
+T        |   |-- org.apache.forrest.plugin.internal.GoogleSitemap
+T        |   |   |-- resources
+T        |   |   |   `-- stylesheets
+T        |   |   `-- src
+T        |   |       `-- documentation
+T        |   |       |   `-- content
+T        |   |       |       `-- xdocs
+T        |   |       |           `-- images
+T        |   |       `-- resources
+T        |   |-- org.apache.forrest.plugin.internal.view
+T        |   |   |-- lib
+T        |   |   |-- resources
+T        |   |   |   |-- screenshots
+T        |   |   |   |-- stylesheets
+T        |   |   |   `-- views
+T        |   |   `-- src
+T        |   |       `-- documentation
+T        |   |           `-- content
+T        |   |               `-- xdocs
+T        |   |                   |-- feeds
+T        |   |                   `-- images
+T        |   |-- org.apache.forrest.plugin.OpenOffice.org-output
+T        |   |   |-- resources
+T        |   |   |   `-- stylesheets
+T        |   |   `-- src
+T        |   |       `-- documentation
+T        |   |           `-- content
+T        |   |               `-- xdocs
+T        |   |                   `-- images
+T        |   |-- org.apache.forrest.plugin.output.Chart
+T        |   |   |-- lib
+T        |   |   |-- license
+T        |   |   |-- resources
+T        |   |   |   `-- stylesheets
+T        |   |   `-- src
+T        |   |       `-- documentation
+T        |   |           `-- content
+T        |   |               `-- xdocs
+T        |   |                   |-- documentation
+T        |   |                   |-- images
+T        |   |                   `-- samples
+T        |   |-- org.apache.forrest.plugin.output.htmlArea
+T        |   |   |-- conf
+T        |   |   |-- resources
+T        |   |   |   `-- stylesheets
+T        |   |   |-- src
+T        |   |   |   `-- documentation
+T        |   |   |       |-- content
+T        |   |   |       |   `-- xdocs
+T        |   |   |       |       `-- images
+T        |   |   |       `-- translations
+T        |   |   |-- tools
+T        |   |   `-- WEB-INF
+T        |   |-- org.apache.forrest.plugin.output.viewHelper.xhtml
+T        |   |   |-- messages
+T        |   |   |-- resources
+T        |   |   |   |-- skin
+T        |   |   |   |   |-- css
+T        |   |   |   |   |   `-- pelt
+T        |   |   |   |   `-- images
+T        |   |   |   |-- stylesheets
+T        |   |   |   `-- templates
+T        |   |   |       `-- pelt
+T        |   |   `-- src
+T        |   |       `-- documentation
+T        |   |           `-- content
+T        |   |               `-- xdocs
+T        |   |                   `-- images
+T        |   |-- org.apache.forrest.plugin.output.voice
+T        |   |   |-- lib
+T        |   |   |-- resources
+T        |   |   |   |-- grammars
+T        |   |   |   `-- stylesheets
+T        |   |   `-- src
+T        |   |       |-- documentation
+T        |   |       |   `-- content
+T        |   |       |       `-- xdocs
+T        |   |       |           `-- images
+T        |   |       `-- java
+T        |   `-- rtf-output
+T        |       |-- resources
+T        |       |   `-- stylesheets
+T        |       |-- src
+T        |       |   `-- documentation
+T        |       |       |-- content
+T        |       |       |   `-- xdocs
+T        |       |       |       |-- images
+T        |       |       |       `-- samples
+T        |       |       `-- translations
+T        |       `-- WEB-INF
+T        |           `-- lib
+T        `-- tests
+T            |
+T            |-- basic
+T            |   `-- src
+T            |       `-- documentation
+T            |           `-- content
+T            |               `-- xdocs
+T            |-- whole-site
+T            |   `-- src
+T            |       `-- documentation
+T            |           |-- content
+T            |           |   |-- subdir
+T            |           |   |   `-- deep
+T            |           |   `-- xdocs
+T            |           |       `-- subdir
+T            |           |           `-- deep
+T            |           |               `-- my-images
+T            |           `-- resources
+T            |               `-- images
+T            `-- xsltunit
+T                |-- content
+T                |   `-- code
+T                `-- testunits
+T                    `-- rss2document.xsl

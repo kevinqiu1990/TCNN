@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Custom Schema</title>
+  </header>
+  <body>
+    <p>
+      Forrest comes with a set of schemas for common documents, however, if you
+      have existing documents that use a different schema you will want to tell
+      Forrest how to work with them. The best way of doing this is to
+      <a href="ext:forrest/buildPlugin">build a plugin</a> so that you can
+      easily reuse the functionality on different projects. Plugins also allow
+      you to share this new functionality with other users, and to benefit from
+      their contributions to your work.
+    </p>
+    <p>
+      If you don't want to build a plugin you can make Forrest process them
+      within your project sitemap (but this won't really save you any work since
+      the process is almost the same). This sample site has a demonstration of
+      using a custom DTD. If you request <a href="site:custom-example">&lt;a
+      href="custom.html"&gt;</a> you can see the results.
+    </p>
+    <p>
+      Look at the project <code>sitemap.xmap</code> to see how it is done. View
+      the xml source at "src/documentation/content/samples/custom.xml" and refer
+      to the DTD and its configuration at "src/documentation/resources/schema/".
+      See the project sitemap at "src/documentation/sitemap.xmap" for how the
+      custom doctype is processed and the stylesheet is applied.
+    </p>
+    <p>
+      See the <a href="ext:forrest/new_content_type">full story</a> about
+      handling custom document types.
+    </p>
+    <note>
+      Adding custom schemas with a plugin has the added benefit of being able to
+      add the schema definition to the catalog file rather than having to
+      reference it directly from within the XML document.
+    </note>
+  </body>
+</document>

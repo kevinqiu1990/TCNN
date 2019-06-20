@@ -1,0 +1,340 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE skinconf [
+  <!ELEMENT skinconf (feature*)>
+  <!ATTLIST skinconf xmlns CDATA #REQUIRED>
+  <!ELEMENT feature (element*)>
+  <!ATTLIST feature name CDATA #IMPLIED
+                    value CDATA #IMPLIED
+                    xmlns CDATA #IMPLIED>
+  <!ELEMENT element (property*)>
+  <!ATTLIST element name CDATA #IMPLIED>
+  <!ELEMENT property (#PCDATA)>
+  <!ATTLIST property name CDATA #IMPLIED>
+]> 
+
+<!-- NOTE: This skinconf format is under development (FOR-144) -->
+
+<skinconf xmlns="http://apache.org/forrest/skinconf/forrest-site/1.0">
+
+  <!--**Display various credit logos-->
+  <!--@required false-->
+  <!-- Credits are typically rendered as a set of small clickable images
+    in the page footer.
+    A credit with @role='pdf' will have its name and url displayed in the
+    PDF page's footer.
+  -->
+  <feature name="credits" value="true">
+    <element>
+      <!--Title for the logo-->
+      <!--@required true-->
+      <property name="name">Built with Forrest</property>
+      <!--URL that the logo refers to-->
+      <!--@required false-->
+      <property name="url">http://forrest.apache.org/</property>
+      <!--Relative path to the image file-->
+      <!--@required true-->
+      <property name="image">images/built-with-forrest-button.png</property>
+      <!--Image width in pixels-->
+      <!--@required true-->
+      <property name="width">88</property>
+      <!--Image height in pixels-->
+      <!--@required true-->
+      <property name="height">31</property>
+    </element>
+    <element>
+      <property name="name">Built with Cocoon</property>
+      <property name="url">http://cocoon.apache.org/</property>
+      <property name="image">images/built-with-cocoon.gif</property>
+      <property name="width">88</property>
+      <property name="height">31</property>
+    </element>
+  </feature>
+ 
+  <!--**Project logo-->
+  <!--@required false-->
+  <!-- Skin: forrest-site renders it at the top -->
+  <feature name="project-logo" value="true">
+    <element>
+      <property name="name">MyProject</property>
+      <property name="description">MyProject Description</property>
+      <property name="url">http://myproj.mygroup.org/</property>
+      <property name="logo">images/project.png</property>
+      <!-- Alternative static image:
+      <property>images/project-logo.gif</property> -->
+    </element>
+  </feature>
+ 
+  <!--**Group logo-->
+  <!--@required false-->
+  <!-- Skin: forrest-site renders it at the top-left corner -->
+  <feature name="group-logo" value="true">
+    <element>
+      <property name="name">MyGroup</property>
+      <property name="description">MyGroup Description</property>
+      <property name="url">http://mygroup.org/</property>
+      <property name="logo">images/group.png</property>
+      <!-- Alternative static image:
+      <property>images/group-logo.gif</property> -->
+    </element>
+  </feature>
+ 
+  <!--**Host logo-->
+  <!--@required false-->
+  <!-- Skin: forrest-site renders it at the bottom-left corner -->
+  <feature name="host-logo" value="false">
+    <element>
+      <property name="name">MyHost</property>
+      <property name="description">MyHost Description</property>
+      <property name="url">http://myhost.org/</property>
+      <property name="logo">images/host.png</property>
+    </element>
+  </feature>
+
+  <!--**Favicon file-->
+  <!--@required false-->
+  <!-- Relative url of a favicon file, normally favicon.ico -->
+  <feature name="favicon" value="false">
+    <element>
+      <property name="url">images/favicon.ico</property>
+    </element>
+  </feature>
+
+  <!--**Copyright statement-->
+  <!--@required false-->
+  <feature name="copyright" value="true">
+    <element>
+      <property name="year">2002-2005</property>
+      <property name="vendor">The Acme Software Foundation.</property>
+      <property name="url">http://myproject.org/license.html</property>
+    </element>
+  </feature>
+
+  <!--**Enable the search facility-->
+  <!--@required false-->
+  <!-- provider = google|lucene -->
+  <feature name="search" value="true">
+    <element>
+      <property name="name">MyProject</property>
+      <property name="domain">mydomain</property>
+      <property name="provider">google</property>
+    </element>
+  </feature>
+
+  <!--**Disable the print link-->
+  <!--@required false-->
+  <!-- If enabled, then invalid HTML 4.0.1 -->
+  <feature name="disable-print-link" value="true"/>
+
+  <!--**Disable the PDF link-->
+  <!--@required false-->
+  <feature name="disable-pdf-link" value="false"/>
+
+  <!--**Disable the xml source link-->
+  <!--@required false-->
+  <!-- The xml source link makes it possible to access the xml rendition of
+    the source frim the html page, and to have it generated statically.
+    This can be used to enable other sites and services to reuse the
+    xml format for their uses. Keep this disabled if you don't want other
+    sites to easily reuse your pages.-->
+  <feature name="disable-xml-link" value="true"/>
+
+  <!--**Disable images on all external links-->
+  <!--@required false-->
+  <feature name="disable-external-link-image" value="false"/>
+
+  <!--**Disable W3C compliance links for Validator and Jigsaw CSS-->
+  <!--@required false-->
+  <feature name="disable-compliance-links" value="false"/>
+  
+  <!--**Render mailto: links unrecognisable by spam harvesters-->
+  <!--@required false-->
+  <feature name="obfuscate-mail-links" value="true"/>
+
+  <!--**Breadcrumb trail-->
+  <!--@required false-->
+  <feature name="trail" value="true">
+    <element>
+      <property name="name">myGroup</property>
+      <property name="href">http://www.apache.org/</property>
+    </element>
+    <element>
+      <property name="name">myProject</property>
+      <property name="href">http://forrest.apache.org/</property>
+    </element>
+  </feature>
+
+  <!--**Table of Contents TOC-->
+  <!--@required false-->
+  <feature name="toc" value="true">
+    <element>
+      <!--How many "section" levels need to be included in the
+        generated Table of Contents (TOC)-->
+      <!--@required false-->
+      <property name="max-depth">2</property>
+      <!--Minimum number of sections required before a TOC will be generated-->
+      <!--@required false-->
+      <property name="min-sections">1</property>
+      <!--Where to show the TOC-->
+      <!--@required false-->
+      <!-- page|menu|page,menu -->
+      <property name="location">page</property>
+    </element>
+  </feature>
+
+  <!--**Heading types-->
+  <!--@required false-->
+  <!-- Heading types can be clean|underlined|boxed  -->
+  <feature name="headings" value="boxed"/>
+
+  <feature name="pdf">
+    <element name="page">
+      <!-- 
+        Supported page sizes are a0, a1, a2, a3, a4, a5, executive,
+        folio, legal, ledger, letter, quarto, tabloid (default letter).
+        Supported page orientations are portrait, landscape (default
+        portrait).
+      -->
+      <property name="size">letter</property>
+      <property name="orientation">portrait</property>
+    </element>
+    <element name="margins">
+      <!--
+        Margins can be specified for top, bottom, inner, and outer
+        edges. If double-sided="false", the inner edge is always left
+        and the outer is always right. If double-sided="true", the
+        inner edge will be left on odd pages, right on even pages,
+        the outer edge vice versa.
+        Specified below are the default settings.
+      -->
+      <property name="double-sided">false</property>
+      <property name="top">lin</property>
+      <property name="bottom">lin</property>
+      <property name="inner">1.25in</property>
+      <property name="outer">lin</property>
+    </element>
+  </feature>
+
+  <feature name="extra-css">
+    <element>
+      <property name="contents">
+        <!-- extra css here -->
+      </property>
+    </element>
+  </feature>
+
+  <feature name="colors">
+    <element name="header">
+      <property name="color">#294563</property>
+    </element>
+    <element name="tab-selected">
+      <property name="color">#4a6d8c</property>
+      <property name="link">#0f3660</property>
+      <property name="vlink">#0f3660</property>
+      <property name="hlink">#000066</property>
+    </element>
+    <element name="tab-unselected">
+      <property name="color">#b5c7e7</property>
+      <property name="link">#0f3660</property>
+      <property name="vlink">#0f3660</property>
+      <property name="hlink">#000066</property>
+    </element>
+    <element name="subtab-selected">
+      <property name="color">#4a6d8c</property>
+      <property name="link">#0f3660</property>
+      <property name="vlink">#0f3660</property>
+      <property name="hlink">#000066</property>
+    </element>
+    <element name="subtab-unselected">
+      <property name="color">#b5c7e7</property>
+      <property name="link">#0f3660</property>
+      <property name="vlink">#0f3660</property>
+      <property name="hlink">#000066</property>
+    </element>
+    <element name="heading">
+      <property name="color">#294563</property>
+    </element>
+    <element name="subheading">
+      <property name="color">#4a6d8c</property>
+    </element>
+    <element name="navstrip">
+      <property name="color">#cedfef</property>
+      <property name="font">#0f3660</property>
+      <property name="link">#0f3660</property>
+      <property name="vlink">#0f3660</property>
+      <property name="hlink">#000066</property>
+    </element>
+    <element name="toolbox">
+      <property name="color">#4a6d8c</property>
+    </element>
+    <element name="border">
+      <property name="color">#294563</property>
+    </element>
+    <element name="menu">
+      <property name="color">#4a6d8c</property>
+      <property name="font">#cedfef</property>
+      <property name="link">#ffffff</property>
+      <property name="vlink">#ffffff</property>
+      <property name="hlink">#ffcf00</property>
+    </element>
+    <element name="dialog">
+      <property name="color">#4a6d8c</property>
+    </element>
+    <element name="body">
+      <property name="color">#ffffff</property>
+      <property name="link">#0f3660</property>
+      <property name="vlink">#009999</property>
+      <property name="hlink">#000066</property>
+    </element>
+    <element name="table">
+      <property name="color">#7099c5</property>
+    </element>
+    <element name="table-cell">
+      <property name="color">#f0f0ff</property>
+    </element>
+    <element name="highlight">
+      <property name="color">#ffff00</property>
+    </element>
+    <element name="fixme">
+      <property name="color">#cc6600</property>
+    </element>
+    <element name="note">
+      <property name="color">#006699</property>
+    </element>
+    <element name="warning">
+      <property name="color">#990000</property>
+    </element>
+    <element name="code">
+      <property name="color">#cfdced</property>
+    </element>
+    <element name="footer">
+      <property name="color">#cedfef</property>
+    </element>
+  </feature>
+
+  <!--**An example project-specific feature -->
+  <!--@required false -->
+   <feature xmlns="http://mydomain.org/myproject/xmyns/1.0"
+            name="myfeature">
+     <element>
+       <property name="name">My Name</property>
+       <property name="weight">84kg</property>
+     </element>
+   </feature>
+
+</skinconf>

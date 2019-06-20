@@ -1,0 +1,471 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!--
+FORREST SITE BUILDER
+
+ - The runtime part of Forrest
+ - Contains actions Forrest can peform on any Forrest-using project.
+ - This is typically called by forrest.bat or forrest
+-->
+<project default="site" basedir="." name="forrest">
+  <property environment="env" />
+  <property name="forrest.home"               location="${env.FORREST_HOME}" />
+  <property name="forrest.version"            value="0.8"/>
+  <property name="forrest.lib-dir"            location="${forrest.home}/lib"/>
+  <property name="forrest.core.lib-dir"       location="${forrest.lib-dir}/core"/>
+  <property name="forrest.endorsed.lib-dir"   location="${forrest.lib-dir}/endorsed"/>
+  <property name="forrest.optional.lib-dir"   location="${forrest.lib-dir}/optional"/>
+  <property name="forrest.ant.lib-dir"        location="${forrest.home}/tools/ant/lib"/>
+  <property name="forrest.anttasks"           location="${forrest.home}/tools/anttasks"/>
+  <property name="forrest.jetty.lib-dir"      location="${forrest.home}/tools/jetty"/>
+  <property name="forrest.build.lib-dir"      location="${forrest.home}/build"/>
+  <property name="forrest.core"               location="${forrest.home}/main"/>
+  <property name="forrest.core.webapp"        location="${forrest.core}/webapp"/>
+  <import file="targets/validate.xml"/>
+  <import file="targets/webapp.xml"/>
+  <import file="targets/site.xml"/>
+  <import file="targets/skins.xml"/>
+  <import file="targets/plugins.xml"/>
+  <import file="targets/context.xml"/>
+  <import file="targets/seed.xml"/>
+  <description>
+    *=======================================================* | Forrest Site
+    Builder | *=======================================================* Call
+    this through the 'forrest' command
+  </description>
+  <taskdef name="jing" classname="com.thaiopensource.relaxng.util.JingTask">
+    <classpath>
+      <fileset dir="${forrest.core.lib-dir}" includes="jing*.jar" />
+    </classpath>
+  </taskdef>
+  <taskdef resource="net/sf/antcontrib/antlib.xml">
+    <classpath>
+      <fileset dir="${forrest.ant.lib-dir}" includes="ant-contrib-*.jar" />
+    </classpath>
+  </taskdef>
+<!-- ***************************************************************** -->
+<!-- ***************************************************************** -->
+<!-- **                                                             ** -->
+<!-- **                                                             ** -->
+<!-- **                    COMMON SETTINGS                          ** -->
+<!-- **                                                             ** -->
+<!-- **                                                             ** -->
+<!-- ***************************************************************** -->
+<!-- ***************************************************************** -->
+<!-- ===============================================================
+       Loads user defined settings for local deployment.
+       Steps back to defaults when they are not set.
+       Echo's the settings if requested.
+       =============================================================== -->
+  <target name="init-props">
+<!-- setting defaults for parameters -->
+<!-- people should use -D switch, or <ant><property>s to override these   -->
+    <property name="project.home" location="." />
+    <property file="${project.home}/forrest.properties" />
+    <property file="${user.home}/forrest.properties" />
+    <property file="${global.home}/forrest.properties" />
+    <property file="${forrest.core.webapp}/default-forrest.properties" />
+<!-- people should use forrest.properties to override following defaults  -->
+    <property name="build.plugins-dir"     value="build/plugins"/>
+    <property name="forrest.skins-dir"     location="${forrest.core.webapp}/skins"/>
+    <property name="forrest.plugins-dir"   location="${forrest.home}/${build.plugins-dir}"/>
+<!-- If the user wants to build i18n in diferent locations this is one way to implemented it-->
+    <if>
+      <equals arg1="${project.i18n}" arg2="true"/>
+      <then>
+        <property name="project.site-dir"      location="${project.build-dir}/${project.site}/${user.language}"    />
+      </then>
+      <else>
+        <property name="project.site-dir"      location="${project.build-dir}/${project.site}"    />
+      </else>
+    </if>
+    <property name="project.war"           location="${project.build-dir}/${project.name}.war" />
+    <property name="project.webapp"        location="${project.build-dir}/webapp" />
+    <property name="project.cocoon-work-dir"    location="${project.temp-dir}/cocoon-work"      />
+    <property name="project.brokenlinkfile" location="${project.temp-dir}/brokenlinks.xml"/>
+    <property name="project.configfile"     value="${forrest.core.webapp}/WEB-INF/cli.xconf" />
+    <property name="project.logkitfile"     value="${forrest.core.webapp}/WEB-INF/logkit.xconf" />
+    <property name="project.logger"         value="debug" />
+    <property name="status"      location="${project.home}/${project.status}" />
+<!-- FIXME: rename project.content-dir to project.documentation-dir -->
+    <property name="content-dir" location="${project.home}/${project.content-dir}" />
+    <property name="raw-content-dir" location="${project.home}/${project.content-dir}/content" />
+    <property name="sitemap-dir"     location="${project.home}/${project.sitemap-dir}" />
+    <property name="xdocs-dir"   location="${project.home}/${project.xdocs-dir}" />
+    <property name="catalog"     location="${project.home}/${project.catalog}" />
+    <property name="skins-dir"   location="${project.home}/${project.skins-dir}" />
+    <property name="skinconf"    location="${project.home}/${project.skinconf}" />
+    <property name="conf-dir"    location="${project.home}/${project.conf-dir}" />
+    <property name="lib-dir"     location="${project.home}/${project.lib-dir}" />
+    <property name="classes-dir" location="${project.home}/${project.classes-dir}" />
+    <property name="translations-dir" location="${project.home}/${project.translations-dir}" />
+<!-- checks for presence of tools.jar -->
+    <property name="tools.jar"           location="${java.home}/../lib/tools.jar"/>
+    <available file="${tools.jar}"       property="tools.jar.present"/>
+<!-- Define filters for project.* properties -->
+    <mkdir dir="${project.temp-dir}"/>
+    <property name="projfilters" value="${project.temp-dir}/projfilters.properties"/>
+    <echoproperties prefix="project" destfile="${projfilters}"/>
+    <filter filtersfile="${projfilters}"/>
+    <filter token="forrest.home" value="${forrest.home}"/>
+    <filter token="project.home" value="${project.home}"/>
+    <available file="${content-dir}/jettyconf.xml"
+      property="custom_jetty_config"/>
+<!--
+    Skin aliasing for backwards compatability
+        0.5 => 0.6+
+        krysalis-site => ... warn about future removal
+        crust => old development, closest is the old krysalis-site
+        forrest-site => ... warn about future removal
+        forrest-css => pelt
+        avalon-tigris => tigris
+        tigris-style => tigris
+
+    This must be kept in sync with ForrestConfModule.java/aliasSkinProperties()
+    -->
+    <if>
+      <equals arg1="${project.skin}" arg2="forrest-css"/>
+      <then>
+        <property name="project.new-skin-name" value="pelt"/>
+      </then>
+      <elseif>
+        <equals arg1="${project.skin}" arg2="avalon-tigris"/>
+        <then>
+          <property name="project.new-skin-name" value="tigris"/>
+        </then>
+      </elseif>
+      <elseif>
+        <equals arg1="${project.skin}" arg2="tigris-style"/>
+        <then>
+          <property name="project.new-skin-name" value="tigris"/>
+        </then>
+      </elseif>
+      <elseif>
+        <equals arg1="${project.skin}" arg2="crust"/>
+        <then>
+          <property name="project.new-skin-name" value="krysalis-site"/>
+        </then>
+      </elseif>
+<!-- temporarily bring back krysalis-site
+        <elseif>
+            <equals arg1="${project.skin}" arg2="krysalis-site"/>
+            <then>
+                <property name="project.new-skin-name" value="pelt"/>
+            </then>
+        </elseif>
+        -->
+<!-- temporarily bring back forrest-site
+        <elseif>
+            <equals arg1="${project.skin}" arg2="forrest-site"/>
+            <then>
+                <property name="project.new-skin-name" value="crust"/>
+            </then>
+        </elseif>
+        -->
+    </if>
+    <if>
+      <isset property="project.new-skin-name"/>
+      <then>
+        <echo>
+-- Warning --
+skin "${project.skin}" no longer exists, the skin named
+"${project.new-skin-name}" will be automatically used instead.
+
+If this is the first time you see this, it means that you have
+to regenerate and publish the *whole* site, so that all pages
+are rendered with the "${project.new-skin-name}" skin.
+
+If you fail to do so it is almost certain that the site will not
+look right.
+
+Please update forrest.properties to choose a new skin
+and so remove this warning.
+</echo>
+        <var name="project.skin" value="${project.new-skin-name}"/>
+      </then>
+    </if>
+    <if>
+      <or>
+        <equals arg1="${project.skin}" arg2="forrest-site"/>
+        <equals arg1="${project.skin}" arg2="krysalis-site"/>
+        <equals arg1="${project.skin}" arg2="crust"/>
+      </or>
+      <then>
+        <echo>
+-- Warning --
+Using skin "${project.skin}" which is deprecated.
+Please migrate to one of the new skins listed in forrest.properties.
+The skin that most likely resembles these ones is called 'pelt'.
+</echo>
+      </then>
+    </if>
+<!-- echo settings in -Dforrest.echo=true mode -->
+    <antcall target="echo-settings" />
+<!-- Gather some build information about this Forrest instance,
+      to be used later by Cocoon. -->
+    <echo file="${project.temp-dir}/build-info.xml">&lt;info>
+  &lt;project-skin>${project.skin}&lt;/project-skin>
+  &lt;forrest-version>${forrest.version}&lt;/forrest-version>
+&lt;/info>
+    </echo>
+  </target>
+  <target name="examine-proj" depends="init-props">
+    <available property="conf.present" file="${conf-dir}" type="dir"/>
+    <available property="raw-content.present" file="${raw-content-dir}" type="dir"/>
+    <available property="sitemap.present" file="${sitemap-dir}" type="dir"/>
+    <available property="xdocs.present" file="${xdocs-dir}" type="dir"/>
+    <available property="images.present" file="${images-dir}" type="dir"/>
+    <available property="grammars.present" file="${grammars-dir}" type="dir"/>
+    <available property="schema.present" file="${schema-dir}" type="dir"/>
+    <available property="stylesheets.present" file="${stylesheets-dir}" type="dir"/>
+    <available property="lib.present" file="${lib-dir}" type="dir"/>
+    <available property="classes.present" file="${classes-dir}" type="dir"/>
+    <available property="skins.present" file="${skins-dir}" type="dir"/>
+    <available property="skinconf.present" file="${skinconf}"/>
+    <available property="status.present" file="${status}"/>
+  </target>
+<!-- Load properties from user's skinconf.xml, if it is defined -->
+  <target name="load-project-props" depends="validation-props, prepare-context" if="skinconf.present">
+    <xslt in="${skinconf}"
+          out="${project.temp-dir}/no-doctype-project-skinconf.xml"
+          style="${forrest.core.webapp}/resources/stylesheets/strip-doctype.xsl">
+      <xmlcatalog refid="fcatalog"/>
+    </xslt>
+    <xmlproperty file="${project.temp-dir}/no-doctype-project-skinconf.xml"
+                 collapseattributes="true"/>
+  </target>
+<!-- Load properties from Forrest's default skinconf.xml, unless a user's is defined -->
+  <target name="load-forrest-props" unless="skinconf.present">
+    <xslt in="${forrest.core.webapp}/skinconf.xml"
+           out="${project.temp-dir}/no-doctype-forrest-skinconf.xml"
+           style="${forrest.core.webapp}/resources/stylesheets/strip-doctype.xsl">
+      <xmlcatalog refid="fcatalog"/>
+    </xslt>
+<!-- Forrest skinconf should have been previously validated in build.xml -->
+    <xmlproperty file="${project.temp-dir}/no-doctype-forrest-skinconf.xml"
+                 collapseattributes="true"/>
+  </target>
+<!-- Define filters equating to elements in the skinconf.xml file. Skins can
+  include tokens corresponding to skinconf.xml elements, and have them replaced
+  at runtime.-->
+  <target name="init-skinprops" depends="load-project-props, load-forrest-props">
+    <mkdir dir="${project.temp-dir}"/>
+    <property name="skinfilters" value="${project.temp-dir}/skinfilters.properties"/>
+    <echoproperties prefix="skinconfig" destfile="${skinfilters}"/>
+    <filter filtersfile="${skinfilters}"/>
+    <condition property="use-lucene-indexer">
+      <equals arg1="${skinconfig.search.provider}" arg2="lucene"/>
+    </condition>
+  </target>
+  <target name="check-java-version">
+<!-- check java version, else user may get a confusing java.lang.UnsupportedClassVersionError -->
+    <if>
+      <or>
+        <equals arg1="${ant.java.version}" arg2="1.1"/>
+        <equals arg1="${ant.java.version}" arg2="1.2"/>
+        <equals arg1="${ant.java.version}" arg2="1.3"/>
+      </or>
+      <then>
+        <fail>Java 1.4 or higher is required; found Java ${ant.java.version} in ${java.home}</fail>
+      </then>
+    </if>
+    <echo message="This is apache-forrest-${forrest.version}"/>
+    <echo message="Using Java ${ant.java.version} from ${java.home}"/>
+  </target>
+<!-- Sets up properties and filters -->
+  <target name="init" depends="check-java-version, init-props, init-skins, init-plugins">
+    <available property="xml-forrest.jar.exists" file="${forrest.build.lib-dir}/xml-forrest.jar"/>
+    <fail unless="xml-forrest.jar.exists">You must build forrest before you can run it.  In ${forrest.home}/main run './build.sh' (linux) or 'build' (windows)</fail>
+  </target>
+<!-- ===============================================================
+       Echo's the settings if requested. [-Dforrest.echo=true]
+       =============================================================== -->
+  <target name="echo-settings" if="forrest.echo">
+    <loadfile property="echo-settings-message" srcFile="${forrest.core}/var/echo-settings-message.txt">
+      <filterchain>
+        <expandproperties/>
+      </filterchain>
+    </loadfile>
+    <echo>${echo-settings-message}</echo>
+  </target>
+<!-- ===============================================================
+       Set class-path.
+       =============================================================== -->
+  <target name="prepare-classpath" depends="prepare-context, -prepare-classpath"/>
+  <target name="-prepare-classpath">
+    <path id="forrest.cp">
+      <pathelement path="${env.CLASSPATH}" />
+      <pathelement location="${forrest.core.webapp}/WEB-INF/classes"/>
+      <pathelement location="${forrest.build.lib-dir}/xml-forrest.jar"/>
+      <pathelement location="${project.home}/${project.classes-dir}"/>
+      <pathelement location="${project.build-dir}"/>
+      <fileset dir="${forrest.plugins-dir}" casesensitive="no">
+        <include name="**/lib/*.jar"/>
+        <include name="**/lib/*.zip"/>
+      </fileset>
+      <fileset dir="${forrest.jetty.lib-dir}" casesensitive="no">
+        <include name="*.jar"/>
+        <include name="*.zip"/>
+      </fileset>
+      <fileset dir="${forrest.endorsed.lib-dir}"  casesensitive="no">
+        <include name="*.jar"/>
+        <include name="*.zip"/>
+      </fileset>
+      <fileset dir="${forrest.core.lib-dir}"  casesensitive="no">
+        <include name="*.jar"/>
+        <include name="*.zip"/>
+      </fileset>
+      <fileset dir="${forrest.optional.lib-dir}"  casesensitive="no">
+        <include name="*.jar"/>
+        <include name="*.zip"/>
+      </fileset>
+      <pathelement location="${tools.jar}"/>
+    </path>
+  </target>
+<!-- ***************************************************************** -->
+<!-- ***************************************************************** -->
+<!-- **                                                             ** -->
+<!-- **                                                             ** -->
+<!-- **                  SITE BUILDING ACTIONS                      ** -->
+<!-- **                                                             ** -->
+<!-- **                                                             ** -->
+<!-- ***************************************************************** -->
+<!-- ***************************************************************** -->
+<!-- ===============================================================
+       Cleans the site.  (typically before generating the new version)
+       param: location to clean ${project.site-dir}
+       param: location to clean ${project.temp-dir}
+       param: location to clean ${project.webapp}
+       param: file to clean ${project.brokenlinkfile}
+       =============================================================== -->
+  <target name="clean-site" depends="init-props"
+      description="* Clean the project generated documents directory">
+    <delete failonerror="false" dir="${project.site-dir}"/>
+    <delete failonerror="false" file="${project.brokenlinkfile}"/>
+  </target>
+  <target name="clean-work" depends="init-props"
+      description="* Clean the project work directories">
+    <delete failonerror="false" dir="${project.temp-dir}"/>
+    <delete failonerror="false" dir="${project.webapp}"/>
+  </target>
+  <target name="clean" depends="clean-site,clean-work"
+      description="* Clean all directories and files generated during the build"/>
+<!-- ***************************************************************** -->
+<!-- ***************************************************************** -->
+<!-- **                                                             ** -->
+<!-- **                                                             ** -->
+<!-- **              LOCAL SERVER RUN ACTION                        ** -->
+<!-- **                                                             ** -->
+<!-- **                                                             ** -->
+<!-- ***************************************************************** -->
+<!-- ***************************************************************** -->
+  <target name="run"
+   depends="init, check-contentdir, ensure-content, run_custom_jetty, run_default_jetty"
+   description="* Run Jetty (instant live webapp)"/>
+  <target name="run_custom_jetty"
+   if="custom_jetty_config"
+   description="Run Jetty with configuration file found in the project">
+    <echo>
+  Note: Use Ctrl-C to stop the Jetty server
+    </echo>
+    <if>
+      <os family="dos"/>
+      <then>
+        <echo>
+         ... and reply 'n' and press [Enter] 
+  	     when asked about aborting the batch!
+      </echo>
+      </then>
+    </if>
+    <java classname="org.mortbay.jetty.Server"
+          dir="${forrest.core.webapp}"
+          fork="yes"
+          maxmemory="${forrest.maxmemory}"
+          failonerror="yes">
+      <classpath>
+        <path refid="forrest.cp"/>
+      </classpath>
+      <jvmarg line="${forrest.jvmargs}"/>
+      <jvmarg
+         value="-Djava.endorsed.dirs=${java.endorsed.dirs}${path.separator}${forrest.endorsed.lib-dir}"/>
+      <arg line="${content-dir}/jettyconf.xml" />
+      <syspropertyset>
+        <propertyref prefix="forrest."/>
+        <propertyref prefix="project."/>
+        <propertyref name="user.home"/>
+        <propertyref name="global.home"/>
+      </syspropertyset>
+    </java>
+  </target>
+  <target name="run_default_jetty"
+   description="Run Jetty with configuration file found in Forrest">
+    <echo>
+  Note: Use Ctrl-C to stop the Jetty server
+    </echo>
+    <if>
+      <os family="dos"/>
+      <then>
+        <echo>
+         ... and reply 'n' and press [Enter] 
+  	     when asked about aborting the batch!
+      </echo>
+      </then>
+    </if>
+    <java classname="org.mortbay.jetty.Server"
+          dir="${forrest.core.webapp}"
+          fork="yes"
+          maxmemory="${forrest.maxmemory}"
+          failonerror="yes">
+      <classpath>
+        <path refid="forrest.cp"/>
+      </classpath>
+      <jvmarg line="${forrest.jvmargs}"/>
+      <jvmarg
+         value="-Djava.endorsed.dirs=${java.endorsed.dirs}${path.separator}${forrest.endorsed.lib-dir}"/>
+      <arg value="${forrest.core.webapp}/jettyconf.xml" />
+      <syspropertyset>
+        <propertyref prefix="forrest."/>
+        <propertyref prefix="project."/>
+        <propertyref name="user.home"/>
+        <propertyref name="global.home"/>
+      </syspropertyset>
+    </java>
+  </target>
+<!-- ***************************************************************** -->
+<!-- ***************************************************************** -->
+<!-- **                                                             ** -->
+<!-- **                                                             ** -->
+<!-- **                       PROXY SETTINGS                        ** -->
+<!-- **                                                             ** -->
+<!-- **                                                             ** -->
+<!-- ***************************************************************** -->
+<!-- ***************************************************************** -->
+  <target name="init-proxy" if="proxy.host" unless="proxy.already.set">
+    <echo>Using proxy : ${proxy.host}:${proxy.port}</echo>
+    <if>
+      <isset property="proxy.user"/>
+      <then>
+        <echo>Proxy connection : xxxxxx/xxxxxx (confidential)</echo>
+        <setproxy proxyhost="${proxy.host}" proxyport="${proxy.port}" proxyuser="${proxy.user}" proxypassword="${proxy.password}"/>
+      </then>
+      <else>
+        <setproxy proxyhost="${proxy.host}" proxyport="${proxy.port}"/>
+      </else>
+    </if>
+  </target>
+</project>

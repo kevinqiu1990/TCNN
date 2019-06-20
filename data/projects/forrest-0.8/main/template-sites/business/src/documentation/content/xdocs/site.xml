@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!--
+Forrest site.xml
+
+This file contains an outline of the site's information content.  It is used to:
+- Generate the website menus (though these can be overridden - see docs)
+- Provide semantic, location-independent aliases for internal 'site:' URIs, eg
+<link href="site:changes"> links to changes.html (or ../changes.html if in
+  subdir).
+- Provide aliases for external URLs in the external-refs section.  Eg, <link
+  href="ext:cocoon"> links to http://cocoon.apache.org/ 
+
+See http://forrest.apache.org/docs/linking.html for more info
+-->
+<!-- The label attribute of the outer "site" element will only show
+  in the linkmap (linkmap.html).
+  Use elements project-name and group-name in skinconfig to change name of 
+  your site or project that is usually shown at the top of page.
+  No matter what you configure for the href attribute, Forrest will
+  always use index.html when you request http://yourHost/
+  See FAQ: "How can I use a start-up-page other than index.html?"
+-->
+<site label="The Forresters" href="" xmlns="http://apache.org/forrest/linkmap/1.0" tab=""
+  xmlns:xi="http://www.w3.org/2001/XInclude">
+  <home label="Home">
+    <index label="Index" href="index.html" description="Welcome to The Forresters"/>
+  </home>
+  <about label="About" href="about/">
+    <index label="About Us" href="index.html" description="About The Forresters"/>
+  </about>
+  <products label="Products" href="product/">
+    <index label="Our Products" href="index.html" description="Products from The Forresters"/>
+  </products>
+  <team label="The Team" href="team/">
+    <index label="Our Team" href="index.html" description="About the @project.display.name@ team"/>
+    <all label="All Team Members" href="all.html" description="The @project.display.name@ team members organisaed by skill"/>
+    <bySkill label="Team Skills" href="allBySkill.html" description="The @project.display.name@ team members organisaed by skill"/>
+    <withForrestSkill label="Apache Forrest" href="allWithSkill/Apache Forrest.html" description="The Apache Forrest @project.display.name@ team members"/>
+    <withForrestSkill label="Technical Authoring" href="allWithSkill/Developer Manuals.html" description="The Technical Authoring Team"/>
+  </team>
+<!--
+  The href must be wholesite.html/pdf  You can change the labels and node names
+  <all label="All">
+    <whole_site_html label="Whole Site HTML" href="wholesite.html"/>
+    <whole_site_pdf label="Whole Site PDF" href="wholesite.pdf"/>
+  </all>
+  -->
+  <external-refs>
+    <forrest href="http://forrest.apache.org/">
+      <linking href="docs/linking.html"/>
+      <validation href="docs/validation.html"/>
+      <webapp href="docs/your-project.html#webapp"/>
+      <dtd-docs href="docs/dtd-docs.html"/>
+    </forrest>
+    <cocoon href="http://cocoon.apache.org/"/>
+    <xml.apache.org href="http://xml.apache.org/"/>
+  </external-refs>
+</site>

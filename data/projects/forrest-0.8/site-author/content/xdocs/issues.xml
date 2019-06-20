@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Apache Forrest issue tracker</title>
+  </header>
+  <body>
+    <section id="intro">
+      <title>Introduction</title>
+      <p>
+        The Apache Forrest uses an issue tracker call Jira. All of the project
+        contributions should go there (not to the mailing list). This enables us
+        to keep track of contributions and to classify and manage the issues.
+      </p>
+      <p>
+        <a href="http://issues.apache.org/jira/browse/FOR">http://issues.apache.org/jira/browse/FOR</a>
+        is the main entry point which provides access to enter, view, search,
+        and add additional comments to issues. There are some additional search
+        <a href="#filters">filters</a> provided below.
+      </p>
+      <p>
+        You need to set up an account there before you can create new issues or
+        add comments to existing issues. Anyone can register as a user and
+        report issues. See <a href="#guide">guidelines</a> below.
+      </p>
+      <p>
+        Note that the issue tracker is not a discussion or user help forum.
+        Please discuss issues about using Forrest on the user or dev mailing
+        list.
+      </p>
+    </section>
+    <section id="guide">
+      <title>Guidelines and hints for reporting issues</title>
+      <ul>
+        <li>Ensure that an issue does not already exist.</li>
+        <li>Use Jira's powerful "Find Issues" ability. Set the Project and
+        Status fields. See the Help about boolean queries in the Query field.
+      </li>
+        <li>Follow the prompts below each entry field.</li>
+        <li>If you don't know the answer to a particular question, then
+        leave the field blank.</li>
+        <li>Add a concise initial Description, then add more Comments later to
+        further describe the issue.</li>
+        <li>Other people will follow up and enhance your description and
+        classifications.</li>
+        <li>If details about your computing environment are relevant
+        (e.g. Java version or operating system) then add them to a Comment.</li>
+        <li>If you are going to also add a patch, then select "Patch available".
+        (Reporters of issues can add this later via "Edit issue".)
+        Follow the instructions about "Grant license" and ensure that you are
+        able to do so.</li>
+      </ul>
+      <section id="priority">
+        <title>Special fields: Priority (a.k.a. Severity)</title>
+        <p>
+          The Priority is the severity according to the issue reporter. This
+          will be a guideline to the development team to identify the most
+          urgent issues. It is not a guarantee that a Critical issue will be
+          resolved before a Major issue.
+        </p>
+        <p>
+          Follow the Jira help icon to see the definition of the options.
+        </p>
+      </section>
+      <section id="urgency">
+        <title>Special fields: Urgency</title>
+        <p>
+          The project team will classify this according to their urgency. The
+          aim is to be able to see at a glance which issues should be attended
+          to, so that developers can operate efficiently and so that the product
+          can be released as soon as possible. Some issues hinder the project,
+          so need to be identified.
+        </p>
+        <fixme author="open">
+          Not sure about the project's use of the "Urgency" field. See issue
+          <a href="http://issues.apache.org/jira/browse/FOR-853">FOR-853</a>
+        </fixme>
+        <p>
+          We use the following definition of the options.
+        </p>
+        <ul>
+          <li>
+          None: The default. Not yet classified.
+        </li>
+          <li>
+          Blocker: Prevents other developers from working; or critical issue with functionality;
+          or holds up the implementation of other functionality.
+          Cannot release until it is fixed. Will be fixed ASAP.
+        </li>
+          <li>
+          Urgent: Is a key new feature; or affects many users. Will be fixed before the next
+          release.
+        </li>
+          <li>
+          Normal: If this issue scratches the itch of any particular developer, then
+          they should help to solve it and provide a patch.
+        </li>
+          <li>
+          Low: If this issue bothers you, then fix it because it is not a high priority
+          for the project.
+        </li>
+        </ul>
+      </section>
+      <section id="permissions">
+        <title>Permissions</title>
+        <ul>
+          <li>
+          Anyone: Browse, Find, View.
+        </li>
+          <li>
+          jira-users: People who have registered as a user of the ASF Jira.
+          Create, Edit, Comment, Attach, Vote, Watch.
+          The reporter can also Close.
+        </li>
+          <li>
+          forrest-developers: People who are Forrest committers.
+          Resolve, Close, Delete issues, Delete coments, Link, Assign, Schedule Fix Version, Administer Project.
+        </li>
+          <li>
+          Some committers are global adminstrators: Edit user details, Add users to groups, Configure.
+        </li>
+        </ul>
+      </section>
+    </section>
+    <section id="filters">
+      <title>Some search filters</title>
+      <p>
+        Various general searches are available from the
+        <a href="http://issues.apache.org/jira/browse/FOR">front page</a>, e.g.
+        "open issues classified by component", or "Added recently". The
+        following are some special filters.
+      </p>
+      <ul>
+        <li><a href="http://issues.apache.org/jira/secure/IssueNavigator.jspa?mode=hide&amp;requestId=12310472">FOR-open-with-patch</a>
+        - Committers need to visit this regularly and deal with the patches.
+      </li>
+        <li><a href="http://issues.apache.org/jira/secure/IssueNavigator.jspa?mode=hide&amp;requestId=12310820">FOR-roadmap-dev</a>
+        - Open issues that are scheduled to be investigated.
+      </li>
+        <li><a href="http://issues.apache.org/jira/secure/IssueNavigator.jspa?mode=hide&amp;requestId=12310476">FOR-unresolved-with-attachment</a>
+        - Issues that have demonstrations of problems, but no solution or patch.
+        Of course it will include FOR-open-with-patch.
+        (Note that this filter searches for the string "attach" so will not find all.)
+      </li>
+        <li><a href="http://issues.apache.org/jira/secure/IssueNavigator.jspa?mode=hide&amp;requestId=12310043">FOR-unscheduled</a>
+        - Issues that have not yet been scheduled to be fixed for a certain version.
+      </li>
+      </ul>
+      <fixme author="open">
+        Not sure about the project's use of the "Urgency" field.
+      </fixme>
+      <ul>
+        <li><a href="http://issues.apache.org/jira/secure/IssueNavigator.jspa?mode=hide&amp;requestId=12310473">FOR-urgency-blocker</a>
+        - Issues that the project considers to be Blockers.
+      </li>
+        <li><a href="http://issues.apache.org/jira/secure/IssueNavigator.jspa?mode=hide&amp;requestId=12310475">FOR-urgency-urgent</a>
+        - Issues that the project considers to be Urgent.
+      </li>
+      </ul>
+    </section>
+  </body>
+</document>

@@ -1,0 +1,69 @@
+All docs need update to reflect the new "copyless" way and the new filesystem.
+Note the ones that have been done using a code in the left-hand columns:
+In column #1 ...
+S = Reviewed for pathnames, etc. following the 0.7-dev SVN restructure
+In column #2 ...
+R = Reviewed for pathnames, URLs, and techniques; perhaps needs general review.
+F = Fully reviewed.
+* = There are issues to be addressed.
+U = Unrelated to changes in forrest, perhaps still needs general review.
+------------------------------------------------------------------------
+ F   |-- build.xml
+     |-- contrib.xml
+     |-- docs
+ R   |   |-- cap.xml
+SR   |   |-- catalog.xml
+ R   |   |-- compliance.xml
+ U   |   |-- document-v11.xml
+ R   |   |-- document-v12.xml
+ R   |   |-- document-v13.xml
+ R   |   |-- document-v20.xml
+ U   |   |-- dreams.xml
+ F   |   |-- dtd-docs.xml
+ R   |   |-- forrest-contract.xml
+ F   |   |-- forrestbar.xml
+ F   |   |-- forrestbot-web-interface.xml
+ F   |   |-- forrestbot.xml
+ U   |   |-- libre-intro.xml
+ R*  |   |-- linking.xml #FIXME: need updated screenshots and site snippets
+ F   |   |-- oowriter.sxw
+ U   |   |-- primer.xml #FIXME: Still seems to be useful doc, but needs review.
+ R   |   |-- searching.xml
+ R   |   |-- sitemap-ref.xml
+ R   |   |-- skin-package.xml
+ U   |   |-- upgrading_05.xml
+ *   |   |-- upgrading_06.xml #FIXME: Add more items as necessary.
+ F   |   |-- validation.xml
+ F   |   |-- wiki-sample.cwiki
+ F   |   `-- your-project.xml
+ R   |-- faq.xml
+ *   |-- bylaws.xml #FIXME: Not yet published.
+     |-- howto
+ U   |   |-- bugzilla-patch
+ U   |   |   |-- book.xml
+ U   |   |   |-- howto-bugzilla-patch.xml
+ U   |   |-- cvs-ssh
+ U   |   |   |-- book.xml
+ U   |   |   `-- howto-cvs-ssh.xml
+ F   |   |-- howto-asf-mirror.xml
+ F   |   |-- howto-howto.xml
+ F   |   |-- howto-pdf-tab.xml
+ F   |   |-- index.xml
+ U   |   `-- multi
+ U   |       |-- howto-multi.xml
+ U   |       |-- revision-howto-multi-2003-09-14.xml
+ U   |       |-- revision-howto-multi-2003-09-15.xml
+ U   |       |-- revision-step1-2003-09-16.xml
+ U   |       |-- step1.xml
+ U   |       |-- step2.xml
+ U   |       `-- step3.xml
+ R   |-- index.xml
+ F   |-- license.xml
+ U   |-- live-sites.xml
+ F   |-- mail-archives.xml
+ F   |-- mail-lists.xml
+ F   |-- mirrors.ihtml
+     |-- site.xml
+     |-- tabs.xml
+ *   |-- uri-namespace.xml  # FIXME: This is old doc, that has not been linked
+ F    `-- who.xml

@@ -1,0 +1,19 @@
+---------------------------------
+Webapp generated in ${project.webapp}
+
+NOTE
+This webapp can only be run on the local system as it is
+configured to allow editing of files in the project src directory.
+Use "forrest webapp" or "forrest war" to generate a webapp
+for deployment.
+
+To run in Tomcat, add this to the config file (usu. server.xml):
+
+&lt;Context path='/${skinconfig.project-name}'
+            docBase='${project.webapp}'
+            reloadable='true'/&gt;
+
+If using JDK 1.4 or above, make sure to set the Java environment variable
+-Djava.endorsed.dirs=${forrest.home}${file.separator}lib${file.separator}endorsed
+e.g. in the TOMCAT_OPTS (3.3.x) or CATALINA_OPTS (4.x) env variable.
+---------------------------------

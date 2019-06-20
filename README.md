@@ -8,21 +8,26 @@ TCNN aims to mine the transferable semantic (deep-learning (DL)-generated) featu
 
 Build running environment
 =================
-**1. Anaconda python 3.6 version (https://www.anaconda.com)
-**2. Pytorch 0.4.1 (https://pytorch.org)
+1. Anaconda python 3.6 version (https://www.anaconda.com)
+
+2. Pytorch 0.4.1 (https://pytorch.org)
 
 Demo
 =================
 After environment building, please run following file:
 
-**1. runTra.py is used to perform traditional methods.
-**2. runCNN.m is used for CNN/DPDBN performing.
-**3. runDBN.m is used for DBN/DPDBN performing.
-**4. unTCNN.m is used for TCNN/DPTCNN performing.
+1. runTra.py is used to perform traditional methods.
+
+2. runCNN.m is used for CNN/DPDBN performing.
+
+3. runDBN.m is used for DBN/DPDBN performing.
+
+4. unTCNN.m is used for TCNN/DPTCNN performing.
 
 Contacts
 =================
 If any issues, please feel free to contact the author.
 
 **Author Name**: Kevin Qiu
+
 **Author Email**: qiushaojian@outlook.com

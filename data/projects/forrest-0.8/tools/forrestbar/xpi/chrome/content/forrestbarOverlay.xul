@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<?xml-stylesheet href="forrestbar.css" type="text/css"?>
+
+<overlay id="forrestbarOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="text/javascript" src="forrestbarOverlay.js"/>
+
+  <toolbox id="navigator-toolbox">
+    <toolbar id="forrestbar" toolbarname="Forrest Toolbar" persist="collapsed,hidden" class="chromeclass-toolbar" context="toolbar-context-menu" hidden="false" grippytooltiptext="Forrestbar" >
+
+      <toolbarbutton class="forrestbar" id="forrestbar-local-forrest" label="Forrest" hidden="false" type="menu">
+        <menupopup>
+          <menuitem label="Forrest Home" onclick="navigate('http://forrest.apache.org/');" />
+          <menuitem label="Browse SVN" onclick="navigate('http://svn.apache.org/viewcvs.cgi/forrest/');" />
+          <menuitem label="Issues" onclick="navigate('http://forrest.apache.org/issues.html');" />
+          <menuitem label="Mail Lists" onclick="navigate('http://forrest.apache.org/mail-lists.html');" />
+          <menuitem label="Plugins" onclick="navigate('http://forrest.apache.org/pluginDocs/index.html');" />
+          <menuitem label="Docs for current release version" onclick="navigate('http://forrest.apache.org/docs/index.html');" />
+          <menuitem label="Docs for development version" onclick="navigate('http://forrest.apache.org/docs/dev/');" />
+          <menuitem label="Testing Zone" onclick="navigate('http://forrest.zones.apache.org/');" />
+          <menuseparator />
+          <menuitem label="Local Forrest (localhost:8888)" onclick="navigateForrestRun();" hidden="false" id="forrest.run.menuitem"/>
+        </menupopup>
+      </toolbarbutton>
+
+      <toolbarbutton class="forrestbar" label="Apache" type="menu" id="forrestbar-community" hidden="false">
+        <menupopup>
+          <menuitem label="Apache Home" onclick="navigate('http://www.apache.org/');" />
+          <menuitem label="News" onclick="navigate('http://www.apache.org/foundation/news.html');" />
+          <menuitem label="Conferences" onclick="navigate('http://www.apache.org/foundation/conferences.html');" />
+          <menuitem label="Foundation" onclick="navigate('http://www.apache.org/foundation/');" />
+          <menuitem label="Incubator" onclick="navigate('http://incubator.apache.org/');" />
+          <menuitem label="PlanetApache Blogs" onclick="navigate('http://planetapache.org/');" />
+          <menuitem label="Projects" onclick="navigate('http://www.apache.org/foundation/projects.html');" />
+          <menuseparator/>
+          <menuitem label="Dev Resources" onclick="navigate('http://www.apache.org/dev/');" />
+          <menuitem label="Issues" onclick="navigate('http://issues.apache.org/');" />
+          <menuitem label="Mail Lists" onclick="navigate('http://www.apache.org/foundation/mailinglists.html');" />
+          <menuitem label="Search Apache" onclick="navigate('http://search.apache.org/');" />
+          <menuitem label="Server Status" onclick="navigate('http://www.apache.org/dev/#status');" />
+        </menupopup>
+      </toolbarbutton>
+
+      <toolbarbutton class="forrestbar" label="References" id="forrestbar-tools" hidden="false" type="menu">
+        <menupopup>
+          <menuitem label="Ant manual" onclick="navigate('http://ant.apache.org/manual/index.html');" />
+          <menuitem label="Cocoon 2.1 user docs" onclick="navigate('http://cocoon.apache.org/2.1/userdocs/');" />
+          <menuitem label="Cocoon 2.1 developer docs" onclick="navigate('http://cocoon.apache.org/2.1/developing/');" />
+          <menuitem label="SVN Book" onclick="navigate('http://svnbook.red-bean.com/');" />
+        </menupopup>
+      </toolbarbutton>
+
+      <toolbarbutton class="forrestbar" label="Devs." id="forrestbar-devs" hidden="false" type="menu">
+        <menupopup>
+          <menuitem label="abs-menulinks" onclick="navigate('http://localhost:8888/abs-menulinks');" />
+          <menuseparator/>
+          <menuitem label="Cocoon Profiler howto" onclick="navigate('http://forrest.apache.org/docs/dev/howto/howto-dev.html#debug');" />
+          <menuitem label="Cocoon Profiler access" onclick="navigate('http://localhost:8888/cprofile.html');" />
+          <menuseparator/>
+          <menuitem label="Docs for development version" onclick="navigate('http://forrest.apache.org/docs/dev/');" />
+         
+        </menupopup>
+      </toolbarbutton>
+        <!-- Following is dispatcher trunk specific 
+          Comment for 0.7 builds
+          START
+          -->
+      <toolbarseparator/>
+      <toolbarbutton class="forrestbar" label="dispatcher-dev " id="forrestbar-dispatcher-dev" hidden="false" type="menu">
+        <menupopup>
+          <menuitem label="Intermediate format" onclick="viewXML('.source.rewritten.xml');" />
+          <menuitem label="Body" onclick="viewXML('.body.xml');" />
+          <menuitem label="Table of Content" onclick="viewXML('.toc.xml');" />
+          <menuitem label="Abstract" onclick="viewXML('.abstract.xml');" />
+          <menuitem label="Authors" onclick="viewXML('.authors.xml');" />
+          <menuitem label="Notice" onclick="viewXML('.notice.xml');" />
+          <menuitem label="Navigation" onclick="viewXML('.navigation.xml');" />
+          <menuitem label="Title" onclick="viewXML('.title.xml');" />
+          <menuseparator/>
+          <menuitem label="structurer" onclick="setDispatcherCall(true);viewXML('resolve.structurer.');setDispatcherCall(false);"/>
+          <menuseparator/>
+          <menuitem label="ls.contracts" onclick="navigate('http://localhost:8888/ls.contracts.html');" />
+          <menuitem label="ls.contracts.project" onclick="navigate('http://localhost:8888/ls.contracts.project.html');" />
+        </menupopup>
+      </toolbarbutton>
+        <!--
+          END
+          -->
+      <toolbarseparator/>
+      <toolbaritem class="forrestbar" id="forrestbar-search">
+        <label value="Search:"/>
+        <textbox id="forrestbar-input" onkeydown="if (event.which == 13) {searchDev('aims', 'forrestbar-input');}" hidden="false"/>
+        <toolbarbutton label="Search" hidden="false" type="menu">
+          <menupopup>
+            <menuitem label="Dev (MARC)" onclick="searchDev('aims', 'forrestbar-input');" hidden="false"/>
+            <menuitem label="Dev (Gmane)" onclick="searchDev('gmane', 'forrestbar-input');" hidden="false"/>
+            <menuitem label="Dev (The Mail Archive)" onclick="searchDev('mailArchive', 'forrestbar-input');" hidden="false"/>
+            <menuitem label="User (Gmane)" onclick="searchUser('gmane', 'forrestbar-input');" hidden="false"/>
+            <menuitem label="User (The Mail Archive)" onclick="searchUser('mailArchive', 'forrestbar-input');" hidden="false"/>
+            <menuitem label="Commits (Gmane)" onclick="searchCommits('gmane', 'forrestbar-input');" hidden="false"/>
+            <menuitem label="Commits (The Mail Archive)" onclick="searchCommits('mailArchive', 'forrestbar-input');" hidden="false"/>
+            <menuitem label="Forrest Site" onclick="searchSite('forrestbar-input');" hidden="false"/>
+            <menuitem label="JIRA Issues" onclick="searchIssue('forrestbar-input');" hidden="false"/>
+            <menuitem label="SVN Revision" onclick="searchSVN('forrestbar-input');" hidden="false"/>
+          </menupopup>
+        </toolbarbutton>
+        <toolbarseparator/>
+        <!-- Following is dispatcher trunk specific 
+          Comment for 0.7 builds
+          START
+          -->
+        <toolbarbutton label="contracts-dev " hidden="false" type="menu">
+          <menupopup>
+             <menuitem label="resolve-contract-html" onclick="contract('resolve.contract.html.','forrestbar-input');"/>
+             <menuitem label="prepare-contract-html" onclick="contract('prepare.contract.html.','forrestbar-input');"/>
+             <menuitem label="resolve-contract-fo" onclick="contract('resolve.contract.fo.','forrestbar-input');"/>
+             <menuitem label="prepare-contract-fo" onclick="contract('prepare.contract.fo.','forrestbar-input');"/>
+          </menupopup>
+        </toolbarbutton>
+        <!--
+          END
+          -->
+        <!--
+        These buttons re for use with the publisher plugin, however, they are
+        commented out at this stage because the plugin does not provide 
+        sufficient error checking and guidance for end users. Use of this
+        plugin should be restricted to devs who understand the publishing 
+        process 
+        <toolbarbutton label="Publishing" hidden="false" type="menu">
+          <menupopup>
+             <menuitem label="Save Page" onclick="navigate('http:/localhost:8888/devTools/do/save.html?URI=' + gBrowser.currentURI.spec + '&amp;file=src/documentation/content/xdocs/index/xml');"/>
+             <menuitem label="Build Site" onclick="navigate('http:/localhost:8888/devTools/do/siteBuild.html');"/>
+             <menuitem label="Deploy Site" onclick="navigate('http:/localhost:8888/devTools/do/stagedDeploy.html');"/>
+          </menupopup>
+        </toolbarbutton>
+	-->
+      </toolbaritem>
+
+    </toolbar>
+  </toolbox>
+
+
+</overlay>

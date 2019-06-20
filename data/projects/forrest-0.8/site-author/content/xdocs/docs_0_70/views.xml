@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>forrest:views concept (Draft -feature planed for 0.8)</title>
+  </header>
+  <body>
+    <warning>
+      This document is heavily under development
+    </warning>
+    <section id="introduction">
+      <title>Introduction</title>
+      <p>
+        Like stated in the <a href="site:v0.70//documentation/skins">Skin
+        documentation file</a> the aim of the forrest skins is to provide many
+        capabilities so that extra skins are not needed. Our experience showed
+        that many forrest user had to create a new skin because the default skin
+        did not offer the feature their wanted to use. That leaded us to develop
+        a new concept of creating skins that would be easily extensible by a
+        user.
+      </p>
+      <p>
+        The aim of the upcoming "forrest:views" skinning concept is to provide a
+        flexible framework for creating site and page specific layout in
+        different formats.
+      </p>
+    </section>
+    <section id="background">
+      <title>Background</title>
+      <p>
+        The problem with the forrest skins so far has been that "only" the
+        design changed (html-skeleton), but still we had to write a completely
+        new skin and implement all functionality. Another problem was that the
+        functionality was not easy extensible by a user. Then we decided to
+        support the a standard regarding naming conventions for css elements.
+        This standard has been developed on the
+        <a href="http://www.oscom.org/events/oscom4/proposals/skins"> OSCOM
+        website</a>, where you can find some more background informations.
+      </p>
+    </section>
+    <section id="nc-definition">
+      <title>Definition of naming conventions</title>
+      <p>
+        "A naming convention is an attempt to systematize names in a field so
+        they unambiguously convey similar information in a similar manner."
+        <a href="http://www.wordiq.com/definition/Naming_convention">wordiq-definition</a>
+      </p>
+    </section>
+    <section id="leather">
+      <title>leather-dev</title>
+      <p>
+        That leaded to the development of the "leather-dev" skin which
+        established a semantic container approach for div elements. The problems
+        with leather-dev was pointed out on the mail
+        <a href="http://marc.theaimsgroup.com/?l=forrest-dev&nbsp;m=111049344517653&nbsp;w=2" >status
+        on leather-dev?</a>
+      </p>
+    </section>
+  </body>
+</document>

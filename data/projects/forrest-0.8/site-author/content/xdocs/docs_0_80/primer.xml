@@ -1,0 +1,650 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd">
+<document>
+  <header>
+    <title>The Forrest Primer</title>
+    <subtitle>Don't panic!</subtitle>
+    <abstract>
+      Forrest is a so-called
+      <link href="http://www.dictionary.com/cgi-bin/dict.pl?term=fledgling">fledgling</link>
+      project that will have a broad impact on
+      <link href="http://xml.apache.org/">xml.apache.org</link> projects. This
+      document helps you to better understand the vision and scope of Forrest,
+      so that you learn what to expect (or not) from it, and eventually will
+      help you discovering places where your contribution could be valuable to
+      all of us.
+    </abstract>
+  </header>
+  <body>
+    <warning>
+      This document is <em>very</em> out of date. There is a lot of good
+      information here, but the focus of the project has shifted away from the
+      Sourceforge-like project management system described here, towards being a
+      simpler project-centric documentation tool -- JT
+    </warning>
+    <section>
+      <title>History</title>
+      <p>
+        Forrest has come into existence because of the abysmal state of the
+        <link href="http://xml.apache.org/">xml.apache.org</link> website in
+        comparison with other open source community sites such as Sourceforge.
+        The old site had no consistent visual look and feel, which was largely
+        due to each and every sub-project managing its own site. Furthermore,
+        much information which could potentially support community-based open
+        source development was hidden inside CVS repositories, mailing lists or
+        word of mouth. Once we experienced the usefullness of cross-project
+        collaboration supported by the Jakarta
+        <link href="http://jakarta.apache.org/gump">Gump</link> project, we
+        reckoned having a single application responsible for the management of
+        the xml.apache.org site could be of benefit to our visitors. And if we
+        added aggregated access to other available resources such as download
+        stats or mailing list archives, the new xml.apache.org website could be
+        a true information clearinghouse for interested parties, both users and
+        contributors alike.
+      </p>
+      <p>
+        The Forrest vision was articulated by Stefano Mazzocchi and Sam Ruby,
+        both long-time contributors to Apache projects, in the beginning of
+        2002, and was rapidly picked up by a bunch of other
+        <link href="site:who">contributors</link> as well, after a headstart by
+        Nicola Ken Barozzi. So here we are, plenty of work-in-progress to erect
+        what eventually will become a true community website infrastructure for
+        Apache open source development.
+      </p>
+    </section>
+    <section>
+      <title>What is Forrest</title>
+      <p>
+        Forrest is a framework that supports the cross-project generation and
+        management of development project websites using Cocoon as its XML
+        publishing framework. It not only provides access to project
+        documentation, but also to other types of information that open source
+        developers depend upon daily: source code repositories, mailing lists,
+        contact info and the like. It aggregates all these resources and
+        publishes them on a regular basis to a website, ensuring a consistent
+        look and feel using skins implemented with XSLT stylesheets. While
+        Forrest's primary focus is XML Apache project websites, it can be
+        adapted to other community development projects as well, as long as they
+        are willing to commit to proven best practices such as Ant for build
+        automation, CVS for source code control and XML as a documentation
+        source format.
+      </p>
+      <p>
+        Forrest is currently based on an
+        <link href="http://jakarta.apache.org/ant/">Ant</link>-based project
+        build system called
+        <link href="http://www.krysalis.org/centipede/">Centipede</link> that
+        drives a <link href="http://cocoon.apache.org/">Cocoon</link>-based
+        document publication system. It contains a set of standard XML document
+        type declarations (DTDs) for project documentation, and different
+        'skins' consisting of XSLT stylesheets that produce HTML renditions of
+        XML documents using these DTDs.
+      </p>
+      <p>
+        The primary mode of operations for Forrest will be as follows:
+      </p>
+      <note>
+        This process is not quite ready for prime time yet, but it gives you an
+        idea where we are heading to. Website generation with skins currently
+        works, try using the <code>docs</code> target when invoking the
+        <code>build</code> script. Add a <code>project.skin</code> property when
+        invoking the build script to experience Forrest skins:
+        <code>build{.bat|.sh} -Dproject.skin=&lt;thenameoftheskintouse&gt;
+        docs</code>. Read our <link href="#cvs">CVS crash course</link> to get
+        hold of the current codebase and start playing with it.
+      </note>
+      <ol>
+        <li>Forrest will harvest documentation and related source files from
+          each of the projects within the community that uses Forrest for their website,
+          usually direct from the CVS repository. Which projects are included, and how
+          they are retrieved is configured by a project descriptor file. This is an
+          automated process that occurs several times a day to ensure Forrest has the
+          latest information available.</li>
+        <li>Forrest then uses Cocoon to generate an HTML rendition of each
+          project's website, configured by a generic sitemap. The result is a static
+          collection of HTML documents and related images and stylesheets comprising the
+          project's website. The impact Forrest has on the participating projects should
+          be minimal, i.e. one should simply author XML documents, put them in a
+          well-specified filesystem hierarchy, and Forrest will do its work.</li>
+        <li>Forrest will enrich the documentation source files with common
+          information: a cross-project navigation structure (and rendition, of course),
+          and useful 'community indicators' such as download statistics, number of
+          contributors with commit access, ...</li>
+        <li>If the individual project build runs are successful, the project's
+          website is automagically (re-)published to the (Apache) website, also several
+          times day.</li>
+      </ol>
+      <p>
+        The Forrest website and the overall xml.apache.org website are
+        maintained and published using the same mechanism.
+      </p>
+    </section>
+    <section>
+      <title>Forrest roles</title>
+      <p>
+        Depending on your interests, your involvement with Forrest may vary,
+        hence your <em>role</em>. We currently envision three different roles:
+      </p>
+      <ul>
+        <li><strong>User</strong> you want or need to use Forrest for your
+          project because it uses Forrest to manage its documentation.</li>
+        <li><strong>Adaptor</strong> you want to adapt Forrest to support your
+          individual project needs, presumably outside the XML Apache context, building
+          your own skins or DTDs and the like.</li>
+        <li><strong>Contributor</strong> you are a fledgling Forresteer and
+          want to contribute to the further development of it. If your contributions are
+          valuable and in true community spirit, you can possibly gain commit access to
+          the Forrest CVS repository and become an Apache committer. The first stage
+          towards becoming a contributor is to join the forrest dev
+          <link href="site:mail-lists">mailing list</link>, the second is to download
+          Forrest and start playing with it (see below).</li>
+      </ul>
+      <p>
+        Depending on your role, your potential area of interest in Forrest will
+        vary:
+      </p>
+      <table>
+        <tr>
+          <th>Role</th>
+          <th>Interests</th>
+        </tr>
+        <tr>
+          <td>User</td>
+          <td>Forrest DTDs and documentation filesystem hierarchy (Cocoon
+            sitemap)</td>
+        </tr>
+        <tr>
+          <td>Adaptor</td>
+          <td>+ skin system and build environment</td>
+        </tr>
+        <tr>
+          <td>Contributor</td>
+          <td>+ the Forrest codebase and runtime environment</td>
+        </tr>
+      </table>
+    </section>
+    <section id="cvs">
+      <title>Getting your local copy of Forrest through CVS</title>
+      <section>
+        <title>System requirements</title>
+        <p>
+          Forrest requires the following systems to be already installed on your
+          system:
+        </p>
+        <ul>
+          <li><em>Java Virtual Machine</em> A Java virtual machine must be
+            present. Forrest has been tested against the latest Sun 1.3 JDK.</li>
+        </ul>
+      </section>
+      <section>
+        <title>Getting Forrest</title>
+        <p>
+          You can retrieve Forrest from its CVS repository or download
+          <link href="http://www.apache.org/dyn/closer.cgi/xml/forrest/">here</link>.
+          <br/>
+          Some help with CVS follows (courtesy of our friends of the Cocoon
+          project).
+        </p>
+      </section>
+      <section>
+        <title>Step-by-step cvs instructions for Windows</title>
+        <ol>
+          <li>Download a recent release of WinCVS (homepage is
+            <link href="http://www.wincvs.org/">http://www.wincvs.org/</link>); </li>
+          <li>Install it;</li>
+          <li>Start it;</li>
+          <li>Click on Admin-&gt;Preferences;</li>
+          <li> In "Enter the CVSROOT:" enter
+            "<code>:pserver:anoncvs@cvs.apache.org:/home/cvspublic</code>" (without
+            quotes);</li>
+          <li>In "Authentication:" choose "passwd file on the cvs server";</li>
+          <li>Click "Ok";</li>
+          <li>Click Admin-&gt;Login;</li>
+          <li> When asked for the password: answer "<code>anoncvs</code>"
+            (without quotes);</li>
+          <li> Click "Create-&gt;Checkout module";</li>
+          <li>Module name and path on the server is "<code>xml-forrest</code>"
+            (no quotes);</li>
+          <li>Choose a dir to put the source code in;</li>
+          <li>Click "Ok";</li>
+          <li>If everything goes well, messages will start to appear in the log
+            window;</li>
+          <li>Wait until you see "<code>*****CVS exited normally with code
+              0*****</code>" in the log window;</li>
+          <li>The Forrest source is now on your harddrive.</li>
+        </ol>
+      </section>
+      <section>
+        <title>Step-by-step cvs instructions for Unix</title>
+        <ol>
+          <li>Make sure you have a CVS client package installed on your Unix
+            system.</li>
+          <li>Start the shell of your choice.</li>
+          <li>Enter "<code>cvs -d
+              :pserver:anoncvs@cvs.apache.org:/home/cvspublic login</code>".</li>
+          <li>When asked for the password: answer "<code>anoncvs</code>".</li>
+          <li>Enter "<code>cvs -d
+              :pserver:anoncvs@cvs.apache.org:/home/cvspublic -z3 checkout
+              xml-forrest</code>". This will create a directory called
+            "<code>xml-forrest</code>" where the Forrest source will be stored.</li>
+          <li>Wait until cvs has finished.</li>
+          <li>The Forrest source is now on your harddrive.</li>
+        </ol>
+        <p>
+          In case you want to update your Forrest source tree to the current
+          version, change to the "<code>xml-forrest</code>" directory and invoke
+          "<code>cvs -z3 update -d -P</code>".
+        </p>
+      </section>
+    </section>
+    <section>
+      <title>Forrest distribution</title>
+      <p>
+        Once you retrieved Forrest from its CVS repository, you will end up with
+        a filesystem hierarchy similar to this inside the
+        <code>xml-forrest</code> home directory:
+      </p>
+      <warning>
+        This is highly volatile information!
+      </warning>
+      <source>
+<![CDATA[+---legal                             various licenses for included projects
++---lib                               jar library
++---src
+|   +---documentation               Forrest's documentation (not generally reusable)
+|   |   +---content                 content of the Forrest website
+|   |   |   +---xdocs               Forrest website XML documents
+|   |   +---resources               Forrest-specific doc resources
+|   |   |   +---images
+|   +---resources                   Generic resources for any Forrest-using project.
+|   |   +---conf                    Default (overridable) Forrest config files
+|   |   +---library                 common components (not skin-specific)
+|   |   |   +---xslt                document format transformers e.g. faq->xdoc
+|   |   +---convert                 XSLTs for aiding a transition to Forrest
+|   |   +---skins                   Forrest skins
+|   |       +---basic
+|   |       +---forrest-site        the future xml.apache.org skin
+|   |       |   +---css             Cascading Stylesheets
+|   |       |   +---images          skin-specific images
+|   |       |   +---xslt            the skin stylesheets (per medium)
+|   |       |       +---fo
+|   |       |       +---html        html rendering skins
+|   |       +---jakarta-site
+|   |       +---scarab-site
+|   |       +---xml-apache-site
+|   |   +---schema                  Generic Forrest DTDs
+|   |       +---dtd
+|   |       +---relaxng
+|   |       +---entity
+|   |   +---images                  Reusable skin-agnostic images 
+|   |   +---fresh-site              A template project structure
+|   |   +---forrest-shbat           'shbat' Forrest distribution files
+|   |   +---forrestbot              Ant-based Forrest deployment tool
+|   |   +---forrestbar              Mozilla Forrest toolbar
+|   |   +---charts                  charting trials
+|   |   +---layout                  HTML page mock-ups
+|   |   |   +---resources
+|   |   |   +---xml.apache.org
+|   |   |       +---images
+|
++---tools                           Tools used to build Forrest
+    +---ant                         Ant 1.6-dev scripts and jars
++---stylesheets                     Stylesheets used for project root XML files
+]]>
+      </source>
+      <p>
+        The <code>xml-forrest</code> home directory consists of the main Ant
+        build script (<code>build.xml</code>) and platform-specific batch
+        files/shell scripts to invoke it. Forrest comes with Ant included, so
+        you do not need to install Ant separately.
+      </p>
+      <p>
+        Running Forrest is a batch operation you can start using the provided
+        <code>build.{sh|bat} &lt;targetname&gt;</code>. The current main targets
+        are:
+      </p>
+      <ul>
+        <li><strong><code>docs</code></strong> - generates an HTML rendition of
+          the Forrest website using the default <code>forrest-site</code> skin</li>
+        <li><strong><code>clean</code></strong> - cleans out the
+          <code>build</code> directory</li>
+        <li><strong><code>webapp</code></strong> - for those who cannot resist
+          running Forrest live instead of its commandline invocation, this target builds
+          a WAR file you can deploy in your servlet container (currently only tested for
+          Tomcat 4.0.1). Mount-point of the web application will be
+          <code>xml-forrest</code>.</li>
+      </ul>
+      <p>
+        After a build run, Forrest creates a <code>build</code> directory. You
+        can find the generated website in the
+        <code>build/xml-forrest/docs/</code> directory. Forrest also creates a
+        <code>tools/tmp/anttasks/</code> upon its first invocation. These are
+        Centipede-specific compiled Ant tasks.
+      </p>
+    </section>
+    <section>
+      <title>The Forrest DTDs</title>
+      <p>
+        Forrest is the reference repository for the XML Apache documentation
+        DTDs. Special care is taken to provide a set of modular, extensible and
+        well-maintained DTDs for project documentation purposes. This modularity
+        is ensured using the
+        <link href="http://www.oasis-open.org/committees/entity/">OASIS
+        catalog</link> mechanism, extensive use of external parameter entities
+        and an entity resolver capable of resolving entities through the
+        aforementioned catalog mechanism. For the docheads amongst us, this
+        means we adhere to the strict use of <code>PUBLIC</code> entity
+        identifiers both in document instances and DTD modules.
+      </p>
+      <p>
+        We have currently identified the following document types:
+      </p>
+      <ul>
+        <li>General documents (<code>document-v11.dtd</code>),</li>
+        <li>How-Tos (<code>howto-v10.dtd</code>),</li>
+        <li>Collections of FAQs (<code>faq-v11.dtd)</code>.</li>
+      </ul>
+      <p>
+        Some work is also under its way for other document types, in close
+        collaboration with the Cocoon project. You will also find some older
+        document types such as <code>changes</code>, <code>javadoc</code>,
+        <code>specification</code> and <code>todo</code>, which are currently
+        under consideration for automatic generation and maintenance using Gump
+        or Centipede descriptors and the like. DTDs will be subject of serious
+        version management as soon as Forrest has a 1.0 release: they are made
+        to depend upon.
+      </p>
+      <p>
+        The DTDs are located in <code>src/resources/schema/dtd</code> and also
+        refer to some character entity collections stored in the
+        <code>src/resources/schema/entity</code> directory. These are referred
+        to by the declarations found in the
+        <code>src/resources/schema/catalog</code> OASIS Catalog file. Take
+        special care using the correct <code>PUBLIC</code> identifiers in the
+        DTD declaration of your instances:
+      </p>
+      <source>
+<![CDATA[<?xml version="1.0"?>
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://apache.org/forrest/dtd/document-v12.dtd">
+<document>
+  ...
+  ]]>
+      </source>
+      <p>
+        The exact local location of the DTD for validation purposes is obtained
+        by the entity resolver evaluating the mapping scheme as defined in the
+        <code>catalog</code> file. This makes sure that you can move and
+        re-arrange your document instances apart from your DTD files. Later on,
+        the DTDs will be web-accessible from the Forrest website for your
+        perusal.
+      </p>
+    </section>
+    <section id="sitemap">
+      <title>Forrest site generation using Cocoon</title>
+      <p>
+        The <code>docs</code> target of the Forrest build environment invokes
+        Cocoon as a command-line application to generate an HTML rendition of
+        the project's documentation. It is not within the scope of this document
+        to explain the Cocoon internals, please read its own
+        <link href="http://cocoon.apache.org/">documentation</link> to fully
+        understand the power of Cocoon.
+      </p>
+      <p>
+        Cocoon's site rendition behaviour is configured in a so-called
+        <em>sitemap</em>, a switchboard that binds URLs to an XML processing
+        pipeline. This pipeline typically consists of a Generator, one or more
+        Transformers and a Serializer. Forrest also makes use of Cocoon's
+        aggregation capabilities that merge multiple pipelines into one
+        resulting output document.
+      </p>
+      <p>
+        A typical page generated using Forrest looks like this:
+      </p>
+      <figure src="images/page-areas.png" height="291" width="336" alt="Pages areas"/>
+      <p>
+        This page is currently composed of two XML sources which are transformed
+        by a different XSLT stylesheet, aggregated by Cocoon with a
+        post-aggregation stylesheet adding the overall page grid and look &amp;
+        feel. This simple example is handled by the following <em>sitemap</em>
+        snippets (<code>src/documentation/conf/sitemap.xmap</code>):
+      </p>
+      <source>
+<![CDATA[<map:match pattern="*.html">
+  <map:aggregate element="site">
+    <map:part src="cocoon:/book-{1}.xml"/>
+    <map:part src="cocoon:/body-{1}.xml" label="content"/>
+  </map:aggregate>
+  <map:call resource="skinit">
+    <map:parameter name="type" value="site2xhtml"/>
+  </map:call>
+</map:match>]]>
+      </source>
+      <source>
+<![CDATA[<map:match pattern="**book-**.xml">
+  <map:generate src="content/xdocs/{1}book.xml"/>
+  <map:call resource="skinit">
+    <map:parameter name="type" value="book2menu"/>
+  </map:call>
+</map:match>]]>
+      </source>
+      <source>
+<![CDATA[<map:match pattern="body-**.xml">
+  <map:generate src="content/xdocs/{1}.xml"/>
+  <map:call resource="skinit">
+    <map:parameter name="type" value="document2html"/>
+  </map:call>
+</map:match>]]>
+      </source>
+      <source>
+<![CDATA[<map:resource name="skinit">
+  <map:transform src="skins/@skin@/xslt/html/{type}.xsl">
+    <map:parameter name="isfaq" value="{isfaq}"/>
+  </map:transform>
+  <map:serialize/>
+</map:resource>]]>
+      </source>
+      <p>
+        When an URL (e.g. <code>http://forrest.apache.org/index.html</code>) is
+        passed through the Cocoon system to generate the required page, the
+        pipeline flow is basically as follows:
+      </p>
+      <ol>
+        <li>The URL is matched by the <code>*.html</code> pattern</li>
+        <li>Cocoon responds by aggregating two 'sub-requests'. The first is for
+          the resource <code>book-{1}.xml</code>, the second is for the resource
+          <code>body-{1}.xml</code>. The <code>{1}</code> parameter is replaced by the
+          values of the first wildcard in the matching pattern above. These
+          'sub-requests' are passed through the Cocoon pipeline just like any other
+          request. This results in the following flow:</li>
+        <ol>
+          <li>The first 'sub-request' (for <code>book-index.xml</code> is matched
+            by the <code>**book-**.xml</code> pattern. This results in the file
+            <code>content/xdocs/book.xml</code> being read. This document is then run
+            through the <code>book2menu</code> stylesheet (which produces an HTML fragment
+            comprising the site navigation, the red area in the image above.</li>
+          <li>The second 'sub-request' is matched by the <code>body-**.xml</code>
+            pattern. This results in the file <code>index.xml</code> being transformed
+            using the <code>document2html</code> stylesheet, the yellow area in the
+            screenshot.</li>
+        </ol>
+        <li>The aggregation result is then transformed using the
+          <code>site2xhtml</code> stylesheet which adds the cherries to the cake. The
+          grey zone.</li>
+      </ol>
+      <p>
+        These <em>skin-specific</em> stylesheets are located in
+        <code>src/documentation/skins/&lt;nameoftheskin&gt;/xslt/html</code>, so
+        if you want to add your own skin, this is the place to be. Apart from
+        these, there exist a number of other stylesheets located in
+        <code>src/documentation/library/xslt</code> and more importantly:
+      </p>
+      <ul>
+        <li><code>faq2document</code>: transforms documents following the
+          <code>faq-v11</code> DTD to <code>document-v11</code> grammar</li>
+        <li><code>howto2document</code>: transforms documents following the
+          <code>howto-v10</code> DTD to <code>document-v11</code> grammar</li>
+        <li>and some others.</li>
+      </ul>
+      <p>
+        As you see, all documents, regardless of their original DTD, are
+        transformed to the <code>document</code> DTD prior to rendition. This
+        alleviates the burden of adding new skins to implementing 3 simple
+        stylesheets: <code>book2menu</code>, <code>document2html</code> and
+        <code>site2xhtml</code>.
+      </p>
+    </section>
+    <section>
+      <title>Where we are heading to</title>
+      <p>
+        We have been explaining so far where we are now and what already works.
+        The purpose of this document however is to attract newcomers and entice
+        them to start contributing to Forrest. We have a decent generation
+        system for static project documentation, a nice set of skins and some
+        simple but effective DTDs. Our goals however are much more ambitious: we
+        have compiled a <link href="site:dreams">dream list</link> that lists
+        most of them.
+      </p>
+      <ul>
+        <li>Our first ambition is to support the project site generation and
+          maintenance of other Apache projects in an automated manner, starting with our
+          own website as a showcase. We are in the process of setting up the shell
+          scripts and Ant tasks for this and will assist projects transitioning to
+          Forrest.</li>
+        <li>As it is often the case with collaborative open source development,
+          there is no formal planning nor task assignments, and we will stick to that
+          practice. We have however compiled a number of functional work areas:</li>
+      </ul>
+      <table>
+        <tr>
+          <th>URI Namespace Management</th>
+          <td>Forrest will offer access to a broad set of information resources
+            using durable URIs: please review
+            <link href="ext:cool-uris">Tim Berners-Lee</link>'s
+            and <link href="http://www.useit.com/alertbox/990321.html">Jakob
+              Nielsen</link>'s opinion on this. We need a unified URI Namespace management
+            approach, bearing in mind mirroring and 'hackable' URIs.</td>
+        </tr>
+        <tr>
+          <th>Skins</th>
+          <td>We currently have a nice set of skins which should be solidified.
+            Furthermore, we need some serious finetuning of the <code>forrest-site</code>
+            skin that will become the new xml.apache.org look&amp;feel.</td>
+        </tr>
+        <tr>
+          <th>Aggregation<br/>and Syndication</th>
+          <td>We plan to aggregate on a per-project basis a number of relevant
+            developer resources, such as project-related news, download statistics,
+            committer bio pages (with photos!), navigable source code listings and the
+            like. Some of these resources need to be made available across content
+            syndication methods such as 
+            <link href="http://blogspace.com/rss/">RSS</link>.</td>
+        </tr>
+        <tr>
+          <th>Build Management</th>
+          <td>Fool-proof automation of Forrest runs and site publication using
+            secure transfer methods and <code>cron</code> jobs.</td>
+        </tr>
+        <tr>
+          <th>Document Types</th>
+          <td>Expanding the collection of DTDs, documenting them using formal
+            How-Tos and example documents.</td>
+        </tr>
+        <tr>
+          <th>xml.apache.org</th>
+          <td>Formation of an editorial team for the main xml.apache.org website,
+            working in close collaboration with the
+            <link href="http://xml.apache.org/whoweare.html">PMC</link> and the different
+            sub-project leads.</td>
+        </tr>
+        <tr>
+          <th>Integration</th>
+          <td> Forrest needs to coexist with existing cross-project collaboration
+            tools such as <link href="ext:gump">Gump</link>,
+            <link href="http://scarab.tigris.org/">Scarab</link> and
+            <link href="http://eyebrowse.tigris.org/">Eyebrowse</link> and provide
+            integrated access to them.</td>
+        </tr>
+        <tr>
+          <th>Authoring support</th>
+          <td>Supporting document authors with preconfigured XML editing
+            solutions.</td>
+        </tr>
+        <tr>
+          <th>Content Management</th>
+          <td>Establish an efficient content management practice, supporting
+            versioning, remote access and work flow, presumably supported by a CMS such as
+            <link href="http://jakarta.apache.org/slide/">Slide</link>.</td>
+        </tr>
+        <tr>
+          <th>Information Accessibility</th>
+          <td>We need to be accessible using a wide range of browsing devices
+            operating on different platforms. Special care should be taken to support the
+            <link href="http://www.w3.org/WAI/">WAI</link> guidelines.</td>
+        </tr>
+      </table>
+    </section>
+    <section>
+      <title>Where you can help</title>
+      <p>
+        By now, you should have a better understanding of Forrest (if that is
+        not the case, consider contributing clarifications to this document). We
+        need more people to get the job done. Forrest is a fun project to work
+        on, and there is something in it for all of us:
+      </p>
+      <ul>
+        <li>XML docheads with skills for document analysis and DTDs
+          development</li>
+        <li>Cocoon developers creating custom Cocoon components connecting
+          Forrest with external resources</li>
+        <li>Graphical whizzkids for true cross-browser HTML/CSS
+          development</li>
+        <li>People who believe XSLT will bring peace to earth (it will, but
+          keep that quiet)</li>
+        <li>Ant wizards able to compete with Nicola and Stefan</li>
+        <li>Unix shell scripting / CVS / cron gurus, preferably bearded</li>
+      </ul>
+      <p>
+        Just drop us a line at the forrest-dev <link href="site:mail-lists">mail
+        list</link>.
+      </p>
+    </section>
+    <p>
+      That is all, folks.
+    </p>
+    <table>
+      <tr>
+        <th>Revision history</th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>2002-05-22</td>
+        <td>Initial version, Steven Noels, stevenn.at.apache.org</td>
+      </tr>
+      <tr>
+        <td>2002-05-23</td>
+        <td>Various rephrasings and clarifications thanks to Ross Gardler,
+          ross.at.saafe.org</td>
+      </tr>
+      <tr>
+        <td>2002-09-23</td>
+        <td>Updated the directory outline (jefft.at.apache.org)</td>
+      </tr>
+    </table>
+  </body>
+</document>

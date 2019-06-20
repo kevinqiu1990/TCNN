@@ -1,0 +1,66 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- ===================================================================
+     
+     Apache Cocoon Documentation Tab DTD (Version 1.0)
+
+PURPOSE:
+This DTD defines the */tab.xml documentation configuration files.  Tabs are
+visual indicators that a certain subsection of the URI space is being browsed.
+
+TYPICAL INVOCATION:
+
+  <!DOCTYPE tab PUBLIC
+       "-//APACHE//DTD Cocoon Documentation Tab Vx.yz//EN"
+       "tab-cocoon-vxyz.dtd">
+
+  where 
+  
+    x := major version
+    y := minor version
+    z := status identifier (optional)
+      
+NOTES:
+  
+FIXME:
+  - find the proper DTD for top.xml
+
+CHANGE HISTORY:
+  20020506 Initial version. (BVK)
+  20021102 Revised to allow either @dir or @href (JT)
+  20030521 Add @id (JT)
+    
+==================================================================== -->
+<!ELEMENT tabs (tab)*>
+<!ELEMENT tab EMPTY>
+<!ATTLIST tabs
+  software CDATA #REQUIRED
+  title CDATA #REQUIRED
+  copyright CDATA #REQUIRED
+  xmlns:xlink CDATA #IMPLIED
+>
+<!ATTLIST tab
+  id CDATA #IMPLIED
+  label CDATA #REQUIRED
+  dir CDATA #IMPLIED
+  indexfile CDATA #IMPLIED
+  href CDATA #IMPLIED
+  type (visible | hidden) "visible"
+>
+<!-- =============================================================== -->
+<!-- End of DTD -->
+<!-- =============================================================== -->

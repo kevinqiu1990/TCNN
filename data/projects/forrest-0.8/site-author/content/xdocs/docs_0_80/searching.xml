@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd">
+<document>
+  <header>
+    <title>Searching Forrest-built documentation</title>
+  </header>
+  <body>
+    <p>
+      Forrest provides you with two distinct options for making your
+      documentation available through full-text search:
+    </p>
+    <ul>
+      <li>Google SiteSearch,</li>
+      <li>Built-in search using Apache Lucene.</li>
+    </ul>
+    <p>
+      Both options have their advantages and disadvantages. The purpose of this
+      document is to outline them, and to help you make a choice. This document
+      also tells you how to disable full-text search completely, if you so
+      choose.
+    </p>
+    <section>
+      <title>Google SiteSearch</title>
+      <p>
+        Forrest provides a simple interface to the Google search engine. It
+        invokes Google Advanced Search and limits the search scope to the domain
+        of your choice. Since the actual search functionality is implemented on
+        Google's end, you do not need any additional capability on your Forrest
+        server (which may well be a simple static web server serving content
+        generated with <code>forrest site</code>).
+      </p>
+      <p>
+        To use Google SiteSearch in your Forrest application, open your
+        <code>skinconf.xml</code> file. By default this file is in the
+        <code>src/documentation</code> subdirectory of your Forrest repository
+        root. Find the <code>&lt;search&gt;</code> element; it should be near
+        the top of the file. If the element does not exist, create it below the
+        <code>&lt;skinconfig&gt;</code> opening tag. If there is any attribute
+        named <code>provider</code>, remove it. The element should look similar
+        to this:
+      </p>
+      <source>
+<![CDATA[<search name="MyProject"
+	domain="myproject.com"/>]]>
+      </source>
+      <p>
+        Then, build your Forrest documentation and open it using your favorite
+        web browser. You are now invited to peruse the search box (most skins
+        render this in the top-right corner). Google's search results will be
+        displayed in a new browser window.
+      </p>
+      <p>
+        Needless to say, for this to work your content must be accessible to
+        Google's indexing robot. It can't be stored on a server which is only
+        locally accessible, or which requires authentication. In addition, the
+        content index is created and updated at a time of Google's choosing.
+        However, the search is fast and search precision is usually excellent.
+        So if your Forrest content is placed on a busy, popular public web
+        server, Google search is probably the best choice.
+      </p>
+    </section>
+    <section>
+      <title>Lucene search</title>
+      <p>
+        Lucene is a high-performance, full-text search engine built entirely in
+        Java. To use Lucene-based search with your Forrest documentation, you
+        will need to run Forrest in a Java servlet environment (such as Tomcat
+        or Jetty). Lucene-based searching will not work in a static site
+        generated with the '<code>forrest site</code>' command.
+      </p>
+      <p>
+        In order to enable Lucene-based full-text search in your Forrest
+        application, you must first edit your <code>skinconf.xml</code> file.
+        Locate the <code>&lt;search&gt;</code> element. If the element does not
+        exist, insert it right underneath the <code>&lt;skinconfig&gt;</code>
+        opening tag. Add an attribute named <code>provider</code> with a value
+        of <code>lucene</code>, so that the element looks similar to this:
+      </p>
+      <source>
+<![CDATA[<search name="MyProject" domain="myproject.com"
+	provider="lucene"/>]]>
+      </source>
+      <p>
+        Next, create and run your Forrest webapp. This may mean simply invoking
+        <code>forrest run</code>, or building and bundling a servlet webapp
+        (with <code>forrest webapp</code>), and then deploying it to your
+        servlet container.
+      </p>
+      <p>
+        You can now build a Lucene search index by pointing your web browser at
+        <code>http://localhost:8888/lucene-update.html</code>. This generates
+        the search index and provides some information about the index
+        generation process.
+      </p>
+      <note>
+        You may have to substitute a different hostname, port, or path,
+        depending on your configuration. The path mentioned here reflects
+        Forrest's default settings when invoked as <code>forrest run</code>.
+      </note>
+      <p>
+        Now you can utilize the full-text search box, located in the top-right
+        corner of the rendered Forrest pages. Search results will be displayed
+        in the same browser window and will look remarkably similar to the rest
+        of your Forrest documents.
+      </p>
+      <p>
+        Unlike with Google SiteSearch, the indexing information retrieved by
+        Lucene is stored on your own server, access to which you may limit to
+        users in your own organization. Likewise, you may update or recreate the
+        Lucene index at any time and at your own discretion. So if you aren't
+        making your Forrest-built documentation publicly available, and you're
+        able to run Forrest on a Java-enabled web server, Lucene search is
+        probably right for you.
+      </p>
+    </section>
+    <section>
+      <title>Disabling full-text search</title>
+      <p>
+        If you are convinced your users don't need any full-text search
+        capability whatsoever, you may disallow displaying the search box
+        entirely. You may also wish to do so if you're keeping Forrest-built
+        content on a restricted server (meaning you can't use Google), while at
+        the same time not having any usable servlet-capable web server at your
+        disposal (meaning you can't use Lucene, either).
+      </p>
+      <p>
+        To disable full-text search completely, open the
+        <code>skinconf.xml</code> file and remove (or comment out) the entire
+        <code>&lt;search&gt;</code> element.
+      </p>
+    </section>
+  </body>
+</document>

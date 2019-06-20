@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one
+   or more contributor license agreements.  See the NOTICE file
+   distributed with this work for additional information
+   regarding copyright ownership.  The ASF licenses this file
+   to you under the Apache License, Version 2.0 (the
+   "License"); you may not use this file except in compliance
+   with the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.    
+-->
+<html>
+<head>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+	<script type="text/javascript">var xookiConfig = {level: 1};</script>	
+	
+
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>dependency | Ivy 2.0.0 Documentation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="../style/style.css" />
+  <script src="../js/jquery.pack.js" type="text/javascript"></script>
+  <script src="../js/jquery.treeview.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){$("#treemenu").Treeview({speed: "fast",store: true});});
+  </script>
+
+<script language="javascript" type="text/javascript">xooki = {u: function(url) {return "../xooki/"+url;}};</script>
+</head>
+<body>
+
+<div id="body">
+<table id="header" summary="Navigation elements." border="0"
+	cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td id="home" width="30%"><a href="http://ant.apache.org/"
+			title="Apache Ant"><img src="../images/ant-group-logo.gif" alt="Apache Ant"
+			border="0" /></a></td>
+
+		<td class="product" width="70%" align="right" valign="middle"><img
+			src="../images/logo.png" alt="ivy" border="0" /></td>
+	</tr>
+</table>
+
+<table id="top-menu" summary="Navigation elements." border="0"
+	cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td>
+
+		<div id="navcontainer">
+		<a href="http://ant.apache.org/">Apache Ant</a> &gt; <a href="http://ant.apache.org/ivy/">Ivy</a> &gt; <span class="breadCrumb"><a href="../index.html" >Documentation</a> &gt; <a href="../reference.html" >Reference</a> &gt; <a href="../ivyfile.html" >Ivy Files</a> &gt; <a href="../ivyfile/dependencies.html" >dependencies</a> &gt; <a href="../ivyfile/dependency.html" class="current">dependency</a></span>
+		</div>
+		</td>
+	</tr>
+
+</table>
+
+<table id="content" border="0" cellpadding="0" cellspacing="0"
+	width="100%">
+	<tr>
+		<td id="sidebar-left">
+		<div class="block block-book" id="block-book-0">
+		<h2>Ivy</h2>
+
+		<div class="content"><ul id="treemenu" class="treeview"><li id="xooki-index" class="submenu"><a href="../index.html" >Documentation</a><ul class="open"><li id="xooki-release-notes"><a href="../release-notes.html" >Release Notes</a></li><li id="xooki-tutorial" class="submenu"><a href="../tutorial.html" >Tutorials</a><ul class="closed"><li id="xooki-tutorial/start"><a href="../tutorial/start.html" >Quick Start</a></li><li id="xooki-tutorial/defaultconf"><a href="../tutorial/defaultconf.html" >Adjusting default settings</a></li><li id="xooki-tutorial/multiple"><a href="../tutorial/multiple.html" >Multiple Resolvers</a></li><li id="xooki-tutorial/dual"><a href="../tutorial/dual.html" >Dual Resolver</a></li><li id="xooki-tutorial/dependence"><a href="../tutorial/dependence.html" >Project dependencies</a></li><li id="xooki-tutorial/multiproject"><a href="../tutorial/multiproject.html" >Using Ivy in multiple projects environment</a></li><li id="xooki-tutorial/conf"><a href="../tutorial/conf.html" >Using Ivy Module Configurations</a></li><li id="xooki-tutorial/build-repository" class="submenu"><a href="../tutorial/build-repository.html" >Building a repository</a><ul class="closed"><li id="xooki-tutorial/build-repository/basic"><a href="../tutorial/build-repository/basic.html" >Basic repository copy</a></li><li id="xooki-tutorial/build-repository/advanced"><a href="../tutorial/build-repository/advanced.html" >Using namespaces</a></li></ul></li><li id="xooki-moreexamples"><a href="../moreexamples.html" >More examples</a></li></ul></li><li id="xooki-reference" class="submenu"><a href="../reference.html" >Reference</a><ul class="open"><li id="xooki-intro" class="submenu">Introduction<ul class="closed"><li id="xooki-terminology"><a href="../terminology.html" >Terminology</a></li><li id="xooki-concept"><a href="../concept.html" >Main Concepts</a></li><li id="xooki-textual"><a href="../textual.html" >Text Conventions</a></li><li id="xooki-principle"><a href="../principle.html" >How does it work ?</a></li><li id="xooki-bestpractices"><a href="../bestpractices.html" >Best practices</a></li><li id="xooki-install"><a href="../install.html" >Installation</a></li></ul></li><li id="xooki-settings" class="submenu"><a href="../settings.html" >Settings Files</a><ul class="closed"><li id="xooki-settings/property"><a href="../settings/property.html" >property</a></li><li id="xooki-settings/properties"><a href="../settings/properties.html" >properties</a></li><li id="xooki-settings/settings"><a href="../settings/settings.html" >settings</a></li><li id="xooki-settings/include"><a href="../settings/include.html" >include</a></li><li id="xooki-settings/classpath"><a href="../settings/classpath.html" >classpath</a></li><li id="xooki-settings/typedef"><a href="../settings/typedef.html" >typedef</a></li><li id="xooki-settings/credentials"><a href="../settings/credentials.html" >credentials</a></li><li id="xooki-settings/lock-strategies"><a href="../settings/lock-strategies.html" >lock-strategies</a></li><li id="xooki-settings/caches" class="submenu"><a href="../settings/caches.html" >caches</a><ul class="closed"><li id="xooki-settings/caches/cache" class="submenu"><a href="../settings/caches/cache.html" >cache</a><ul class="closed"><li id="xooki-settings/caches/ttl"><a href="../settings/caches/ttl.html" >ttl</a></li></ul></li></ul></li><li id="xooki-settings/latest-strategies"><a href="../settings/latest-strategies.html" >latest-strategies</a></li><li id="xooki-settings/parsers"><a href="../settings/parsers.html" >parsers</a></li><li id="xooki-settings/namespaces" class="submenu"><a href="../settings/namespaces.html" >namespaces</a><ul class="closed"><li id="xooki-settings/namespace" class="submenu"><a href="../settings/namespace.html" >namespace</a><ul class="closed"><li id="xooki-settings/namespace/rule" class="submenu"><a href="../settings/namespace/rule.html" >rule</a><ul class="closed"><li id="xooki-settings/namespace/fromtosystem" class="submenu"><a href="../settings/namespace/fromtosystem.html" >fromsystem / tosystem</a><ul class="closed"><li id="xooki-settings/namespace/src"><a href="../settings/namespace/src.html" >src</a></li><li id="xooki-settings/namespace/dest"><a href="../settings/namespace/dest.html" >dest</a></li></ul></li></ul></li></ul></li></ul></li><li id="xooki-settings/macrodef" class="submenu"><a href="../settings/macrodef.html" >macrodef</a><ul class="closed"><li id="xooki-settings/macrodef/attribute"><a href="../settings/macrodef/attribute.html" >attribute</a></li></ul></li><li id="xooki-settings/resolvers" class="submenu"><a href="../settings/resolvers.html" >resolvers</a><ul class="closed"><li id="xooki-resolver/ivyrep"><a href="../resolver/ivyrep.html" >IvyRep Resolver</a></li><li id="xooki-resolver/ibiblio"><a href="../resolver/ibiblio.html" >IBiblio Resolver</a></li><li id="xooki-resolver/packager"><a href="../resolver/packager.html" >Packager resolver</a></li><li id="xooki-resolver/filesystem"><a href="../resolver/filesystem.html" >File System resolver</a></li><li id="xooki-resolver/url"><a href="../resolver/url.html" >Url Resolver</a></li><li id="xooki-resolver/chain"><a href="../resolver/chain.html" >Chain Resolver</a></li><li id="xooki-resolver/dual"><a href="../resolver/dual.html" >Dual resolver</a></li><li id="xooki-resolver/sftp"><a href="../resolver/sftp.html" >sftp resolver</a></li><li id="xooki-resolver/ssh"><a href="../resolver/ssh.html" >ssh resolver</a></li><li id="xooki-resolver/vfs"><a href="../resolver/vfs.html" >vfs</a></li></ul></li><li id="xooki-settings/conflict-managers"><a href="../settings/conflict-managers.html" >conflict-managers</a></li><li id="xooki-settings/modules" class="submenu"><a href="../settings/modules.html" >modules</a><ul class="closed"><li id="xooki-settings/module"><a href="../settings/module.html" >module</a></li></ul></li><li id="xooki-settings/outputters"><a href="../settings/outputters.html" >outputters</a></li><li id="xooki-settings/statuses" class="submenu"><a href="../settings/statuses.html" >statuses</a><ul class="closed"><li id="xooki-settings/status"><a href="../settings/status.html" >status</a></li></ul></li><li id="xooki-settings/triggers"><a href="../settings/triggers.html" >triggers</a></li><li id="xooki-settings/version-matchers"><a href="../settings/version-matchers.html" >version-matchers</a></li></ul></li><li id="xooki-ivyfile" class="submenu"><a href="../ivyfile.html" >Ivy Files</a><ul class="open"><li id="xooki-ivyfile/info" class="submenu"><a href="../ivyfile/info.html" >info</a><ul class="closed"><li id="xooki-ivyfile/license"><a href="../ivyfile/license.html" >license</a></li><li id="xooki-ivyfile/ivyauthor"><a href="../ivyfile/ivyauthor.html" >ivyauthor</a></li><li id="xooki-ivyfile/repository"><a href="../ivyfile/repository.html" >repository</a></li><li id="xooki-ivyfile/description"><a href="../ivyfile/description.html" >description</a></li></ul></li><li id="xooki-ivyfile/configurations" class="submenu"><a href="../ivyfile/configurations.html" >configurations</a><ul class="closed"><li id="xooki-ivyfile/conf"><a href="../ivyfile/conf.html" >conf</a></li><li id="xooki-ivyfile/include"><a href="../ivyfile/include.html" >include</a></li></ul></li><li id="xooki-ivyfile/publications" class="submenu"><a href="../ivyfile/publications.html" >publications</a><ul class="closed"><li id="xooki-ivyfile/artifact" class="submenu"><a href="../ivyfile/artifact.html" >artifact</a><ul class="closed"><li id="xooki-ivyfile/artifact-conf"><a href="../ivyfile/artifact-conf.html" >conf</a></li></ul></li></ul></li><li id="xooki-ivyfile/dependencies" class="submenu"><a href="../ivyfile/dependencies.html" >dependencies</a><ul class="open"><li id="xooki-ivyfile/dependency" class="submenu"><a href="../ivyfile/dependency.html" class="current">dependency</a><ul class="open"><li id="xooki-ivyfile/dependency-conf" class="submenu"><a href="../ivyfile/dependency-conf.html" >conf</a><ul class="closed"><li id="xooki-ivyfile/mapped"><a href="../ivyfile/mapped.html" >mapped</a></li></ul></li><li id="xooki-ivyfile/dependency-artifact" class="submenu"><a href="../ivyfile/dependency-artifact.html" >artifact</a><ul class="closed"><li id="xooki-ivyfile/dependency-artifact-conf"><a href="../ivyfile/dependency-artifact-conf.html" >conf</a></li></ul></li><li id="xooki-ivyfile/artifact-exclude" class="submenu"><a href="../ivyfile/artifact-exclude.html" >exclude</a><ul class="closed"><li id="xooki-ivyfile/artifact-exclude-conf"><a href="../ivyfile/artifact-exclude-conf.html" >conf</a></li></ul></li><li id="xooki-ivyfile/dependency-include" class="submenu"><a href="../ivyfile/dependency-include.html" >include</a><ul class="closed"><li id="xooki-ivyfile/dependency-include-conf"><a href="../ivyfile/dependency-include-conf.html" >conf</a></li></ul></li></ul></li><li id="xooki-ivyfile/exclude"><a href="../ivyfile/exclude.html" >exclude</a></li><li id="xooki-ivyfile/override"><a href="../ivyfile/override.html" >override</a></li><li id="xooki-ivyfile/conflict"><a href="../ivyfile/conflict.html" >conflict</a></li></ul></li><li id="xooki-ivyfile/conflicts" class="submenu"><a href="../ivyfile/conflicts.html" >conflicts</a><ul class="closed"><li id="xooki-ivyfile/manager"><a href="../ivyfile/manager.html" >manager</a></li></ul></li></ul></li><li id="xooki-ant" class="submenu"><a href="../ant.html" >Ant Tasks</a><ul class="closed"><li id="xooki-use/artifactproperty"><a href="../use/artifactproperty.html" >artifactproperty</a></li><li id="xooki-use/artifactreport"><a href="../use/artifactreport.html" >artifactreport</a></li><li id="xooki-use/buildlist"><a href="../use/buildlist.html" >buildlist</a></li><li id="xooki-use/buildnumber"><a href="../use/buildnumber.html" >buildnumber</a></li><li id="xooki-use/cachefileset"><a href="../use/cachefileset.html" >cachefileset</a></li><li id="xooki-use/cachepath"><a href="../use/cachepath.html" >cachepath</a></li><li id="xooki-use/cleancache"><a href="../use/cleancache.html" >cleancache</a></li><li id="xooki-use/configure"><a href="../use/configure.html" >configure</a></li><li id="xooki-use/deliver"><a href="../use/deliver.html" >deliver</a></li><li id="xooki-use/findrevision"><a href="../use/findrevision.html" >findrevision</a></li><li id="xooki-use/info"><a href="../use/info.html" >info</a></li><li id="xooki-use/install"><a href="../use/install.html" >install</a></li><li id="xooki-use/listmodules"><a href="../use/listmodules.html" >listmodules</a></li><li id="xooki-use/makepom"><a href="../use/makepom.html" >makepom</a></li><li id="xooki-use/postresolvetask"><a href="../use/postresolvetask.html" >post resolve tasks</a></li><li id="xooki-use/publish"><a href="../use/publish.html" >publish</a></li><li id="xooki-use/repreport"><a href="../use/repreport.html" >repreport</a></li><li id="xooki-use/resolve"><a href="../use/resolve.html" >resolve</a></li><li id="xooki-use/retrieve"><a href="../use/retrieve.html" >retrieve</a></li><li id="xooki-use/report" class="submenu"><a href="../use/report.html" >report</a><ul class="closed"><li id="xooki-yed"><a href="../yed.html" >Using yEd to layout report graphs</a></li></ul></li><li id="xooki-use/settings"><a href="../use/settings.html" >settings</a></li><li id="xooki-use/var"><a href="../use/var.html" >var</a></li></ul></li><li id="xooki-standalone"><a href="../standalone.html" >Using standalone</a></li></ul></li><li id="xooki-dev" class="submenu"><a href="../dev.html" >Developer doc</a><ul class="closed"><li id="xooki-extend"><a href="../extend.html" >Extending Ivy</a></li><li id="xooki-dev/makerelease"><a href="../dev/makerelease.html" >Making a release</a></li><li id="xooki-dev/updatesite"><a href="../dev/updatesite.html" >Updating the updatesite</a></li></ul></li></ul></li></ul></div>
+
+		</div>
+
+		</td>
+		
+		<td valign="top">
+		<div id="main">
+
+		<h1 class="title">dependency</h1>
+            <br class="xooki-br"/><b>Tag:</b> dependency <b>Parent:</b> <a href="dependencies.html">dependencies</a><br class="xooki-br"/><br class="xooki-br"/>Declares a dependency for this module. A dependency is described by the module on which the current module depends (identified by its name, organisation and revision), and a mapping of configurations.<br class="xooki-br"/><br class="xooki-br"/><h2><a name="revision">Fixed and dynamic revisions</a></h2>
+The revision can be given as a fixed one (1.5.2, for instance) or as a latest (or dynamic) one. Several possibilities for dynamic revisions are implemented in Ivy:
+<ul>
+<li>latest.integration</li> selects the latest revision of the dependency module.
+<li>latest.[any status]</li> selects the latest revision of the dependency module with at least the specified status. <span class="since">since 1.4</span>
+For instance latest.milestone will select the latest version being either a milestone or a release, and latest.release will only selects the latest release. Note that in order to find the latest revision with the appropriate status Ivy has to parse all the ivy files in your repository from the last one until it finds such a revision. Hence don't be surprised if the resolution slow down.<br class="xooki-br"/>See also <a href="../settings/statuses.html">statuses</a> to see how to configure module statuses.
+<li>end the revision with a +</li> selects the latest sub-revision of the dependency module. For instance, <br class="xooki-br"/>if the dependency module exists in revision 1.0.3, 1.0.7 and 1.1.2, "1.0.+" will select 1.0.7.
+<li>version ranges</li> mathematical notation for ranges can be used to match a range of version. <span class="since">since 1.4</span>  
+Examples:<br class="xooki-br"/>[1.0,2.0] matches all versions greater or equal to 1.0 and lower or equal to 2.0<br class="xooki-br"/>[1.0,2.0[ matches all versions greater or equal to 1.0 and lower than 2.0<br class="xooki-br"/>]1.0,2.0] matches all versions greater than 1.0 and lower or equal to 2.0<br class="xooki-br"/>]1.0,2.0[ matches all versions greater than 1.0 and lower than 2.0<br class="xooki-br"/>[1.0,) matches all versions greater or equal to 1.0<br class="xooki-br"/>]1.0,) matches all versions greater than 1.0<br class="xooki-br"/>(,2.0] matches all versions lower or equal to 2.0<br class="xooki-br"/>(,2.0[ matches all versions lower than 2.0 
+</ul>
+<span class="since">since 1.4</span> If you don't find a way to expression your dependency version constraint among these, you can <a href="../settings/version-matchers.html">plug your own</a>.<br class="xooki-br"/>The way to determine which revision is the "latest" between two is configurable through the use of pluggable LatestStrategy. See <a href="../reference.html">ivy main concepts</a> for details about this.<br class="xooki-br"/><br class="xooki-br"/><h2><a name="revision-constraint">Revision constraint</a></h2>
+<span class="since">since 2.0</span> The dependency tag supports two revision attributes: rev, corresponding to the default required dependency revision, and revConstraint, corresponding to a dynamic revision constraint applied on this dependency. <br class="xooki-br"/><br class="xooki-br"/>Depending on the <a href="../use/resolve.html">resolve mode</a> used, the actual revision used during dependency resolution may vary. These revisions usually differ only for modules published in a repository. When <a href="../use/deliver.html">deliver</a> is used, dynamic version constraints are replaced by a stic version constraint, to help build reproducibility. However, the information of the original version constraint is not lost, but rather put in the revConstraint attribute. This both ensure better metadata in the repository while still allowing easier build reproducibility. <br class="xooki-br"/><br class="xooki-br"/><h2>Configurations mapping</h2>
+This mapping indicates which configurations of the dependency are required in which configurations of the current module, also called master configurations.<br class="xooki-br"/><br class="xooki-br"/>There are several ways to declare this mapping of configurations, choose depending more on preference than on possibilities. Try to avoid mixing usage in a single dependency element: do not use both nested and inline mapping declaration.<br class="xooki-br"/><br class="xooki-br"/>The first way to declare this mapping is called the inline mapping. It is maybe the less natural at first, but it's powerful and concise. Inline mapping can take several forms.<br class="xooki-br"/>
+<ul>
+<li>Specify one configuration name</li> This means that in this master configuration the same dependency configuration is needed (except if a defaultconfmapping has been specified in this ivy file, see <a href="../ivyfile/configurations.html">configurations</a> for details, or table below for examples).<br class="xooki-br"/>For instance, if the current module has defined a configuration named 'runtime', and the dependency too, then having an inline mapping configuration set to 'runtime' means that in the runtime master configuration the runtime dependency configuration is required.<br class="xooki-br"/><br class="xooki-br"/><a name="defaultconfmapping"/>More examples:<br class="xooki-br"/>The table below indicates how ivy interpret the conf attribute according to how <a href="../ivyfile/configurations.html">defaultconfmapping</a> is set:<table class="ivy-attributes"><thead><tr><th>defaultconfmapping</th><th>conf</th><th>ivy interpretation</th></tr>
+</thead>
+<tbody>
+<tr><td></td><td></td><td><pre>*-&gt;*</pre></td></tr>
+<tr><td></td><td>runtime</td><td><pre>runtime-&gt;runtime</pre></td></tr>
+<tr><td></td><td>test</td><td><pre>test-&gt;test</pre></td></tr>
+<tr><td><pre>runtime-&gt;*;test-&gt;default</pre></td><td></td><td><pre>runtime-&gt;*;test-&gt;default</pre></td></tr>
+<tr><td><pre>runtime-&gt;*;test-&gt;default</pre></td><td>runtime</td><td><pre>runtime-&gt;*</pre></td></tr>
+<tr><td><pre>runtime-&gt;*;test-&gt;default</pre></td><td>test</td><td><pre>test-&gt;default</pre></td></tr>
+</tbody>
+</table>
+<br/>
+<li>Specify a configuration mapping using the '->' operator separating a comma separated list of master configurations (left operand) of a comma separated list of dependency configurations (right operand).</li>
+A good way to remember which side is for the master configuration (i.e. the configuration of the module defining the dependency) and which side is for the dependency configuration is to read the '->' as 'depends on'.<br class="xooki-br"/><br class="xooki-br"/>In this case, all specified dependency configurations are required in all specified master configurations.<br class="xooki-br"/>For instance, 'A, B, C -> E, F' means that dependency configurations E & F are required in master configurations A, B and C.<br class="xooki-br"/><br class="xooki-br"/>Note that you can use the wildcard '*' as a configuration name, meaning that all configurations (either master or dependency public ones depending on the side) are wanted. For instance, '* -> B, C' means that B & C dependency configurations are required in all master configurations.<br class="xooki-br"/><br class="xooki-br"/><span class="since">since 1.4</span> you can use * wildcard followed by negated configurations to mean all but xxx. For instance, '*, !A, !B -> X' means that X dependency configuration is required in all master configurations except A and B.<br class="xooki-br"/><br class="xooki-br"/><span class="since">since 1.2</span> '@' also has a special meaning as a right operand of the dependency mapping, it means map to self. This is particularly useful with '*', '*->@' meaning that all configurations of the module maps to their equivalent (same name) in the dependency.<br class="xooki-br"/><br class="xooki-br"/><span class="since">since 1.4</span> '#' can be used as right side operand to mean 'this' configuration, and thus refers to the configuration being resolved. It is slightly similar to @, except that it takes into account the configuration being actually resolved in case of a configuration extending another one.<br class="xooki-br"/><br class="xooki-br"/>Example:<br class="xooki-br"/>Let's foo be a module with two configurations, A and B, B extending A.<br class="xooki-br"/>Then a dependency declaring conf A-># will get A dep conf in its confs A (when resolving A, ivy will find interpret the # symbol as A) and B dep conf in its conf B (when resolving B, ivy will interpret the # symbol as B, even if this dependency is only required because of the A dependency).<br class="xooki-br"/><br class="xooki-br"/>If you don't understand really how this works, do not use it :-)<br class="xooki-br"/><br class="xooki-br"/><span class="since">since 1.4</span> '%' can be used as left side operand to mean 'all the other configurations'. This can be usefull when you only have a specific mapping for some configurations and a default mapping for all the others.<br class="xooki-br"/><br class="xooki-br"/>Example:
+<pre>test-&gt;runtime;%-&gt;default</pre> means that the <pre>test</pre> configuration is mapped to the <pre>runtime</pre> configuration, but all the other configurations are mapped to the <pre>default</pre> configuration.<br class="xooki-br"/><br class="xooki-br"/><span class="since">since 1.3</span> a fallback mechanism can be used when you are not sure that the dependency will have the required conf. You can indicate to ivy that you want one configuration, but if it isn't present, use another one. <br class="xooki-br"/>The syntax for specifying this adds the fallback conf between parenthesis right after the required conf. <br class="xooki-br"/>For instance, <pre>test-&gt;runtime(default)</pre> means that in the test configuration of the module the <pre>runtime</pre> conf of the dependency is required, but if doesn't exist, it will use the <pre>default</pre> conf instead. If <pre>default</pre> conf doesn't exist then it will be considered as an error. Note that the <pre>*</pre> wildcard can be used as fallback conf.<br class="xooki-br"/><br class="xooki-br"/><span class="since">since 1.4</span> you can add simple conditions in the dependency mapping. This is done by adding a condition between '[' and ']'. If the condition evaluates to <pre>true</pre>, the mapping is performed. If the condition evaluates to <pre>false</pre>, the mapping will be ignored. For instance, <pre>test-&gt;[org=A]runtime,[org=B]default</pre> means that the <pre>test</pre> configuration will be mapped to the <pre>runtime</pre> conf for the dependencies of organisation 'A' and to the <pre>default</pre> conf for dependencies of organisation 'B'.<br class="xooki-br"/>
+<li>Specify a semi-column separated list of any of the previous specs.</li> In this case, it is the union of the mapping which is kept. For instance, 'A -> B; * -> C' means that B conf is needed in A conf and C conf is need in all master conf... so both B & C dep conf are required in A master conf
+</ul>
+
+If you prefer more verbose mapping declaration, everything is also possible with sub elements mapping declaration. <br class="xooki-br"/><br class="xooki-br"/><h2>Artifact restriction</h2>
+Moreover, the dependency element also supports an artifact restriction feature (since 0.6).<br class="xooki-br"/>See <a href="#dependency-artifact">dependency artifact restriction</a> for details.<br class="xooki-br"/><br class="xooki-br"/><h2>Forcing revision</h2>
+Finally, the dependency element also supports an a force attribute (since 0.8), which gives an indication<br class="xooki-br"/>to conflicts manager to force the revision of a dependency to the one given here.<br class="xooki-br"/>See <a href="../ivyfile/conflicts.html">conflicts manager</a> for details. <br class="xooki-br"/><br class="xooki-br"/><span class="since">since 1.4</span> this tag supports <a href="../concept.html#extra">extra attributes</a><br class="xooki-br"/><h1>Attributes</h1>
+<table class="ivy-attributes">
+<thead>
+    <tr><th class="ivy-att">Attribute</th><th class="ivy-att-desc">Description</th><th class="ivy-att-req">Required</th></tr>
+</thead>
+<tbody>
+    <tr><td>org</td><td>the name of the organisation of the dependency.</td>
+        <td>No, defaults to the master module organisation</td></tr>
+    <tr><td>name</td><td>the module name of the dependency</td>
+        <td>Yes</td></tr>
+    <tr><td>branch</td><td>the branch of the dependency. <span class="since">since 1.4</span></td>
+        <td>No, defaults to the default branch setting for the dependency.</td></tr>
+    <tr><td>rev</td><td>the revision of the dependency. See <a href="#revision">above</a> for details.</td>
+        <td>Yes</td></tr>
+    <tr><td>revConstraint</td><td>the dynamic revision constraint originally used for this dependency. See <a href="#revision-constraint">above</a> for details.</td>
+        <td>No, defaults to the value of rev</td></tr>
+    <tr><td>force</td><td>a boolean to give an indication to conflict manager that this dependency <br class="xooki-br"/>     should be forced to this revision (see <a href="../ivyfile/conflicts.html">conflicts manager</a>)</td>
+        <td>No, defaults to false</td></tr>
+    <tr><td>conf</td><td>an inline mapping configuration spec (see above for details)</td>
+        <td>No, defaults to defaultconf attribute of dependencies element if neither conf attribute nor conf children element is given</td></tr>
+    <tr><td>transitive</td><td>true to resolve this dependency transitively, false otherwise (<span class="since">since 1.2</span>)</td>
+        <td>No, defaults to true</td></tr>
+    <tr><td>changing</td><td>true if the dependency artifacts may change without revision change, false otherwise (<span class="since">since 1.2</span>). See <a href="../concept.html#change">cache and change management</a> for details.</td>
+        <td>No, defaults to false</td></tr>
+</tbody>
+</table>
+<h1>Child elements</h1>
+<table class="ivy-children">
+<thead>
+    <tr><th class="ivy-chld">Element</th><th class="ivy-chld-desc">Description</th><th class="ivy-chld-card">Cardinality</th></tr>
+</thead>
+<tbody>
+    <tr><td><a href="../ivyfile/dependency-conf.html">conf</a></td><td>defines configuration mapping has sub element</td>
+        <td>0..n</td></tr>
+    <tr><td><a href="../ivyfile/dependency-artifact.html">artifact / include</a></td><td>defines artifacts inclusion - use only if you do not control dependency ivy file</td>
+        <td>0..n</td></tr>
+    <tr><td><a href="../ivyfile/artifact-exclude.html">exclude</a></td><td>defines artifacts exclusion - use only if you do not control dependency ivy file</td>
+        <td>0..n</td></tr>
+</tbody>
+</table>
+
+<h1>Examples</h1>
+<pre>
+&lt;dependency org="jayasoft" name="swtbinding" revision="0.2"/&gt;
+</pre>
+Declares a dependency on the module swtbinding from jayasoft in its revision 0.2. All the configuration of this dependency will be included in all configurations of the module in which the dependency is declared.<br class="xooki-br"/><hr/>
+<pre>
+&lt;dependency org="jayasoft" name="swtbinding" branch="fix-103" revision="latest.integration"/&gt;
+</pre>
+Same as above except that it will take the latest revision on the branch 'fix-103' instead of revision '0.2'.<br class="xooki-br"/><hr/>
+<pre>
+&lt;dependency name="mymodule" revision="latest.integration" conf="test-&gt;default"/&gt;
+</pre>
+Declares a dependency on the module <pre>mymodule</pre> from the same organisation as the module in which the dependency is declared. The latest available revision of this dependency will be used. This dependency will only be included in the test configuration of the module, and it's only the default configuration of the dependency which will be included.<br class="xooki-br"/><hr/>
+<pre>
+&lt;dependency org="apache" name="commons-lang" revision="2.0" force="true" conf="default"/&gt;
+</pre>
+Declares a dependency on the module <pre>commons-lang</pre> from apache, in revision 2.0. The revision 2.0 will be used even if another dependency declares itself a dependency on another version of commons-lang. Moreover, if no defaultconfmapping is defined, only the <pre>default</pre> conf of commons-lang will be used in the <pre>default</pre> conf of the master module. If <pre>*-&gt;runtime</pre> was declared as defaultconfmapping, then the runtime conf of commons-lang would be included in the default conf of the master module. Note that whatever the defaultconfmapping is, the dependency only be included in the default conf of the master module. The defaultconfmapping only changes the required dependency confs.<br class="xooki-br"/><hr/>
+<pre>
+&lt;dependency org="foo" name="bar" revision="3.0" transitive="false" conf="default-&gt;@;runtime,test-&gt;runtime"/&gt;
+</pre>
+Declares a dependency on the module <pre>bar</pre> from foo, in revision 3.0. The dependencies of bar will themselves not be included due to the setting of transitive. The default dependency conf will be included in the default master conf, and the runtime dependency conf will be included in both the runtime and test master conf.<br class="xooki-br"/><hr/>
+<pre>
+&lt;dependency org="foo" name="bar" revision="3.0" changing="true" conf="compile-&gt;runtime(default)"/&gt;
+</pre>
+Declares a dependency on the module <pre>bar</pre> from foo, in revision 3.0. This revision is considered to be able to change (<pre>changing="true"</pre>), so even if it is already in ivy cache, Ivy will check if a revision is a more recent last modified date is available on the repository. The runtime conf of bar is required in the compile conf of the master module, but if bar doesn't define a runtime conf, then the <pre>default</pre> conf will be used.<br class="xooki-br"/>	
+ 		</div><!-- main -->
+		</td>
+	</tr>
+</table>
+
+<table id="footer-menu" summary="Navigation elements." border="0"
+	cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td align="center" valign="middle">
+		<div class="primary-links">:: 
+			<a href="../index.html">Home</a> ::
+			<a href="../reference.html">Reference</a> ::
+			<a href="../tutorial.html">Tutorials</a> ::
+			<a href="../dev.html">Developer's doc</a> ::
+		</div>
+		</td>
+	</tr>
+</table>
+
+
+
+<div id="footer-message"></div>
+
+
+</div><!-- body -->
+</body>
+</html>

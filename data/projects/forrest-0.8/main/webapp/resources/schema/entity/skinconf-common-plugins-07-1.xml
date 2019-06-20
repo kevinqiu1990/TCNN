@@ -1,0 +1,101 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!--
+This is the minimal common skinconf for plugins documentation.
+This file is included into plugins/*/src/documentation/skinconf.xml
+
+See the full configuration elements and the usage instructions
+in a 'forrest seed-sample" site.
+-->
+<disable-print-link>true</disable-print-link>
+<disable-pdf-link>true</disable-pdf-link>
+<disable-pod-link>true</disable-pod-link>
+<disable-txt-link>true</disable-txt-link>
+<disable-xml-link>true</disable-xml-link>
+<disable-external-link-image>true</disable-external-link-image>
+<disable-compliance-links>false</disable-compliance-links>
+<obfuscate-mail-links>true</obfuscate-mail-links>
+<obfuscate-mail-value>.at.</obfuscate-mail-value>
+<disable-font-script>false</disable-font-script>
+<project-logo>images/project.png</project-logo>
+<group-name>Apache Forrest</group-name>
+<group-description>Apache Forrest</group-description>
+<group-url>http://forrest.apache.org/</group-url>
+<group-logo>images/project-logo.gif</group-logo>
+<favicon-url>favicon.ico</favicon-url>
+<year inception="true">2004</year>
+<vendor>The Apache Software Foundation.</vendor>
+<copyright-link>http://www.apache.org/licenses/</copyright-link>
+<trail>
+  <link1 name="Apache Forrest" href="http://forrest.apache.org/"/>
+  <link2 name="Plugins" href="http://forrest.apache.org/pluginDocs/"/>
+  <link3 name="" href=""/>
+</trail>
+<toc max-depth="2" min-sections="1" location="page"/>
+<headings type="underlined"/>
+<extra-css>
+    #footer a { color: #0F3660; }
+    #footer a:visited { color: #009999; }
+  </extra-css>
+<colors>
+<!-- Forrest -->
+  <color name="header" value="#294563"/>
+  <color name="tab-selected" value="#4a6d8c" link="#0F3660" vlink="#0F3660" hlink="#000066"/>
+  <color name="tab-unselected" value="#b5c7e7" link="#0F3660" vlink="#0F3660" hlink="#000066"/>
+  <color name="subtab-selected" value="#4a6d8c" link="#0F3660" vlink="#0F3660" hlink="#000066"/>
+  <color name="subtab-unselected" value="#4a6d8c" link="#0F3660" vlink="#0F3660" hlink="#000066"/>
+  <color name="heading" value="#294563"/>
+  <color name="subheading" value="#4a6d8c"/>
+  <color name="published" value="#4C6C8F" font="#FFFFFF"/>
+  <color name="feedback" value="#4C6C8F" font="#FFFFFF" align="center"/>
+  <color name="navstrip" value="#4a6d8c" font="#ffffff" link="#0F3660" vlink="#0F3660" hlink="#000066"/>
+  <color name="toolbox" value="#4a6d8c"/>
+  <color name="border" value="#294563"/>
+  <color name="menu" value="#4a6d8c" font="#cedfef" link="#ffffff" vlink="#ffffff" hlink="#ffcf00"/>
+  <color name="menuheading" value="#cfdced" font="#000000" />
+  <color name="searchbox" value="#4a6d8c" font="#000000"/>
+  <color name="dialog" value="#4a6d8c"/>
+  <color name="body" value="#ffffff" link="#0F3660" vlink="#009999" hlink="#000066"/>
+  <color name="table" value="#7099C5"/>
+  <color name="table-cell" value="#f0f0ff"/>
+  <color name="highlight" value="#ffff00"/>
+  <color name="fixme" value="#cc6600"/>
+  <color name="note" value="#006699"/>
+  <color name="warning" value="#990000"/>
+  <color name="code" value="#CFDCED"/>
+  <color name="footer" value="#cedfef"/>
+</colors>
+<pdf>
+  <page size="a4" orientation="portrait" text-align="left"/>
+  <margins double-sided="false">
+    <top>1cm</top>
+    <bottom>1cm</bottom>
+    <inner>1.25cm</inner>
+    <outer>1.5cm</outer>
+  </margins>
+  <show-external-urls>false</show-external-urls>
+  <disable-copyright-footer>true</disable-copyright-footer>
+</pdf>
+<credits>
+  <credit>
+    <name>Built with Apache Forrest</name>
+    <url>http://forrest.apache.org/</url>
+    <image>images/built-with-forrest-button.png</image>
+    <width>88</width>
+    <height>31</height>
+  </credit>
+</credits>

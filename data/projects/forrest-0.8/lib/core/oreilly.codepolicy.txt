@@ -1,0 +1,103 @@
+http://www.oreilly.com/pub/a/oreilly/ask_tim/2001/codepolicy.html
+
+*O'Reilly Policy on Re-Use of Code Examples from Books*
+
+Bruce Epstein, author of /Director in a Nutshell/ (out of print) and
+Lingo in a Nutshell <http://www.oreilly.com/catalog/lingonut/>, who is
+now working as a part-time editor for O'Reilly (he is editor of Colin
+Moock's recently published ActionScript: The Definitive Guide
+<http://www.oreilly.com/catalog/actscript/>) sent in the following
+question:
+
+"What is our policy with regard to programmers incorporating code
+examples from books into their work? I get asked this all the time."
+
+The short answer is this:
+
+You can use and redistribute example code from our books for any
+non-commercial purpose (and most commercial purposes) as long as you
+acknowledge their source and authorship. The source of the code should
+be noted in any documentation as well as in the program code itself (as
+a comment). The attribution should include author, title, publisher, and
+ISBN.
+
+As is often the case, there's a longer answer as well. Bruce made it
+really easy for me to put this response together, since he forwarded an
+unofficial reply on this subject that he'd sent to the FlashCoders
+mailing list. What appears below is based on his message. (Hey, anyone
+else who wants to send the answer as well as the question to Ask Tim can
+make my job a lot easier :-) Thanks, Bruce.)
+
+As per the copyright notice in our books, O'Reilly reserves all rights
+to the material in the book, including the code examples. This literally
+means that you can use the example code all you like, but you can't
+publish or redistribute it without our permission. In reality, we are
+comfortable with any reasonable "fair use" of the code, and you can
+assume permission is granted without contacting us. The threshold of
+what is reasonable (fair use) depends on a number of factors. First, if
+the book is published under an open source or open publication license,
+you can use the code examples without any obligation to us. Otherwise,
+use the following sanity tests:
+
+   1.
+
+      If the code is incorporated into a software product, Web site, or
+      Web service, is the product, site, or service a commercial
+      venture? We don't object to commercial ventures, but if someone is
+      looking to profit from our work (or that of our authors'), and the
+      use is substantial, we may want to consider a license fee. (Send
+      licensing queries to permissions@oreilly.com
+      <mailto:permissions@oreilly.com>.)
+
+   2.
+
+      Is the O'Reilly material incidental to the entire product? Are you
+      using only a small excerpt? For example, you can't publish a
+      CD-ROM of code examples from O'Reilly books without our explicit
+      permission. But we aren't going to worry if you use a routine
+      taken from our books as part of a huge software project, in which
+      the borrowed code is incidental.
+
+   3.
+
+      Does the work compete with O'Reilly? For example, if you are a
+      book publisher, you can't use anything from our books without our
+      permission.
+
+   4.
+
+      Is proper credit given? Such credit would include a statement
+      specifying the source of the material, such as "Derived from
+      Example 10-2, /ActionScript: The Definitive Guide/ by Colin Moock.
+      Copyright 2001 O'Reilly & Associates." Note that giving credit
+      does not insulate you from prosecution if you improperly use
+      copyrighted material!
+
+   5.
+
+      Does your use fall within fair use provisions of copyright law?
+      (Academic research, commentary, etc.) For example, you don't need
+      O'Reilly's explicit permission to post a snippet of code on a
+      mailing list if you are pointing out a bug, asking a question, or
+      answering one. We especially like it when people answer questions
+      by pointing to our books, quoting from them, and citing their
+      examples, as long as they acknowledge the source!
+
+      Acknowledging the source is particularly important. Bruce didn't
+      mention this in his posting to FlashCoders, but I know that he
+      personally was bit by this one. Someone was routinely answering
+      Lingo questions on a mailing list by supplying examples from
+      Bruce's book, without acknowledging the source (and leading people
+      to believe that the poster had written them).
+
+We put the code from our books online because we want it to be used.
+(Who wants to type it in?) That's why we make it available in lots of
+ways: for download from the Web (all examples are linked from the book's
+catalog page on /oreilly.com/), in our CD Bookshelf products, and in our
+new Safari online service.
+
+If you are interested in licensing O'Reilly book content as a third
+party, send your request to corporate@oreilly.com
+<mailto:corporate@oreilly.com>.
+
+--Tim

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" 
+  "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>XXE Forrest Configuration</title>
+  </header>
+  <body>
+    <note>
+      This is not a particular endorsement of XXE over other xml editors. It is
+      just that we provide this tool to take advantage of XXE.
+    </note>
+    <p>
+      <link href="http://www.xmlmind.com/xmleditor/">XMLmind XML Editor</link>
+      is a validating XML editor featuring a word processor-like view. We
+      support the Forrest plugin for XXE only, please direct all XXE-related
+      questions to XXE support or mailing lists.
+    </p>
+    <section>
+      <title>Requirements</title>
+      <ul>
+        <li>XXE 3.0p1+ (version 1.3 of the tool works with XXE version 2.5p3 - 
+          3.0)</li>
+        <li>Forrest 0.5+</li>
+      </ul>
+    </section>
+    <section id="build">
+      <title>Build</title>
+      <p>
+        To build the configuration:
+      </p>
+      <ol>
+        <li>Make sure the FORREST_HOME environment variable is set</li>
+        <li>Change directory to <code>$FORREST_HOME/tools/xxe</code></li>
+        <li>Run <code>ant</code> in this directory</li>
+      </ol>
+      <p>
+        e.g.
+      </p>
+      <source>you@yourHost:~/src/apache/forrest-trunk$ cd tools/xxe 
+        you@yourHost:~/src/apache/forrest-trunk/tools/xxe$ ant Buildfile: 
+        build.xml -init: clean: copy-dtds: [copy] Copying 71 files to 
+        /home/you/src/apache/forrest-trunk/tools/xxe copy-catalog: [copy] 
+        Copying 1 file to /home/you/src/apache/forrest-trunk/tools/xxe update: 
+        dist: [mkdir] Created dir: 
+        /home/you/src/apache/forrest-trunk/tools/xxe/dist [zip] Building zip: 
+        /home/you/src/apache/forrest-trunk/tools/xxe/dist/XXE_forrest_config-1.4.zip 
+        BUILD SUCCESSFUL Total time: 9 seconds</source>
+      <p>
+        <strong>Developer note:</strong>
+        <br/>
+        To work directly with the SVN version of the configuration, check out
+        http://svn.apache.org/repos/asf/forrest/trunk/tools/xxe/ into the
+        <code>forrest</code> folder in the XXE <code>addon</code> folder. Run
+        the build there to copy the DTDs
+      </p>
+      <p>
+        <link 
+          href="http://www.xmlmind.com/xmleditor/_distrib/doc/configure/index.html">
+        XXE Custom Configuration Info</link>
+      </p>
+    </section>
+    <section>
+      <title>Install</title>
+      <ol>
+        <li>Extract into the XXE application config directory (e.g. 
+          <code>D:\Program Files\XMLmind_XML_Editor\config</code>)<br/><strong>OR</strong></li>
+        <li>Extract into your XXE user directory (e.g. 
+          <code>~/.xxe/addon/config</code>) (only in version 1.3+ of this 
+          config). For version 1.3+, this is the recommended installation 
+          location, as it permits upgrading XXE without having to reinstall 
+          this config <note>
+            This location is new for XXE 2.10, and is not tested with earlier
+            releases!
+          </note></li>
+      </ol>
+    </section>
+    <section>
+      <title>Upgrade</title>
+      <ol>
+        <li>Delete the <code>forrest</code> directory from the XXE application 
+          config directory. (e.g. <code>D:\Program 
+          Files\XMLmind_XML_Editor\config</code>)<br/><strong>OR</strong></li>
+        <li>Delete the 'forrest' directory from your user XXE config directory: 
+          <ul>
+            <li>*nix-es: <code>~/.xxe/addon/</code></li>
+            <li>Windows: 
+          <code>%SystemDrive%\Documents and Settings\user\Application 
+          Data\XMLmind\XMLeditor\</code></li>
+          </ul> depending on where you 
+          installed the previous version of the tool </li>
+        <li>Install normally</li>
+      </ol>
+    </section>
+    <section>
+      <title>History</title>
+      <section>
+        <title>1.4</title>
+        <ul>
+          <li>Updated the tool to work with XXE 3.0p1. (FOR-779) <note>
+              This change is backwards INCOMPATIBLE, therefore the tool now
+              <em>requires</em> XXE 3.0p1+.
+            </note></li>
+          <li>Added XXE-provided default rendering of tables</li>
+        </ul>
+      </section>
+      <section>
+        <title>1.3</title>
+        <ul>
+          <li>Fixed a bug that prevented this config to work with XXE 3.x 
+            (FOR-720)</li>
+          <li>Fixed a bug that prevented correct loading of the common css 
+            stylesheet (FOR-581)</li>
+          <li>Changed icon references to be installation independent 
+            (FOR-581)</li>
+          <li>Added a Forrest menu, with more robust table manipulation, and 
+            for v2 docs some link traversals (both taken from the XXE XHTML 
+            config)</li>
+          <li>Added more entries to the Table button (menu) in the Forrest 
+            toolbar, replicating the entries in the Forrest menu</li>
+          <li>Added a History section to the README and documentation</li>
+        </ul>
+      </section>
+    </section>
+  </body>
+</document>

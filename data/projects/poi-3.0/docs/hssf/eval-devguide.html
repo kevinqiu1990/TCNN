@@ -1,0 +1,441 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--*** This is a generated file.  Do not edit.  ***-->
+<link rel="stylesheet" href="../skin/tigris.css" type="text/css">
+<link rel="stylesheet" href="../skin/mysite.css" type="text/css">
+<link rel="stylesheet" href="../skin/site.css" type="text/css">
+<link media="print" rel="stylesheet" href="../skin/print.css" type="text/css">
+<title>Developing Formula Evaluation</title>
+</head>
+<body bgcolor="white" class="composite">
+<!--================= start Banner ==================-->
+<div id="banner">
+<table width="100%" cellpadding="8" cellspacing="0" summary="banner" border="0">
+<tbody>
+<tr>
+<!--================= start Group Logo ==================-->
+<td align="left">
+<div class="groupLogo">
+<a href="http://jakarta.apache.org"><img border="0" class="logoImage" alt="Jakarta" src="../resources/images/group-logo.gif"></a>
+</div>
+</td>
+<!--================= end Group Logo ==================-->
+<!--================= start Project Logo ==================--><td align="right">
+<div class="projectLogo">
+<a href="http://jakarta.apache.org/poi/"><img border="0" class="logoImage" alt="POI" src="../resources/images/project-logo.gif"></a>
+</div>
+</td>
+<!--================= end Project Logo ==================-->
+</tr>
+</tbody>
+</table>
+</div>
+<!--================= end Banner ==================-->
+<!--================= start Main ==================-->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" summary="nav" id="breadcrumbs">
+<tbody>
+<!--================= start Status ==================-->
+<tr class="status">
+<td>
+<!--================= start BreadCrumb ==================--><a href="http://www.apache.org/">Apache</a> | <a href="http://jakarta.apache.org/">Jakarta</a> | <a href="http://jakarta.apache.org/poi/">POI</a>
+<!--================= end BreadCrumb ==================--></td><td id="tabs">
+<!--================= start Tabs ==================-->
+<div class="tab">
+<span class="selectedTab"><a class="base-selected" href="../index.html">Home</a></span> | <script language="Javascript" type="text/javascript">
+function printit() {  
+if (window.print) {
+    window.print() ;  
+} else {
+    var WebBrowser = '<OBJECT ID="WebBrowser1" WIDTH="0" HEIGHT="0" CLASSID="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2"></OBJECT>';
+document.body.insertAdjacentHTML('beforeEnd', WebBrowser);
+    WebBrowser1.ExecWB(6, 2);//Use a 1 vs. a 2 for a prompting dialog box    WebBrowser1.outerHTML = "";  
+}
+}
+</script><script language="Javascript" type="text/javascript">
+var NS = (navigator.appName == "Netscape");
+var VERSION = parseInt(navigator.appVersion);
+if (VERSION > 3) {
+    document.write('  <a title="PRINT this page OUT" href="javascript:printit()">PRINT</a>');
+}
+</script> | <a title="PDF file of this page" href="eval-devguide.pdf">PDF</a>
+</div>
+<!--================= end Tabs ==================-->
+</td>
+</tr>
+</tbody>
+</table>
+<!--================= end Status ==================-->
+<table id="main" width="100%" cellpadding="8" cellspacing="0" summary="" border="0">
+<tbody>
+<tr valign="top">
+<!--================= start Menu ==================-->
+<td id="leftcol">
+<div id="navcolumn">
+<div class="menuBar">
+<div class="menu">
+<span class="menuLabel">Jakarta POI</span>
+        
+<div class="menuItem">
+<a href="../index.html">Top</a>
+</div>
+    
+</div>
+<div class="menu">
+<span class="menuLabel">HSSF</span>
+        
+<div class="menuItem">
+<a href="index.html">Overview</a>
+</div>
+        
+<div class="menuItem">
+<a href="quick-guide.html">Quick Guide</a>
+</div>
+        
+<div class="menuItem">
+<a href="how-to.html">HOWTO</a>
+</div>
+        
+<div class="menuItem">
+<a href="formula.html">Formula Support</a>
+</div>
+        
+<div class="menuItem">
+<a href="eval.html">Formula Evaluation</a>
+</div>
+		
+<div class="menuItem">
+<span class="menuSelected">Eval Dev Guide</span>
+</div>
+        
+<div class="menuItem">
+<a href="use-case.html">Use Case</a>
+</div>
+        
+<div class="menuItem">
+<a href="diagrams.html">Pictorial Docs</a>
+</div>
+        
+<div class="menuItem">
+<a href="limitations.html">Limitations</a>
+</div>
+    
+</div>
+<div class="menu">
+<span class="menuLabel">Contributer's Guide</span>
+        
+<div class="menuItem">
+<a href="hacking-hssf.html">Hacking HSSF</a>
+</div>
+        
+<div class="menuItem">
+<a href="record-generator.html">Record Generator</a>
+</div>
+        
+<div class="menuItem">
+<a href="chart.html">Charts</a>
+</div>
+    
+</div>
+</div>
+</div>
+<form target="_blank" action="http://www.google.com/search" method="get">
+<table summary="search" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td><img height="1" width="1" alt="" src="../skin/images/spacer.gif" class="spacer"></td><td nowrap="nowrap"><input value="jakarta.apache.org" name="sitesearch" type="hidden"><input size="10" name="q" id="query" type="text"><img height="1" width="5" alt="" src="../skin/images/spacer.gif" class="spacer"><input name="Search" value="GO" type="submit">
+<br>
+                          Search jakarta</td><td><img height="1" width="1" alt="" src="../skin/images/spacer.gif" class="spacer"></td>
+</tr>
+<tr>
+<td colspan="3"><img height="7" width="1" alt="" src="../skin/images/spacer.gif" class="spacer"></td>
+</tr>
+<tr>
+<td class="bottom-left-thick"></td><td bgcolor="#a5b6c6"><img height="1" width="1" alt="" src="../skin/images/spacer.gif" class="spacer"></td><td class="bottom-right-thick"></td>
+</tr>
+</table>
+</form>
+</td>
+<!--================= end Menu ==================-->
+<!--================= start Content ==================--><td>
+<div id="bodycol">
+<div class="app">
+<div align="center">
+<h1>Developing Formula Evaluation</h1>
+</div>
+<div class="h3">
+    
+    
+	
+<div class="h3">
+<h3>Introduction</h3>
+</div>
+		
+<p>This document is for developers wishing to contribute to the 
+			FormulaEvaluator API functionality.</p>
+		
+<p>Currently, contribution is desired for implementing the standard MS 
+			excel functions. Place holder classes for these have been created, 
+			contributors only need to insert implementation for the 
+			individual "evaluate()" methods that do the actual evaluation.</p>
+	
+	
+<div class="h3">
+<h3>Overview of FormulaEvaluator </h3>
+</div>
+		
+<p>Briefly, a formula string (along with the sheet and workbook that 
+			form the context in which the formula is evaluated) is first parsed 
+			into RPN tokens using the FormulaParser class in POI-HSSF main. 
+			(If you dont know what RPN tokens are, now is a good time to 
+			read <a href="http://www-stone.ch.cam.ac.uk/documentation/rrf/rpn.html">
+			this</a>.)
+		</p>
+		
+<div class="h4">
+<h4> The big picture</h4>
+</div>
+			
+<p>RPN tokens are mapped to Eval classes. (Class hierarchy for the Evals 
+				is best understood if you view the class diagram in a class diagram 
+				viewer.) Depending on the type of RPN token (also called as Ptgs 
+				henceforth since that is what the FormulaParser calls the classes) a 
+				specific type of Eval wrapper is constructed to wrap the RPN token and 
+				is pushed on the stack.... UNLESS the Ptg is an OperationPtg. If it is an 
+				OperationPtg, an OperationEval instance is created for the specific 
+				type of OperationPtg. And depending on how many operands it takes, 
+				that many Evals are popped of the stack and passed in an array to 
+				the OperationEval instance's evaluate method which returns an Eval 
+				of subtype ValueEval.Thus an operation in the formula is evaluated. </p>
+				
+<div class="frame note">
+<div class="label">Note</div>
+<div class="content"> An Eval is of subinterface ValueEval or OperationEval. 
+				Operands are always ValueEvals, Operations are always OperationEvals.</div>
+</div> 
+				
+<p>
+<span class="codefrag">OperationEval.evaluate(Eval[])</span> returns an Eval which is supposed 
+				to be of type ValueEval (actually since ValueEval is an interface, 
+				the return value is instance of one of the implementations of 
+				ValueEval). The valueEval resulting from evaluate() is pushed on the 
+				stack and the next RPN token is evaluated.... this continues till 
+				eventually there are no more RPN tokens at which point, if the formula 
+				string was correctly parsed, there should be just one Eval on the 
+				stack - which contains the result of evaluating the formula.</p>
+			
+<p>Ofcourse I glossed over the details of how AreaPtg and ReferencePtg 
+				are handled a little differently, but the code should be self 
+				explanatory for that. Very briefly, the cells included in AreaPtg and 
+				RefPtg are examined and their values are populated in individual 
+				ValueEval objects which are set into the AreaEval and RefEval (ok, 
+				since AreaEval and RefEval are interfaces, the implementations of 
+				AreaEval and RefEval - but you'll figure all that out from the code)</p>
+			
+<p>OperationEvals for the standard operators have been implemented and tested.</p>
+		
+		
+<div class="h4">
+<h4> FunctionEval and FuncVarEval</h4>
+</div>
+			
+<p>FunctionEval is an abstract super class of FuncVarEval. The reason for this is that in the FormulaParser Ptg classes, there are two Ptgs, FuncPtg and FuncVarPtg. In my tests, I did not see FuncPtg being used so there is no corresponding FuncEval right now. But in case the need arises for a FuncVal class, FuncEval and FuncVarEval need to be isolated with a common interface/abstract class, hence FunctionEval.</p>
+			
+<p>FunctionEval also contains the mapping of which function class maps to which function index. This mapping has been done for all the functions, so all you really have to do is implement the evaluate method in the function class that has not already been implemented. The Function indexes are defined in AbstractFunctionPtg class in POI main.</p>
+		
+	
+	
+<div class="h3">
+<h3>Walkthrough of an "evaluate()" implementation.</h3>
+</div>
+		
+<p>So here is the fun part - lets walk through the implementation of the excel 
+			function... <strong>SQRT()</strong> 
+</p>
+		
+<div class="h4">
+<h4>The Code</h4>
+</div>
+		
+<pre class="code">
+public class Sqrt extends NumericFunction {
+    
+    private static final ValueEvalToNumericXlator NUM_XLATOR = 
+        new ValueEvalToNumericXlator((short)
+                ( ValueEvalToNumericXlator.BOOL_IS_PARSED 
+                | ValueEvalToNumericXlator.EVALUATED_REF_BOOL_IS_PARSED
+                | ValueEvalToNumericXlator.EVALUATED_REF_STRING_IS_PARSED
+                | ValueEvalToNumericXlator.REF_BOOL_IS_PARSED
+                | ValueEvalToNumericXlator.STRING_IS_PARSED
+                ));
+
+    protected ValueEvalToNumericXlator getXlator() {
+        return NUM_XLATOR;
+    }
+
+    public Eval evaluate(Eval[] operands, int srcRow, short srcCol) {
+        double d = 0;
+        ValueEval retval = null;
+        
+        switch (operands.length) {
+        default:
+            retval = ErrorEval.VALUE_INVALID;
+            break;
+        case 1:
+            ValueEval ve = singleOperandEvaluate(operands[0], srcRow, srcCol);
+            if (ve instanceof NumericValueEval) {
+                NumericValueEval ne = (NumericValueEval) ve;
+                d = ne.getNumberValue();
+            }
+            else if (ve instanceof BlankEval) {
+                // do nothing
+            }
+            else {
+                retval = ErrorEval.NUM_ERROR;
+            }
+        }
+        
+        if (retval == null) {
+            d = Math.sqrt(d);
+            retval = (Double.isNaN(d)) ? (ValueEval) ErrorEval.VALUE_INVALID : new NumberEval(d);
+        }
+        return retval;
+    }
+
+}
+	</pre>
+		
+		
+<div class="h4">
+<h4>Implementation Details</h4>
+</div>
+		
+<ul>
+			
+<li>The first thing to realise is that classes already exist, even for functions that are not yet implemented.
+			Just that they extend from DefaultFunctionImpl whose behaviour is to return an ErrorEval.FUNCTION_NOT_IMPLEMENTED value.</li>
+			
+<li>In order to implement SQRT(..), we need to: a. Extend from the correct Abstract super class; b. implement the evaluate(..) method</li>
+			
+<li>Hence we extend SQRT(..) from the predefined class NumericFunction</li>
+			
+<li>Since SQRT(..) takes a single argument, we verify the length of the operands array else set the return value to ErrorEval.VALUE_INVALID</li>
+			
+<li>Next we normalize each operand to a limited set of ValueEval subtypes, specifically, we call the function 
+			<span class="codefrag">singleOperandEvaluate(..)</span> to do conversions of different value eval types to one of: NumericValueEval,
+			BlankEval and ErrorEval. The conversion logic is configured by a ValueEvalToNumericXlator instance which
+			is returned by the Factory method: <span class="codefrag">getXlator(..)</span> The flags used to create the ValueEvalToNumericXlator
+			instance are briefly explained as follows:
+			BOOL_IS_PARSED means whether this function treats Boolean values as 1, 
+			REF_BOOL_IS_PARSED means whether Boolean values in cell references are parsed or not.
+			So also, EVALUATED_REF_BOOL_IS_PARSED means if the operand was a RefEval that was assigned a
+			Boolean value as a result of evaluation of the formula that it contained.
+			eg. SQRT(TRUE) returns 1: This means BOOL_IS_PARSED should be set.
+			SQRT(A1) returns 1 when A1 has TRUE: This means REF_BOOL_IS_PARSED should be set.
+			SQRT(A1) returns 1 when A1 has a formula that evaluates to TRUE: This means EVALUATED_REF_BOOL_IS_PARSED should be set.
+			If the flag is not set for a particular case, that case is ignored (treated as if the cell is blank) _unless_
+			there is a flag like: STRING_IS_INVALID_VALUE (which means that Strings should be treated as resulting in VALUE_INVALID ErrorEval)
+			</li>
+			
+<li>Next perform the appropriate Math function on the double value (if an error didnt occur already).</li>
+			
+<li>Finally before returning the NumberEval wrapping the double value that 
+				you computed, do one final check to see if the double is a NaN, (or if it is "Infinite")
+				If it is return the appropriate ErrorEval instance. Note: The OpenOffice.org error codes
+				should NOT be preferred. Instead use the excel specific error codes like VALUE_INVALID, NUM_ERROR, DIV_ZERO etc. 
+				(Thanks to Avik for bringing this issue up early!) The Oo.o ErrorCodes will be removed (if they havent already been :)</li>
+		
+</ul>
+		
+		
+<div class="h4">
+<h4>Modelling Excel Semantics</h4>
+</div>
+			
+<p>Strings are ignored. Booleans are ignored!!!. Actually here's the info on Bools: 
+				if you have formula: "=TRUE+1", it evaluates to 2. 
+				So also, when you use TRUE like this: "=SUM(1,TRUE)", you see the result is: 2. 
+				So TRUE means 1 when doing numeric calculations, right? 
+				Wrong!
+				Because when you use TRUE in referenced cells with arithmetic functions, it evaluates to blank - meaning it is not evaluated - as if it was string or a blank cell. 
+				eg. "=SUM(1,A1)" when A1 is TRUE evaluates to 1.
+				This behaviour changes depending on which function you are using. eg. SQRT(..) that was 
+				described earlier treats a TRUE as 1 in all cases. This is why the configurable ValueEvalToNumericXlator
+				class had to be written.
+				</p>
+			
+<p>Note that when you are extending from an abstract function class like
+			NumericFunction (rather than implementing the interface o.a.p.hssf.record.formula.eval.Function directly)
+			you can use the utility methods in the super class - singleOperandEvaluate(..) - to quickly
+			reduce the different ValueEval subtypes to a small set of possible types. However when
+			implemenitng the Function interface directly, you will have to handle the possiblity
+			of all different ValueEval subtypes being sent in as 'operands'. (Hard to put this in
+			word, please have a look at the code for NumericFunction for an example of
+			how/why different ValueEvals need to be handled)
+			</p>
+		
+	
+	
+<div class="h3">
+<h3>Testing Framework</h3>
+</div>
+	
+<p>Automated testing of the implemented Function is easy.
+	The source code for this is in the file: o.a.p.h.record.formula.GenericFormulaTestCase.java
+	This class has a reference to the test xls file (not /a/ test xls, /the/ test xls :)
+	which may need to be changed for your environment. Once you do that, in the test xls,
+	locate the entry for the function that you have implemented and enter different tests 
+	in a cell in the FORMULA row. Then copy the "value of" the formula that you entered in the
+	cell just below it (this is easily done in excel as: 
+	[copy the formula cell] &gt; [go to cell below] &gt; Edit &gt; Paste Special &gt; Values &gt; "ok").
+	You can enter multiple such formulas and paste their values in the cell below and the
+	test framework will automatically test if the formula evaluation matches the expected
+	value (Again, hard to put in words, so if you will, please take time to quickly look
+	at the code and the currently entered tests in the patch attachment "FormulaEvalTestData.xls" 
+	file).
+	</p>	
+	
+	
+
+<div id="authors" align="right">by&nbsp;Amol Deshmukh</div>
+</div>
+</div>
+</div>
+</td>
+<!--================= end Content ==================-->
+</tr>
+</tbody>
+</table>
+<!--================= end Main ==================-->
+<!--================= start Footer ==================-->
+<div id="footer">
+<table summary="footer" cellspacing="0" cellpadding="4" width="100%" border="0">
+<tbody>
+<tr>
+<!--================= start Copyright ==================-->
+<td colspan="2">
+<div align="center">
+<div class="copyright">
+              Copyright &copy; 2002-2006&nbsp;The Apache Software Foundation. All rights reserved.
+            </div>
+</div>
+</td>
+<!--================= end Copyright ==================-->
+</tr>
+<tr>
+<td align="left">
+<!--================= start Host ==================-->
+<!--================= end Host ==================--></td><td align="right">
+<!--================= start Credits ==================-->
+<div align="right">
+<div class="credit"></div>
+</div>
+<!--================= end Credits ==================-->
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!--================= end Footer ==================-->
+</body>
+</html>

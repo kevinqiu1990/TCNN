@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Test document for Tidy</title>
+  </header>
+  <body>
+    <section id="para-1">
+      <title>Paragraphs</title>
+      <p>The following paragraph was already formatted into separate lines, with each line less than 80
+      characters.</p>
+      <p>Apache Forrest is a publishing framework that transforms
+      input from various sources into a unified presentation
+      in one or more output formats. The modular and extensible
+      plugin architecture is based on Apache Cocoon and relevant
+      standards, which separates presentation from content.
+      Forrest can generate static documents, or be used as a
+      dynamic server, or be deployed by its automated facility.</p>
+      <p>The following paragraph was all on one line.</p>
+      <p>Apache Forrest is a publishing framework that transforms input from various sources into a unified presentation in one or more output formats. The modular and extensible plugin architecture is based on Apache Cocoon and relevant standards, which separates presentation from content.  Forrest can generate static documents, or be used as a dynamic server, or be deployed by its automated facility.</p>
+    </section>
+
+    <section id="para-2">
+      <title>Another section
+      </title>
+      <p>
+        Forrest is ...
+      </p>
+      <p> Forrest is ... </p>
+      <p>
+        Forrest is ...
+       </p>
+      <ul>
+        <li><strong>this</strong> and that</li>
+        <li>these and <em>those</em></li>
+      </ul>
+    </section>
+
+    <section id="cdata">
+      <title>CDATA</title>
+      <source><![CDATA[top line text
+<elements>
+   <indented>
+   A long line that should not get wrapped. A long line that should not get wrapped. A long line that should not get wrapped.
+   </indented>
+</elements>]]>
+      </source>
+    </section>
+
+    <section id="white">
+      <title>Whitespace and Tabs</title>
+    
+      <p>Trailing whitespace after this closing tag:</p> 
+      <p>Indentation was using tabs:
+	here
+		and here in element content.</p>
+	<ul>
+		<li>and before this "li" element and closing ul</li>
+	</ul>
+    </section>
+
+    <section id="comments">
+      <title>XML Comments</title>
+      <p>How does it handle comments</p>
+<!-- a comment, already left-aligned -->
+       <!-- another comment indented and
+         nicely
+         spaced -->
+
+       <!--+
+           | another style of carefully formatted
+           | comments.
+           -->
+    </section>
+
+    <section id="entities">
+      <title>Entities</title>
+      <p>What happens to entities?</p>
+      <ul>
+        <li>J&ouml;rg</li>
+        <li>this &amp; that</li>
+        <li>greater than &gt; great</li>
+        <li>trademark&trade;</li>
+        <li>J&#246;rg</li>
+        <li>me&#64;there.org</li>
+      </ul>
+    </section>
+
+    <section id="misc">
+      <title>Miscellaneous</title>
+      <p>Elements with carefully formatted attributes. Do they get re-aligned?</p>
+      <p><a href="http://forrest.apache.org/"
+           title="Apache Forrest"
+           id="forrest-home">link</a>.</p>
+
+      <p><a href="http://forrest.apache.org/docs_0_80/howto/howto-custom-html-source.html"
+           title="How to customize processing of html source"
+           id="custom-html-source">link</a>.</p>
+      <p>Elements with attributes. Do they get re-aligned?</p>
+      <p>
+        <a href="http://forrest.apache.org/" title="Apache Forrest" id="forrest-home2">link</a>.
+      </p>
+    </section>
+  </body>
+</document>

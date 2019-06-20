@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XHTML2: http://www.w3.org/TR/2005/WD-xhtml2-20050527
+Copyright © 1999-2004 World Wide Web Consortium, (Massachusetts Institute of Technology,
+European Research Consortium for Informatics and Mathematics, Keio University).
+All Rights Reserved. This work is distributed under the W3C® Software Licens [1]
+in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:x="http://www.w3.org/1999/xhtml">
+
+  <x:h1>Core Attributes Module</x:h1>
+
+  <div>
+    <x:h2>Core Attribute Collection</x:h2>
+
+    <define name="class.attrib">
+      <optional>
+        <attribute name="class">
+          <ref name="NMTOKENS.datatype"/>
+        </attribute>
+      </optional>
+    </define>
+
+    <define name="id.attrib">
+      <optional>
+        <attribute name="xml:id">
+          <ref name="ID.datatype"/>
+        </attribute>
+      </optional>
+    </define>
+
+    <define name="title.attrib">
+      <optional>
+        <attribute name="title">
+          <ref name="Text.datatype"/>
+        </attribute>
+      </optional>
+    </define>
+
+    <define name="Core.attrib">
+      <ref name="id.attrib"/>
+      <ref name="class.attrib"/>
+      <ref name="title.attrib"/>
+    </define>
+  </div>
+
+  <define name="Common.attrib" combine="interleave">
+    <ref name="Core.attrib"/>
+  </define>
+
+  <define name="CommonTypeRequired.attrib" combine="interleave">
+    <ref name="Core.attrib"/>
+  </define>
+
+</grammar>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN"
+"http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Status of Themes: Skins and Dispatcher</title>
+  </header>
+  <body>
+    <section id="skins">
+      <title>Skins</title>
+      <p>
+        "Skins" is the term used to describe the current method for adding
+        navigation and menu information to the content of a page and applying a
+        consistent theme for layout, colours, etc. The
+        <a 
+        href="site:skins">"pelt" skin</a> is the only one that the
+        Forrest project is maintaining. It is configurable enough to meet many
+        purposes. The main configuration file for skins is the skinconf.xml
+        file. There is an ability for users to create their own skins, although
+        we have not encouraged that.
+      </p>
+      <p>
+        For the Forrest-0.8 release, skins are still available and are still the
+        main mechanism. No effort has been made to enhance skins.
+      </p>
+    </section>
+    <section id="dispatcher">
+      <title>Dispatcher</title>
+      <p>
+        "Dispatcher" is the term used to describe a new method which aims to be
+        a more flexible and complete solution to build a reliable common
+        structure for documents, incorporate other content, and provide hooks
+        for applying themes. Themes get configured by structurer definitions (a
+        wee bit like the skinconf.xml). Although strong progress has been made,
+        it is still under development. We encourage developers to use Dispatcher
+        and contribute to its development. See the
+        <a 
+        href="http://forrest.apache.org/pluginDocs/plugins_0_80/org.apache.forrest.plugin.internal.dispatcher/index.html">
+        plugin documentation</a> for more information.
+      </p>
+    </section>
+    <section id="framework">
+      <title>Plan for future framework</title>
+      <p>
+        The desired direction is to use xhtml2 as the internal format, move the
+        current "skins" into a plugin, and develop input plugins for xdoc and
+        html sources. This would enable any theme engine to be used, whether
+        that be Skins or Dispatcher or some other.
+      </p>
+      <p>
+        See the development discussion:
+        <a href="http://thread.gmane.org/gmane.text.xml.forrest.devel/20573">Re:
+        status of skins and dispatcher</a>. This is planned for immediately
+        following the 0.8 release. New developers please help.
+      </p>
+    </section>
+  </body>
+</document>

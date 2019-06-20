@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE howto PUBLIC "-//APACHE//DTD How-to V1.2//EN"
+"http://forrest.apache.org/dtd/howto-v12.dtd">
+<howto>
+  <header>
+    <title>Generate an ASF mirrors page using interactive web form</title>
+    <abstract>
+      Include html form elements into a forrest-generated html page. For
+      example, this enables building automated download mirror pages for ASF
+      project websites.
+    </abstract>
+    <last-modified-content-date date="2005-04-20" />
+  </header>
+  <audience title="Intended Audience">
+    <ul>
+      <li>Any Apache project that uses Forrest to generate their website
+        will need to have a mirrors page.</li>
+      <li>Also anyone interested in the use of embedding html form
+        elements into a generated Forrest page.</li>
+    </ul>
+    <warning>
+      Due to issue
+      <link href="http://issues.apache.org/jira/browse/FOR-555">FOR-555</link>
+      the html comments that the CGI script depends upon are stripped before the
+      output stage. You need to manually add those comments. This is fixed in
+      forrest_07_branch of SVN.
+    </warning>
+  </audience>
+  <purpose title="Purpose">
+    <p>
+      All Apache projects use dynamically generated download pages which
+      determine the closest mirror and provide an interactive list of the
+      current alternative mirrors. This HowTo describes the procedure to
+      generate the template page that is utilised by the mirrors.cgi script.
+    </p>
+    <p>
+      The mirrors.cgi and mirrors.html are "extra" documents, i.e. have no links
+      from anywhere in the site. So we explain how to process additional files.
+    </p>
+  </purpose>
+  <prerequisites title="Prerequisites">
+    <ul>
+      <li>Followed the documentation about
+      <link href="http://www.apache.org/~bodewig/mirror.html">Making your
+      downloads mirrorable</link> and
+      <link href="http://www.apache.org/dev/mirrors.html">Apache Mirroring Information</link>
+      .
+      </li>
+      <li>Established your ASF distribution space as described.</li>
+      <li>Already building your project website with Forrest.</li>
+    </ul>
+  </prerequisites>
+  <steps title="Steps">
+    <section id="cgi">
+      <title>Add the mirrors.cgi as a raw file</title>
+      <p>
+        As explained in the mirrors document, there will be a two-line CGI
+        wrapper script at the top-level of your website called
+        <code>mirrors.cgi</code>
+      </p>
+      <p>
+        Utilising the Forrest concept of raw un-processed content, add the file
+        as <code>src/documentation/mirrors.cgi</code> (copy the Forrest
+        project's
+        <link href="http://svn.apache.org/repos/asf/forrest/trunk/site-author/content/mirrors.cgi">mirrors.cgi</link>)
+      </p>
+    </section>
+    <section id="html">
+      <title>Add the mirrors.html to xdocs directory</title>
+      <p>
+        This file contains the html content of your mirror page, including the
+        html form elements which drive the mirror selection. It also contains
+        the specific tokens that are interpreted by the mirrors.cgi script to
+        add the list of mirrors and select the closest.
+      </p>
+      <p>
+        Add the file as <code>src/documentation/xdocs/mirrors.html</code> (Use
+        the Forrest project's
+        <link href="http://svn.apache.org/repos/asf/forrest/trunk/site-author/content/xdocs/mirrors.html">mirrors.html</link>
+        as a template and edit it to suit.)
+      </p>
+      <p>
+        Note that the special tokens (e.g. [if-any http] [for http]) need to be
+        encompassed by xml comments.
+      </p>
+    </section>
+    <section id="menu">
+      <title>Add a menu entry for Download</title>
+      <p>
+        Add an entry to your site.xml navigation. For example ...
+      </p>
+      <source>
+<![CDATA[
+ <about label="About">
+  <index label="Index" href="index.html"/>
+  <license label="License" href="license.html"/>
+  <download label="Download" href="http://forrest.apache.org/mirrors.cgi"/>
+  <download_html href="mirrors.html"/><!-- so the page is part of a tab -->
+  ...]]>
+      </source>
+    </section>
+    <section id="link">
+      <title>Cause the mirrors.html to be processed as an extra file</title>
+      <p>
+        Forrest gathers the links that are to be crawled, by reading site.xml
+        and by finding any other internal links in the actual documents. There
+        is no link to mirrors.html because it is an extra file that needs to be
+        generated and skinned, but not linked in any way.
+      </p>
+      <p>
+        The Cocoon command-line interface
+        (<link href="http://cocoon.apache.org/2.1/userdocs/offline/">CLI</link>)
+        to the rescue. Add an entry to your project's cli.xconf by copying the
+        default one from
+        <code>$FORREST_HOME/main/webapp/WEB-INF/cli.xconf</code> to your
+        <code>src/documentation/conf/</code> directory (or wherever
+        ${forrest.conf-dir} points). Add the following entry ...
+      </p>
+      <source>
+<![CDATA[
+<uris name="mirrors" follow-links="false">
+  <uri type="append" src="mirrors.html"/>
+</uris>]]>
+      </source>
+    </section>
+    <section id="forrest">
+      <title>Run 'forrest' to build your site</title>
+      <p>
+        That is all that you need to do, Forrest will take care of it from
+        there. Run the '<code>forrest</code>' command. The mirrors.html page
+        will be generated with the skin applied.
+      </p>
+      <note>
+        Due to Issue
+        <link href="http://issues.apache.org/jira/browse/FOR-480">FOR-480</link>,
+        the generated mirror.html will end up in forrest/main/site/mirrors.html
+        rather than in the project's build directory.
+      </note>
+    </section>
+  </steps>
+</howto>

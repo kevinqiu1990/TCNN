@@ -1,0 +1,90 @@
+<?xml version="1.0"  encoding="ISO-8859-1"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure 1.2//EN" "http://jetty.mortbay.org/configure_1_2.dtd">
+<!-- =============================================================== -->
+<!-- Configure the Jetty Server                                      -->
+<!-- =============================================================== -->
+<Configure class="org.mortbay.jetty.Server">
+<!-- =============================================================== -->
+<!-- Configure the Request Listeners                                 -->
+<!-- =============================================================== -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- Add and configure a HTTP listener to port 8888                  -->
+<!-- The default port can also be changed using:                     -->
+<!--     forrest run -Dforrest.jvmargs="-Djetty.port=80"             -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <Call name="addListener">
+    <Arg>
+      <New class="org.mortbay.http.SocketListener">
+        <Set name="Port">
+          <SystemProperty name="jetty.port" default="8888"/>
+        </Set>
+        <Set name="MinThreads">5</Set>
+        <Set name="MaxThreads">100</Set>
+        <Set name="MaxIdleTimeMs">30000</Set>
+        <Set name="LowResourcePersistTimeMs">5000</Set>
+      </New>
+    </Arg>
+  </Call>
+<!-- =============================================================== -->
+<!-- Configure the Contexts                                          -->
+<!-- =============================================================== -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- Add root context web applications.                              -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- Add a all web application within the webapps directory.         -->
+<!-- + No virtual host specified                                     -->
+<!-- + Look in the webapps directory relative to jetty.home or .     -->
+<!-- + Use the webdefault.xml resource for the defaults descriptor   -->
+<!-- + Upack the war file                                            -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <Call name="addWebApplication">
+    <Arg>/</Arg>
+    <Arg>
+<!--<SystemProperty name="jetty.home" default="."/>-->.</Arg>
+  </Call>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- Build a context manually.                                  -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- 
+  <Call name="addContext">
+    <Arg>/forrest/*</Arg>
+
+    <Call name="addHandler">
+      <Arg><New class="org.mortbay.http.handler.ProxyHandler"></New></Arg>
+    </Call>
+
+    <Call name="addHandler">
+      <Arg><New class="org.mortbay.http.handler.ContentEncodingHandler">
+           <Call name="addPathSpec"><Arg>/images/*</Arg></Call>
+           <Set name="minimumLength">512</Set>
+      </New></Arg> 
+    </Call>
+
+    <Call name="addHandler">
+      <Arg><New class="org.mortbay.http.handler.HTAccessHandler">
+	    <Set name="AccessFile">.htaccess</Set>
+      </New></Arg>
+    </Call>
+
+    <Call name="addServlet">
+      <Arg>Invoker</Arg>
+      <Arg>/*</Arg>
+      <Arg>org.mortbay.jetty.servlet.Invoker</Arg>
+      <Put name="InitParam">Value</Put>      
+    </Call>
+
+    <Set name="ResourceBase"><SystemProperty name="jetty.home" default="."/>/demo/docroot/</Set>
+    
+    <Call name="addHandler">
+      <Arg><New class="org.mortbay.http.handler.ResourceHandler"/></Arg>
+    </Call>
+
+    <Call name="addHandler">
+      <Arg><New class="org.mortbay.http.handler.DumpHandler"/></Arg>
+    </Call>
+
+    <Set name="ClassPath"><SystemProperty name="jetty.home" default="."/>/demo/servlets/</Set>
+  </Call>
+  -->
+</Configure>

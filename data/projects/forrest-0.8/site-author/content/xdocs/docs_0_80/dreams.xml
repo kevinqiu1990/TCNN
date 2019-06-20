@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd">
+<document>
+  <header>
+    <title>Forrest dream list</title>
+    <subtitle>Overview</subtitle>
+  </header>
+  <body>
+    <section>
+      <title>Introduction</title>
+      <p>
+        This is the initial attempt to give focus to the Forrest project. This
+        summary is a loose collection of items from the forrest-dev mailing
+        list. Please add and re-arrange so that it can evolve into a focus
+        document. The <link href="site:primer">Forrest Primer</link> provides an
+        overview.
+      </p>
+      <p>
+        These are the email threads and documents that are currently being
+        summarised. Please see those documents for further detail.
+      </p>
+      <ul>
+        <li>
+    [RT] my Forrest dream-list
+    Date: Wed, 20 Feb 2002
+    <link href="http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=101431895118349">http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=101431895118349</link>
+    [done]
+   </li>
+        <li>
+    README 
+    [FIXME: not yet started summarising]
+   </li>
+        <li>
+    [phases] Forrest
+    Date: Fri, 22 Feb 2002
+    <link href="http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=101445744931104">http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=101445744931104</link>
+    [FIXME: not yet started summarising]
+   </li>
+        <li>
+    adding to the dream list
+    Date: Fri, 15 Mar 2002
+    <link href="http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=101620970016263">http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=101620970016263</link>
+    [FIXME: not yet started summarising]
+   </li>
+        <li>
+    analysis paralysis :-)
+    Date: Mon, 25 Feb 2002
+    <link href="http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=101465344708301">http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=101465344708301</link>
+    [FIXME: not yet started summarising]
+   </li>
+        <li>
+    documentation architecture?
+    Date: Thu, 25 Apr 2002
+    <link href="http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=101973705501466">http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=101973705501466</link>
+    [FIXME: not yet started summarising]
+   </li>
+        <li>
+    Topic Maps for Forrest ?
+    Date: Mon, 18 Mar 2002
+    <link href="http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=101647290524645">http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=101647290524645</link>
+    [FIXME: not yet started summarising]
+   </li>
+      </ul>
+    </section>
+    <section>
+      <title>Draft dream list</title>
+      <ul>
+        <li>
+   Forrest provides a robust technological infrastructure for open software development for the Apache Software Foundation based on ASF software, ASF practices and experience, and modern software design principles.
+  </li>
+        <li>
+  a publishing system for documentation
+ </li>
+        <li>
+  analysis of logs and publishing of results
+ </li>
+        <li>
+Ok, first of all: "it hurts my spirit" (I should TM this) to see the
+apache web sites with such a *poor* information infrastructure. Just
+look at sourceforge: it's not the best site of the world, but gives you
+lots of tools and information that we currently don't have (or have
+hidden someplace).
+ </li>
+        <li>
+I want Forrest to be the development infrastructure of your dreams,
+something that you'll be proud of showing your boss and say "if only we
+had this in place, we would save big bucks" so...
+ </li>
+        <li>
+  Dream #1: Forrest should make Sourceforge look obsolete.
+ </li>
+        <li>
+So, in order for this to happen, it must be dynamic.
+Assumption #1: Forrest is a dynamic site.
+The staticity of apache web sites was mostly due to the quest for heavy
+mirroring, Forrest should allow mirroring, so
+ </li>
+        <li>
+  Dream #2: Forrest should reduce xml.apache.org bandwidth use dramatically
+ </li>
+        <li>
+  Dream #3: Forrest should automate mirroring in a simple and easy way.
+
+My idea is to use the 'command line' features of Cocoon to generate
+static snapshots of sites and produce mirrors directly using a sort of
+rsync or other mean. Anyway, the goal is to make sure mirroring is as
+easy as possible. No, easier than that.
+ </li>
+        <li>
+  coherence: all the site should look coherent, same graphics, same
+look-and-feel, same information in the same locations, coherent and nice URI
+space (build to last! so that broken links are reduced!)
+ </li>
+        <li>
+  structure: the site should look professional, the structure should be
+flexible enough to fit every need but solid enough to guide users
+browsing and developers adding resources
+ </li>
+        <li>
+  scalability
+ </li>
+        <li>
+  functionality: everything you ever wanted to have in your project web site
+ </li>
+        <li>
+ logs and community rating: I want to have numbers to judge the value
+of a community/effort
+ </li>
+        <li>
+Downloads, number of committers, numbers of people subscribed on the users/dev
+list, numbers of mail messages / week on these lists, CVS activity...
+These are the kind of parameters I use to "judge" an Apache project that I
+have not been looking into before.
+ </li>
+        <li>
+  Graphs of various statistics.
+ </li>
+        <li>
+Having good site metrics will be a valuable aid to those involved in
+maintenance and future re-design phases.
+See some discussion in
+<link href="http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=102238816218885">http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=102238816218885</link></li>
+        <li>
+ Built-in search engine: users much have a simple way to find things.
+ Lucene.
+ </li>
+        <li>
+ User-writable pages: people should have a way to add things to the pages.
+ See the thread for more detail on this.
+FIXME: get MARC ref
+ </li>
+        <li>
+ short bios for the project committers, with pictures: gives a better
+sense of community. Having a weblog there would be great.
+ </li>
+        <li>
+ news, announcements, events and project calendaring: the news and
+the announcements will generate a RSS feed, events will be aggregated
+into a project-wide calendar, or an effort-specific calendar, the events
+will also be overwritten on the logs, to indicate how logs were
+influenced by the events (say, a release or a new committer added)
+ </li>
+        <li>
+ book-like PDF versions of documentation: easy to print out docs.
+ </li>
+        <li>
+  integration with GUMP: dependencies, runs, committer that broke the run
+ </li>
+        <li>
+ javadocs seemlessly integrated with the documentation and with the
+search engine.
+ <link href="http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=101620970016263">http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=101620970016263</link></li>
+        <li>
+ mail archive seemlessly integrated with the search engine (one should
+look for something and get results from either docs, javadocs or emails
+messages)
+ </li>
+        <li>
+  coherent-looking CVS view
+ </li>
+        <li>
+  document translation using Google translation services
+ </li>
+        <li>
+ Integrated project management, task management, bug tracking, feature requests, process management. 
+The idea is to integrate Scarab for bug tracking/patches and
+managing/feature requests.
+(As far as team management, this is a serious political issue and I do not
+want to tackle that one yet, not even on the dreamlist.)
+ </li>
+        <li>
+  overview doco for all projects ... CVS Usage precis, overview of opensource
+  and links to relevant doco
+ </li>
+      </ul>
+    </section>
+  </body>
+</document>

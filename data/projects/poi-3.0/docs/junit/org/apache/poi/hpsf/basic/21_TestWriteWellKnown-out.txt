@@ -1,0 +1,13 @@
+Reading file /home/nick/java/jakarta-poi/src/testcases/org/apache/poi/hpsf/data/TestSolidWorks.sldprt
+Reading file /home/nick/java/jakarta-poi/src/testcases/org/apache/poi/hpsf/data/TestCorel.shw
+Reading file /home/nick/java/jakarta-poi/src/testcases/org/apache/poi/hpsf/data/TestShiftJIS.doc
+Reading file /home/nick/java/jakarta-poi/src/testcases/org/apache/poi/hpsf/data/TestGermanWord90.doc
+Reading file /home/nick/java/jakarta-poi/src/testcases/org/apache/poi/hpsf/data/TestSectionDictionary.doc
+Reading file /home/nick/java/jakarta-poi/src/testcases/org/apache/poi/hpsf/data/TestMickey.doc
+Reading file /home/nick/java/jakarta-poi/src/testcases/org/apache/poi/hpsf/data/Test0313rur.adm
+Reading file /home/nick/java/jakarta-poi/src/testcases/org/apache/poi/hpsf/data/TestHPSFWritingFunctionality.doc
+Reading file /home/nick/java/jakarta-poi/src/testcases/org/apache/poi/hpsf/data/TestUnicode.xls
+Reading file /home/nick/java/jakarta-poi/src/testcases/org/apache/poi/hpsf/data/TestEditTime.doc
+Reading file /home/nick/java/jakarta-poi/src/testcases/org/apache/poi/hpsf/data/TestChineseProperties.doc
+Reading file /home/nick/java/jakarta-poi/src/testcases/org/apache/poi/hpsf/data/TestRobert_Flaherty.doc
+Reading file /home/nick/java/jakarta-poi/src/testcases/org/apache/poi/hpsf/data/TestWriteWellKnown.doc

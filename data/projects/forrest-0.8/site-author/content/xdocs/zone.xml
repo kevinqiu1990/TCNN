@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Notes for forrest.zones.apache.org</title>
+  </header>
+  <body>
+    <section id="overview">
+      <title>Overview</title>
+      <p>
+        The server <a href="ext:forrest-zone">forrest.zones.apache.org</a>
+        provides our testing and demonstration area. It is managed by Apache
+        Forrest committers. The material is intended for developer use only.
+      </p>
+    </section>
+    <section id="configuration">
+      <title>Configuration</title>
+      <p>
+        Configuration files and directory structures are stored in SVN at
+        <code>https://svn.apache.org/repos/asf/forrest/zone</code>
+      </p>
+      <p>
+        <strong>config</strong>
+      </p>
+<!-- FIXME: create better layout for notes, just dumping text inside source elements for now. -->
+      <source>
+creates /export/home/config ... $CONFIG
+directories /forrestbot-*/ are the forrestbot homes, see below.
+setenv*.sh ... these are sourced by the forrestbots and other
+  cronjobs and user configs, to set the environment.
+</source>
+      <p>
+        <strong>htdocs</strong>
+      </p>
+      <source>
+creates /var/apache2/htdocs ... $DOC_ROOT
+directories /ft/ and /fts/ are the forrestbot config and results, see below.
+</source>
+      <p>
+        <strong>test-sources</strong>
+      </p>
+      <source>
+A place to hold sources for various test sites.
+Normally these would be in the relevant project's SVN.
+Hold them here until building properly.
+</source>
+      <p>
+        All files are owned in the group "other" so any one of us can
+        edit/update. Make sure that your 'umask' is set properly so that new
+        files have group write permissions. See the
+        <a href="#admin-user">notes</a> about user administration. FIXME: Add a
+        proper group.
+      </p>
+      <p>
+        Cron runs the various Forrestbots and management tasks, such as updating
+        the forrest-trunk software; cleaning up old logfiles, etc. FIXME: These
+        are not yet managed under SVN, see ~crossley/my-crontab.txt
+      </p>
+    </section>
+    <section id="software">
+      <title>Software</title>
+      <p>
+        Global zone software is as described in
+        <a href="http://www.apache.org/dev/solaris-zones.html">zone
+        administration</a>.
+      </p>
+      <p>
+        Various local software is installed in <code>/export/opt/</code> (not
+        managed with SVN) ...
+      </p>
+      <section id="s-forrest">
+        <title>Forrest</title>
+        <p>
+          <strong>forrest-trunk</strong>
+        </p>
+        <source>
+svn checkout of trunk.
+automatically 'svn update' and 'build' via cron: $CONFIG/update-forrest-trunk.sh
+</source>
+        <p>
+          <strong>forrest-trunk-stable</strong>
+        </p>
+        <source>
+svn checkout of trunk, manually updated as needed.
+</source>
+        <p>
+          <strong>forrest-release</strong>
+        </p>
+        <source>
+svn checkout of current release branch, manually updated as needed.
+</source>
+        <p>
+          To manually update -stable or -release do this:
+        </p>
+        <source>
+<![CDATA[
+source $CONFIG/setenv-java-14.sh
+cd /export/opt/forrest-trunk-stable
+svn up
+cd main
+./build.sh clean; ./build.sh
+]]>
+        </source>
+      </section>
+    </section>
+    <section id="fb">
+      <title>The forrestbots</title>
+      <p>
+        There are various forrestbots operating with different versions of
+        forrest. Their home is at $CONFIG
+      </p>
+      <p>
+        <strong>$CONFIG/forrestbot-trunk</strong>
+      </p>
+      <source>
+forrestbot operating with trunk.
+builds various sites automatically, triggered via cron.
+Configuration files and the generated results are at $DOC_ROOT/ft/
+FIXME: The web interface is coming soon.
+</source>
+      <p>
+        <strong>$CONFIG/forrestbot-trunk-stable</strong>
+      </p>
+      <source>
+forrestbot operating with trunk-stable.
+builds various sites, only runs when needed, triggered via cron.
+Configuration files and the generated results are at $DOC_ROOT/fts/
+</source>
+      <p>
+        Forrestbot logs are at $CONFIG/forrestbot-trunk*/logs/ and old ones are
+        cleaned up by the crontab. There is also a log file for each site that
+        forrestbot builds which captures the output of cron (cronout-*.txt). Be
+        sure to verify this logfile after making configuration changes.
+      </p>
+    </section>
+    <section id="admin">
+      <title>Administration</title>
+      <p>
+        See the general notes for the
+        <a href="http://www.apache.org/dev/solaris-zones.html">zone
+        administration</a>.
+      </p>
+      <p>
+        The project chair is the root user. Committers can ask on the dev list
+        to get a user account added or modified.
+      </p>
+      <p>
+        Follow Leo's config ideas at
+        <a href="http://wiki.apache.org/gump/GumpZonesConfig">GumpZonesConfig</a>.
+      </p>
+      <p>
+        Also keep an occasional eye on $CONFIG/update-forrest-trunk.log This is
+        the output of the cronjob to do svn update to trunk and re-build.
+      </p>
+      <p>
+        FIXME: Start apache2 on boot (using new Solaris init.d replacement
+        called smf). At the moment we need to realise that it is down and
+        manually restart as per http://www.apache.org/dev/solaris-zones.html
+        Also it seems that /var/run/apache2 is wiped out on reboot, so need to
+        mkdir again.
+      </p>
+      <source>
+sudo mkdir /var/run/apache2
+sudo /usr/apache2/bin/apachectl -k start
+</source>
+      <section id="admin-user">
+        <title>User administration</title>
+        <p>
+          After receiving your account, please be sure to configure it properly.
+        </p>
+        <p>
+          See some notes at
+          <a href="http://www.apache.org/dev/solaris-zones.html">zone
+          administration</a> and the general notes for
+          <a href="http://www.apache.org/dev/new-committers-guide.html#shell">new
+          committers</a> (especially the part about 'umask').
+        </p>
+        <p>
+          Look at the setup of some other users on our zone.
+        </p>
+      </section>
+    </section>
+  </body>
+</document>

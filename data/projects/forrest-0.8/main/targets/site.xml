@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project default="site" basedir="." name="site">
+<!-- ===============================================================
+       Makes the site.
+       param: name of the skin to use ${project.skin} (now)
+       param: location to find the content ${content-dir}(now)
+       param: location to make temporary context-dir ${project.webapp} 
+       param: location to make temporary cocoon-work-dir ${content-dir}
+       param: debuglevel for logging ${project.debuglevel}
+       param: location of log-file ${project.logkitfile}
+       ===============================================================
+   -->
+  <target name="site" depends="init, -prepare-classpath, check-contentdir, validate" 
+                       if="project.content.present"
+                       description="* Generates a static HTML website for this project">
+    <sequential>
+      <parallel>
+        <java classname="org.apache.cocoon.Main"
+          fork="true"
+          dir="${forrest.core.webapp}"  
+          maxmemory="${forrest.maxmemory}"
+          failonerror="false"
+          resultproperty="buildResult">
+          <jvmarg line="${forrest.jvmargs}"/>
+          <jvmarg value="-Djava.endorsed.dirs=${forrest.endorsed.lib-dir}${path.separator}${java.endorsed.dirs}"/>
+          <jvmarg value="-Dorg.apache.cocoon.core.LazyMode=true"/>
+          <arg value="--logLevel=${project.debuglevel}"/>
+          <arg value="--Logger=${project.logger}"/>
+          <arg value="--logKitconfig=${project.logkitfile}"/>
+          <arg value="--destDir=${project.site-dir}"/>
+          <arg value="--xconf=${project.configfile}"/>
+          <arg value="--brokenLinkFile=${project.brokenlinkfile}"/>
+          <arg value="--workDir=${project.cocoon-work-dir}"/>
+          <arg value="${project.start-uri}"/>
+          <classpath>
+            <path refid="forrest.cp"/>
+          </classpath>
+          <syspropertyset>
+            <propertyref prefix="forrest."/>
+            <propertyref prefix="project."/>
+            <propertyref name="user.home"/>
+            <propertyref name="global.home"/>
+          </syspropertyset>
+        </java>
+        <sequential>
+          <echo>
+  Copying the various non-generated resources to site.
+  Warnings will be issued if the optional project resources are not found.
+  This is often the case, because they are optional and so may not be available.</echo>
+<!-- 
+          | Copy all non-xdocs content across, as we cannot rely on crawling to
+          | discover the whole URI space.  Note: we are emulating the sitemap here;
+          | please ensure they keep in synch.
+          -->
+          <echo message="Copying project resources and images to site ..."/>
+          <copy toDir="${project.site-dir}" 
+            overwrite="true" failonerror="false">
+            <fileset dir="${content-dir}/content">
+<!-- FIXME: what about raw-content-dir? -->
+              <exclude name="xdocs/**"/>
+<!-- FIXME: should use properties since they can be overridden in forrest.properties -->
+            </fileset>
+            <fileset dir="${project.webapp}/resources" includes="images"/>
+          </copy>
+<!-- Copy skin images -->
+          <echo message="Copying main skin images to site ..."/>
+          <mkdir dir="${project.site-dir}/skin/images"/>
+<!-- FIXME: we will only be using either project skins or forrest skins - only copy those necessary (don't forget common) -->
+<!-- Copy forrest skin images -->
+<!-- Do the common ones first followed by those for the skin. -->
+          <copy toDir="${project.site-dir}/skin/images" overwrite="true"
+            failonerror="false">
+            <fileset dir="${forrest.skins-dir}/common/images">
+              <exclude name="**/*.xslt"/>
+            </fileset>
+          </copy>
+          <copy toDir="${project.site-dir}/skin/images" overwrite="true"
+            failonerror="false">
+            <fileset dir="${forrest.skins-dir}/${project.skin}/images">
+              <exclude name="**/*.xslt"/>
+            </fileset>
+          </copy>
+<!-- Copy project skin images -->
+<!-- Do the common ones first followed by those for the skin. -->
+          <echo message="Copying project skin images to site ..."/>
+          <copy toDir="${project.site-dir}/skin/images" overwrite="true"
+            failonerror="false">
+            <fileset dir="${project.skins-dir}/common/images"/>
+          </copy>
+          <copy toDir="${project.site-dir}/skin/images" overwrite="true"
+            failonerror="false">
+            <fileset dir="${project.skins-dir}/${project.skin}/images">
+              <exclude name="**/*.xslt"/>
+            </fileset>
+          </copy>
+<!-- Copy all other non-resource files -->
+<!-- Do the common ones first followed by those for the skin. -->
+          <echo message="Copying main skin css and js files to site ..."/>
+          <copy toDir="${project.site-dir}/skin" 
+            overwrite="true"
+            failonerror="false">
+            <mapper type="flatten"/>
+            <fileset dir="${forrest.skins-dir}/common">
+              <exclude name="images/**"/>
+              <exclude name="xslt/**"/>
+              <exclude name="**/*.xslt"/>
+              <exclude name="skinconf.xsl"/>
+            </fileset>
+          </copy>
+          <copy toDir="${project.site-dir}/skin" 
+            overwrite="true"
+            failonerror="false">
+            <mapper type="flatten"/>
+            <fileset dir="${forrest.skins-dir}/${project.skin}">
+              <exclude name="images/**"/>
+              <exclude name="xslt/**"/>
+              <exclude name="**/*.xslt"/>
+              <exclude name="skinconf.xsl"/>
+            </fileset>
+          </copy>
+<!-- Copy all other non-resource files from project skins-->
+<!-- Do the common ones first followed by those for the skin. -->
+          <echo message="Copying project skin css and js files to site ..."/>
+          <copy toDir="${project.site-dir}/skin" 
+            overwrite="true"
+            failonerror="false">
+            <mapper type="flatten"/>
+            <fileset dir="${project.skins-dir}/common">
+              <exclude name="images/**"/>
+              <exclude name="xslt/**"/>
+              <exclude name="**/*.xslt"/>
+            </fileset>
+          </copy>
+          <copy toDir="${project.site-dir}/skin" 
+            overwrite="true"
+            failonerror="false">
+            <mapper type="flatten"/>
+            <fileset dir="${project.skins-dir}/${project.skin}">
+              <exclude name="images/**"/>
+              <exclude name="xslt/**"/>
+              <exclude name="**/*.xslt"/>
+            </fileset>
+          </copy>
+          <echo>
+Finished copying the non-generated resources.
+Now Cocoon will generate the rest.
+
+Static site will be generated at:
+${project.site-dir}
+
+Cocoon will report the status of each document:
+  - in column 1: *=okay X=brokenLink ^=pageSkipped (see FAQ).
+  </echo>
+        </sequential>
+      </parallel>
+      <echo>
+  Copying broken links file to site root.
+      </echo>
+      <copy toFile="${project.site-dir}/broken-links.xml" file="${project.brokenlinkfile}"/>
+    </sequential>
+    <if>
+      <equals arg1="${buildResult}" arg2="1"/>
+      <then>
+        <fail if="buildResult">
+Error building site.
+        
+There appears to be a problem with your site build.
+
+Read the output above:
+* Cocoon will report the status of each document:
+    - in column 1: *=okay X=brokenLink ^=pageSkipped (see FAQ).
+* Even if only one link is broken, you will still get "failed".
+* Your site would still be generated, but some pages would be broken.
+  - See ${project.site-dir}/broken-links.xml
+        </fail>
+      </then>
+    </if>
+<!-- Fix inconsistent line endings. Workaround for FOR-492
+      Default "eol" attribute will set line endings appropriate to current OS.
+    -->
+<!-- However, due to Ant bug 39585, fixcrlf/@eol is broken on "Mac OS X" so
+     add another workaround. 39585 is fixed now in Ant trunk 1.7alpha
+-->
+    <condition property="isUnix">
+      <os family="unix"/>
+    </condition>
+    <if>
+      <equals arg1="${isUnix}" arg2="true"/>
+      <then>
+        <fixcrlf srcdir="${project.site-dir}" eol="unix">
+          <include name="**/*.html"/>
+        </fixcrlf>
+      </then>
+      <else>
+        <fixcrlf srcdir="${project.site-dir}">
+          <include name="**/*.html"/>
+<!-- The CSS Includes are a workaround for FOR-925 -->
+          <include name="**/*.css"/>
+        </fixcrlf>
+      </else>
+    </if>
+    <echo>
+-----------------------------
+Static site was successfully generated at:
+${project.site-dir}
+------------------------------
+    </echo>
+  </target>
+</project>

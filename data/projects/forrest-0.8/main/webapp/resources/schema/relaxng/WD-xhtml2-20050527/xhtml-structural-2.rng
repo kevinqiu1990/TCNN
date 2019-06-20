@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XHTML2: http://www.w3.org/TR/2005/WD-xhtml2-20050527
+Copyright © 1999-2004 World Wide Web Consortium, (Massachusetts Institute of Technology,
+European Research Consortium for Informatics and Mathematics, Keio University).
+All Rights Reserved. This work is distributed under the W3C® Software Licens [1]
+in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:x="http://www.w3.org/1999/xhtml">
+
+  <x:h1>Structural Module</x:h1>
+
+  <div>
+    <x:h2>The address element</x:h2>
+
+    <define name="address">
+      <element name="address">
+        <ref name="address.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="address.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The blockcode element</x:h2>
+
+    <define name="blockcode">
+      <element name="blockcode">
+        <ref name="blockcode.attlist"/>
+        <ref name="blockcode.content"/>
+      </element>
+    </define>
+
+    <define name="blockcode.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+
+    <define name="blockcode.content">
+      <ref name="blockcode.model"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The blockquote element</x:h2>
+
+    <define name="blockquote">
+      <element name="blockquote">
+        <ref name="blockquote.attlist"/>
+        <ref name="blockquote.content"/>
+      </element>
+    </define>
+
+    <define name="blockquote.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+
+    <define name="blockquote.content">
+      <ref name="blockquote.model"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The div element</x:h2>
+
+    <define name="div">
+      <element name="div">
+        <ref name="div.attlist"/>
+        <ref name="Flow.model"/>
+      </element>
+    </define>
+
+    <define name="div.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The heading elements</x:h2>
+
+    <define name="h">
+      <element name="h">
+        <ref name="Heading.attlist"/>
+        <ref name="Heading.content"/>
+      </element>
+    </define>
+ 
+    <define name="h1">
+      <element name="h1">
+        <ref name="Heading.attlist"/>
+        <ref name="Heading.content"/>
+      </element>
+    </define>
+ 
+    <define name="h2">
+      <element name="h2">
+        <ref name="Heading.attlist"/>
+        <ref name="Heading.content"/>
+      </element>
+    </define>
+     
+    <define name="h3">
+      <element name="h3">
+        <ref name="Heading.attlist"/>
+        <ref name="Heading.content"/>
+      </element>
+    </define>
+ 
+    <define name="h4">
+      <element name="h4">
+        <ref name="Heading.attlist"/>
+        <ref name="Heading.content"/>
+      </element>
+    </define>
+ 
+    <define name="h5">
+      <element name="h5">
+        <ref name="Heading.attlist"/>
+        <ref name="Heading.content"/>
+      </element>
+    </define>
+
+    <define name="h6">
+      <element name="h6">
+        <ref name="Heading.attlist"/>
+        <ref name="Heading.content"/>
+      </element>
+    </define>
+
+    <define name="Heading.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+ 
+    <define name="Heading.content">
+      <ref name="Text.model"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The p element</x:h2>
+
+    <define name="p">
+      <element name="p">
+        <ref name="p.attlist"/>
+        <ref name="p.content"/>
+      </element>
+    </define>
+
+    <define name="p.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+
+    <define name="p.content">
+      <ref name="p.model"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The pre element</x:h2>
+
+    <define name="pre">
+      <element name="pre">
+        <ref name="pre.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="pre.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The section element</x:h2>
+
+    <define name="section">
+      <element name="section">
+        <ref name="section.attlist"/>
+        <ref name="Flow.model"/>
+      </element>
+    </define>
+
+    <define name="section.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The separator element</x:h2>
+
+    <define name="separator">
+      <element name="separator">
+        <ref name="separator.attlist"/>
+      </element>
+    </define>
+
+    <define name="separator.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>Content Model</x:h2>
+
+    <define name="Heading.class">
+      <choice>
+        <ref name="h"/>
+        <ref name="h1"/>
+        <ref name="h2"/>
+        <ref name="h3"/>
+        <ref name="h4"/>
+        <ref name="h5"/>
+        <ref name="h6"/>
+      </choice>
+    </define>
+
+    <define name="Structural.class">
+      <choice>
+        <ref name="address"/>
+        <ref name="blockcode"/>
+        <ref name="blockquote"/>
+        <ref name="div"/>
+        <ref name="p"/>
+        <ref name="pre"/>
+        <ref name="section"/>
+        <ref name="separator"/>
+      </choice>
+    </define>
+
+    <define name="blockcode.model">
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="Text.class"/>
+          <ref name="Heading.class"/>
+          <ref name="Structural.class"/>
+          <ref name="List.class"/>
+          <ref name="Misc.class"/>
+        </choice>
+      </zeroOrMore>
+    </define>
+
+    <define name="blockquote.model">
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="Text.class"/>
+          <ref name="Heading.class"/>
+          <ref name="Structural.class"/>
+          <ref name="List.class"/>
+          <ref name="Misc.class"/>
+        </choice>
+      </zeroOrMore>
+    </define>
+
+    <define name="p.model">
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="Text.class"/>
+          <ref name="List.class"/>
+          <ref name="blockcode"/>
+          <ref name="blockquote"/>
+          <ref name="pre"/>
+          <ref name="table"/>
+          <ref name="Misc.class"/>
+        </choice>
+      </zeroOrMore>
+    </define>
+
+    <define name="Structural.mix">
+      <zeroOrMore>
+        <choice>
+          <ref name="Heading.class"/>
+          <ref name="Structural.class"/>
+          <ref name="List.class"/>
+          <ref name="Misc.class"/>
+        </choice>
+      </zeroOrMore>
+    </define>
+
+    <define name="Structural.model">
+      <oneOrMore>
+        <ref name="Structural.mix"/>
+      </oneOrMore>
+    </define>
+
+    <define name="Flow.model">
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="Heading.class"/>
+          <ref name="Structural.class"/>
+          <ref name="List.class"/>
+          <ref name="Text.class"/>
+          <ref name="Misc.class"/>
+        </choice>
+      </zeroOrMore>
+    </define>
+  </div>
+
+</grammar>

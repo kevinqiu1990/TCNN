@@ -1,0 +1,428 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project basedir="." name="plugins">
+<!-- public targets -->
+  <target name="available-plugins"
+          depends="init-props, plugin-unavailable, fetch-plugins-descriptors"
+          description="What plugins are available?">
+    <for param="plugin-descriptor-file">
+      <path>
+        <fileset dir="${project.temp-dir}" includes="plugins-*.xml"/>
+      </path>
+      <sequential>
+        <xslt in="@{plugin-descriptor-file}" 
+          out="${project.temp-dir}/pluginlist2echobuild.xml"
+          style="${forrest.core}/var/pluginlist2echo.xsl"/>
+        <ant antfile="${project.temp-dir}/pluginlist2echobuild.xml"/>
+      </sequential>
+    </for>
+  </target>
+  <target name="plugin-unavailable">
+    <property name="plugin.unavailable" value="true"/>
+  </target>
+  <target name="check-plugin">
+    <condition property="plugin.unavailable">
+      <and>
+        <not>
+          <available type="dir" file="${forrest.plugins-dir}/${versioned.name}"/>
+        </not>
+        <not>
+          <available type="file" file="${forrest.plugins-dir}/${versioned.name}.zip"/>
+        </not>
+      </and>
+    </condition>
+    <if>
+      <isset property="plugin.unavailable"/>
+      <then>
+        <echo>${versioned.name} is not available in the build dir. Trying to fetch it...</echo>
+      </then>
+      <else>
+        <echo>${versioned.name} is available in the build dir. Trying to update it...</echo>
+      </else>
+    </if>
+  </target>
+  <target name="unpack-plugin"
+           if="downloaded"
+          depends="init-props">
+    <if>
+      <available file="${forrest.plugins-dir}/${versioned.name}.zip"/>
+      <then>
+        <antcall target="extract-plugin">
+          <param name="plugin" value="${versioned.name}"/>
+        </antcall>
+      </then>
+      <else>
+        <if>
+          <available file="${forrest.plugins-dir}/${plugin.name}.zip"/>
+          <then>
+            <antcall target="extract-plugin">
+              <param name="plugin" value="${plugin.name}"/>
+            </antcall>
+          </then>
+          <else>
+            <if>
+              <not>
+                <available file="${forrest.plugins-dir}/${plugin.name}"/>
+              </not>
+              <then>
+                <echo>
+ERROR
+=====
+       
+Unable to retrieve the ${versioned.name} plugin.
+There may be more information about the reason for this in output
+above. The usual cause is that Forrest has been unable to download
+the plugin descriptor file that indicates where this plugin is to be
+downloaded from. If you are behind a firewall then set the proxy.host 
+and proxy.port values in the forrest.properties file.
+
+You may also like to check the value of the 
+forrest.plugins.descriptors property in the forrest.properties file
+and ensure that the locations indicated by that value are accessible
+(note there should be no spaces in this property).
+
+If all else fails you can can manually install the plugins you need 
+by downloading the install bundles (see 
+http://forrest.apache.org/pluginDocs/plugins_0_70/index.html) and unpacking 
+them into FORREST_HOME/build/plugins. 
+
+Note that once the plugins have been installed, they will not need
+to be installed again unless you delete them or wish to upgrade them.
+                 </echo>
+                <fail message="Unable to install required plugins. See error messages above for more detail."/>
+              </then>
+            </if>
+          </else>
+        </if>
+      </else>
+    </if>
+  </target>
+  <target name="extract-plugin">
+    <unzip dest="${forrest.plugins-dir}/${plugin}">
+      <fileset dir="${forrest.plugins-dir}/">
+        <include name="${plugin}.zip"/>
+      </fileset>
+    </unzip>
+<!-- add to the entity catalog -->
+    <copy file="${forrest.core}/var/initial_catalog.xcat"
+     tofile="${forrest.plugins-dir}/catalog.xcat"
+     overwrite="false"/>
+    <if>
+      <available file="${forrest.plugins-dir}/${plugin}/resources/schema/catalog.xcat"/>
+      <then>
+        <xslt in="${forrest.plugins-dir}/catalog.xcat"
+           out="${forrest.plugins-dir}/catalog.xcat.new"
+           style="${forrest.core}/var/catalogMountSnippet.xsl"
+           force="true">
+          <param name="plugin-catalog-path"
+           expression="${plugin}/resources/schema/catalog.xcat"/>
+        </xslt>
+        <move file="${forrest.plugins-dir}/catalog.xcat.new" 
+         tofile="${forrest.plugins-dir}/catalog.xcat"/>
+      </then>
+    </if>
+  </target>
+  <target name="configure-plugin"
+    unless="plugin.unavailable">
+    <if>
+      <available file="${forrest.plugins-dir}/${versioned.name}"/>
+      <then>
+        <if>
+          <available property="input-plugin" file="${forrest.plugins-dir}/${versioned.name}/input.xmap"/>
+          <then>
+            <antcall target="configure-input-plugin">
+              <param name="plugin" value="${versioned.name}"/>
+            </antcall>
+          </then>
+        </if>
+        <if>
+          <available property="output-plugin" file="${forrest.plugins-dir}/${versioned.name}/output.xmap"/>
+          <then>
+            <antcall target="configure-output-plugin">
+              <param name="plugin" value="${versioned.name}"/>
+            </antcall>
+          </then>
+        </if>
+        <if>
+          <available property="internal-plugin" file="${forrest.plugins-dir}/${versioned.name}/internal.xmap"/>
+          <then>
+            <antcall target="configure-internal-plugin">
+              <param name="plugin" value="${versioned.name}"/>
+            </antcall>
+          </then>
+        </if>
+        <if>
+          <available property="plugin-locationmap" file="${forrest.plugins-dir}/${versioned.name}/locationmap.xml"/>
+          <then>
+            <antcall target="configure-plugin-locationmap">
+              <param name="plugin" value="${versioned.name}"/>
+            </antcall>
+          </then>
+          <else>
+            <echo message="No locationmap provided for plugin ${versioned.name}"/>
+          </else>
+        </if>
+      </then>
+      <else>
+        <if>
+          <available property="input-plugin" file="${forrest.plugins-dir}/${plugin.name}/input.xmap"/>
+          <then>
+            <antcall target="configure-input-plugin">
+              <param name="plugin" value="${plugin.name}"/>
+            </antcall>
+          </then>
+        </if>
+        <if>
+          <available property="output-plugin" file="${forrest.plugins-dir}/${plugin.name}/output.xmap"/>
+          <then>
+            <antcall target="configure-output-plugin">
+              <param name="plugin" value="${plugin.name}"/>
+            </antcall>
+          </then>
+        </if>
+        <if>
+          <available property="internal-plugin" file="${forrest.plugins-dir}/${plugin.name}/internal.xmap"/>
+          <then>
+            <antcall target="configure-internal-plugin">
+              <param name="plugin" value="${plugin.name}"/>
+            </antcall>
+          </then>
+        </if>
+        <if>
+          <available property="plugin-locationmap" file="${forrest.plugins-dir}/${plugin.name}/locationmap.xml"/>
+          <then>
+            <antcall target="configure-plugin-locationmap">
+              <param name="plugin" value="${plugin.name}"/>
+            </antcall>
+          </then>
+          <else>
+            <echo message="No locationmap provided for plugin ${plugin.name}"/>
+          </else>
+        </if>
+      </else>
+    </if>
+  </target>
+  <target name="configure-input-plugin">
+<!-- add the snippet to plugins/input.xmap that will mount the plugin
+          specific input.xmap -->
+    <echo>Mounting input plugin: ${plugin}</echo>
+    <xslt in="${project.temp-dir}/input.xmap"
+       out="${project.temp-dir}/input.xmap.new"
+       style="${forrest.core}/var/pluginMountSnippet.xsl"
+       force="true">
+      <param name="plugin-name" expression="${plugin}"/>
+      <param name="plugin-type" expression="input"/>
+    </xslt>
+    <move file="${project.temp-dir}/input.xmap.new" 
+       tofile="${project.temp-dir}/input.xmap"/>
+    <xslt in="${project.temp-dir}/resources.xmap"
+       out="${project.temp-dir}/resources.xmap.new"
+       style="${forrest.core}/var/pluginMountSnippet.xsl"
+       force="true">
+      <param name="plugin-name" expression="${plugin}"/>
+      <param name="plugin-type" expression="resources"/>
+    </xslt>
+    <move file="${project.temp-dir}/resources.xmap.new" 
+       tofile="${project.temp-dir}/resources.xmap"/>
+  </target>
+  <target name="configure-output-plugin">
+<!-- add the snippet to plugins/output.xmap that will mount the plugin
+          specific input.xmap -->
+    <echo>Mounting output plugin: ${plugin}</echo>
+    <xslt in="${project.temp-dir}/output.xmap"
+       out="${project.temp-dir}/output.xmap.new"
+       style="${forrest.core}/var/pluginMountSnippet.xsl"
+       force="true">
+      <param name="plugin-name" expression="${plugin}"/>
+      <param name="plugin-type" expression="output"/>
+    </xslt>
+    <move file="${project.temp-dir}/output.xmap.new" 
+       tofile="${project.temp-dir}/output.xmap"/>
+  </target>
+  <target name="configure-internal-plugin">
+<!-- add the snippet to plugins/internal.xmap that will mount the plugin
+          specific input.xmap -->
+    <echo>Mounting internal plugin: ${plugin}</echo>
+    <xslt in="${project.temp-dir}/internal.xmap"
+       out="${project.temp-dir}/internal.xmap.new"
+       style="${forrest.core}/var/pluginMountSnippet.xsl"
+       force="true">
+      <param name="plugin-name" expression="${plugin}"/>
+      <param name="plugin-type" expression="internal"/>
+    </xslt>
+    <move file="${project.temp-dir}/internal.xmap.new" 
+       tofile="${project.temp-dir}/internal.xmap"/>
+  </target>
+  <target name="configure-plugin-locationmap">
+<!-- add the snippet to plugins/locationmap.xml that will mount the plugin
+          specific locationmap -->
+    <echo>Mounting plugin locationmap for ${plugin}</echo>
+    <xslt in="${project.temp-dir}/locationmap.xml"
+       out="${project.temp-dir}/locationmap.xml.new"
+       style="${forrest.core}/var/pluginLmMountSnippet.xsl"
+       force="true">
+      <param name="plugin-name" expression="${plugin}"/>
+    </xslt>
+    <move file="${project.temp-dir}/locationmap.xml.new" 
+       tofile="${project.temp-dir}/locationmap.xml"/>
+  </target>
+  <target name="fetch-plugins-descriptors" depends="init-proxy" unless="plugins.desc.already.fetched">
+<!-- Copy the initial local descriptors, then replace them with the
+      published descriptors. This enables offline operation. -->
+    <copy file="${forrest.home}/plugins/plugins.xml"
+      tofile="${project.temp-dir}/plugins-1.xml"
+      preservelastmodified="true"/>
+    <copy file="${forrest.home}/whiteboard/plugins/whiteboard-plugins.xml"
+      tofile="${project.temp-dir}/plugins-2.xml"
+      preservelastmodified="true"/>
+    <var name="plugin-counter" value="1"/>
+    <for list="${forrest.plugins.descriptors}" param="url">
+      <sequential>
+        <echo>Fetching plugins descriptor: @{url}</echo>
+        <get src="@{url}" 
+           dest="${project.temp-dir}/plugins-${plugin-counter}.xml"
+           verbose="true" usetimestamp="true" ignoreerrors="true"/>
+        <available property="plugin.list-${plugin-counter}.present"
+                 file="${project.temp-dir}/plugins-${plugin-counter}.xml"/>
+        <math result="plugin-counter" operand1="${plugin-counter}" operation="+" operand2="1" datatype="int"/>
+      </sequential>
+    </for>
+    <var name="plugin-counter" value="1"/>
+    <for list="${forrest.plugins.descriptors}" param="url">
+      <sequential>
+        <if>
+          <available file="${project.temp-dir}/plugins-${plugin-counter}.xml"/>
+          <then>
+            <echo>Plugin list loaded from @{url}.</echo>
+          </then>
+          <else>
+            <echo>
+            WARNING
+            =======
+            
+            Unable to load plugin list number ${plugin-counter} from @{url}. 
+            Any plugins identified in this plugin list cannot be installed 
+            automatially, see further errors below.</echo>
+          </else>
+        </if>
+        <math result="plugin-counter" operand1="${plugin-counter}" operation="+" operand2="1" datatype="int"/>
+      </sequential>
+    </for>
+  </target>
+  <target name="fetch-plugin" 
+          
+          depends="init-props, fetch-plugins-descriptors">
+    <echo>Trying to find the description of ${versioned.name} in the different descriptor files</echo>
+    <trycatch property="plugin-found">
+      <try>
+        <for param="plugin-descriptor-file">
+          <path>
+            <fileset dir="${project.temp-dir}" includes="plugins-*.xml"/>
+          </path>
+          <sequential>
+            <echo>Using the descriptor file @{plugin-descriptor-file}...</echo>
+            <xslt in="@{plugin-descriptor-file}" 
+		          out="${project.temp-dir}/pluginlist2fetchbuild.xml"
+		          style="${forrest.core}/var/pluginlist2fetch.xsl"
+		          force="true">
+              <param name="plugin-name" expression="${plugin.name}"/>
+              <param name="plugin-version" expression="${plugin.version}"/>
+              <param name="plugin-dir" expression="${forrest.plugins-dir}/"/>
+              <param name="plugin-src-dir" expression="${project.required.plugins.src}"/>
+              <param name="forrest-version" expression="${forrest.version}"/>
+            </xslt>
+            <antfetch antfile="${project.temp-dir}/pluginlist2fetchbuild.xml" return="plugin-found,downloaded"/>
+            <fail if="plugin-found"/>
+          </sequential>
+        </for>
+      </try>
+      <catch>
+        <echo>Fetch-plugin Ok, installing !</echo>
+      </catch>
+    </trycatch>
+<!-- Here we stop if the description of a plugin has not been found... -->
+    <fail unless="plugin-found">STOP GENERATION !
+    WARNING - Cannot find the plugin description
+    ============================================ 
+
+    Unable to find the description of ${versioned.name} in the different descriptor files.
+    This plugin used by this project (declared in project.required.plugins variable of the forrest.properties).
+    Forrest will stop the generation now.
+    To correct this :
+      - Check the name of the plugin and correct it in case it is wrong,
+      - Add the missing descriptor file in the list in the forrest.plugins.descriptors variable (forrest.properties) if necessary...
+    </fail>
+  </target>
+  <target name="install-plugin" depends="check-plugin, fetch-plugin, unpack-plugin"/>
+  <target name="init-plugins" depends="init-props, fetch-plugins-descriptors"
+    description="Ensure the required plugins are available locally, if any are not, download them automatically">
+    <mkdir dir="${forrest.plugins-dir}"/>
+    <mkdir dir="${project.temp-dir}"/>
+    <mkdir dir="${project.webapp}/conf"/>
+    <copy file="${forrest.core}/var/initial_plugins_sitemap.xmap"
+      tofile="${project.temp-dir}/input.xmap"
+      overwrite="true"/>
+    <copy file="${forrest.core}/var/initial_plugins_sitemap.xmap"
+      tofile="${project.temp-dir}/resources.xmap"
+      overwrite="true"/>
+    <copy file="${forrest.core}/var/initial_plugins_sitemap.xmap"
+      tofile="${project.temp-dir}/output.xmap"
+      overwrite="true"/>
+    <copy file="${forrest.core}/var/initial_plugins_sitemap.xmap"
+      tofile="${project.temp-dir}/internal.xmap"
+      overwrite="true"/>
+    <copy file="${forrest.core}/var/initial_plugins_locationmap.xml"
+          tofile="${project.temp-dir}/locationmap.xml"
+      overwrite="true"/>
+    <for list="${project.required.plugins}" param="name">
+      <sequential>
+        <echo>
+      --------------------------------------------------------------
+      Installing plugin: @{name}
+      --------------------------------------------------------------
+       </echo>
+        <propertyregex property="plugin.name"
+              override="true"
+              input="@{name}"
+              regexp="(.*)-(.*)"
+              select="\1"
+              casesensitive="false" 
+              defaultvalue="@{name}"/>
+        <propertyregex property="plugin.version"
+              override="true"
+              input="@{name}"
+              regexp="(.*)-(.*)"
+              select="\2"
+              casesensitive="false"
+              defaultvalue=""/>
+        <antcall target="install-plugin">
+          <param name="plugin.name" value="${plugin.name}"/>
+          <param name="plugin.version" value="${plugin.version}"/>
+          <param name="versioned.name" value="@{name}"/>
+          <param name="plugins.desc.already.fetched" value="true"/>
+          <param name="proxy.already.set" value="true"/>
+        </antcall>
+        <antcall target="configure-plugin">
+          <param name="plugin.name" value="${plugin.name}"/>
+          <param name="plugin.version" value="${plugin.version}"/>
+          <param name="versioned.name" value="@{name}"/>
+        </antcall>
+      </sequential>
+    </for>
+  </target>
+</project>

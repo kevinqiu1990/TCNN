@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Internationalisation (i18n)</title>
+  </header>
+  <body>
+    <section id="intro">
+      <title>Introduction</title>
+      <p></p>
+    </section>
+    <fixme author="">
+      This sample will explain and demonstrate the i18n capabilities. Issue
+      <a href="http://issues.apache.org/jira/browse/FOR-707">FOR-707</a> has
+      some discussion and doc links. We need to summarise it all into this demo.
+    </fixme>
+    <section id="locale-request-param">
+      <title>Using the locale request parameter</title>
+      <p>
+        As a simple example of Forrest's i18n functionality, you can view
+        <a href="site:i18n-demo">this demo page</a>. To see alternative language
+        versions of this page, append the <code>locale</code> request parameter,
+        e.g. <code>localhost:8888/samples/demo-i18n.html?locale=fr</code>
+      </p>
+      <p>
+        There are some other laguage demos (de, fr, nl).
+      </p>
+      <p>
+        This only works in 'forrest run' mode. There are other ways to switch,
+        this is just one way of demonstrating these features.
+      </p>
+    </section>
+  </body>
+</document>

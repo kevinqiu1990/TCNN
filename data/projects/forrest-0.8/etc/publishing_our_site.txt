@@ -1,0 +1,29 @@
+To publish from trunk/site-author/
+
+Do once:
+# Create $FORREST_HOME/deploy.svn.settings file. These credentials
+# are needed by forrestbot so that it can do your 'svn add'
+# and 'svn commit' etc. to the forrest/site/ repository.
+# The deploy.svn.settings file looks like:
+<?xml version="1.0"?>
+<project>
+  <property name="deploy.svn.user" value="myApacheUsername"/>
+  <property name="deploy.svn.password" value="myPassword"/>
+</project>
+
+
+# Make changes to sources, and then test, then commit.
+# Use the forrestbot to build and then deploy to svn.apache.org ...
+
+cd site-author
+forrest -f publish.xml build
+# ... verify files in build/forrest-docs
+forrest -f publish.xml deploy -Ddeploy.svn.commit-message="my commit message"
+
+Now the files are in SVN at forrest/site
+Periodically the real website files are updated from there.
+You do not have to do anything else.
+
+----------------------
+Note: The first time that you deploy, it will need to do
+a long svn checkout first.

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd" [
+
+]>
+<document>
+  <header>
+    <title>Skin packaging, provision, and use</title>
+    <subtitle>Automated distributed skin packages</subtitle>
+  </header>
+  <body>
+    <section id="overview">
+      <title>Overview</title>
+      <p>
+        Skins are standard zip archives with a *.zip extension. This enables
+        them to be unpacked and installed automatically.
+      </p>
+      <p>
+        To publish a skin:
+      </p>
+      <source>
+1 - forrest package-skin
+The skin package will be made in the skin dir, next to the custom skin.
+2 - place the file in a directory on a web server
+3 - ask forrest-dev to add the url and the skin name to the list of skins
+</source>
+      <p>
+        To use a custom skin with automatic download:
+      </p>
+      <source>
+1 - set the skin property in forrest.properties to the name of the skin
+2 - forrest install-skin
+3 - forrest
+</source>
+      <p>
+        Currently there are two test skins: "testskin" and "testskin2"
+      </p>
+      <p>
+        To see the names of the remote skins:
+      </p>
+      <source>forrest available-skins</source>
+    </section>
+    <section id="notes">
+      <title>Notes</title>
+      <p>
+        The skin will get blown away by the next 'build clean' in forrest. But
+        that is okay because it is so quick to go get another copy. Also it may
+        be preferable to get a fresh copy. If the user wanted to keep the skin
+        and perhaps enhance it, then they can copy it to their project.
+      </p>
+    </section>
+  </body>
+</document>

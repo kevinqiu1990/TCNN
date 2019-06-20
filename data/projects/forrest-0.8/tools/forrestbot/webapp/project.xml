@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project>
+<!-- the version of maven's project object model -->
+  <pomVersion>3</pomVersion>
+<!-- a unique name for this project -->
+  <id>forrestbot-webapp</id>
+<!-- a short but descriptive name for the project -->
+  <name>Forrestbot Webapp</name>
+<!-- The version of the project under development, e.g.
+       1.1, 1.2, 2.0-SNAPSHOT -->
+  <currentVersion>2.0</currentVersion>
+<!-- details about the organization that 'owns' the project -->
+  <organization>
+    <name>Apache Software Foundation</name>
+    <url>http://www.apache.org/</url>
+  </organization>
+<!-- the year the project started -->
+  <inceptionYear>2004</inceptionYear>
+  <package>org.apache.forrest.forrestbot.webapp</package>
+<!-- jar files the project is dependent on -->
+  <dependencies>
+<!-- for build only -->
+    <dependency>
+      <id>servletapi</id>
+      <version>2.3</version>
+    </dependency>
+<!-- include in war for runtime -->
+    <dependency>
+      <id>xerces</id>
+      <version>2.4.0</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>jstl</id>
+      <version>1.0.2</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>log4j</id>
+      <version>1.2.8</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>struts</id>
+      <version>1.1</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>struts</id>
+      <artifactId>struts-el</artifactId>
+      <version>1.1</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <groupId>taglibs</groupId>
+      <artifactId>standard</artifactId>
+      <version>1.0.4</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>commons-logging</id>
+      <version>1.0.3</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>commons-beanutils</id>
+      <version>1.6.1</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>commons-digester</id>
+      <version>1.5</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>commons-collections</id>
+      <version>2.1</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>commons-validator</id>
+      <version>1.0.2</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+<!-- osuser and dependencies -->
+    <dependency>
+      <id>osuser</id>
+      <version>1.0-dev</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>oscore</id>
+      <version>2.2.2</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>propertyset</id>
+      <version>1.2</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>dom4j</id>
+      <version>1.4</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+<!-- 2.3+ servlet container would have the struts tlds already 
+    ...
+    -->
+  </dependencies>
+<!-- build information for the project -->
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>src/conf</directory>
+        <includes>
+          <include>*.properties</include>
+          <include>*.xml</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/java/org/apache/forrest/forrestbot/webapp</directory>
+        <targetPath>org/apache/forrest/forrestbot/webapp</targetPath>
+        <includes>
+          <include>*.properties</include>
+          <include>*.xml</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
+</project>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd">
+<document>
+  <header>
+    <title>Using Catalog Entity Resolver for local DTDs</title>
+  </header>
+  <body>
+    <section id="overview">
+      <title>Overview</title>
+      <p>
+        This is a collection of notes for configuring the Catalog Entity
+        Resolver with your favourite XML tools (validating parsers and editors).
+      </p>
+      <p>
+        All XML documents declare their ruleset - the Document Type Definition
+        (DTD). When Forrest processes the documents, it uses the Resolver to
+        find Forrest's local copies of the DTDs, rather than trundling out onto
+        the network.
+      </p>
+      <p>
+        Many Java-based XML tools already have an entity resolver, probably the
+        same one that Forrest uses. Many non-Java tools also have an entity
+        resolver. To use these tools with documents based on the Forrest DTDs,
+        you need to configure the tools.
+      </p>
+      <note>
+        The information provided here is not intended to endorse any particular
+        tool.
+      </note>
+      <p>
+        If you have any other configuration tips for a particular tool, then
+        please send them to the forrest-dev mailing list.
+      </p>
+    </section>
+    <section id="config">
+      <title>General configuration notes</title>
+      <p>
+        The Forrest DTDs and supporting resources are in the Forrest
+        distribution at <code>main/webapp/resources/schema/</code>
+      </p>
+      <p>
+        Usually all that is required is to direct your tool to the "catalog"
+        supplied by Forrest at either:
+        <code>$FORREST_HOME/main/webapp/resources/schema/catalog.xcat</code>
+        (for XML Catalog) or
+        <code>$FORREST_HOME/main/webapp/resources/schema/catalog</code> (for TR
+        9401 Catalog).
+      </p>
+    </section>
+    <section id="tools">
+      <title>Configuring specific tools</title>
+      <section id="system">
+        <title>Operating system catalog</title>
+        <p>
+          Some operating systems already provide a system-wide catalog that is
+          used by many tools. This is usually located at
+          <code>/etc/xml/catalog</code> or at
+          <code>/usr/share/sgml/catalog</code> files.
+        </p>
+        <p>
+          For an XML Catalog, add this line:
+        </p>
+        <source>
+<![CDATA[
+<nextCatalog
+catalog="/usr/local/svn/forrest/main/webapp/resources/schema/catalog.xcat"/>
+        ]]>
+        </source>
+        <p>
+          For a TR 9401 Catalog, add this line:
+        </p>
+        <source>
+<![CDATA[
+CATALOG \
+"/usr/local/svn/forrest/main/webapp/resources/schema/catalog"
+        ]]>
+        </source>
+        <p>
+          Actually you probably do not want to touch that system catalog, so
+          rather create your own catalog file in your home directory which
+          refers to both the Forrest catalog and your system catalog.
+        </p>
+      </section>
+      <section id="xmllint">
+        <title>xmllint validating parser</title>
+        <p>
+          "xmllint" is part of the "libxml2" package. It is very fast and
+          powerful, with are many facilities. It can validate whole directories
+          of files at once. Set the SGML_CATALOG_FILES environment variable.
+        </p>
+        <source>
+export SGML_CATALOG_FILES=$SGML_CATALOG_FILES:\
+$FORREST_HOME/main/webapp/resources/schema/catalog
+xmllint --valid --catalogs --noout mydoc.xml
+        </source>
+      </section>
+      <section id="vim">
+        <title>Vim</title>
+        <p>
+          The following .vimrc entries are useful:
+        </p>
+        <source>
+au FileType xml set efm=%A%f:%l:\ %.%#error:\ %m,%-Z%p^,%-C%.%#
+au FileType xml set makeprg=xmllint\ --noout\ --valid\ --catalogs\ %
+        </source>
+        <p>
+          See other notes about using
+          <link href="http://www.pinkjuice.com/howto/vimxml/">Vim as XML
+          editor</link>.
+        </p>
+      </section>
+      <section id="emacs">
+        <title>Emacs</title>
+        <p>
+          See <link href="http://www.thaiopensource.com/nxml-mode/">nXML
+          mode</link> and
+          <link href="http://www.dpawson.co.uk/relaxng/nxml/">FAQ</link>.
+        </p>
+      </section>
+      <section id="onsgmls">
+        <title>onsgmls validating parser</title>
+        <p>
+          "onsgmls" is part of the "Open SP" package. You need to also tell it
+          where to find an "SGML declaration". The easiest way is to create your
+          own little "my-catalog" file, containing this:
+        </p>
+        <source>
+SGMLDECL "/usr/share/sgml/xml.dcl"
+CATALOG \
+"/usr/local/svn/forrest/main/webapp/resources/schema/catalog"
+        </source>
+        <p>
+          Then point the parser at it:
+        </p>
+        <source>
+onsgmls -c path/to/my-catalog -wall -wxml -s mydoc.xml
+        </source>
+      </section>
+      <section id="jedit">
+        <title>jEdit - Open Source programmer's text editor</title>
+        <source>
+<![CDATA[
+Select the menu:
+Utilities > Global Options > Plugins:XML > Catalogs
+Select the "+" button, and use the "File System Browser"
+to specify the TR9401 Catalog file:
+"forrest/main/webapp/resources/schema/catalog"
+        ]]>
+        </source>
+        <source>
+<![CDATA[
+On version 4.2. Select the menu:
+Plugins > Plugins Options > Plugins:XML > Catalogs
+Select the "+" button, and use the "File System Browser"
+to specify the TR9401 Catalog file:
+"forrest/main/webapp/resources/schema/catalog"
+        ]]>
+        </source>
+      </section>
+      <section id="oxygenxml">
+        <title>oXygen XML Editor</title>
+        <source>
+<![CDATA[
+Select the menu:
+Options > Preferences > XML Catalog
+Specify the XML Catalog file:
+"forrest/main/webapp/resources/schema/catalog.xcat"
+        ]]>
+        </source>
+      </section>
+      <section id="xmlspy">
+        <title>xmlspy</title>
+        <source>
+<![CDATA[
+Add the following entry to the file CustomCatalog.xml
+(located in XMLSpy install directory):
+
+<nextCatalog
+catalog="file://localhost/C:/apache/forrest/main/webapp/
+resources/schema/catalog.xcat"/>
+        ]]>
+        </source>
+      </section>
+      <section id="xxe">
+        <title>XMLmind XML Editor (XXE)</title>
+        <section>
+          <title>XXE v2.5p2 or older</title>
+          <source>
+<![CDATA[
+Select the menu:
+Options > Options > Schema > Add File
+Specify the XML Catalog file:
+"forrest/main/webapp/resources/schema/catalog.xcat"
+        ]]>
+          </source>
+        </section>
+        <section>
+          <title>XXE v2.5p3+</title>
+          <p>
+            XXE supports catalogs by automatic detection via configuration
+            files. Download the
+            <fork href="http://www.splike.com/howtos/xxe_forrest.html">XXE
+            Forrest Config</fork> files from splike.com; this also add support
+            for WYSIWYG editing of forrest documents. Note: This configuration
+            suite has recently been added to the Forrest scratchpad.
+          </p>
+        </section>
+      </section>
+    </section>
+    <section id="info">
+      <title>Further information and resources</title>
+      <p>
+        Forrest and Cocoon use the
+        <link href="http://xml.apache.org/commons/components/resolver/">Catalog
+        Entity Resolver</link> that is provided by the
+        <link href="http://xml.apache.org/commons/">Apache XML Commons</link>
+        project. The resolver is packaged with the Forrest distribution at
+        <code>lib/core/xml-commons-resolver-x.y.jar</code>
+      </p>
+      <p>
+        Other Forrest documentation has some notes about configuring the entity
+        resolver for your own DTDs. See <link href="site:validation">XML
+        Validation</link>.
+      </p>
+      <p>
+        Cocoon has extensive documentation about the entity resolver. See
+        <link href="ext:cocoon/catalogs">Entity resolution with catalogs</link>.
+      </p>
+    </section>
+  </body>
+</document>

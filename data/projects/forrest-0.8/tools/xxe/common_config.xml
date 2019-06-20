@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<configuration name="Forrest Common"
+  xsi:schemaLocation="http://www.xmlmind.com/xmleditor/schema/configuration
+                      xsd/configuration.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.xmlmind.com/xmleditor/schema/configuration"
+  xmlns:cfg="http://www.xmlmind.com/xmleditor/schema/configuration">
+  <include location="toolBar.xml" />
+  <documentResources>
+    <resource path="//img/@src"/>
+    <resource path="//figure/@src"/>
+    <resource path="//icon/@src"/>
+  </documentResources>
+  <elementTemplate xmlns="" name="tableHeaded">
+    <table>
+      <tr>
+        <th>Column 1</th>
+        <th>Column 2</th>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </elementTemplate>
+  <elementTemplate xmlns="" name="tableUnheaded">
+    <table>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </elementTemplate>
+  <elementTemplate xmlns="" name="tableRow">
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+  </elementTemplate>
+<!-- Bindings =========================================================== -->
+<!--   modified from xhtml & docbook config files =============== -->
+<!-- attempt to behave like a word-processor. -->
+  <binding>
+    <keyPressed code="ENTER" />
+    <command name="forrest.splitOrInsertNewLine" />
+  </binding>
+  <binding>
+    <keyPressed code="DELETE" />
+    <command name="forrest.joinOrDeleteChar" />
+  </binding>
+  <binding>
+    <keyPressed code="BACK_SPACE" />
+    <command name="forrest.joinOrDeleteChar" parameter="backwards" />
+  </binding>
+  <command name="forrest.splitOrInsertNewLine">
+    <macro trace="false">
+      <choice>
+        <command name="insertControlChar" parameter="\n" />
+        <sequence>
+          <command name="selectNode" parameter="ancestorOrSelf[implicitElement] p td th li" />
+          <command name="split" />
+        </sequence>
+      </choice>
+    </macro>
+  </command>
+  <command name="forrest.joinOrDeleteChar">
+    <macro trace="false">
+      <choice>
+        <sequence>
+          <test expression="($dot/ancestor::p or $dot/ancestor::li or $dot/ancestor::td or $dot/ancestor::th) and not($selected) and not($mark)" />
+          <command name="deleteSelectionOrJoinOrDeleteChar" parameter="%0" />
+        </sequence>
+        <command name="deleteSelectionOrDeleteChar" parameter="%0" />
+      </choice>
+    </macro>
+  </command>
+<!-- An easy way to insert a table row -->
+  <binding>
+    <keyPressed code="ENTER" modifiers="mod"/>
+    <command name="add" parameter="after[implicitElement] #template(tr,tableRow)" />
+  </binding>
+<!-- An easy way to insert a br -->
+  <binding>
+    <keyPressed code="ENTER" modifiers="shift" />
+    <command name="forrest.insertLineBreak" />
+  </binding>
+  <command name="forrest.insertLineBreak">
+    <macro>
+      <sequence>
+        <command name="insert" parameter="into br" />
+<!-- harmless if macro fails starting from here -->
+        <command name="insertNode" parameter="textAfter" />
+        <command name="cancelSelection" />
+      </sequence>
+    </macro>
+  </command>
+  <command name="forrest.tableColumn">
+    <class>com.xmlmind.xmleditapp.xhtml.table.TableColumn</class>
+  </command>
+  <command name="forrest.tableRow">
+    <class>com.xmlmind.xmleditapp.xhtml.table.TableRow</class>
+  </command>
+<!-- Menu =========================================================== -->
+<!--   modified from xhtml config files ============================= -->
+  <menu label="Forrest" mnemonic="F">
+    <item label="Insert Table With heading row"
+          command="add"
+          parameter="after[implicitElement] #template(table,tableHeaded)" />
+    <item label="Insert Table Without heading row"
+          command="add"
+          parameter="after[implicitElement] #template(table,tableUnheaded)" />
+    <separator />
+    <item label="Insert Column Before"
+          mnemonic="B"
+          icon="xxe-config:common/icons/ColumnInsertBefore16.gif"
+          command="forrest.tableColumn"
+          parameter="insertBefore"/>
+    <item label="Insert Column After"
+          mnemonic="A"
+          icon="xxe-config:common/icons/ColumnInsertAfter16.gif"
+          command="forrest.tableColumn"
+          parameter="insertAfter"/>
+    <item label="Delete Column"
+          mnemonic="D" 
+          icon="xxe-config:common/icons/ColumnDelete16.gif"
+          command="forrest.tableColumn"
+          parameter="delete"/>
+    <separator />
+    <item label="Insert Row Before"
+          mnemonic="I"
+          icon="xxe-config:common/icons/RowInsertBefore16.gif"
+          command="forrest.tableRow"
+          parameter="insertBefore"/>
+    <item label="Insert Row After"
+          mnemonic="n"
+          icon="xxe-config:common/icons/RowInsertAfter16.gif"
+          command="forrest.tableRow"
+          parameter="insertAfter"/>
+    <item label="Delete Row"
+          mnemonic="e" 
+          icon="xxe-config:common/icons/RowDelete16.gif"
+          command="forrest.tableRow"
+          parameter="delete"/>
+  </menu>
+</configuration>

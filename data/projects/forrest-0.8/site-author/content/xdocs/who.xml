@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Who we are</title>
+  </header>
+  <body>
+    <section id="community">
+      <title>The Forrest Community</title>
+      <p>
+        The Forrest Project operates as a meritocracy: the more you do, the more
+        responsibility you will obtain. This page lists all of the people who
+        have gone the extra mile and are Committers. If you would like to get
+        involved, the first step is to join the mailing lists.
+      </p>
+      <p>
+        Of course the committers are not the only people involved in the
+        community. Thanks to the many people for their contributions of patches,
+        assistance, ideas, and email discussion. Some are mentioned at the
+        <a href="site:changes">changes</a> page. See how we
+        <a href="guidelines.html#contribution">acknowledge</a> contributions.
+      </p>
+      <p>
+        Please do not send emails directly to individual developers asking for
+        free support - see the Important Notices at the
+        <a href="site:mail-lists">mailing lists</a> page.
+      </p>
+    </section>
+    <section id="committers">
+      <title>List of committers</title>
+      <p>
+        List of all people who have ever been committers at Apache Forrest,
+        sorted alphabetically.
+      </p>
+      <ul>
+        <li><em>[NKB] - Nicola Ken Barozzi (nicolaken.at.apache.org)</em></li>
+        <li><strong>[DB] - Dave Brondsema (brondsem.at.apache.org)</strong></li>
+        <li><strong>[DC] - David Crossley (crossley.at.apache.org)</strong> - PMC Chair</li>
+        <li><strong>[CD] - Cyriaque Dupoirieux (cdupoirieux.at.apache.org)</strong></li>
+        <li><strong>[AG] - Antonio Gallardo (antonio.at.apache.org)</strong></li>
+        <li><strong>[RG] - Ross Gardler (rgardler.at.apache.org)</strong></li>
+        <li><strong>[DG] - Diwaker Gupta (diwaker.at.apache.org)</strong></li>
+        <li>[SM] - Stefano Mazzocchi (stefano.at.apache.org)</li>
+        <li><strong>[GM] - Gavin McDonald (gmcdonald.at.apache.org)</strong></li>
+        <li><strong>[SNM] - Sjur Moshagen (sjur.at.apache.org)</strong></li>
+        <li>[JM] - John Morrison (morrijr.at.apache.org)</li>
+        <li>[SN] - Steven Noels (stevenn.at.apache.org)</li>
+        <li><strong>[JJP] - Juan Jose Pablos (cheche.at.apache.org)</strong></li>
+        <li>[KP] - Konstantin Piroumian (kpiroumian.at.apache.org)</li>
+        <li>[MP] - Marc Portier (mpo.at.apache.org)</li>
+        <li>[SR] - Sam Ruby (rubys.at.apache.org)</li>
+        <li><strong>[JS] - Johannes Schaefer (josch.at.apache.org)</strong></li>
+        <li><strong>[TS] - Thorsten Scherler (thorsten.at.apache.org)</strong></li>
+        <li><strong>[FSO] - Ferdinand Soethe (ferdinand.at.apache.org)</strong></li>
+        <li><strong>[RFT] - Rick F. Tessner (rick.at.apache.org)</strong></li>
+        <li>[JT] - Jeff Turner (jefft.at.apache.org)</li>
+        <li><strong>[TW] - Tim Williams (twilliams.at.apache.org)</strong></li>
+      </ul>
+    </section>
+    <section id="notes">
+      <title>Notes</title>
+      <p>
+        Strong type denotes "Project Management Committee
+        (<a href="guidelines.html#pmc">PMC</a>) member". Emphasis type denotes
+        "emeritus PMC member". See the <a href="guidelines.html#roles">ASF role
+        definitions</a> for detailed role information. The actual list of PMC
+        members is in the SVN "committers" repository at
+        /board/committee-info.txt
+      </p>
+      <p>
+        Some people were committers prior to Forrest becoming a top-level
+        project and so gaining a PMC. They were not around since then, so have
+        never been on the PMC. All new committers are
+        <a href="guidelines.html#pmc-committers">encouraged</a> to be PMC
+        members.
+      </p>
+      <p>
+        Committers can be as active as they choose and there is no performance
+        pressure from the project. For those who are interested in the work that
+        each paticular committer has done, see the
+        <a href="guidelines.html#contribution">acknowledgements</a> section.
+      </p>
+      <p>
+        All <a href="http://cocoon.apache.org/community/members.html">Apache
+        Cocoon committers</a> and
+        <a href="http://lenya.apache.org/community/acknowledgements.html">Apache
+        Lenya committers</a> also have rights to commit to Forrest.
+      </p>
+    </section>
+  </body>
+</document>

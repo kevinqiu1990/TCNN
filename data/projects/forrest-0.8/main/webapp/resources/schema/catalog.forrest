@@ -1,0 +1,165 @@
+--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--
+
+-- OASIS TR 9401 Catalog for Forrest Documents --
+
+-- This file is not used directly by Forrest (see catalog.xcat instead), but is
+provided for compatibility with older XML validation tools --
+
+OVERRIDE YES
+
+-- Document Type Definitions --
+PUBLIC "-//APACHE//DTD Documentation V2.0//EN"
+       "dtd/document-v20.dtd"
+PUBLIC "-//APACHE//DTD FAQ V2.0//EN"
+       "dtd/faq-v20.dtd"
+PUBLIC "-//APACHE//DTD Changes V2.0//EN"
+       "dtd/changes-v20.dtd"
+PUBLIC "-//APACHE//DTD Todo V2.0//EN"
+       "dtd/todo-v20.dtd"
+PUBLIC "-//APACHE//DTD How-to V2.0//EN"
+       "dtd/howto-v20.dtd"
+PUBLIC "-//APACHE//DTD Documentation V1.3//EN"
+       "dtd/document-v13.dtd"
+PUBLIC "-//APACHE//DTD FAQ V1.3//EN"
+       "dtd/faq-v13.dtd"
+PUBLIC "-//APACHE//DTD Changes V1.3//EN"
+       "dtd/changes-v13.dtd"
+PUBLIC "-//APACHE//DTD Todo V1.3//EN"
+       "dtd/todo-v13.dtd"
+PUBLIC "-//APACHE//DTD Status V1.3//EN"
+       "dtd/status-v13.dtd"
+PUBLIC "-//APACHE//DTD Cocoon Documentation Book V1.0//EN"
+       "dtd/book-cocoon-v10.dtd"
+PUBLIC "-//APACHE//DTD Cocoon Documentation Tab V1.0//EN"
+       "dtd/tab-cocoon-v10.dtd"
+PUBLIC "-//APACHE//DTD Cocoon Documentation Tab V1.1//EN"
+       "dtd/tab-cocoon-v11.dtd"
+       
+-- New unfinished DTDs --
+PUBLIC "-//APACHE//DTD Skin Configuration V0.8-1//EN"
+        "dtd/skinconfig-v08-1.dtd"
+PUBLIC "-//APACHE//DTD Skin Configuration V0.7-1//EN"
+        "dtd/skinconfig-v07-1.dtd"
+PUBLIC "-//APACHE//DTD Skin Configuration V0.6-3//EN"
+        "dtd/skinconfig-v06-3.dtd"
+
+-- Reusable modules --
+PUBLIC "-//APACHE//ENTITIES Documentation V2.0//EN"
+       "dtd/document-v20.mod"
+PUBLIC "-//APACHE//ENTITIES Changes V2.0//EN"
+       "dtd/changes-v20.mod"
+PUBLIC "-//APACHE//ENTITIES FAQ V2.0//EN"
+       "dtd/faq-v20.mod"
+PUBLIC "-//APACHE//ENTITIES Todo V2.0//EN"
+       "dtd/todo-v20.mod"
+PUBLIC "-//APACHE//ENTITIES Status V1.3//EN"
+       "dtd/status-v13.mod"
+PUBLIC "-//APACHE//ENTITIES Documentation V1.3//EN"
+       "dtd/document-v13.mod"
+PUBLIC "-//APACHE//ENTITIES Documentation V1.2//EN"
+       "dtd/document-v12.mod"
+PUBLIC "-//APACHE//ENTITIES Documentation V1.1//EN"
+       "dtd/document-v11.mod"
+PUBLIC "-//APACHE//ENTITIES FAQ V1.1//EN"
+       "dtd/faq-v11.mod"
+PUBLIC "-//APACHE//ENTITIES FAQ V1.2//EN"
+       "dtd/faq-v12.mod"
+PUBLIC "-//APACHE//ENTITIES Changes V1.1//EN"
+       "dtd/changes-v11.mod"
+PUBLIC "-//APACHE//ENTITIES Todo V1.1//EN"
+       "dtd/todo-v11.mod"
+PUBLIC "-//APACHE//ENTITIES Common Elements V1.0//EN"
+       "dtd/common-elems-v10.mod"
+PUBLIC "-//APACHE//ENTITIES Common Character Entity Sets V1.0//EN"
+       "dtd/common-charents-v10.mod"
+
+-- ISO public identifiers for sets of character entities --
+PUBLIC "ISO 8879-1986//ENTITIES Added Latin 1//EN//XML"
+       "entity/ISOlat1.pen"
+PUBLIC "ISO 9573-15:1993//ENTITIES Greek Letters//EN//XML"
+       "entity/ISOgrk1.pen"
+PUBLIC "ISO 8879:1986//ENTITIES Publishing//EN//XML"
+       "entity/ISOpub.pen"
+PUBLIC "ISO 8879:1986//ENTITIES General Technical//EN//XML"
+       "entity/ISOtech.pen"
+PUBLIC "ISO 8879:1986//ENTITIES Numeric and Special Graphic//EN//XML"
+       "entity/ISOnum.pen"
+PUBLIC "ISO 8879:1986//ENTITIES Diacritical Marks//EN//XML"
+       "entity/ISOdia.pen"
+PUBLIC "ISO 8879:1986//ENTITIES Added Latin 1//EN//XML"
+       "entity/ISOlat1.pen"
+
+-- Sets of symbols. e.g. for string replacements --
+PUBLIC "-//Apache Forrest//ENTITIES Symbols Core v1.0//EN"
+       "entity/symbols-core-v10.ent"
+
+-- Various other resources --
+PUBLIC "-//Apache Forrest//ENTITIES Skin Configuration common plugins V0.7-1//EN"
+       "entity/skinconf-common-plugins-07-1.xml"
+
+-- Old DTDs --
+PUBLIC "-//APACHE//DTD Skin Configuration V0.6-2//EN"
+        "dtd/skinconfig-v06-2.dtd"
+PUBLIC "-//APACHE//DTD Skin Configuration V0.6-1//EN"
+        "dtd/skinconfig-v06-1.dtd"
+PUBLIC "-//APACHE//DTD Skin Configuration V0.6//EN"
+        "dtd/skinconfig-v06.dtd"
+PUBLIC "-//APACHE//DTD Documentation V2.0a//EN"
+       "dtd/v20a/document-v20.dtd"
+PUBLIC "-//APACHE//ENTITIES Documentation V2.0a//EN"
+       "dtd/v20a/document-v20.mod"
+PUBLIC "-//APACHE//DTD FAQ V2.0a//EN"
+       "dtd/v20a/faq-v20.dtd"
+PUBLIC "-//APACHE//ENTITIES FAQ V2.0a//EN"
+       "dtd/v20a/faq-v20.mod"
+PUBLIC "-//APACHE//DTD Documentation V1.2//EN"
+       "dtd/document-v12.dtd"
+PUBLIC "-//APACHE//DTD FAQ V1.2//EN"
+       "dtd/faq-v12.dtd"
+PUBLIC "-//APACHE//DTD Changes V1.2//EN"
+       "dtd/changes-v12.dtd"
+PUBLIC "-//APACHE//DTD Todo V1.2//EN"
+       "dtd/todo-v12.dtd"
+PUBLIC "-//APACHE//DTD How-to V1.2//EN"
+       "dtd/howto-v12.dtd"
+PUBLIC "-//APACHE//DTD Documentation V1.1//EN"
+       "dtd/document-v11.dtd"
+PUBLIC "-//APACHE//DTD Specification V1.1//EN"
+       "dtd/specification-v11.dtd"
+PUBLIC "-//APACHE//DTD FAQ V1.1//EN"
+       "dtd/faq-v11.dtd"
+PUBLIC "-//APACHE//DTD Changes V1.1//EN"
+       "dtd/changes-v11.dtd"
+PUBLIC "-//APACHE//DTD Todo V1.1//EN"
+       "dtd/todo-v11.dtd"
+PUBLIC "-//APACHE//DTD How-to V1.0//EN"
+       "dtd/howto-v10.dtd"
+PUBLIC "-//APACHE//DTD Gump Descriptor V1.0//EN"
+       "dtd/xgump-draft.dtd"
+PUBLIC "-//APACHE//DTD JavaDoc V1.0//EN"
+       "dtd/javadoc-v04draft.dtd"
+PUBLIC "-//APACHE//DTD Contributors V1.0//EN"
+       "dtd/contributors-v10.dtd"
+PUBLIC "-//APACHE//DTD Documentation V1.0//EN"
+       "dtd/v10/document-v10.dtd"
+PUBLIC "-//APACHE//DTD FAQ V1.0//EN"
+       "dtd/v10/faq-v10.dtd"
+PUBLIC "-//APACHE//DTD Changes V1.0//EN"
+       "dtd/v10/changes-v10.dtd"
+PUBLIC "-//APACHE//DTD Todo V1.0//EN"
+       "dtd/v10/todo-v10.dtd"

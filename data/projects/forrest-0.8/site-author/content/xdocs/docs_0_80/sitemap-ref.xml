@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd" [
+<!ENTITY s '<code>site.xml</code>'>
+<!ENTITY linkrewriter '<link href="#linkrewriting_impl">linkrewriter</link>'>
+]>
+<document>
+  <header>
+    <title>Forrest Sitemap Reference</title>
+  </header>
+  <body>
+    <p>
+      Technically, Forrest can be thought of as a
+      <link href="ext:cocoon">Cocoon</link> distribution that has been stripped
+      down and optimized for people with simple site publishing needs. Central
+      to Cocoon, and hence Forrest, is the <strong>sitemap</strong>. The sitemap
+      defines the site's URI space (what pages are available), and how each page
+      is constructed. Understanding the sitemap is the key to understanding
+      Forrest.
+    </p>
+    <note>
+      We advise you to spend time to understand the Apache Cocoon sitemap. See
+      <link href="ext:cocoon/sitemap">Cocoon sitemap</link> and
+      <link href="ext:cocoon/concepts">Cocoon concepts</link> and related
+      component documentation. It is also necessary to understand the "**" and
+      "*" pattern matching and replacements. See the email thread: "Re: explain
+      sitemap matches and pass parameters to transformers"
+      <link href="http://issues.apache.org/jira/browse/FOR-874">FOR-874</link>.
+    </note>
+    <p>
+      This document provides an overview of the special sitemap which is used at
+      the core of Apache Forrest.
+    </p>
+    <warning>
+      The example sitemap fragments might be out-of-date because since this
+      document was written, the core sitemaps in main/webapp/ have changed and
+      some of the specialised processing has moved to plugins. View your source
+      sitemaps when reading this document. (See
+      <link href="https://issues.apache.org/jira/browse/FOR-922">FOR-922</link>.)
+    </warning>
+    <section id="getting_started">
+      <title>Getting started</title>
+      <p>
+        Forrest's sitemap comprises the multiple
+        $FORREST_HOME/main/webapp/*.xmap files. The main one is
+        <strong>sitemap.xmap</strong> which delegates to others, including to
+        sitemaps in the various
+        <link href="site:plugins/infrastructure">plugins</link>.
+      </p>
+      <p>
+        You can add pre-processing sitemaps to your project
+        <code>src/documentation</code> directory (or wherever
+        <code>${project.sitemap-dir}</code> points to). Any match that is not
+        handled, passes through to be handled by the default Forrest sitemaps -
+        obviously extremely powerful. The capability is described in
+        "<link href="site:project-sitemap">Using project sitemaps</link>".
+      </p>
+      <p>
+        Another way to experiment with the sitemap is to do '<code>forrest
+        run</code>' on a Forrest-using site. Making changes to the core
+        <code>*.xmap</code> files will now be immediately effective at
+        <code>http://localhost:8888/</code>
+      </p>
+    </section>
+    <section id="overview">
+      <title>Sitemap Overview</title>
+      <p>
+        Forrest's sitemap is divided both physically and logically. The most
+        obvious is the physical separation. There are a number of separate
+        *.xmap files, each defining pipelines for a functional area. Each *.xmap
+        file has its purpose documented in comments at the top. Here is a brief
+        overview of the files, in order of importance.
+      </p>
+      <table>
+        <tr>
+          <th><strong>sitemap.xmap</strong>
+          </th>
+          <td>Primary sitemap file, which delegates responsibility for serving
+            certain URIs to the others (technically called sub-sitemaps).  More
+            about the structure of this file later.</td>
+        </tr>
+        <tr>
+          <th>forrest.xmap</th>
+          <td>Sitemap defining Source pipelines, which generate the body section
+            of Forrest pages. All pipelines here deliver XML in Forrest's
+            intermediate "document-v13" format, regardless of originating source
+            or format.</td>
+        </tr>
+        <tr>
+          <th>menu.xmap</th>
+          <td>Pipelines defining the XML that becomes the menu.</td>
+        </tr>
+        <tr>
+          <th>linkmap.xmap</th>
+          <td>Defines a mapping from abstract ("site:index") to physical
+            ("index.html") links for the current page.  See 
+            <link href="site:linking">Menus and Linking</link> for a conceptual
+            overview, and the <link href="#linkrewriting_impl">Link
+              rewriting</link> section for technical details.</td>
+        </tr>
+        <tr>
+          <th>resources.xmap</th>
+          <td>Serves "resource" files (images, CSS, Javascript).</td>
+        </tr>
+        <tr>
+          <th>raw.xmap</th>
+          <td>Serves files located in <code>src/documentation/content/xdocs</code>
+            that are not to be modified by Forrest.</td>
+        </tr>
+        <tr>
+          <th>aggregate.xmap</th>
+          <td>Generates a single page (HTML or PDF) containing all the content
+            for the site.</td>
+        </tr>
+        <tr>
+          <th>faq.xmap</th>
+          <td>Processes FAQ documents.</td>
+        </tr>
+        <tr>
+          <th>status.xmap</th>
+          <td>Generates <link href="site:changes">changes</link> and 
+          <link href="site:todo">todo</link> pages from a single
+            <code>status.xml</code> in the project root.
+          </td>
+        </tr>
+        <tr>
+          <th>issues.xmap</th>
+          <td>Generates a page of content from an RSS feed.  Used in Forrest to
+            generate a "current issues" list from JIRA.</td>
+        </tr>
+        <tr>
+          <th>revisions.xmap</th>
+          <td>
+            Support for HOWTO documents that want "revisions".  Revisions are
+            XML snippets containing comments on the main XML file.  The main
+            pipeline here automatically appends a page's revisions to the
+            bottom.
+          </td>
+        </tr>
+        <tr>
+          <th>dtd.xmap</th>
+          <td>A Source pipeline that generates XML from a DTD, using Andy
+            Clark's 
+            <link href="http://www.apache.org/~andyc/neko/doc/dtd/index.html">DTD
+              Parser</link>.  Useful for documenting DTD-based XML schemas, such
+            as <link href="site:dtd-docs">Forrest's own DTDs</link>.
+          </td>
+        </tr>
+        <tr>
+          <th>profiler.xmap</th>
+          <td>Defines the "profiler" pipeline. allowing pipelines to be benchmarked.</td>
+        </tr>
+      </table>
+    </section>
+<!--
+    <section>
+      <title>Logical structure</title>
+      <p>There are a few major groups of sitemap pipelines</p>
+      <dl>
+        <dt>Content pipelines</dt>
+        <dd>These define the body (without menu and header) for HTML pages, and all the content of PDFs.</dd>
+        <dt>Menu pileines.
+      </dl>
+    </section>
+    -->
+    <section id="source_pipelines">
+      <title>Source pipelines (**.xml)</title>
+      <p>
+        Most *.xmap files (forrest, aggregate, faq, status, issues, revisions,
+        dtd) define Source pipelines. Source pipelines define the content (body)
+        XML for site pages. The input XML format can be any format
+        (document-v13, Docbook, RSS, FAQ, Howto) and from any source (local or
+        remote). The output format is always Forrest's intermediate
+        "document-v13" format.
+      </p>
+      <p>
+        Source pipelines always have a "<code>.xml</code>" extension. Thus,
+        <link href="index.xml">index.xml</link> gives you the XML source for the
+        index page. Likewise, <link href="faq.xml">faq.xml</link> gives you XML
+        for the FAQ (transformed from FAQ syntax), and
+        <link href="changes.xml">changes.xml</link> returns XML from the
+        status.xml file. Take any page, and replace its extension
+        (<code>.html</code> or <code>.pdf</code>) with <code>.xml</code> and
+        you'll have the Source XML.
+      </p>
+      <p>
+        This is quite powerful, because we now have an abstraction layer, or
+        "virtual filesystem", on which the rest of Forrest's sitemap can build.
+        Subsequent layers don't need to care whether the XML was obtained
+        locally or remotely, or from what format. Wikis, RSS, FAQs and Docbook
+        files are all processed identically from here on.
+      </p>
+      <source>
+                   (subsequent Forrest pipelines)
+                                 |
+--------+------------------------^------------------------------------------
+        |          STANDARD FORREST FORMAT (current document-v13)
+        +-----^-------^--------^------------^------^-----^-----^------^-----
+SOURCE        |       |        |            |      |     |     |      |
+FORMATS    doc-v11  doc-v13  doc-v20 ... Docbook  FAQ  Howto  Wiki  RSS  ??
+(*.xml)
+                        (in forrest.xmap, faq.xmap, etc)
+      </source>
+      <section id="forrest_xmap">
+        <title>forrest.xmap</title>
+        <p>
+          Most of the usual Source pipelines are defined in
+          <code>forrest.xmap</code> which is the default (fallback) handler for
+          <code>**.xml</code> pages. The forrest.xmap uses the
+          <link href="site:cap">SourceTypeAction</link> to determine the type of
+          XML it is processing, and converts it to document-v13 if necessary.
+        </p>
+        <p>
+          For instance, say we are rendering <link href="site:write-howto">a
+          Howto document</link> called "howto-howto.xml". It contains this
+          DOCTYPE declaration:
+        </p>
+        <source>
+&lt;!DOCTYPE howto PUBLIC "-//APACHE//DTD How-to V1.3//EN"
+  "http://forrest.apache.org/dtd/howto-v13.dtd"></source>
+        <p>
+          The SourceTypeAction sees this, and applies this transform to get it
+          to document-v13:
+        </p>
+        <source>
+<![CDATA[
+          <map:when test="howto-v13">
+            <map:transform src="{forrest:forrest.stylesheets}/howto-to-document.xsl" />
+          </map:when>
+          ]]>
+        </source>
+<!--
+    if we link to an intermediate .xml file, the CLI crawler tries
+    to fetch the @hrefs from it but they still have site: in them 
+    which causes it to break
+    
+        <p>
+          The intermediate result is visible at the URL 
+          <link href="../howto/howto-howto.xml">howtos/howto-howto.xml</link>.
+        </p>
+    -->
+      </section>
+      <section id="other_source">
+        <title>Other source pipelines</title>
+        <p>
+          As mentioned above, all non-core Source pipelines are distributed in
+          independent <code>*.xmap</code> files. There is a block of
+          <code>sitemap.xmap</code> which simply delegates certain requests to
+          these subsitemaps:
+        </p>
+        <source>
+<![CDATA[
+      <!-- Body content -->
+      <map:match pattern="**.xml">
+        <map:match pattern="changes.xml">
+          <map:mount uri-prefix="" src="status.xmap" check-reload="yes" />
+        </map:match>
+
+        <map:match pattern="todo.xml">
+          <map:mount uri-prefix="" src="status.xmap" check-reload="yes" />
+        </map:match>
+
+        <map:match pattern="**dtdx.xml">
+          <map:mount uri-prefix="" src="dtd.xmap" check-reload="yes" />
+        </map:match>
+
+        <map:match pattern="forrest-issues.xml">
+          <map:mount uri-prefix="" src="issues.xmap" check-reload="yes" />
+        </map:match>
+
+        <map:match pattern="**faq.xml">
+          <map:mount uri-prefix="" src="faq.xmap" check-reload="yes" />
+        </map:match>
+
+        <map:match pattern="site.xml">
+          <map:mount uri-prefix="" src="aggregate.xmap" check-reload="yes" />
+        </map:match>
+        ....
+        ....]]>
+        </source>
+        <section id="late_binding_pipelines">
+          <title>Late-binding pipelines</title>
+          <p>
+            One point of interest here is that the sub-sitemap is often not
+            specific about which URLs it handles, and relies on the caller (the
+            section listed above) to only pass relevant requests to it. We term
+            this "binding a URL" to a pipeline.
+          </p>
+          <p>
+            For instance, the main pipeline in <code>faq.xmap</code> matches
+            <code>**.xml</code>, but only <code>**faq.xml</code> requests are
+            sent to it.
+          </p>
+          <p>
+            This "late binding" is useful, because the whole URL space is
+            managed in <code>sitemap.xmap</code> and not spread over lots of
+            *.xmap files. For instance, say you wish all <code>*.xml</code>
+            inside a "<code>faq/</code>" directory to be processed as FAQs. Just
+            override <code>sitemap.xmap</code> and redefine the relevant source
+            matcher:
+          </p>
+          <source>
+<![CDATA[
+        <map:match pattern="**faq.xml">
+          <map:mount uri-prefix="" src="faq.xmap" check-reload="yes" />
+        </map:match>]]>
+          </source>
+        </section>
+      </section>
+    </section>
+    <section id="output_pipelines">
+      <title>Output pipelines</title>
+      <p>
+        To recap, we now have a <code>*.xml</code> pipeline defined for each
+        page in the site, emitting standardized XML. These pipeline definitions
+        are located in various *.xmap files, notably forrest.xmap
+      </p>
+      <p>
+        We now wish to render the XML from these pipelines to output formats
+        like HTML and PDF.
+      </p>
+      <section id="pdf">
+        <title>PDF output</title>
+        <note>
+          PDF is now generated via the org.apache.forrest.plugin.output.pdf
+          plugin.
+        </note>
+        <p>
+          Easiest case first; PDFs don't require menus or headers, so we can
+          simply transform our intermediate format into XSL:FO, and from there
+          to PDF. This is done by the following matcher in
+          <code>output.xmap</code> from the pdf plugin ...
+        </p>
+        <source>
+<![CDATA[
+1   <map:match type="regexp" pattern="^(.*?)([^/]*).pdf$">
+2     <map:generate src="cocoon:/{1}{2}.xml"/>
+3     <map:transform type="xinclude"/>
+4     <map:transform type="]]>&linkrewriter;<![CDATA[" src="cocoon://{1}linkmap-{2}.pdf"/>
+5     <map:transform src="skins/{forrest:forrest.skin}/xslt/fo/document-to-fo.xsl">
+6       <map:parameter name="ctxbasedir" value="{realpath:.}/"/>
+7       <map:parameter name="xmlbasedir" value="content/xdocs/{1}"/>
+8     </map:transform>
+9     <map:serialize type="fo2pdf"/>
+10  </map:match>
+        ]]>
+        </source>
+        <ol>
+          <li>The first line uses a matching regexp to break the URL into
+            directory <code>(.*?)</code> and filename
+            <code>([^/]*)</code> parts.</li>
+          <li>We then generate XML from a <link href="#source_pipelines">Source
+              pipeline</link>, with the URL <code>cocoon:/{1}{2}.xml</code></li>
+          <li>We then expand any XInclude statements..</li>
+          <li>and <link href="#linkrewriting_impl">rewrite links</link>..</li>
+          <li>and finally apply the document-to-fo.xsl stylesheet, to generate
+            XSL:FO XML.</li>
+        </ol>
+        <p>
+          Lastly, we generate a PDF using the fo2pdf serializer.
+        </p>
+      </section>
+      <section id="html">
+        <title>HTML output</title>
+        <p>
+          Generating HTML pages is more complicated, because we have to merge
+          the page body with a menu and tabs, and then add a header and footer.
+          Here is the <code>*.html</code> matcher in <code>sitemap.xmap</code>
+          ...
+        </p>
+        <source>
+          &lt;map:match pattern="*.html"&gt;
+            &lt;map:aggregate element="site"&gt;
+            &lt;map:part src="<link href="#tab_pipeline">cocoon:/tab-{0}</link>"/&gt;
+            &lt;map:part src="<link href="#menu_pipeline">cocoon:/menu-{0}</link>"/&gt;
+            &lt;map:part src="<link href="#body_pipeline">cocoon:/body-{0}</link>"/&gt;
+            &lt;/map:aggregate&gt;
+            &lt;map:call resource="skinit"&gt;
+              &lt;map:parameter name="type" value="site2xhtml"/&gt;
+              &lt;map:parameter name="path" value="{0}"/&gt;
+            &lt;/map:call&gt;
+          &lt;/map:match&gt;
+        </source>
+        <p>
+          So <link href="index.html">index.html</link> is formed from
+          aggregating <link href="body-index.html">body-index.html</link> and
+          <link href="menu-index.html">menu-index.html</link> and
+          <link href="tab-index.html">tab-index.html</link> and then applying
+          the <code>site-to-xhtml.xsl</code> stylesheet to the result.
+        </p>
+        <p>
+          There is a nearly identical matcher for HTML files in subdirectories:
+        </p>
+        <source>
+          &lt;map:match pattern="**/*.html"&gt;
+            &lt;map:aggregate element="site"&gt;
+            &lt;map:part src="<link
+              href="#tab_pipeline">cocoon:/{1}/tab-{2}.html</link>"/&gt;
+            &lt;map:part src="<link
+              href="#menu_pipeline">cocoon:/{1}/menu-{2}.html</link>"/&gt;
+            &lt;map:part src="<link
+              href="#body_pipeline">cocoon:/{1}/body-{2}.html</link>"/&gt;
+            &lt;/map:aggregate&gt;
+            &lt;map:call resource="skinit"&gt;
+              &lt;map:parameter name="type"
+                value="site2xhtml"/&gt;
+              &lt;map:parameter name="path"
+                value="{0}"/&gt;
+            &lt;/map:call&gt;
+          &lt;/map:match&gt;
+        </source>
+      </section>
+    </section>
+    <section id="intermediate_pipelines">
+      <title>Intermediate pipelines</title>
+      <section id="body_pipeline">
+        <title>Page body</title>
+        <p>
+          Here is the matcher which generates the page body:
+        </p>
+        <source>
+<![CDATA[
+1   <map:match pattern="**body-*.html">
+2     <map:generate src="cocoon:/{1}{2}.xml"/>
+3     <map:transform type="idgen"/>
+4     <map:transform type="xinclude"/>
+5     <map:transform type="]]>&linkrewriter;<![CDATA[" src="cocoon:/{1}linkmap-{2}.html"/>
+6     <map:call resource="skinit">
+7       <map:parameter name="type" value="document2html"/>
+8       <map:parameter name="path" value="{1}{2}.html"/>
+9       <map:parameter name="notoc" value="false"/>
+10    </map:call>
+11  </map:match>
+          ]]>
+        </source>
+        <ol>
+          <li>In our matcher pattern, {1} will be the directory (if any) and {2}
+            will be the filename.</li>
+          <li>First, we obtain XML content from a source pipeline</li>
+          <li><p>
+              We then apply a custom-written
+              <code>IdGeneratorTransformer</code>, which ensures that every
+              &lt;section> has an "id" attribute if one is not supplied, by
+              generating one from the &lt;title> if necessary. For example,
+              &lt;idgen> will transform:
+            </p>
+            <source>
+              &lt;section&gt;
+              &lt;title&gt;How to boil eggs&lt;/title&gt;
+              ...
+            </source>
+            <p>
+              into:
+            </p>
+            <source>
+              &lt;section id="How+to+boil+eggs"&gt;
+              &lt;title&gt;How to boil eggs&lt;/title&gt;
+              ...
+            </source>
+            <p>
+              Later, the <code>document-to-html.xsl</code> stylesheet will
+              create an &lt;a name> element for every section, allowing this
+              section to be referred to as
+              <code>index.html#How+to+boil+eggs</code>.
+            </p></li>
+          <li>We then expand XInclude elements.</li>
+          <li>and <link href="#linkrewriting_impl">rewrite links</link>..</li>
+          <li>and then finally apply the stylesheet that generates a fragment of
+            HTML (minus the outer elements like
+            &lt;html> and &lt;body>) suitable for merging with the menu and tabs.</li>
+        </ol>
+      </section>
+      <section id="menu_pipeline">
+        <title>Page menu</title>
+        <p>
+          In the <code>sitemap.xmap</code> file, the matcher generating HTML for
+          the menu is:
+        </p>
+        <source>
+<![CDATA[
+      <map:match pattern="**menu-*.html">
+        <map:generate src="cocoon:/{1}book-{2}.html"/>
+        <map:transform type="]]>&linkrewriter;<![CDATA[" src="cocoon:/{1}linkmap-{2}.html"/>
+        <map:call resource="skinit">
+          <map:parameter name="type" value="book2menu"/>
+          <map:parameter name="path" value="{1}{2}.html"/>
+        </map:call>
+      </map:match>
+      ]]>
+        </source>
+        <p>
+          We get XML from a "book" pipeline,
+          <link href="#linkrewriting_impl">rewrite links</link>, and apply the
+          <code>book-to-menu.xsl</code> stylesheet to generate HTML.
+        </p>
+        <p>
+          How the menu XML is actually generated (the *book-*.html pipeline) is
+          sufficiently complex to require a
+          <link href="#menu_generation_impl">section of its own</link>.
+        </p>
+      </section>
+      <section id="tab_pipeline">
+        <title>Page tabs</title>
+        <p>
+          Tab generation is quite tame compared to menus:
+        </p>
+        <source>
+<![CDATA[
+     <map:match pattern="**tab-*.html">
+       <map:generate src="content/xdocs/tabs.xml" />
+       <map:transform type="]]>&linkrewriter;<![CDATA[" src="cocoon:/{1}linkmap-{2}.html"/>
+       <map:call resource="skinit">
+         <map:parameter name="type" value="tab2menu"/>
+         <map:parameter name="path" value="{1}{2}.html"/>
+       </map:call>
+     </map:match>
+           ]]>
+        </source>
+        <p>
+          All the smarts are in the <code>tab-to-menu.xsl</code> stylesheet,
+          which needs to choose the correct tab based on the current path.
+          Currently, a "longest matching path" algorithm is implemented. See the
+          <code>tab-to-menu.xsl</code> stylesheet for details.
+        </p>
+      </section>
+    </section>
+    <section id="resolvingResources">
+      <title>Resolving Resources</title>
+      <p>
+        Many resources are resolved by the locationmap. This allow us to provide
+        many alternative locations for a file without cluttering up the sitemap
+        with multiple processing paths. We use a strict naming convention to
+        help make the sitemaps more readable. This is described in the
+        <link href="site:locationmap/namingConvention">Locationmap</link>
+        documentation.
+      </p>
+    </section>
+    <section id="menu_generation_impl">
+      <title>Menu XML generation</title>
+      <p>
+        The "book" pipeline is defined in <code>sitemap.xmap</code>as:
+      </p>
+      <source>
+<![CDATA[
+        <map:match pattern="**book-*.html">
+          <map:mount uri-prefix="" src="menu.xmap" check-reload="yes" />
+        </map:match>
+        ]]>
+      </source>
+      <p>
+        Meaning that it is defined in the <code>menu.xmap</code> file. In there
+        we find the real definition, which is quite complicated, because there
+        are three supported menu systems (see <link href="site:linking">menus
+        and linking</link>). We will not go through the sitemap itself
+        (menu.xmap), but will instead describe the logical steps involved:
+      </p>
+      <ol>
+        <li>Take site.xml and expand hrefs so that they are all
+          root-relative.</li>
+        <li><p>
+            Depending on the <code>forrest.menu-scheme</code> property, we now
+            apply one of the two algorithms for choosing a set of menu links
+            (described in <link href="site:menu_generation">menu
+            generation</link>):
+          </p>
+          <ul>
+            <li><p>
+                For "@tab" menu generation, we first ensure each site.xml node
+                has a tab attribute (inherited from a parent if necessary), and
+                then pass through nodes whose tab attribute matches that of the
+                "current" node.
+              </p>
+              <p>
+                For example, say our current page's path is
+                <code>community/howto/index.html</code>. In
+                <code>site.xml</code> we look for the node with this
+                "<code>href</code>" and discover its "<code>tab</code>"
+                attribute value is "<code>howtos</code>". We then prune the
+                <code>site.xml</code>-derived content to contain only nodes with
+                <code>tab="howtos"</code>.
+              </p>
+              <p>
+                All this is done with XSLT, so the sitemap snippet does not
+                reveal this complexity:
+              </p>
+              <source>
+<![CDATA[
+<map:transform src="resources/stylesheets/site-to-site-normalizetabs.xsl" />
+<map:transform src="resources/stylesheets/site-to-site-selectnode.xsl">
+  <map:parameter name="path" value="{1}{2}"/>
+</map:transform>
+                ]]>
+              </source></li>
+            <li><p>
+                For "directory" menu generation, we simply use an
+                <code>XPathTransformer</code> to include only pages in the
+                current page's directory, or below:
+              </p>
+              <source>
+<![CDATA[
+<map:transform type="xpath">
+  <map:parameter name="include" value="//*[@href='{1}']" />
+</map:transform>
+                ]]>
+              </source>
+              <p>
+                Here, the "<code>{1}</code>" is the directory part of the
+                current page. So if our current page is
+                <code>community/howto/index.html</code> then "<code>{1}</code>"
+                will be <code>community/howto/</code> and the transformer will
+                include all nodes in that directory.
+              </p></li>
+          </ul>
+          <p>
+            We now have a <code>site.xml</code> subset relevant to our current
+            page.
+          </p></li>
+        <li>The "<code>href</code>" nodes in this are then made relative to the
+          current page.</li>
+        <li>The XML is then transformed into a legacy "<code>book.xml</code>"
+          format, for compatibility with existing stylesheets, and this XML
+          format is returned (hence the name of the matcher:
+          <code>**book-*.html</code>).</li>
+      </ol>
+    </section>
+    <section id="linkrewriting_impl">
+      <title>Link rewriting</title>
+      <p>
+        In numerous places in <code>sitemap.xmap</code> you will see the
+        "linkrewriter" transformer in action. For example:
+      </p>
+      <source>
+<![CDATA[<map:transform type="linkrewriter" src="cocoon:/{1}linkmap-{2}.html"/>]]>
+      </source>
+      <p>
+        This statement is Cocoon's linking system in action. A full description
+        is provided in <link href="site:linking">Menus and Linking</link>. Here
+        we describe the implementation of linking.
+      </p>
+      <section id="input_modules">
+        <title>Cocoon foundations: Input Modules</title>
+        <p>
+          The implementation of <code>site:</code> linking is heavily based on
+          Cocoon <link href="ext:cocoon/input-modules">Input Modules</link>, a
+          little-known but quite powerful aspect of Cocoon. Input Modules are
+          generic Components which simply allow you to look up a value with a
+          key. The value is generally dynamically generated, or obtained by
+          querying an underlying data source.
+        </p>
+        <p>
+          In particular, Cocoon contains an <code>XMLFileModule</code>, which
+          lets one look up the value of an XML node, by interpreting the key as
+          an XPath expression. Cocoon also has a
+          <code>SimpleMappingMetaModule</code>, which allows the key to be
+          rewritten before it is used to look up a value.
+        </p>
+        <p>
+          The idea for putting these together to rewrite "<code>site:</code>"
+          links was described in <link href="ext:inputmoduletransformer">this
+          thread</link>. The idea is to write a Cocoon Transformer that triggers
+          on encountering &lt;link href="<code>scheme:address</code>"&gt;, and
+          interprets the <code>scheme:address</code> internal URI as
+          <code>inputmodule:key</code>. The transformer then uses the named
+          InputModule to look up the key value. The <code>scheme:address</code>
+          URI is then rewritten with the found value. This transformer was
+          implemented as
+          <link href="ext:linkrewritertransformer">LinkRewriterTransformer</link>,
+          currently distributed as a "block" in Cocoon 2.1
+        </p>
+      </section>
+      <section id="implement_rewriting">
+        <title>Implementing "<code>site:</code>" rewriting</title>
+        <p>
+          Using the above components, "<code>site:</code>" URI rewriting is
+          accomplished as follows.
+        </p>
+        <section id="cocoon_xconf">
+          <title>cocoon.xconf</title>
+          <p>
+            First, we declare all the input modules we will be needing:
+          </p>
+          <source>
+<![CDATA[
+<!-- For the site: scheme -->
+<component-instance
+  class="org.apache.cocoon.components.modules.input.XMLFileModule"
+  logger="core.modules.xml" name="linkmap"/>
+
+<!-- Links to URIs within the site -->
+<component-instance
+  class="org.apache.cocoon.components.modules.input.SimpleMappingMetaModule"
+  logger="core.modules.mapper" name="site"/>
+
+<!-- Links to external URIs, as distinct from 'site' URIs -->
+<component-instance
+  class="org.apache.cocoon.components.modules.input.SimpleMappingMetaModule"
+  logger="core.modules.mapper" name="ext"/>
+]]>
+          </source>
+          <ul>
+            <li><strong>linkmap</strong> will provide access to the contents of
+              &s;; for example, <code>linkmap:/site/about/index/@href</code>
+              would return the value "index.html".</li>
+            <li><strong>site</strong> provides a "mask" over
+              <strong>linkmap</strong> such that <code>site:index</code> expands
+              to <code>linkmap:/site//index/@href</code></li>
+            <li><strong>ext</strong> provides another "mask" over
+              <strong>linkmap</strong>, such that <code>ext:ant</code> would
+              expand to <code>linkmap:/site/external-refs//ant/@href</code></li>
+          </ul>
+          <p>
+            However at the moment, we have only declared the input modules. They
+            will be configured in <code>sitemap.xmap</code> as described in the
+            next section.
+          </p>
+        </section>
+        <section id="sitemap">
+          <title>sitemap.xmap</title>
+          <p>
+            Now in the sitemap, we define the LinkRewriterTransformer, and
+            insert it into any pipelines which deal with user-editable XML
+            content:
+          </p>
+          <source>
+<![CDATA[
+....
+<!-- Rewrites links, e.g. transforming
+     href="site:index" to href="../index.html"
+-->
+<map:transformer name="linkrewriter"
+  logger="sitemap.transformer.linkrewriter"
+  src="org.apache.cocoon.transformation.LinkRewriterTransformer">
+  <link-attrs>href src</link-attrs>
+  <schemes>site ext</schemes>
+
+  <input-module name="site">
+    <input-module name="linkmap">
+      <file src="{src}" reloadable="false" />
+    </input-module>
+    <prefix>/site//</prefix>
+    <suffix>/@href</suffix>
+  </input-module>
+  <input-module name="ext">
+    <input-module name="linkmap">
+      <file src="{src}" reloadable="false" />
+    </input-module>
+    <prefix>/site/external-refs//</prefix>
+    <suffix>/@href</suffix>
+  </input-module>
+</map:transformer>
+....
+....
+<map:match pattern="**body-*.html">
+  <map:generate src="cocoon:/{1}{2}.xml"/>
+  <map:transform type="idgen"/>
+  <map:transform type="xinclude"/>
+  <map:transform type="linkrewriter" src="cocoon:/{1}linkmap-{2}.html"/>
+  ...
+</map:match>]]>
+          </source>
+          <p>
+            As you can see, our three input modules are configured as part of
+            the LinkRewriterTransformer's configuration.
+          </p>
+          <ul>
+            <li><p>
+                Most deeply nested, we have:
+              </p>
+              <source>
+<![CDATA[
+                <input-module name="linkmap">
+                  <file src="{src}" reloadable="false" />
+              </input-module>]]>
+              </source>
+              <p>
+                The "<code>{src}</code>" text is expanded to the value of the
+                "<code>src</code>" attribute in the "<code>linkrewriter</code>"
+                instance, namely "<code>cocoon:/{1}linkmap-{2}.html</code>" Thus
+                the <code>linkmap</code> module reads dynamically generated XML
+                specific to the current request.
+              </p></li>
+            <li><p>
+                One level out, we configure the "<code>site</code>" and
+                "<code>ext</code>" input modules, to map onto our dynamically
+                configured "<code>linkmap</code>" module.
+              </p></li>
+            <li><p>
+                Then at the outermost level, we configure the
+                "<code>linkrewriter</code>" transformer. First we tell it which
+                attributes to consider rewriting:
+              </p>
+              <source>
+<![CDATA[
+                <link-attrs>href src</link-attrs>
+                <schemes>site ext</schemes>]]>
+              </source>
+              <p>
+                So, "<code>href</code>" and "<code>src</code>" attributes
+                starting with "<code>site:</code>" or "<code>ext:</code>" are
+                rewritten.
+              </p>
+              <p>
+                By nesting the "<code>site</code>" and "<code>ext</code>" input
+                modules in the "<code>linkrewriter</code>" configuration, we
+                tell "<code>linkrewriter</code>" to use these two input modules
+                when rewriting links.
+              </p></li>
+          </ul>
+          <p>
+            The end result is that, for example, the source XML for the
+            <code>community/body-index.html</code> page has its links rewritten
+            by an XMLFileModule reading XML from
+            <code>cocoon:/community/linkmap-index.html</code>
+          </p>
+        </section>
+        <section id="dynamic_linkmap">
+          <title>Dynamically generating a linkmap</title>
+          <p>
+            Why do we need this "linkmap" pipeline generating dynamic XML from
+            &s;, instead of just using &s; directly? The reasons are described
+            in <link href="ext:linkmaps">the linkmap RT</link>: we need to
+            concatenate @hrefs and add dot-dots to the paths, depending on which
+            directory the linkee is in. This is done with the following
+            pipelines in <code>linkmap.xmap</code> ...
+          </p>
+          <source>
+<![CDATA[
+<!-- site.xml with @href's appended to be context-relative. -->
+<map:match pattern="abs-linkmap">
+  <map:generate src="content/xdocs/site.xml" />
+  <map:transform src="resources/stylesheets/absolutize-linkmap.xsl" />
+  <map:serialize type="xml" />
+</map:match>
+
+<!-- Linkmap for regular pages -->
+<map:match pattern="**linkmap-*">
+  <map:generate src="cocoon://abs-linkmap" />
+  <map:transform src="resources/stylesheets/relativize-linkmap.xsl">
+    <map:parameter name="path" value="{1}{2}" />
+    <map:parameter name="site-root" value="{conf:project-url}" />
+  </map:transform>
+  <map:serialize type="xml" />
+</map:match>
+            ]]>
+          </source>
+          <p>
+            You can try these URIs out directly on a live Forrest to see what is
+            going on (for example, Forrest's own
+            <link href="../abs-linkmap">abs-linkmap</link>).
+          </p>
+        </section>
+      </section>
+    </section>
+  </body>
+</document>

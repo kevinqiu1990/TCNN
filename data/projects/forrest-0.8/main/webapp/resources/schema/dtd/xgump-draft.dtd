@@ -1,0 +1,179 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- ===================================================================
+
+     Apache XGump DTD (Version 1.0)
+
+PURPOSE:
+  Gump descriptor DTD
+
+TYPICAL INVOCATION:
+
+  <!DOCTYPE module PUBLIC
+       "-//APACHE//DTD Gump Descriptor Vx.y//EN"
+       "xgump-draft.dtd">
+
+  where
+
+    x := major version
+    y := minor version
+
+FIXME:
+* cannot yet include the module of ISO character entity sets because
+forrest.xgump has trouble with the catalog entity resolver at startup.
+
+CHANGE HISTORY:
+[Version 1.0]
+  20020611 Initial version. (SN)
+
+==================================================================== -->
+
+<!-- =============================================================== -->
+<!-- Include the Documentation DTD -->
+<!-- =============================================================== -->
+
+<!ENTITY % document PUBLIC
+    "-//APACHE//ENTITIES Documentation V1.1//EN"
+    "document-v11.mod">
+%document;
+
+<!-- =============================================================== -->
+<!-- Include the Common ISO Character Entity Sets -->
+<!-- =============================================================== -->
+
+<!--
+<!ENTITY % common-charents PUBLIC
+    "-//APACHE//ENTITIES Common Character Entity Sets V1.0//EN"
+    "common-charents-v10.mod">
+%common-charents;
+-->
+
+<!-- =============================================================== -->
+<!-- Include the Common elements -->
+<!-- =============================================================== -->
+
+<!ENTITY % common PUBLIC
+    "-//APACHE//ENTITIES Common Elements V1.0//EN"
+    "common-elems-v10.mod">
+%common;
+
+<!-- =============================================================== -->
+<!-- Include the Todo module -->
+<!-- =============================================================== -->
+
+<!ENTITY % todo PUBLIC
+    "-//APACHE//ENTITIES Todo V1.1//EN"
+    "todo-v11.mod">
+%todo;
+
+<!-- =============================================================== -->
+<!-- Include the Changes module -->
+<!-- =============================================================== -->
+
+<!ENTITY % changes PUBLIC
+    "-//APACHE//ENTITIES Changes V1.1//EN"
+    "changes-v11.mod">
+%changes;
+
+<!-- =============================================================== -->
+<!-- Document type element -->
+<!-- =============================================================== -->
+
+<!ELEMENT module (url, forrest?, cvs, mailing-lists, description,
+                  detailed, what, why, who, todo, changes, licence,
+                  credits, project+)>
+<!ATTLIST module
+  name CDATA #REQUIRED>
+
+  <!ELEMENT url EMPTY>
+  <!ATTLIST url
+    href CDATA #REQUIRED>
+
+  <!ELEMENT forrest (skin)>
+  <!ATTLIST forrest
+    version CDATA #REQUIRED>
+
+    <!ELEMENT skin EMPTY>
+    <!ATTLIST skin
+      name CDATA #REQUIRED
+      style CDATA #REQUIRED>
+
+  <!ELEMENT cvs EMPTY>
+  <!ATTLIST cvs
+    repository CDATA #REQUIRED>
+
+  <!ELEMENT mailing-lists (mailing-list+)>
+
+    <!ELEMENT mailing-list EMPTY>
+    <!ATTLIST mailing-list
+      user CDATA #REQUIRED
+      mail CDATA #REQUIRED
+      subscribe CDATA #REQUIRED
+      unsubscribe CDATA #REQUIRED>
+
+  <!ELEMENT description (%content.mix;)*>
+
+  <!ELEMENT detailed (%blocks;)>
+
+  <!ELEMENT what (goal+)>
+
+    <!ELEMENT goal (%content.mix;)*>
+
+  <!ELEMENT why (%content.mix;)*>
+
+  <!ELEMENT who (person+)>
+
+  <!ELEMENT licence (%content.mix;)*>
+
+  <!ELEMENT credits (credit+)>
+
+    <!ELEMENT credit (%content.mix;)*>
+
+  <!ELEMENT project (url?, description?, version?, package?, ant?,
+                     depend*, work*, home, jar+, javadoc?)>
+  <!ATTLIST project name CDATA #REQUIRED>
+
+    <!ELEMENT package (#PCDATA)>
+
+    <!ELEMENT ant EMPTY>
+    <!ATTLIST ant
+      target CDATA #REQUIRED>
+
+    <!ELEMENT depend EMPTY>
+    <!ATTLIST depend
+      project CDATA #REQUIRED>
+
+    <!ELEMENT work EMPTY>
+    <!ATTLIST work
+      nested CDATA #REQUIRED>
+
+    <!ELEMENT home EMPTY>
+    <!ATTLIST home
+      nested CDATA #REQUIRED>
+
+    <!ELEMENT jar EMPTY>
+    <!ATTLIST jar
+      name CDATA #REQUIRED
+      id CDATA #IMPLIED>
+
+    <!ELEMENT javadoc EMPTY>
+    <!ATTLIST javadoc
+      parent CDATA #REQUIRED>
+
+<!-- =============================================================== -->
+<!-- End of DTD -->
+<!-- =============================================================== -->

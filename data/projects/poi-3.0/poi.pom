@@ -1,0 +1,33 @@
+<project> 
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.apache.poi</groupId>
+	<artifactId>poi</artifactId>
+	<version>@VERSION@</version>
+	<packaging>jar</packaging>
+	<name>Jakarta POI</name>
+	<url>http://jakarta.apache.org/poi/</url>
+	<description>Jakarta POI - Java API To Access Microsoft Format Files</description>
+
+	<dependencies></dependencies>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>http://svn.apache.org/viewvc/jakarta/poi/trunk</url>
+		<connection>scm:svn:http://svn.apache.org/repos/asf/jakarta/poi/trunk</connection>
+	</scm>
+	<issueManagement>
+		<system>bugzilla</system>
+		<url>http://issues.apache.org/bugzilla/buglist.cgi?product=POI</url>
+	</issueManagement>
+	<organization>
+		<name>Apache Software Foundation</name>
+		<url>http://www.apache.org/</url>
+		<logo>http://jakarta.apache.org/images/original-jakarta-logo.gif</logo>
+	</organization>
+</project>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XHTML2: http://www.w3.org/TR/2005/WD-xhtml2-20050527
+Copyright © 1999-2004 World Wide Web Consortium, (Massachusetts Institute of Technology,
+European Research Consortium for Informatics and Mathematics, Keio University).
+All Rights Reserved. This work is distributed under the W3C® Software Licens [1]
+in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+         xmlns:x="http://www.w3.org/1999/xhtml">
+
+  <x:h1>Param Module</x:h1>
+
+  <div>
+    <x:h2>The param element</x:h2>
+
+    <define name="param">
+      <element name="param">
+        <ref name="param.attlist"/>
+      </element>
+    </define>
+
+    <define name="param.attlist">
+      <optional>
+        <ref name="id.attrib"/>
+      </optional>
+      <attribute name="name"/>
+      <optional>
+        <attribute name="value"/>
+      </optional>
+      <optional>
+        <attribute name="valuetype" a:defaultValue="data">
+          <choice>
+            <value>data</value>
+            <value>ref</value>
+            <value>object</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="type">
+          <ref name="ContentTypes.datatype"/>
+        </attribute>
+      </optional>
+    </define>
+  </div>
+
+</grammar>

@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project name="getsrc">
+<!-- default values -->
+  <property name="getsrc.local.root-dir" value=""/>
+  <target name="getsrc.clean-workdir">
+    <delete dir="${build.work-dir}"/>
+  </target>
+  <target name="getsrc.local" description="FB: Get source from local filesystem">
+    <property name="build.home-dir" location="${getsrc.local.root-dir}" />
+  </target>
+<!-- default values -->
+  <property name="getsrc.cvs.user" value="anoncvs"/>
+  <property name="getsrc.cvs.password" value="anoncvs"/>
+  <property name="getsrc.cvs.root" value="/home/cvspublic"/>
+  <property name="getsrc.cvs.host" value="cvs.apache.org"/>
+  <property name="getsrc.cvs.module" value="${ant.project.name}"/>
+  <property name="getsrc.cvs.tag" value=""/>
+  <property name="build.cvsmodule-dir"    location="work/cvsmodules"/>
+  <target name="getsrc.cvs" description="FB: Get source from a CVS repository">
+    <cvspass cvsroot=":pserver:${getsrc.cvs.user}@${getsrc.cvs.host}:${getsrc.cvs.root}" password="${getsrc.cvs.password}"/>
+<!-- non-recursive; just to get forrest.properties -->
+    <echo>
+<![CDATA[<cvs cvsRoot=":pserver:${getsrc.cvs.user}@${getsrc.cvs.host}:${getsrc.cvs.root}"
+      package="${getsrc.cvs.module}"
+      dest="${build.cvsmodule-dir}"
+      quiet="false"
+      command="checkout -l"
+      tag="${getsrc.cvs.tag}"
+      failonerror="true"
+      />]]>
+    </echo>
+    <cvs cvsRoot=":pserver:${getsrc.cvs.user}@${getsrc.cvs.host}:${getsrc.cvs.root}"
+      package="${getsrc.cvs.module}"
+      dest="${build.cvsmodule-dir}"
+      quiet="true"
+      command="checkout -l"
+      tag="${getsrc.cvs.tag}"
+      failonerror="true"
+      />
+    <echo>Loading ${build.cvsmodule-dir}/${getsrc.cvs.module}/forrest.properties..</echo>
+    <loadproperties srcFile="${build.cvsmodule-dir}/${getsrc.cvs.module}/forrest.properties"/>
+    <loadproperties srcFile="${forrest.home}/main/webapp/default-forrest.properties"/>
+<!-- only the project.content-dir directory -->
+    <echo>
+<![CDATA[<cvs cvsRoot=":pserver:${getsrc.cvs.user}@${getsrc.cvs.host}:${getsrc.cvs.root}"
+      package="${getsrc.cvs.module}/${project.content-dir}"
+      dest="${build.cvsmodule-dir}"
+      quiet="false"
+      tag="${getsrc.cvs.tag}"
+      failonerror="true"
+      />]]>
+    </echo>
+    <cvs cvsRoot=":pserver:${getsrc.cvs.user}@${getsrc.cvs.host}:${getsrc.cvs.root}"
+      package="${getsrc.cvs.module}/${project.content-dir}"
+      dest="${build.cvsmodule-dir}"
+      quiet="true"
+      tag="${getsrc.cvs.tag}"
+      failonerror="true"
+      />
+    <copy todir="${build.work-dir}" overwrite="true">
+      <fileset dir="${build.cvsmodule-dir}/${getsrc.cvs.module}"/>
+    </copy>
+  </target>
+  <taskdef resource="taskdef.properties">
+    <classpath>
+<!-- non-recursive doesn't work from 0.8 stable -->
+      <pathelement location="${bot.home}/lib/jsvn-0.9-dev.jar"/>
+    </classpath>
+  </taskdef>
+<!-- default values -->
+  <property name="getsrc.svn.url" value=""/>
+  <property name="getsrc.svn.revision" value="HEAD"/>
+  <property name="build.svn-dir"    location="work/svn"/>
+  <target name="getsrc.svn" description="FB: Get source from an SVN repository">
+<!-- non-recursive; just to get forrest.properties -->
+    <echo>svn: ${getsrc.svn.url} -> ${build.svn-dir}/${ant.project.name}</echo>
+    <svncheckout repositoryUrl="${getsrc.svn.url}"
+      destination="${build.svn-dir}/${ant.project.name}"
+      revision="${getsrc.svn.revision}"
+      failonerror="true"
+      recursive="false"/>
+    <echo>Loading ${build.svn-dir}/${ant.project.name}/forrest.properties..</echo>
+    <loadproperties srcFile="${build.svn-dir}/${ant.project.name}/forrest.properties"/>
+    <loadproperties srcFile="${forrest.home}/main/webapp/default-forrest.properties"/>
+<!-- only the project.content-dir directory -->
+    <echo>svn: ${getsrc.svn.url}/${project.content-dir} -> ${build.svn-dir}/${ant.project.name}/${project.content-dir}</echo>
+    <svncheckout repositoryUrl="${getsrc.svn.url}/${project.content-dir}"
+      destination="${build.svn-dir}/${ant.project.name}/${project.content-dir}"
+      revision="${getsrc.svn.revision}"
+      failonerror="true"/>
+    <copy todir="${build.work-dir}" overwrite="true">
+      <fileset dir="${build.svn-dir}/${ant.project.name}"/>
+    </copy>
+  </target>
+</project>

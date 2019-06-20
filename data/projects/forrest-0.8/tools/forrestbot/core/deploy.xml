@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project name="deploy">
+<!-- ================================================================= -->
+<!-- The deploy.local target                                           -->
+<!-- ================================================================= -->
+  <property name="deploy.local.dir" location="sites/${ant.project.name}"/>
+  <target name="deploy.local" unless="build.failed" description="FB: Deploy to a local location">
+    <mkdir dir="${deploy.local.dir}"/>
+    <echo>Deploying from ${build.site-dir} to ${deploy.local.dir}</echo>
+    <copy todir="${deploy.local.dir}">
+      <fileset dir="${build.site-dir}">
+        <modified/>
+      </fileset>
+    </copy>
+<!-- set a property to be used in the notify target -->
+    <property name="notify.deploy-location" value="${deploy.local.dir}"/>
+  </target>
+<!-- ================================================================= -->
+<!-- The deploy.ftp target                                             -->
+<!-- ================================================================= -->
+  <property name="deploy.ftp.server" value="localhost"/>
+  <property name="deploy.ftp.user" value="anonymous"/>
+  <property name="deploy.ftp.password" value="forrestbot@"/>
+  <property name="deploy.ftp.remotedir" value="incoming"/>
+  <property name="deploy.ftp.verbose" value="yes"/>
+  <property name="deploy.ftp.newer" value="yes"/>
+<!-- target definition for deploy.ftp -->
+  <target name="deploy.ftp" unless="build.failed" description="Forrestbot:
+    Deploy via FTP">
+    <ftp server="${deploy.ftp.server}" remotedir="${deploy.ftp.remotedir}"
+      userid="${deploy.ftp.user}" password="${deploy.ftp.password}"
+      newer="${deploy.ftp.newer}" verbose="${deploy.ftp.verbose}">
+      <fileset dir="${build.site-dir}">
+        <modified/>
+      </fileset>
+    </ftp>
+  </target>
+<!-- ================================================================= -->
+<!-- The deploy.scp target                                             -->
+<!-- ================================================================= -->
+  <property name="deploy.scp.dest" value=""/>
+  <target name="deploy.scp" unless="build.failed" description="FB: Deploy to a remote location via scp">
+    <if>
+      <isset property="deploy.scp.keyfile"/>
+      <then>
+        <antcall target="deploy.scp-with-keyfile"/>
+      </then>
+      <else>
+        <antcall target="deploy.scp-with-password"/>
+      </else>
+    </if>
+  </target>
+  <target name="deploy.scp-with-keyfile">
+    <if>
+      <not>
+        <isset property="deploy.scp.passphrase"/>
+      </not>
+      <then>
+        <input addproperty="deploy.scp.passphrase"
+            message="Enter local passphrase for key to enable scp to ${deploy.scp.dest}:"/>
+      </then>
+    </if>
+    <scp todir="${deploy.scp.dest}"
+        keyfile="${deploy.scp.keyfile}" passphrase="${deploy.scp.passphrase}">
+      <fileset dir="${build.site-dir}">
+        <modified/>
+      </fileset>
+    </scp>
+  </target>
+  <target name="deploy.scp-with-password">
+    <if>
+      <not>
+        <isset property="deploy.scp.password"/>
+      </not>
+      <then>
+        <input addproperty="deploy.scp.password"
+            message="Enter remote password to enable scp to ${deploy.scp.dest}:"/>
+      </then>
+    </if>
+    <scp todir="${deploy.scp.dest}" password="${deploy.scp.password}">
+      <fileset dir="${build.site-dir}">
+        <modified/>
+      </fileset>
+    </scp>
+  </target>
+<!-- ================================================================= -->
+<!-- The deploy.cvs target                                             -->
+<!-- ================================================================= -->
+  <property name="deploy.cvs.user" value="anoncvs"/>
+  <property name="deploy.cvs.password" value="anoncvs"/>
+  <property name="deploy.cvs.root" value="/home/cvs"/>
+  <property name="deploy.cvs.host" value="cvs.apache.org"/>
+  <property name="deploy.cvs.module" value="${ant.project.name}"/>
+  <property name="deploy.cvs.commit-message" value="Automatic publish from forrestbot"/>
+  <property name="deploy.cvsmodule-dir" value="work/cvsmodules-deploy/${ant.project.name}"/>
+  <target name="deploy.cvs" unless="build.failed" description="FB: Deploy by committing to a CVS repository">
+    <condition property="isUnix">
+      <os family="unix"/>
+    </condition>
+    <fail unless="isUnix" message="deploy.cvs only supported for unix-like operating systems."/>
+    <property name="deploy.cvs.fullroot" value=":ext:${deploy.cvs.user}@${deploy.cvs.host}:${deploy.cvs.root}"/>
+<!-- log in -->
+    <cvspass cvsroot="${deploy.cvs.fullroot}" password="${deploy.cvs.password}"/>
+<!-- get current CVS source -->
+    <cvs cvsRoot="${deploy.cvs.fullroot}"
+      package="${deploy.cvs.module}"
+      dest="${deploy.cvsmodule-dir}"
+      command="checkout"
+      failonerror="true"
+      />
+<!-- copy new files into sandbox -->
+    <copy todir="${deploy.cvsmodule-dir}/${deploy.cvs.module}">
+      <fileset dir="${build.site-dir}"/>
+    </copy>
+<!-- add new files to CVS -->
+    <exec executable="${bot.home}/core/cvs_add.sh" dir="${deploy.cvsmodule-dir}/${deploy.cvs.module}" failonerror="true"/>
+<!-- check in to CVS -->
+    <exec executable="cvs" dir="${deploy.cvsmodule-dir}/${deploy.cvs.module}" failonerror="true">
+      <arg value="commit"/>
+      <arg value="-m '${deploy.cvs.commit-message}'"/>
+    </exec>
+  </target>
+<!-- ================================================================= -->
+<!-- The deploy.svn target                                             -->
+<!-- ================================================================= -->
+  <property name="deploy.svn.user" value=""/>
+  <property name="deploy.svn.password" value=""/>
+  <property name="deploy.svn.url" value=""/>
+  <property name="deploy.svn.commit-message" value="Automatic publish from forrestbot"/>
+  <property name="deploy.svn.svn-dir" location="work/svn-deploy/${ant.project.name}"/>
+  <property name="deploy.svn.svn-filestoadd" location="work/svn-deploy/${ant.project.name}.toadd"/>
+  <target name="deploy.svn" unless="build.failed" description="FB: Deploy by committing to an SVN repository">
+<!-- get current SVN source -->
+    <svncheckout
+        repositoryurl="${deploy.svn.url}"
+        username="${deploy.svn.user}"
+        password="${deploy.svn.password}"
+        destination="${deploy.svn.svn-dir}"
+        failonerror="true"
+    />
+<!-- copy new files into sandbox -->
+    <copy todir="${deploy.svn.svn-dir}">
+      <fileset dir="${build.site-dir}"/>
+    </copy>
+<!-- add new files to SVN -->
+<!-- svnadd doesn't work (it doesn't change the working directory properly) -->
+    <exec executable="svn" dir="${deploy.svn.svn-dir}" output="${deploy.svn.svn-filestoadd}" failonerror="true">
+      <arg value="status"/>
+    </exec>
+<!-- the status columns make all lines invalid filenames
+      we remove the status columns for the new files so the only valid
+      filenames in the list are new files
+    -->
+    <replace file="${deploy.svn.svn-filestoadd}" token="?      " value=""/>
+    <replace file="${deploy.svn.svn-filestoadd}" token="M      " value=""/>
+<!-- don't fail on error here because
+      1) the targets file might have 'bad' filenames but we should continue
+      2) we would've already failed if the svn executable wasn't found
+    -->
+    <exec executable="svn" dir="${deploy.svn.svn-dir}">
+      <arg value="add"/>
+      <arg value="--targets"/>
+      <arg value="${deploy.svn.svn-filestoadd}"/>
+    </exec>
+<!-- check in to SVN -->
+    <svncommit
+        target="${deploy.svn.svn-dir}"
+        repositoryurl="${deploy.svn.url}"
+        commitmessage="${deploy.svn.commit-message}"
+    />
+  </target>
+</project>

@@ -1,0 +1,42 @@
+Subject: [Important] code-freeze commenced
+
+The code-freeze is now happening to allow us to prepare the
+release candidate packages and make them available for testing.
+
+Code-freeze means *no* non-essential commits to the trunk
+or to the new release branch. Other branches are free to
+continue. Whiteboard plugins can also continue.
+
+There should be no code enhancements or new functionality,
+because that could introduce new bugs.
+
+The main aim is to find and fix important bugs. Any minor
+issues are delayed until after release (add to Jira).
+
+Documentation corrections can happen because they will not
+break anything. As long as we do test the documentation
+building just prior to making the final release candidate.
+Although remember that such work should have happened
+prior to the code-freeze. We don't want to build subsequent
+release candidates unless necessary.
+
+However, if there are important code changes that are
+required you can make a proposal to allow that commit.
+The Release Manager will make a quick decision.
+
+Next important milestones are:
+
+* Create release candidate #2 if there have been changes
+  on [date]
+  [www.timeanddate.com-URL]
+
+* Actual release date is [date]
+  [www.timeanddate.com-URL]
+
+Now the Release Manager will do some final changes, such
+as license header checks, xml code cleanup, and changing
+version number information. Then the RM will build the
+packages. These steps may take some time.
+
+The next message will tell you where to downlaod the
+release candidate packages and describe how to test.

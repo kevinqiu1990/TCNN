@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd" [
+<!ENTITY % symbols-project
+    PUBLIC "-//Apache Forrest//ENTITIES Symbols Project v1.0//EN"
+    "symbols-project-v10.ent"> 
+  %symbols-project;
+]>
+<document>
+  <header>
+    <title>Using XML entities for character replacements</title>
+  </header>
+  <body>
+    <p>
+      All of the normal xml character entities are available for use in your
+      source documents. So you can use "<code>&amp;trade;</code>" for the
+      trademark symbol (&trade;) and use "<code>&amp;ouml;</code>" for special
+      accents (&ouml;).
+    </p>
+    <p>
+      Forrest also has some default sets of symbols. There is one set for the
+      core of Forrest. These are automatically available for use in the
+      "document-v*" series of document types. (If you want to use them in
+      another document type, then you need to specify them in the document type
+      declaration of your xml instance documents or in your custom DTD. See
+      below.)
+    </p>
+    <p>
+      For example, use "<code>&amp;for-s;</code>" to represent the strong text
+      string "&for-s;". See the list of available symbols at
+      <code>main/webapp/resources/schema/entity/symbols-core-v10.ent</code>
+      which shows that that example entity was declared as <code>
+<![CDATA[<strong>Apache Forrest</strong>]]>
+      </code>.
+    </p>
+    <p>
+      You can supply lists of symbols for your own project too. Create a fresh
+      site with 'forrest seed' and see the set
+      <code>src/documentation/resources/schema/symbols-project-v10.ent</code>
+    </p>
+    <p>
+      For example, use "<code>&amp;myp-t;</code>" to represent the project name
+      together with trademark symbol "&myp-t;".
+    </p>
+    <p>
+      The set of project symbols is already configured. To use the symbols in
+      your documents, add to the document type declaration. For example, see the
+      source for this document
+      (<code>src/documentation/content/xdocs/samples/xml-entites.xml</code>)
+      which declares the project symbol set ...
+    </p>
+    <source>
+<![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd" [
+<!ENTITY % symbols-project
+    PUBLIC "-//Apache Forrest//ENTITIES Symbols Project v1.0//EN"
+    "symbols-project-v10.ent"> 
+  %symbols-project;
+]>
+<document> 
+  ...
+]]>
+    </source>
+  </body>
+</document>

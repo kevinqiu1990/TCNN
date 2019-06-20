@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd">
+<document>
+  <header>
+    <title>Overview of the How-To documents</title>
+  </header>
+  <body>
+    <section>
+      <title>Forrest Site and Documentation</title>
+      <ul>
+        <li><link href="site:write-howto">How to write a How-To</link>
+          - Provides instructions about writing documents. Please copy this
+          file to serve as a template for your own document.
+        </li>
+        <li><link href="site:asf-mirror">Generate an ASF mirrors page using interactive web form</link>
+          - include html form elements
+          into a forrest-generated html page. For example, this enables building
+          automated download mirror pages for ASF project websites.
+          Also shows how to process "extra" documents, i.e. that have no links
+          from anywhere in the site.
+        </li>
+      </ul>
+    </section>
+    <section>
+      <title>Using and developing with Forrest</title>
+      <p>
+        You will soon see that there is not much distinction between users and
+        developers.
+      </p>
+      <ul>
+        <li><link href="site:pdf-tab">How to create a PDF document for each tab</link>
+          - Describes the generation of a PDF document for each
+          group of documents that is defined by a tab.
+        </li>
+        <li><link href="site:editcss">How to edit Forrest's CSS in a WYSIWYG fashion</link>
+          - Describes the use of Mozilla Firebird and the free EditCSS-Plugin to 
+          customize your Forrest design in a WYSIWYG-way.
+        </li>
+        <li><link href="site:corner-css">How to modify the color of generated corner images</link>
+          - Describes the use of CSS values from the skinconf.xml configuration
+          file to change the color of the corner images to be suitable for
+          your own skin colors. Advanced use explains editing the *.css too.
+        </li>
+        <li><link href="site:maven">How to run Forrest from within Maven</link>
+        - For Maven users who want to generate their project's documentation and/or website
+          using Forrest in lieu of Maven's site plugin.
+        </li>
+        <li><link href="site:custom-html-source">How to customize processing of html source</link>
+        - When integrating legacy html documents into a Forrest-built site, additional processing
+        of the html sources might be required.
+        </li>
+      </ul>
+    </section>
+    <section>
+      <title>Extending Forrest</title>
+      <ul>
+        <li><link href="site:buildPlugin">How to create a Plugin for Forrest</link>
+          - Describes how to write a plugin to add new input or output document
+          formats, or to modify the default behaviour of Forrest</li>
+      </ul>
+    </section>
+  </body>
+</document>

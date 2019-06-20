@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Standards Compliance</title>
+  </header>
+  <body>
+    <section>
+      <title>Introduction</title>
+      <p>
+        Forrest is still quite young, so there are known issues. Standards
+        compliance is a definite major goal. Please send patches for the Forrest
+        stylesheets to ensure such compliance.
+      </p>
+      <note>
+        For your testing, use the Forrestbot-generated website at our
+        <link href="site:zone">Zone testbed</link> because that reflects the
+        current SVN code.
+      </note>
+    </section>
+    <section>
+      <title>HTML</title>
+      <p>
+        Tested using the W3C HTML Validation Service
+        (<link href="http://validator.w3.org/">validator.w3.org</link>).
+      </p>
+      <p>
+        The "<code>pelt</code>" skin validates as HTML 4.0.1
+      </p>
+      <p>
+        The "<code>tigris</code>" skin validates as HTML 4.0.1
+      </p>
+    </section>
+    <section>
+      <title>WAI</title>
+      <p>
+        See <link href="http://www.w3.org/WAI/">Web Accessibility Initiative
+        (WAI)</link>
+      </p>
+      <p>
+        "W3C WCAG - AAA Compliance" using
+        <link href="http://webxact.watchfire.com/">webxact.watchfire.com</link>
+      </p>
+      <p>
+        Issues ...
+      </p>
+      <ol>
+        <li>Priority 1: No errors, some warnings.</li>
+        <li>Priority 2: Some errors, some warnings.</li>
+        <li>Priority 3: Some errors, some warnings.</li>
+      </ol>
+    </section>
+    <section>
+      <title>CSS</title>
+      <p>
+        Jigsaw:
+        <link href="http://jigsaw.w3.org/css-validator/">jigsaw.w3.org</link>
+      </p>
+      <p>
+        Issues ...
+      </p>
+      <ol>
+        <li>CSS 2: No errors, some warnings.</li>
+      </ol>
+    </section>
+  </body>
+</document>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!--
+This file kept for backwards-compatibility (well, backwards-warning at least).
+In the future we can probably remove it altogether.
+-->
+<project default="site" basedir="." name="Forrest Ant proxy targets">
+  <property name="obsolete.message" value="${line.separator}${line.separator}The use of forrest-targets.ent as an 'ant proxy' is no longer supported.${line.separator}Please see http://forrest.apache.org/docs/upgrading_06.html#antproxy for upgrade instructions."/>
+  <target name="validate" description="Validates XML doc files">
+    <fail>${obsolete.message}</fail>
+  </target>
+  <target name="webapp" description="Generates an unpacked webapp">
+    <fail>${obsolete.message}</fail>
+  </target>
+  <target name="war" description="Generates a packaged .war webapp">
+    <fail>${obsolete.message}</fail>
+  </target>
+  <target name="site" description="Generates static HTML">
+    <fail>${obsolete.message}</fail>
+  </target>
+  <target name="forrest">
+    <fail>${obsolete.message}</fail>
+  </target>
+</project>

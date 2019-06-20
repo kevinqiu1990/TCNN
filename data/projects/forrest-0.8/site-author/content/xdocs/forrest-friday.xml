@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN"
+  "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>ForrestFriday monthly get-together</title>
+  </header>
+  <body>
+    <section id="overview">
+      <title>Overview</title>
+      <p>
+        On the second Friday of each month we have a 24-hour get-together using
+        the dev mailing list, Internet Relay Chat (IRC), and other collaborative
+        tools, to work on Forrest development and get to know each other.
+      </p>
+      <p>
+        ForrestFriday starts at 06:00 UTC (6am Greenwich Mean Time in London)
+        and lasts for 24 hours.
+      </p>
+      <p>
+        The next event will take place on <strong>?? ?? 2006</strong>. (Note:
+        See recent mail discussion - not happening until further notice.) See
+        <a href="http://www.timeanddate.com/worldclock/fixedtime.html?year=2006&amp;month=07&amp;day=14&amp;hour=6&amp;min=0&amp;sec=0">start
+        time</a> and
+        <a href="http://www.timeanddate.com/worldclock/meetingtime.html?day=14&amp;month=07&amp;year=2006&amp;p1=136&amp;p2=48&amp;p3=176&amp;p4=240&amp;p5=224&amp;p6=213">zone
+        overlap</a>.
+      </p>
+    </section>
+    <section id="purpose">
+      <title>Purpose</title>
+      <p>
+        The day is devoted to working collaboratively to solve particular issues
+        and getting to know each other. In the weeks leading up to each event,
+        decide on the dev mailing list what the main topic should be. Probably
+        something that needs groups work (e.g. moving the internal format to be
+        XHTML2).
+      </p>
+      <p>
+        There will also be an effort to clean up the <a href="site:bugs">Issue
+        Tracker</a>.
+      </p>
+      <p>
+        The dev mailing list is still the main form of communication and all
+        decisions are made there. The IRC channel is to support that and provide
+        a place for near real-time discussion.
+      </p>
+      <p>
+        The IRC channel is definitely not open continuously. It is only for
+        temporary communications at this monthly meeting.
+      </p>
+      <p>
+        This is not a user help forum, please do that on the user mailing list.
+      </p>
+    </section>
+    <section id="how">
+      <title>How to participate</title>
+      <ul>
+        <li>
+          All volunteers are welcome.
+        </li>
+        <li>
+          Get an IRC client (some are mentioned at <a href="http://irchelp.org/">irchelp.org</a>)
+          and see <a href="http://www.irchelp.org/irchelp/irctutorial.html">IRC Tutorial</a>.
+        </li>
+        <li>
+          Read the dev mailing list. That is where any decisions will be
+          made and the name of the IRC channel will be announced.
+        </li>
+        <li>
+          At the start time, connect to irc.freenode.net and join the channel.
+        </li>
+        <li>
+          The discussion will be logged, summarised, and added to our
+          "<a href="http://svn.apache.org/repos/asf/forrest/events/forrest-friday/">events</a>"
+          SVN repository.
+        </li>
+        <li>
+          ASF committers should try to use a nickname that matches their ASF
+          committer id.
+          Please also apply for an "IRC hostname
+          <a href="http://freenode.net/faq.shtml#cloaks">cloak</a>".
+          This hides your machine hostname. It also enables ASF oversight
+          processes to ensure that project PMC members are participating.
+          Instructions are in our SVN at
+          <a href="https://svn.apache.org/repos/private/committers/docs/freenode-cloaks.txt">https://svn.apache.org/repos/private/committers/docs/freenode-cloaks.txt</a></li>
+        <li>
+          See notes about the <a href="site:plan/overview">topic of the day</a>.
+        </li>
+        <li>
+          We hope to also have a Lenya instance. This will enable a "whiteboard"
+          for the day, and also be the first step for later Forrest-Lenya integration.
+        </li>
+      </ul>
+    </section>
+    <section id="op">
+      <title>Notes for channel operator</title>
+      <ul>
+        <li>
+          Send a reminder email to dev- prior to the event. Send one about a
+          week beforehand so that the Topic can be decided and to remind people
+          that it is happening (it comes around quickly). Send another the day
+          before the event. Then do the following on the day ...
+        </li>
+        <li>
+          The first person to join the IRC channel is the operator.
+        </li>
+        <li>
+          See the irchelp.org
+          <a href="http://www.irchelp.org/irchelp/changuide.html">guide</a>
+          for channel operators.
+        </li>
+        <li>
+          Make sure that your irc client is creating a logfile.
+        </li>
+        <li>
+          Decide on a channel name. Join it a bit before the start time, then do
+          this setup ...
+        </li>
+        <li>
+          Set the channel mode: <code>/mode +n</code></li>
+        <li>
+          Declare today's topic: <code>/topic ForrestFriday: XHTML2 core and Jira cleanup</code></li>
+        <li>Ask cheche to start the logger bot and tell the URL for the live logfile.
+        </li>
+        <li>
+          Make sure that your client is creating a logfile.
+        </li>
+        <li>
+          Begin a summary text file in the "forrest-events" SVN. Committers
+          should add to this during the day. Don't leave it until the end.
+        </li>
+        <li>
+          Announce to the dev mailing list that the channel is open and tell the channel name
+          and the URL for the live log.
+        </li>
+        <li>
+          During the session, occasionally refer to the live logfile URL. People can read
+          what they missed, and also refer to previous discussion by stating the time that
+          it occurred.
+        </li>
+        <li>
+          At the end, everyone leaves the channel and it will automatically close.
+          Ask cheche to stop the logger bot.
+        </li>
+        <li>
+          Add the logfile to the Forrest Events repository.
+        </li>
+      </ul>
+    </section>
+  </body>
+</document>

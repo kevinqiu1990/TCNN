@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE howto PUBLIC "-//APACHE//DTD How-to V1.2//EN" "http://forrest.apache.org/dtd/howto-v12.dtd">
+<howto>
+  <header>
+    <title>How to create a PDF document for each tab</title>
+    <abstract>
+      This How-To describes the generation of a PDF document for each group of
+      documents that is defined by a tab.
+    </abstract>
+    <last-modified-content-date date="2005-07-19"/>
+  </header>
+  <audience title="Intended Audience">
+    <p>
+      Users who need to generate one printable document aggregated from a group
+      of documents.
+    </p>
+  </audience>
+  <purpose title="Purpose">
+    <p>
+      By default Forrest generates a pdf file for each separate document of your
+      project. As well you can create a pdf of the whole site. But sometimes it
+      may be necessary to generate a pdf file out of selected tab, i.e. only for
+      certain parts of the site.
+    </p>
+  </purpose>
+  <prerequisites title="Prerequisites">
+    <ul>
+      <li>Understand how to create project-specific sitemaps by following the
+      <link href="site:your-project">Using Forrest</link> document.</li>
+    </ul>
+  </prerequisites>
+  <steps title="Steps">
+    <p>
+      The procedure outlined below will define a project
+      <code>sitemap.xmap</code> and create a new <code>pdf-tab.xmap</code>.
+    </p>
+    <section id="sitemap">
+      <title>Create your project's main sitemap.xmap</title>
+      <p>
+        If you do not have already a sitemap then create a new empty one in your
+        <code>src/documentation</code> directory (or wherever
+        ${project.sitemap-dir} points to).
+      </p>
+    </section>
+    <section id="aggregator">
+      <title>Create another sitemap: pdf-tab.xmap</title>
+      <p>
+        Like before create an empty sitemap and name it pdf-tab.xmap.
+      </p>
+    </section>
+    <section id="mount">
+      <title>Edit project sitemap.xmap to mount pdf-tab.xmap</title>
+      <p>
+        Your sitemap should look something like this.
+      </p>
+      <source>
+<![CDATA[
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  <map:pipelines>
+    <map:pipeline internal-only="false">
+      <map:match pattern="**.xml">
+        <!-- pdf-tab definitions -->
+        <map:match pattern="pdf-tab.xml">
+          <map:mount uri-prefix="" src="pdf-tab.xmap"
+            check-reload="yes" />
+        </map:match>
+        <!-- end of pdf-tab definitions -->
+      </map:match>
+    </map:pipeline>
+  </map:pipelines>
+</map:sitemap>]]>
+      </source>
+    </section>
+    <section id="edit-aggregator">
+      <title>Edit the file <code>pdf-tab.xmap</code></title>
+      <p>
+        The <code>
+<![CDATA[<map:match pattern="*.xml">]]>
+        </code> element should look like the following:
+      </p>
+      <source>
+<![CDATA[
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  <map:pipelines>
+    <map:pipeline internal-only="false">
+     <map:match pattern="*.xml">
+	<map:generate src="cocoon://abs-linkmap"/>
+	  <map:transform type="xpath">
+	  	<map:parameter name="include" value="//*[@wholesite='true']"/>
+		<map:parameter name="exclude" value="//*[@wholesite='false']"/>
+	  </map:transform>
+	  <map:transform src="resources/stylesheets/site2book.xsl" />
+	  <map:transform src="resources/stylesheets/aggregates/book2cinclude.xsl">
+	     <map:parameter name="title"
+		value="{conf:project-name}: Still My Foo Site"/>
+	     </map:transform>
+	  <map:transform type="cinclude"/>
+	  <map:transform src="resources/stylesheets/aggregates/doc2doc-uniqueids.xsl"/>
+	  <map:transform src="resources/stylesheets/aggregates/docs2document.xsl"/>
+	  <map:serialize type="xml"/>
+    </map:match>    
+   </map:pipeline>
+  </map:pipelines>
+</map:sitemap>]]>
+      </source>
+    </section>
+    <section id="edit-site">
+      <title>Edit your site.xml</title>
+      <note>
+        Do not use directories with "." in it. Replace them by "_" e.g 1.2/ will
+        not work in the aggregation. e.g. 1_2/ just works fine.
+      </note>
+      <p>
+        Add the following entry to your site.xml in the <code>
+<![CDATA[<about>]]>
+        </code> element
+      </p>
+      <source>
+<![CDATA[... 
+<whole_foosite href="pdf-tab.html" label="sub site" />]]>
+      </source>
+      <p>
+        Your site.xml should look like this ...
+      </p>
+      <source>
+<![CDATA[... 
+<about label="About">
+  <index label="Index" href="index.html" description="Welcome to MyProj"/>
+  <changes label="Changes" href="changes.html"
+    description="History of Changes" />
+  <todo label="Todo" href="todo.html" description="Todo List" />
+  <whole_foosite href="pdf-tab.html" label="pdf-tab" />
+</about>
+...]]>
+      </source>
+      <p>
+        This allows you to link to it via a <code>
+<![CDATA[<link href="site:whole_foosite">]]>
+        </code> reference.
+      </p>
+      <p>
+        Add to every element that should be included in the pdf-tab.pdf the
+        attribute <code>wholesite="true"</code>
+      </p>
+      <source>
+<![CDATA[
+<sample-wiki label="Wiki page" href="wiki-sample.html"
+  description="wiki-sample" wholesite="true"/>]]>
+      </source>
+      <note>
+        This attribute will be inherited by all children of the element. Do not
+        use it in the parent element that contains the <code>
+<![CDATA[<whole_foosite href="pdf-tab.html" label="pdf-tab" />]]>
+        </code> as the child (will cause a <code>stack overflow</code> if you
+        do)!!!
+      </note>
+    </section>
+    <section id="explain">
+      <title>Explanation of the operation</title>
+      <p>
+        Line 4 of our example
+        <br/>
+        <code>
+<![CDATA[<map:parameter name="include" value="//*[@wholesite='true']"/>]]>
+        </code> looks at your site.xml and will match every element containing
+        the <code>wholesite="true"</code> attribute. For example, to use the
+        "samples" tab ...
+      </p>
+      <source>
+<![CDATA[
+...
+<samples label="Samples" href="samples/" tab="samples" wholesite="true">
+...
+</samples>
+...]]>
+      </source>
+      <p>
+        It matches <strong>all</strong> of the elements that contain
+        <code>wholesite="true"</code> (in our example <code>
+<![CDATA[<samples>]]>
+        </code> and its "children") for the content of the pdf file to be
+        generated.
+      </p>
+      <source>
+<![CDATA[ 
+<samples label="Samples" href="samples/" tab="samples" wholesite="true">
+ <sample2 label="Static content" href="sample2.html"      
+   description="More Samples" wholesite='false'/>
+ <sample-wiki label="Wiki page" href="wiki-sample.html"      
+   description="wiki-sample" />
+ <sample-ihtml label="ihtml page" href="ihtml-sample.html"      
+   description="Test iHTML page" />
+</samples> ]]>
+      </source>
+      <p>
+        This example shows that you can as well exclude site(s) from the
+        aggregation by using the <code>wholesite="false"</code> attribute. This
+        attribute will be as well inherited by all children of the element.
+      </p>
+      <p>
+        Line 8 defines the title of the pdf file by taking the content of the
+        project-name variable in <code>skinconf.xml</code> and adding some funny
+        text:
+        <br/>
+        <code>
+<![CDATA[<map:parameter name="title" value="{conf:project-name}: Still My Foo Site"/>]]>
+        </code>
+      </p>
+    </section>
+  </steps>
+  <feedback title="Feedback and further development of this How-To">
+    <p>
+      Please provide feedback about this document via the
+      <link href="site:mail-lists">mailing lists</link>.
+    </p>
+    <p>
+      In the future, this ability will probably be incorporated into the main
+      Forrest process.
+    </p>
+  </feedback>
+</howto>

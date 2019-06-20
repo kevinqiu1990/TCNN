@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Upgrading to Apache Forrest 0.7</title>
+  </header>
+  <body>
+    <section id="introduction">
+      <title>Introduction</title>
+      <p>
+        This page describes some changes to Apache Forrest that affect people
+        who are upgrading to the 0.7 version. If you have other issues, then
+        please discuss on either the
+        <a href="site:mail-lists/forrest-dev">dev</a> or
+        <a href="site:mail-lists/forrest-user">user</a> mailing lists. As more
+        experience is gained, this document will be updated.
+      </p>
+      <p>
+        (If you are upgrading from a version prior to 0.6 then you will need to
+        see the notes for the previous upgrade.)
+      </p>
+    </section>
+    <section id="new">
+      <title>New Features</title>
+      <p>
+        The following list shows some of the key new features (for the full list
+        of changes, see the <a href="site:changes">change log</a>).
+      </p>
+      <ul>
+        <li>Plugin architecture</li>
+        <li>Java 1.4</li>
+      </ul>
+      <p>
+        As usual, do a "forrest seed site" in a new directory and compare the
+        forrest.properties and skinconf.xml with that of your project.
+      </p>
+    </section>
+    <section id="clean">
+      <title>Run a clean target after upgrade</title>
+      <p>
+        Do 'forrest clean-work' in each of your projects. This also removes the
+        old Cocoon disk cache.
+      </p>
+    </section>
+    <section id="home">
+      <title>New location of $FORREST_HOME</title>
+      <p>
+        $FORREST_HOME is now the top-level of the distribution. Also make sure
+        $PATH gets updated to use the new $FORREST_HOME/bin
+      </p>
+    </section>
+    <section id="jdk14">
+      <title>Java 1.4 (or newer) is required</title>
+      <p>
+        Java 1.4 (or newer) is required, starting with this Forrest 0.7 version.
+        For further information, see
+        <a href="site:v0.70//faq/requirements">FAQ</a>.
+      </p>
+    </section>
+    <section id="tips">
+      <title>General upgrade tips</title>
+      <p>
+        Synchronise your project's skinconf.xml and forrest.properties files.
+      </p>
+      <p>
+        Take advantage of the separation of concerns. In a new workspace, create
+        a fresh '<code>forrest seed</code>' site, then tweak its
+        forrest.properties and skinconf.xml until it reflects your old site.
+        When it is ready, replace your project's skinconf.xml and
+        forrest.properties files. Any remaining issues would concern other
+        aspects of your configuration, such as site.xml and your actual content.
+      </p>
+    </section>
+    <section id="plugin">
+      <title>Plugin architecture</title>
+      <p>
+        See <a href="site:plugins/infrastructure">Plugin Infrastructure</a> and
+        <a href="site:plugins/using">Extending Forrest with Plugins</a> and for
+        developing new plugins see <a href="site:v0.70//howto/buildPlugin">How
+        to Build a Plugin</a>. See the list of
+        <a href="site:plugins/index">current plugins</a> and their
+        documentation.
+      </p>
+      <p>
+        Note that other experimental plugins can be found in the
+        "whiteboard/plugins" directory.
+      </p>
+    </section>
+    <section id="configure-plugin">
+      <title>Configure plugins</title>
+      <p>
+        Some functionality has been moved out of the forrest core and into
+        plugins. You will need to declare any plugins that are used by your
+        project, e.g. if you use projectInfo (status, changes, todo) and PDF
+        output, then declare the following in forrest.properties
+      </p>
+      <source>
+project.required.plugins=org.apache.forrest.plugin.input.projectInfo,org.apache.forrest.plugin.output.pdf
+      </source>
+    </section>
+    <section id="raw">
+      <title>Including raw un-processed content</title>
+      <p>
+        The method for including "raw un-processed content" has changed.
+      </p>
+      <p>
+        In 0.6 version, the raw content was placed in the
+        src/documentation/content/ directory and potential sub-directories. In
+        the generated site, these links would automatically function. Any linked
+        file with .html extension was not processed and not adorned with Forrest
+        skin and navigation menus.
+      </p>
+      <p>
+        It was also possible to place HTML content in the xdocs directory where
+        it would be copied across if it was linked from the main content.
+      </p>
+      <p>
+        In 0.7 version, any file that is linked to, needs to be placed in the
+        content/xdocs/ directory structure. Any linked file with .html extension
+        is now processed and is adorned with Forrest skin and navigation menus.
+      </p>
+      <p>
+        If you you wish to emulate the behaviour of 0.6 and earlier then you
+        must add the following to your project sitemap.
+      </p>
+      <source>
+&lt;map:match pattern="**.html"&gt;
+ &lt;map:select type="exists"&gt;
+  &lt;map:when test="{properties:content}{0}"&gt;
+    &lt;map:read src="{properties:content}/{0}" mime-type="text/html"/&gt;
+    &lt;!--
+      Use this instead if you want JTidy to clean up your HTML
+      &lt;map:generate type="html" src="{properties:content}/{0}" /&gt;
+      &lt;map:serialize type="html"/&gt;
+    --&gt;
+  &lt;/map:when&gt;
+  &lt;map:when test="{properties:content.xdocs}{0}"&gt;
+    &lt;map:read src="{properties:content.xdocs}/{0}" mime-type="text/html"/&gt;
+    &lt;!--
+      Use this instead if you want JTidy to clean up your HTML
+      &lt;map:generate type="html" src="{properties:content.xdocs}/{0}" /&gt;
+      &lt;map:serialize type="html"/&gt;
+    --&gt;
+  &lt;/map:when&gt;
+ &lt;/map:select&gt;
+&lt;/map:match&gt;
+        </source>
+      <p>
+        If you need to include files that are not linked to, then place them in
+        the src/documentation/content/ directories as with the 0.6 version.
+      </p>
+    </section>
+    <section>
+      <title>To be continued...</title>
+      <p>
+        ...as more issues are discovered/remembered :) Please send feedback to
+        the <a href="site:mail-lists/forrest-dev">mailing list</a>.
+      </p>
+    </section>
+  </body>
+</document>

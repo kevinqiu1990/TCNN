@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project default="forrestbar" basedir="." name="forrestbar">
+  <description>
+    Build script for the ForrestBar
+  </description>
+<!-- Default init values-->
+  <target name="init">
+    <property name="build.dir" location="build"/>
+    <xmlproperty file="properties.xml" keeproot="false" collapseAttributes="true" />
+  </target>
+<!-- =================================================================== -->
+<!-- ForrestBar for Mozilla 1.x and Firefox 0.9-1.5+                     -->
+<!-- =================================================================== -->
+  <target name="forrestbar" depends="init">
+    <property name="xpi.dir" location="xpi"/>
+    <mkdir dir="${build.dir}" />
+    <mkdir dir="${build.dir}/work/forrestbar" />
+    <mkdir dir="${build.dir}/work/forrestbar/chrome" />
+    <mkdir dir="${build.dir}/work/forrestbar-jar" />
+    <copy todir="${build.dir}/work/forrestbar-jar" overwrite="true">
+      <fileset dir="${xpi.dir}" />
+    </copy>
+    <jar jarfile="${build.dir}/work/forrestbar/chrome/forrestbar.jar">
+      <fileset dir="${build.dir}/work/forrestbar-jar/chrome" includes="content/**/*" />
+    </jar>
+    <copy file="${xpi.dir}/install.js"
+          todir="${build.dir}/work/forrestbar" overwrite="true"></copy>
+    <copy file="${xpi.dir}/install.rdf"
+          todir="${build.dir}/work/forrestbar" overwrite="true"></copy>
+    <copy file="${xpi.dir}/chrome.manifest"
+          todir="${build.dir}/work/forrestbar" overwrite="true"></copy>
+    <zip zipfile="${build.dir}/forrestbar.xpi"
+      basedir="${build.dir}/work/forrestbar" />
+  </target>
+</project>

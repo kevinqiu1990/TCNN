@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE howto PUBLIC "-//APACHE//DTD How-to V2.0//EN"
+"http://forrest.apache.org/dtd/howto-v20.dtd">
+<howto>
+  <header>
+    <title>How to write a How-To</title>
+    <version>0.3</version>
+    <abstract>
+      This How-To describes the steps necessary to write a How-To document.
+      Writing documentation is a valuable way to give back to the community.
+    </abstract>
+    <last-modified-content-date date="2005-07-18" />
+  </header>
+  <audience title="Intended Audience">
+    <p>
+      Users who are ready to share their knowledge and experiences with the
+      community.
+    </p>
+  </audience>
+  <purpose title="Purpose">
+    <p>
+      These guidelines are based on successful how-to document structures used
+      by other open source projects with diverse author groups. Following these
+      tried and true guidelines will help to ensure the effectiveness of your
+      work.
+    </p>
+  </purpose>
+  <prerequisites title="Prerequisites">
+    <p>
+      How-To authors should have:
+    </p>
+    <ul>
+      <li>A unique How-To topic, related to using Forrest, which fulfills a
+      specific need. Look at existing How-Tos to find a niche for your work.
+      Consider posting your idea for the How-To to user mailing list, to make
+      sure another author's draft is not already in process.</li>
+      <li>A sufficient ability in English to write the document. However, we would
+      rather that you just make a start, as the community can help to
+      fine-tune the document.</li>
+      <li>Copy this template document "howto-howto.xml" to be modified with
+      your own content as necessary.</li>
+      <li>An understanding of the How-To document structure. Just use this
+      template document and you will be safe.
+      Make sure you run '<code>forrest validate-xdocs</code>' before
+      contributing your document.</li>
+    </ul>
+  </prerequisites>
+  <steps title="Steps">
+    <p>
+      Here is how to proceed.
+    </p>
+    <section id="overview">
+      <title>Write the Overview</title>
+      <p>
+        An overview helps potential readers to determine quickly if a particular
+        How-To matches their interests or needs. In a few sentences, summarize
+        the main points of your How-To. Make sure to include any critical
+        definitions which will help readers evaluate the utility of your How-To.
+        Consider writing the overview last, after you have completed all other
+        sections.
+      </p>
+    </section>
+    <section id="audience">
+      <title>Describe your Intended Audience</title>
+      <p>
+        If your How-To is targetted at a specific audience, describe it here.
+        For example, potential readers will have different levels of skill using
+        Forrest. They will also bring different areas of expertise and
+        backgrounds to their How-To learning experience. When you clarify your
+        target audience up front, you will save all other readers time and
+        confusion.
+      </p>
+    </section>
+    <section id="purpose">
+      <title>State the Purpose</title>
+      <p>
+        State the purpose of your How-To. Explain how the reader will benefit by
+        reading it. Give your reader an incentive or two to continue.
+      </p>
+    </section>
+    <section id="prerequisites">
+      <title>List any Prerequisites</title>
+      <p>
+        Inform your reader about any required knowledge, configuration, or
+        resources they may need before stepping through your How-To. Assist them
+        in this preparation by linking to other useful resources on the Forrest
+        site or the web. Helping your readers to prepare increases the
+        likelihood that they will continue reading your How-To.
+      </p>
+    </section>
+    <section id="steps">
+      <title>Describe the Steps of your How-To</title>
+      <p>
+        In a precise, step-by-step approach, walk your reader through the
+        process. Make sure your reader can reproduce your intended result by
+        following your exact steps. Make the learning process efficient by
+        supplying sample code snippets or configuration details as necessary.
+      </p>
+    </section>
+    <section id="extension">
+      <title>Extend the Learning</title>
+      <p>
+        Provide your reader with a few real-world examples of how the techniques
+        or capabilities gained from your How-To could be applied. Reward the
+        reader for successfully completing the How-To with a few ideas about how
+        it will pay off.
+      </p>
+    </section>
+    <section id="summarize">
+      <title>Summarize the Entire Process</title>
+      <p>
+        In a few sentences, remind the reader what they have just learned. This
+        helps to reinforce the main points of your How-To.
+      </p>
+    </section>
+    <section id="tips">
+      <title>Additional Tips or FAQs</title>
+      <p>
+        In some cases, step-by-step instructions simply aren't enough. Use this
+        section to pass on any other tips or frequently asked questions.
+        Anticipating the needs of your readers will increase the overall success
+        of your writing effort.
+      </p>
+    </section>
+    <section id="references">
+      <title>References</title>
+      <p>
+        Remember to acknowledge any third-party resources or individuals who
+        contributed to the development of your How-To. Consider providing links
+        for those motivated readers who want to learn more.
+      </p>
+    </section>
+    <section id="contribute">
+      <title>Submit via the project issue tracker</title>
+      <p>
+        Create an attachment for your How-To document, and submit it via the
+        project issue tracker.
+      </p>
+    </section>
+    <section id="feedback">
+      <title>Get some feedback</title>
+      <p>
+        When the committers have added your document then it will be available
+        for everyone to to build upon and enhance. Feedback will happen via the
+        mailing lists.
+      </p>
+    </section>
+  </steps>
+  <extension title="Extension">
+    <p>
+      Solutions can be extended to cover many different problem domains. A
+      nearly unlimited number of potential How-To topics, from simple to
+      complex, are available right now, limited only by your imagination.
+    </p>
+  </extension>
+  <faqs id="faqs">
+    <title>Frequently Asked Questions</title>
+    <faqsection id="faq-general">
+      <title>General issues</title>
+      <faq id="faq-difference">
+        <question>What is the difference between a How-To and a
+        tutorial?</question>
+        <answer>
+          <p>
+            The goal of a How-To is to help the reader to accomplish a specific
+            task with clear and consise instructions. While tutorials may
+            contain How-To-like instructions and content, they also include
+            additional background and conceptual content to help teach their
+            readers higher order concepts along the way. How-Tos are concerned
+            about filling an immediate, short-term need. Tutorials often provide
+            long-term knowledge which can be applied across a range of needs.
+          </p>
+        </answer>
+      </faq>
+    </faqsection>
+    <faqsection id="faq-style">
+      <title>Style issues</title>
+      <faq id="spelling">
+        <question>What spelling convention should I follow?</question>
+        <answer>
+          <p>
+            Use whatever spelling convention (American, British, etc.) that is
+            most intuitive to you.
+          </p>
+        </answer>
+      </faq>
+    </faqsection>
+  </faqs>
+  <tips title="Tips">
+    <section id="tip-dtd">
+      <title>How-To dtd</title>
+      <p>
+        The document structure is likely to change at some time. Please note
+        that this HOWTO page is likely to change as well.
+      </p>
+    </section>
+  </tips>
+  <references title="References">
+    <p>
+      This is not the first, nor will it be the last, How-To on writing How-Tos.
+      For other ideas and opinions on the matter, check out the following
+      sources.
+    </p>
+    <ul>
+      <li>Joel D. Canfield's <a
+      href="http://www.evolt.org/article/How_To_Write_A_How_To/9741/18250/index.html">How
+      to Write a How-To</a> on evolt.org.</li>
+      <li>The Linux Documentation Project's <a
+      href="http://www.tldp.org/HOWTO/HOWTO-INDEX/index.html">HOWTO</a>
+      index page provides many excellent How-To documents to inspire your
+      efforts.</li>
+    </ul>
+  </references>
+</howto>

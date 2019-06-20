@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XHTML2: http://www.w3.org/TR/2005/WD-xhtml2-20050527
+Copyright © 1999-2004 World Wide Web Consortium, (Massachusetts Institute of Technology,
+European Research Consortium for Informatics and Mathematics, Keio University).
+All Rights Reserved. This work is distributed under the W3C® Software Licens [1]
+in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:x="http://www.w3.org/1999/xhtml">
+
+  <x:h1>Metainformation Module</x:h1>
+
+  <div>
+    <x:h2>The link element</x:h2>
+
+    <define name="link">
+      <element name="link">
+        <ref name="link.attlist"/>
+        <zeroOrMore>
+          <choice>
+            <ref name="link"/>
+            <ref name="meta"/>
+          </choice>
+        </zeroOrMore>
+      </element>
+    </define>
+
+    <define name="link.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <define name="head.misc" combine="choice">
+    <ref name="link"/>
+  </define>
+
+  <define name="Structural.class" combine="choice">
+    <ref name="link"/>
+  </define>
+
+  <define name="Text.class" combine="choice">
+    <ref name="link"/>
+  </define>
+
+  <div>
+    <x:h2>The meta element</x:h2>
+
+    <define name="meta">
+      <element name="meta">
+        <ref name="meta.attlist"/>
+        <choice>
+          <ref name="Text.model"/>
+          <oneOrMore>
+            <ref name="meta"/>
+          </oneOrMore>
+        </choice>
+      </element>
+    </define>
+
+    <define name="meta.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <define name="head.misc" combine="choice">
+    <ref name="meta"/>
+  </define>
+
+  <define name="Structural.class" combine="choice">
+    <ref name="meta"/>
+  </define>
+
+  <define name="Text.class" combine="choice">
+    <ref name="meta"/>
+  </define>
+
+</grammar>

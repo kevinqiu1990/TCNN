@@ -1,0 +1,6 @@
+camel-1.6,ivy-2.0
+ivy-2.0,poi-3.0
+log4j-1.2,xalan-2.7
+synapse-1.2,forrest-0.8
+velocity-1.6.1,ivy-2.0
+xerces-1.4.4,xalan-2.7

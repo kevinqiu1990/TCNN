@@ -1,0 +1,40 @@
+----------------------------------------------------------------
+2009-02-12 04:53:45.754 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance a816c00e-011f-68d5-55dc-00000013f1d8
+on database directory /w1/apache/release/camel/components/camel-jcr/target/repository/version/db  
+
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+2009-02-12 04:53:47.623 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance 67bb80b4-011f-68d5-55dc-00000013f1d8
+on database directory /w1/apache/release/camel/components/camel-jcr/target/repository/workspaces/default/db  
+
+Database Class Loader started - derby.database.classpath=''
+
+2009-02-12 04:53:49.460 GMT:
+Shutting down instance 67bb80b4-011f-68d5-55dc-00000013f1d8
+----------------------------------------------------------------
+
+2009-02-12 04:53:49.510 GMT:
+Shutting down instance a816c00e-011f-68d5-55dc-00000013f1d8
+----------------------------------------------------------------
+----------------------------------------------------------------
+2009-02-12 04:53:49.597 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance 5a9fc15b-011f-68d5-55dc-00000013f1d8
+on database directory /w1/apache/release/camel/components/camel-jcr/target/repository/version/db  
+
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+2009-02-12 04:53:49.719 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance 2667c166-011f-68d5-55dc-00000013f1d8
+on database directory /w1/apache/release/camel/components/camel-jcr/target/repository/workspaces/default/db  
+
+Database Class Loader started - derby.database.classpath=''
+
+2009-02-12 04:53:49.976 GMT:
+Shutting down instance 2667c166-011f-68d5-55dc-00000013f1d8
+----------------------------------------------------------------
+
+2009-02-12 04:53:49.985 GMT:
+Shutting down instance 5a9fc15b-011f-68d5-55dc-00000013f1d8
+----------------------------------------------------------------

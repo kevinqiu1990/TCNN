@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd"
+[
+ <!ENTITY % ISOnum PUBLIC
+   "ISO 8879:1986//ENTITIES Numeric and Special Graphic//EN//XML"
+   "http://forrest.apache.org/entity/ISOnum.pen">
+ %ISOnum;
+]>
+<document>
+  <header>
+    <title>XML validation and entity resolution</title>
+    <subtitle>DTDs, catalogs and whatnot</subtitle>
+  </header>
+  <body>
+    <section id="intro">
+      <title>Introduction</title>
+      <p>
+        When a source document uses a DTD to define its structure, then various
+        abilities are enabled. Forrest handles the annoying side of this and
+        takes advantage of the benefits.
+      </p>
+      <p>
+        The xml parser must locate the DTDs and other entities. Forrest uses the
+        XML Catalog Entity Resolver to associate DTD references with local
+        copies.
+      </p>
+      <p>
+        Forrest also uses the XML Document Type Declaration to effect the
+        <link href="site:cap">Content Aware Pipelines</link>. Remember that you
+        are not required to use DTDs (for example Forrest can also respond to a
+        namespace) so RELAX NG or W3c XML Schema can be used.
+      </p>
+      <p>
+        If you do use DTDs, then forrest is automatically configured to do XML
+        validation.
+      </p>
+      <p>
+        This document explains both the validation and entity resolution aspects
+        of the Forrest XML framework.
+      </p>
+    </section>
+    <section id="xml_validation">
+      <title>XML validation</title>
+      <p>
+        By default, Forrest will validate your XML before generating HTML or a
+        webapp from it, and fail if any XML files are not valid. Validation can
+        be performed manually by doing '<code>forrest validate</code>' in the
+        project root directory.
+      </p>
+      <p>
+        For an XML file to be valid, it <em>must</em> have a document type
+        declaration at the top, indicating its content type. Hence by default,
+        any Forrest-processed XML file that lacks a DOCTYPE declaration will
+        cause the build to break.
+      </p>
+      <p>
+        Despite the strict default behavior, Forrest is quite flexible about
+        validation. Validation can be switched off for certain sections of a
+        project. In validated sections, it is possible for projects to specify
+        exactly what files they want (and don't want) validated. Forrest
+        validation is controlled through a set of properties in
+        <code>forrest.properties</code>:
+      </p>
+      <source>
+##############
+# validation properties
+
+# This set of properties determine if validation is performed
+# Values are inherited unless overridden.
+# e.g. if forrest.validate=false then all others are false unless set to true.
+#forrest.validate=true
+#forrest.validate.xdocs=${forrest.validate}
+#forrest.validate.skinconf=${forrest.validate}
+#forrest.validate.sitemap=${forrest.validate}
+#forrest.validate.stylesheets=${forrest.validate}
+#forrest.validate.skins=${forrest.validate}
+#forrest.validate.skins.stylesheets=${forrest.validate.skins}
+
+# *.failonerror=(true|false) - stop when an XML file is invalid
+#forrest.validate.failonerror=true
+
+# *.excludes=(pattern) - comma-separated list of path patterns to not validate
+# e.g.
+#forrest.validate.xdocs.excludes=samples/subdir/**, samples/faq.xml
+#forrest.validate.xdocs.excludes=
+      </source>
+      <p>
+        For example, to avoid validating
+        <code>${project.xdocs-dir}</code>/slides.xml and everything inside the
+        <code>${project.xdocs-dir}/manual/</code> directory, add this to
+        <code>forrest.properties</code>:
+      </p>
+      <source>forrest.validate.xdocs.excludes=slides.xml, manual/**</source>
+      <note>
+        The <code>failonerror</code> properties only work for files validated
+        with Ant's &lt;xmlvalidate&gt; and not (yet) for those validated with
+        &lt;jing&gt;, where <code>failonerror</code> defaults to
+        <code>true</code>.
+      </note>
+    </section>
+    <section>
+      <title>Validating new XML types</title>
+      <p>
+        Forrest provides an <link href="ext:catalog_spec">OASIS Catalog</link>
+        [see <link href="ext:catalog_intro">tutorial</link>]
+        <code>forrest/main/webapp/resources/schema/catalog.xcat</code> as a
+        means of associating public identifiers (e.g. <code>-//APACHE//DTD
+        Documentation V1.1//EN</code> above) with DTDs. If you
+        <link href="site:your-project/new_content_type">add a new content
+        type</link>, you should add the DTD to
+        <code>${project.schema-dir}/dtd/</code> and add an entry to the
+        <code>${project.schema-dir}/catalog.xcat</code> file. This section
+        describes the details of this process.
+      </p>
+      <section>
+        <title>Creating or extending a DTD</title>
+        <p>
+          The main Forrest DTDs are designed to be modular and extensible, so it
+          is fairly easy to create a new document type that is a superset of one
+          from Forrest. This is what we'll demonstrate here, using our earlier
+          <link href="site:your-project/new_content_type">download format</link>
+          as an example. Our download format adds a group of new elements to the
+          standard 'documentv13' format. Our new elements are described by the
+          following DTD:
+        </p>
+        <source>
+&lt;!ELEMENT release (downloads)&gt;
+&lt;!ATTLIST release
+version CDATA #REQUIRED
+date CDATA #REQUIRED&gt;
+
+&lt;!ELEMENT downloads (file*)&gt;
+
+&lt;!ELEMENT file EMPTY&gt;
+&lt;!ATTLIST file
+url CDATA #REQUIRED
+name CDATA #REQUIRED
+size CDATA #IMPLIED&gt;
+        </source>
+        <p>
+          The document-v13 entities are defined in a reusable 'module':
+          <code>forrest/main/webapp/resources/schema/dtd/document-v13.mod</code>
+          The
+          <code>forrest/main/webapp/resources/schema/dtd/document-v13.dtd</code>
+          file provides a full description and basic example of how to pull in
+          modules. In our example, our DTD reuses modules
+          <code>common-charents-v10.mod</code> and
+          <code>document-v13.mod</code>. Here is the full DTD, with explanation
+          to follow.
+        </p>
+        <source>
+&lt;!-- ===================================================================
+
+Download Doc format
+
+PURPOSE:
+This DTD provides simple extensions on the Apache DocumentV11 format to link
+to a set of downloadable files.
+
+TYPICAL INVOCATION:
+
+&lt;!DOCTYPE document PUBLIC "-//Acme//DTD Download Documentation V1.0//EN"
+"download-v10.dtd"&gt;
+
+==================================================================== --&gt;
+
+
+&lt;!-- =============================================================== --&gt;
+&lt;!-- Include the Common ISO Character Entity Sets --&gt;
+&lt;!-- =============================================================== --&gt;
+
+&lt;!ENTITY % common-charents PUBLIC
+"-//APACHE//ENTITIES Common Character Entity Sets V1.0//EN"
+"common-charents-v10.mod"&gt;
+%common-charents;
+
+&lt;!-- =============================================================== --&gt;
+&lt;!-- Document --&gt;
+&lt;!-- =============================================================== --&gt;
+
+&lt;!ENTITY % document PUBLIC "-//APACHE//ENTITIES Documentation V1.3//EN"
+"document-v13.mod"&gt;
+
+&lt;!-- Override this entity so that 'release' is allowed below 'section' --&gt;
+&lt;!ENTITY % local.sections "|release"&gt;
+
+%document;
+
+&lt;!ELEMENT release (downloads)&gt;
+&lt;!ATTLIST release
+version CDATA #REQUIRED
+date CDATA #REQUIRED&gt;
+
+&lt;!ELEMENT downloads (file*)&gt;
+
+&lt;!ELEMENT file EMPTY&gt;
+&lt;!ATTLIST file
+url CDATA #REQUIRED
+name CDATA #REQUIRED
+size CDATA #IMPLIED&gt;
+
+&lt;!-- =============================================================== --&gt;
+&lt;!-- End of DTD --&gt;
+&lt;!-- =============================================================== --&gt;
+        </source>
+        <p>
+          This custom DTD should be placed in your project resources directory
+          at <code>src/documentation/resources/schema/dtd/</code>
+        </p>
+        <p>
+          The &lt;!ENTITY % ... &gt; blocks are so-called
+          <link href="http://www.xml.com/axml/target.html#dt-PERef">parameter
+          entities</link>. They are like macros, whose content will be inserted
+          when a parameter-entity reference, like <code>%common-charents;</code>
+          or <code>%document;</code> is inserted.
+        </p>
+        <p>
+          In our DTD, we first pull in the 'common-charents' entity, which
+          defines character symbol sets. We then define the 'document' entity.
+          However, before the <code>%document;</code> PE reference, we first
+          override the 'local.section' entity. This is a hook into
+          document-v13.mod. By setting its value to '|release', we declare that
+          our &lt;release&gt; element is to be allowed wherever "local sections"
+          are used. There are five or so such hooks for different areas of the
+          document; see document-v13.dtd for more details. We then import the
+          %document; contents, and declare the rest of our DTD elements.
+        </p>
+        <p>
+          We now have a DTD for the 'download' document type.
+        </p>
+        <note>
+          <link href="http://www.oasis-open.org/docbook/documentation/reference/html/ch05.html">Chapter
+          5: Customizing DocBook</link> of Norman Walsh's "DocBook: The
+          Definitive Guide" gives a complete overview of the process of
+          customizing a DTD.
+        </note>
+      </section>
+      <section id="catalog">
+        <title>Associating DTDs with document types</title>
+        <p>
+          Recall that our DOCTYPE declaration for our download document type is:
+        </p>
+        <source>&lt;!DOCTYPE document PUBLIC "-//Acme//DTD Download Documentation V1.0//EN"
+          "download-v10.dtd"&gt;
+        </source>
+        <p>
+          We only care about the quoted section after <code>PUBLIC</code>,
+          called the "public identifier", which globally identifies our document
+          type. We cannot rely on the subsequent "system identifier" part
+          ("download-v10.dtd"), because as a relative reference it is liable to
+          break. The solution Forrest uses is to ignore the system id, and rely
+          on a mapping from the public ID to a stable DTD location, via a
+          Catalog file.
+        </p>
+        <note>
+          See <link href="ext:catalog_intro">this article</link> for a good
+          introduction to catalogs and the Cocoon documentation
+          <link href="ext:cocoon/catalogs">Entity resolution with
+          catalogs</link>.
+        </note>
+        <p>
+          Forrest provides a standard catalog file at
+          <code>forrest/main/webapp/resources/schema/catalog.xcat</code> for the
+          document types that Forrest supplies.
+        </p>
+        <p>
+          An additional system-wide catalog can be configured for use by
+          multiple forrest-based projects. See the "local-catalog" parameter in
+          <code>main/webapp/WEB-INF/xconf/forrest-core.xconf</code>
+        </p>
+        <p>
+          Projects can augment this with their own catalog file located in
+          <code>${project.schema-dir}/catalog.xcat</code> to use it you must
+          specify either the path (full or relative) to your
+          <code>catalog.xcat</code> in the
+          <code>CatalogManager.properties</code> file. If you provide a relative
+          path you must set the property <code>relative-catalogs</code> to
+          "yes".
+        </p>
+        <p>
+          When Cocoon starts, it reads the
+          <code>CatalogManager.properties</code> file from your
+          <code>project.classes-dir</code>. This is usually
+          src/documentation/classes/ but you can change this in
+          <code>forrest.properties</code>. When you seed a new site using
+          <code>forrest seed</code> a sample catalog file is placed in the site
+          structure, you can use this as a template for your own files.
+        </p>
+        <p>
+          Forrest uses the XML Catalog syntax by default, although the older
+          plain-text format can also be used. Here is what the XML Catalog
+          format looks like:
+        </p>
+        <source>
+<![CDATA[<?xml version="1.0"?>
+<!-- OASIS XML Catalog for Forrest -->
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <public publicId="-//Acme//DTD Download Documentation V1.0//EN"
+    uri="dtd/download-v10.dtd"/>
+</catalog>]]>
+        </source>
+        <p>
+          The format is described in <link href="ext:catalog_spec">the
+          spec</link>, and is fairly simple and very powerful. The
+          "<code>public</code>" elements map a public identifier to a DTD
+          (relative to the catalog file).
+        </p>
+        <p>
+          We now have a custom DTD and a catalog mapping which lets both Forrest
+          and Cocoon locate the DTD. Now if we were to run <code>'forrest
+          validate-xdocs'</code> our download file would validate along with all
+          the others. If something goes wrong, try running <code>'forrest -v
+          validate-xdocs'</code> to see the error in more detail.
+        </p>
+      </section>
+    </section>
+    <section id="debug-catalog">
+      <title>Debugging the Catalog Entity Resolver</title>
+      <p>
+        If you suspect problems with your project catalog, then raise the
+        "verbosity" level in
+        <code>src/documentation/classes/CatalogManager.properties</code> and
+        re-start forrest. This should show your project catalogs being parsed
+        and loaded.
+      </p>
+      <p>
+        However this configuration does not show your DTDs being resolved. So
+        raise the verbosity level in the central configuration at
+        <code>main/webapp/WEB-INF/properties/dev/core.properties</code> and
+        re-start forrest. This also shows the main catalogs being loaded and
+        shows the resolving of every DTD and entity set.
+      </p>
+      <p>
+        When a DTD is successfully resolved you should see the message:
+        <code>Resolved public:</code>
+      </p>
+      <p>
+        When debugging such issues, a network monitoring tool (e.g.
+        ngrep.sf.net) is useful to ensure that all resources are being locally
+        resolved and not wandering onto the network to find remote copies.
+      </p>
+    </section>
+    <section id="entities">
+      <title>Referring to entities</title>
+      <p>
+        Look at the source of this document
+        (<code>xdocs/docs/validation.xml</code>) and see how the entity set
+        <code>"Numeric and Special Graphic"</code> is declared in the document
+        type declaration.
+      </p>
+      <table>
+        <tr>
+          <td>ISOnum.pen</td>
+          <td>&amp;half;</td>
+          <td>&half;</td>
+        </tr>
+      </table>
+    </section>
+    <section>
+      <title>Validating in an XML editor</title>
+      <p>
+        If you have an XML editor that understands SGML or XML catalogs, let it
+        know where the Forrest catalog file is, and you will be able to validate
+        any Forrest XML file, regardless of location, as you edit your files.
+        See the <link href="site:catalog">configuration notes</link> your
+        favourite editor.
+      </p>
+    </section>
+    <section id="relaxng">
+      <title>Validation using RELAX NG</title>
+      <p>
+        Other validation is also conducted during build-time using RELAX NG.
+        This validates all of the important configuration files, both in Forrest
+        itself and in your project. At the moment it processes all skinconf.xml
+        files, all sitemap.xmap files, and all XSLT stylesheets.
+      </p>
+      <p>
+        The RNG grammars to do this are located in the
+        <code>main/webapp/resources/schema/relaxng</code> directory. If you want
+        to know more about this, and perhaps extend it for your own use, then
+        see <code>main/webapp/resources/schema/relaxng/README.txt</code> and the
+        Ant targets in the various build.xml files.
+      </p>
+    </section>
+    <section id="sitemap">
+      <title>Validation using Cocoon sitemap and the Cocoon Validation block</title>
+      <p>
+        The content of pipelines can be validated at various points in the
+        Cocoon sitemaps using RELAX NG or W3C XML Schema. See
+        <link href="site:forrest-dev/debug-validation">notes</link>.
+      </p>
+    </section>
+  </body>
+</document>

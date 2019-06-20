@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XHTML2: http://www.w3.org/TR/2005/WD-xhtml2-20050527
+Copyright © 1999-2004 World Wide Web Consortium, (Massachusetts Institute of Technology,
+European Research Consortium for Informatics and Mathematics, Keio University).
+All Rights Reserved. This work is distributed under the W3C® Software Licens [1]
+in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:ev="http://www.w3.org/2001/xml-events"
+         xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+         xmlns:x="http://www.w3.org/1999/xhtml">
+
+  <x:h1>Events Attribute Collection Module</x:h1>
+
+  <define name="Events.attrib">
+    <optional>
+      <attribute name="ev:event">
+        <ref name="NMTOKEN.datatype"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="ev:observer">
+        <ref name="IDREF.datatype"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="ev:target">
+        <ref name="IDREF.datatype"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="ev:handler">
+        <ref name="URI.datatype"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="ev:phase" a:defaultValue="default">
+        <choice>
+          <value>capture</value>
+          <value>default</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="ev:propagate" a:defaultValue="continue">
+        <choice>
+          <value>stop</value>
+          <value>continue</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="ev:defaultAction" a:defaultValue="perform">
+        <choice>
+          <value>cancel</value>
+          <value>perform</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="Common.extra.attrib" combine="interleave">
+    <ref name="Events.attrib"/>
+  </define>
+
+  <define name="head.misc" combine="choice">
+    <ref name="listener" ns="http://www.w3.org/2001/xml-events"/>
+  </define>
+
+  <define name="Script.class" combine="choice">
+    <ref name="listener" ns="http://www.w3.org/2001/xml-events"/>
+  </define>
+
+</grammar>

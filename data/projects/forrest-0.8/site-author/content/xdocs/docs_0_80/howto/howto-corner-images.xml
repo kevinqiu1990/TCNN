@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE howto PUBLIC "-//APACHE//DTD How-to V2.0//EN" "http://forrest.apache.org/dtd/howto-v20.dtd">
+<howto>
+  <header>
+    <title>How to modify the color of generated corner images</title>
+    <abstract>
+      This How-To describes how to modify the corner images that appear in the
+      menu and tabs of the skins.
+    </abstract>
+    <last-modified-content-date date="2004-11-05"/>
+  </header>
+  <audience title="Intended Audience">
+    <p>
+      Users who want to change the colors of the corner images in the output
+      html documents.
+    </p>
+    <p>
+      This explanation is also useful for skin developers to understand the
+      corner image generation process.
+    </p>
+  </audience>
+  <purpose title="Purpose">
+    <p>
+      Forrest renders the corner images through
+      <a href="http://www.w3.org/TR/SVG/">Scalable Vector Graphics (SVG)</a>. It
+      may be necessary to change the color of the corner images to be suitable
+      for your own skin colors.
+    </p>
+  </purpose>
+  <prerequisites title="Prerequisites">
+    <ul>
+      <li>Understand how to use the skinconf.xml file to change the appearance
+      of the output documents.</li>
+      <li>Understand how to create or modify skins by following the
+      <a href="site:your-project">Using Forrest</a> document
+       (topic "<a href="site:your-project/skins">Forrest skins</a>").</li>
+    </ul>
+  </prerequisites>
+  <steps title="Steps">
+    <p>
+      The procedure outlined below provides an understanding of how corner
+      images are named (the contract) and then shows how to define new colors
+      for these images by modifying the
+      <code>src/documentation/skinconf.xml</code> of a project.
+    </p>
+    <section id="css-files">
+      <title>Understand how corner images are named (the contract)</title>
+      <p>
+        The corner images are referenced in some .css files of the above-named
+        skins; for example, in screen.css of the pelt skin:
+      </p>
+      <source>
+/*Example from screen.css of pelt*/
+...
+/**
+* Round corner
+*/
+#roundtop {
+    background-image: url(images/rc-t-r-15-1body-2menu-3menu.png);
+    background-repeat: no-repeat;
+    background-position: top right;
+}
+...
+      </source>
+      <p>
+        The naming follows a contract which is described below. In general, the
+        naming looks like:
+      </p>
+      <source>
+images/{$name}-{$v-orientation}-{$h-orientation}-{$size}-1{$backgroundColor}-2{$strokeColor}-3{$foregroundColor}
+      </source>
+      <p>
+        The first part
+        (<code>images/{$name}-{$v-orientation}-{$h-orientation}-{$size}</code>)
+        identifies which images is used and how big (width x height) it should
+        be. The second part\
+        (<code>-1{$backgroundColor}-2{$strokeColor}-3{$foregroundColor}</code>)
+        identifies the coloring of each portion of the image. The input
+        parameter for the second part comes from the color profile of
+        <code>src/documentation/skinconf.xml</code>. The second part is easily
+        identifiable through the numbering 1-2-3.
+      </p>
+      <p>
+        Let us get into details:
+      </p>
+      <dl>
+        <dt><code>images</code></dt>
+        <dd>
+          Path to the xslt that creates the corner.
+          <br/><code>images/ = {$FORREST_HOME}/main/webapp/skins/common/images/</code></dd>
+        <dt><code>{$name}</code></dt>
+        <dd>
+          In the common skin there are two XSLT files ready for use:
+          <ul>
+            <li><code>rc.svg.xslt</code>: handles rounded corners
+            </li>
+            <li><code>dc.svg.xslt</code>: handles diagonal 45-degree corners
+            </li>
+          </ul><code>name = [rc|dc]</code>
+          <br/><em>e.g.</em><code>rc</code></dd>
+        <dt><code>{$v-orientation}</code></dt>
+        <dd>
+          Vertical orientation of the corner images (top or bottom).
+          <br/><code>v-orientation = [t|b]</code>
+          <br/><em>e.g.</em><code>t</code></dd>
+        <dt><code>{$h-orientation}</code></dt>
+        <dd>
+          Horizontal orientation of the corner images (left or right).
+          <br/><code>h-orientation = [l|r]</code>
+          <br/><em>e.g.</em><code>r</code></dd>
+        <dt><code>{$size}</code></dt>
+        <dd>
+          Pixels size of the width <strong>and</strong> height of the corner image.
+          <br/><code>size=x</code>
+          <br/><em>e.g.</em><code>5</code></dd>
+        <dt><code>{$backgroundColor}</code></dt>
+        <dd>
+          Any <code>&lt;color name=""/&gt;</code> element in the <code>skinconf.xml</code> (the <code>value="{$color}"</code>
+          attribute will be applied).
+          <br/><em>e.g.</em><code>header</code></dd>
+        <dt><code>{$strokeColor}</code></dt>
+        <dd>
+          Any <code>&lt;color name=""/&gt;</code> element in the <code>skinconf.xml</code> (the <code>value="{$color}"</code>
+          attribute will be applied).
+          <br/><em>e.g.</em><code>searchbox</code></dd>
+        <dt><code>{$foregroundColor}</code></dt>
+        <dd>
+          Any <code>&lt;color name=""/&gt;</code> element in the <code>skinconf.xml</code> (the <code>value="{$color}"</code>
+          attribute will be applied).
+          <br/><em>e.g.</em><code>searchbox</code></dd>
+      </dl>
+      <p>
+        The corner images are made by generating a dymanic
+        <a 
+        href="/skin/images/rc-t-r-50-1body-2menu-3menu.svg">svg
+        image</a> to add the colors and size. Then this svg is serialize to
+        <a 
+        href="/skin/images/rc-t-r-50-1body-2menu-3menu.png">the png
+        image</a> via the
+        <a 
+        href="http://cocoon.apache.org/2.1/apidocs/org/apache/cocoon/serialization/SVGSerializer.html">org.apache.cocoon.serialization.SVGSerializer</a>
+        (see
+        <a href="http://cocoon.apache.org/2.1/userdocs/svg-serializer.html">docs</a>).
+      </p>
+      <fixme author="thorsten">
+        The following link is for pure debugging reason.
+        <a 
+        href="/skin/images/rc-t-r-50-1body-2menu-3menu.test.png">test
+        png image</a> - this image is taken from the svg pipe instead of
+        directly generating it.
+      </fixme>
+    </section>
+    <section id="skinconfig">
+      <title>Modifying the skinconf.xml of your project</title>
+      <p>
+        modifying the <code>skinconf.xml</code> of your project (by default you
+        find it at <code>[project-dir]/src/documentation/</code>).
+      </p>
+      <p>
+        Starting about line 155 you find a <code>&lt;colors&gt;</code> ...
+        <code>&lt;/colors&gt;</code> element with content commented-out:
+      </p>
+      <source>
+&lt;colors&gt;
+&lt;!-- These values are used for the generated CSS files. --&gt;
+
+&lt;!-- Krysalis --&gt;
+&lt;!--
+  &lt;color name="header"    value="#FFFFFF"/&gt;
+
+  &lt;color name="tab-selected" value="#a5b6c6" link="#000000" vlink="#000000" hlink="#000000"/&gt;
+  &lt;color name="tab-unselected" value="#F7F7F7" link="#000000" vlink="#000000" hlink="#000000"/&gt;
+  &lt;color name="subtab-selected" value="#a5b6c6" link="#000000" vlink="#000000" hlink="#000000"/&gt;
+  &lt;color name="subtab-unselected" value="#a5b6c6" link="#000000" vlink="#000000" hlink="#000000"/&gt;
+
+...
+
+--&gt;
+
+&lt;/colors&gt;
+      </source>
+      <p>
+        To modify the colors of the corner images, you can either define your
+        own <code>&lt;color name=.../&gt;</code> elements or uncomment one of
+        the existing <code>&lt;color name=.../&gt;</code> elements and adjust
+        the color value to your needs.
+      </p>
+      <p>
+        <em>e.g.</em>
+      </p>
+      <source>
+&lt;color name="tab-selected" value="#FF0000"/&gt;
+      </source>
+      <p>
+        This affects all corner images whose <code>{$backgroundColor}</code>,
+        <code>{$strokeColor}</code> or <code>{$foregroundColor}</code> is set to
+        <code>tab-selected</code>.
+        <br/>
+        For example, in <code>screen.css</code> (of the "pelt" skin) you find:
+      </p>
+      <source>
+#roundbottomsmall {
+    background-image: url(images/rc-b-r-5-1header-2tab-selected-3tab-selected.png);
+    background-repeat: no-repeat;
+    background-position: top right;
+}
+      </source>
+      <p>
+        Now the stroke color (<code>-2tab-selected</code>) and the foreground
+        color (<code>-3tab-selected</code>) are set to red (remember: we defined
+        <code>#FF0000</code> as the "color" value of <code>tab-selected</code>).
+      </p>
+    </section>
+    <section id="css_modify">
+      <title>Modifying .css files</title>
+      <p>
+        In addition to the modification of <code>skinconf.xml</code> you can
+        also modify the respective .css file of your skin.
+      </p>
+      <p>
+        Here's another example:
+      </p>
+      <source>
+/*your .css file*/
+...
+#roundbottomsmall {
+    background-image: url(images/rc-b-r-5-1<em>foo</em>-2<em>secondfoo</em>-3<em>thirdfoo</em>.png);
+    background-repeat: no-repeat;
+    background-position: top right;
+}
+...
+      </source>
+      <source>
+&lt;!-- your skinconf.xml --&gt;
+...
+&lt;colors&gt;
+  &lt;color name="<em>foo</em>" value="#FF0000"/&gt;
+  &lt;color name="<em>secondfoo</em>" value="#00FF00"/&gt;
+  &lt;color name="<em>thirdfoo</em>" value="##00FF00"/&gt;
+&lt;/colors&gt;
+      </source>
+      <p>
+        Here we have created our own color tags (in the .css file) and defined
+        the respective values for them (in <code>skinconf.xml</code>). Now you
+        have color images with a red background and a green foreground.
+        Horrible, isn't it?
+      </p>
+    </section>
+  </steps>
+  <feedback title="Feedback">
+    <p>
+      Please provide feedback about this document via the
+      <a href="site:mail-lists">mailing lists</a>.
+    </p>
+  </feedback>
+</howto>

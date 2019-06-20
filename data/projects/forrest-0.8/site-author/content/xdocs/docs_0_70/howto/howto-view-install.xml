@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE howto PUBLIC "-//APACHE//DTD How-to V2.0//EN" "http://forrest.apache.org/dtd/howto-v20.dtd">
+<howto>
+  <header>
+    <title>How to install the view package</title>
+    <abstract>
+      This How-To describes the setup of the plugins (needed to work with
+      forrest:views and forrest:contracts) and a fresh seed.
+    </abstract>
+    <last-modified-content-date date="2005-06-06"/>
+  </header>
+  <audience title="Intended Audience">
+    <warning>
+      "Views" are a new functionality which is still in development phase. That
+      is why it is in the "whiteboard" section of the Forrest distribution. This
+      HowTo is a good start but still needs proof-reading.
+    </warning>
+    <p>
+      Users/devs who wants to get started with view development. This setup
+      guide is valid for both users and devs.
+    </p>
+  </audience>
+  <purpose title="Purpose">
+    <p>
+      To help users install views. This is the "getting started" setup-guide.
+    </p>
+  </purpose>
+  <prerequisites title="Prerequisites">
+    <ul>
+      <li>You have to use the trunk version of forrest to use views because it is in an early stage
+      	of development.</li>
+    </ul>
+  </prerequisites>
+  <steps title="Steps">
+    <p>
+      The process of setting up the plugin is quite involved. We promise it will
+      be easier in the future. Some of the instructions have to be modified with
+      your local settings.
+    </p>
+    <section id="localBuild">
+      <title>Build the view and the viewHelper plugins</title>
+      <p>
+        The first step is to build the view and the viewHelper plugins. Change
+        to a console of your choice and go (cd) to the trunk version of forrest
+        {forrest-trunk}. Then do an update and after this deploy both plugins
+        locally.
+      </p>
+      <source>
+cd {forrest-trunk}
+svn up
+cd whiteboard/plugins/org.apache.forrest.plugin.internal.view/
+ant local-deploy
+cd ../org.apache.forrest.plugin.output.viewHelper.xhtml/
+ant local-deploy
+      </source>
+    </section>
+    <section id="newSeed">
+      <title>Seed a new project</title>
+      <p>
+        Go to the dir where you want to seed a new project and seed it. Next we
+        have to prepare a default.fv directory ("conf") in project.conf-dir
+        (forrest.properties) of the fresh seed. This will be needed as soon you
+        modify the default view of your project. A "templates" directory is
+        needed as well, for your project-specific contract implementations.
+      </p>
+      <source>
+cd ~/src/newSeed
+forrest seed
+mkdir src/documentation/conf
+mkdir src/documentation/resources/templates
+      </source>
+    </section>
+    <section id="forrestProperties">
+      <title>Modifying forrest.properties</title>
+      <p>
+        Now we have to tell forrest that we are planning to use the view
+        plugins. We will do that by editing to the forrest.properties to add the
+        plugins:
+      </p>
+      <source>
+project.required.plugins=org.apache.forrest.plugin.output.viewHelper.xhtml,org.apache.forrest.plugin.internal.view
+      </source>
+      <p>
+        We also have to change the project skin to leather-dev. The reason for
+        this is that the plugins are still not independent from the "old fashion
+        skins".
+      </p>
+      <note>
+        We are exchanging only site2xhtml.xsl of leather-dev skin by the plugins
+        and some contracts are based on e.g. document2html.xsl output of
+        leather-dev.
+      </note>
+      <source>
+project.skin=leather-dev
+      </source>
+    </section>
+    <section id="testing">
+      <title>Test your new view-based project</title>
+      <p>
+        Now you have finished the preparation and the setup to finally try
+      </p>
+      <source>
+forrest run
+      </source>
+      <p>
+        then point to
+        <a href="http://localhost:8888/">http://localhost:8888/</a> and you
+        should see the default view-based skin.
+      </p>
+      <note>
+        When developing styles with views 'forrest run' is the quickest way. You
+        will see you do not have to build your project to see the changes on
+        your pages when working with *.fv.
+      </note>
+    </section>
+    <section id="availableContracts">
+      <title>Available contracts</title>
+      <p>
+        To start working with views you need to know which contracts you can
+        use. For this we will install another plugin
+        <code>org.apache.forrest.plugin.input.viewHelper.xhtml.ls</code>. The
+        setup is:
+      </p>
+      <source>
+cd {forrest-trunk}
+svn up
+cd whiteboard/plugins/org.apache.forrest.plugin.input.viewHelper.xhtml.ls/
+ant local-deploy
+</source>
+      <p>
+        The newly installed plugin will show the available contracts listed in
+        an html page. First we have to tell forrest that we are planning to use
+        the new plugin. We will do that by editing the forrest.properties of the
+        <a href="site:howto/view/install">newSeed</a> to <strong>add</strong>
+        the plugin:
+      </p>
+      <source>
+project.required.plugins=org.apache.forrest.plugin.input.viewHelper.xhtml.ls
+      </source>
+      <p>
+        Now point your browser to
+        <code>http://localhost:8888/ls.contracts.html</code>. On this page you
+        will find all contracts that you can use in your project.
+      </p>
+    </section>
+  </steps>
+  <extension title="Further Reading">
+    <p>
+      Congratulations, you are now able to work with views. From here we
+      recommend reading the following How-To's:
+    </p>
+    <ul>
+      <li><a href="site:v0.70//howto/view/DSL">Getting started with forrest:view DSL</a></li>
+      <li><a href="site:v0.70//howto/view/contracts">Create your own contract implementation</a></li>
+    </ul>
+  </extension>
+  <feedback title="Feedback">
+    <p>
+      Please provide feedback about this document via the
+      <a href="site:mail-lists">mailing lists</a>.
+    </p>
+  </feedback>
+</howto>

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  <map:components>
+    <map:generators default="file"/>
+    <map:serializers default="html"/>
+    <map:matchers default="wildcard"/>
+    <map:selectors>
+      <map:selector logger="sitemap.selector.config" name="config" src="org.apache.cocoon.selection.SimpleSelector" />
+    </map:selectors>
+    <map:transformers default="xslt">
+      <map:transformer name="i18n" src="org.apache.cocoon.transformation.I18nTransformer">
+        <catalogues default="tabs">
+          <catalogue id="tabs" name="tabs" location="{lm:project.translations}"/>
+        </catalogues>
+<!-- <untranslated-text>untranslated</untranslated-text-->
+        <cache-at-startup>true</cache-at-startup>
+      </map:transformer>
+    </map:transformers>
+  </map:components>
+  <map:resources>
+    <map:resource name="skinit">
+      <map:transform src="{lm:{type}}">
+        <map:parameter name="notoc" value="{notoc}"/>
+<!-- FIXME: do we need this anymore? -->
+<!-- For backwards-compat with 0.2 - 0.4 skins -->
+        <map:parameter name="isfaq" value="{notoc}"/>
+        <map:parameter name="nopdf" value="{nopdf}"/>
+        <map:parameter name="path" value="{path}"/>
+        <map:parameter name="config-file" value="{lm:project.skinconf}"/>
+      </map:transform>
+      <map:serialize/>
+    </map:resource>
+  </map:resources>
+  <map:pipelines>
+    <map:pipeline >
+      <map:match pattern="**tab-*.html">
+        <map:generate src="{lm:project.tabs.xml}"/>
+        <map:transform type="xinclude"/>
+        <map:select type="config">
+          <map:parameter name="value" value="{properties:forrest.i18n}"/>
+          <map:when test="true">
+            <map:act type="locale">
+              <map:transform src="{lm:transform.book.book-i18n}"/>
+              <map:transform type="i18n">
+                <map:parameter name="locale" value="{locale}"/>
+              </map:transform>
+            </map:act>
+          </map:when>
+        </map:select>
+        <map:transform type="linkrewriter" src="cocoon:/{1}linkmap-{2}.html"/>
+        <map:call resource="skinit">
+          <map:parameter name="type" value="transform.tab.menu"/>
+          <map:parameter name="path" value="{1}{2}.html"/>
+        </map:call>
+      </map:match>
+    </map:pipeline>
+  </map:pipelines>
+</map:sitemap>

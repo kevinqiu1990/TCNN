@@ -1,0 +1,280 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one
+   or more contributor license agreements.  See the NOTICE file
+   distributed with this work for additional information
+   regarding copyright ownership.  The ASF licenses this file
+   to you under the Apache License, Version 2.0 (the
+   "License"); you may not use this file except in compliance
+   with the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.    
+-->
+<html>
+<head>
+	<script type="text/javascript">var xookiConfig = {level: 1};</script>	
+	
+
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>triggers | Ivy 2.0.0 Documentation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="../style/style.css" />
+  <script src="../js/jquery.pack.js" type="text/javascript"></script>
+  <script src="../js/jquery.treeview.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){$("#treemenu").Treeview({speed: "fast",store: true});});
+  </script>
+
+<script language="javascript" type="text/javascript">xooki = {u: function(url) {return "../xooki/"+url;}};</script>
+</head>
+<body>
+
+<div id="body">
+<table id="header" summary="Navigation elements." border="0"
+	cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td id="home" width="30%"><a href="http://ant.apache.org/"
+			title="Apache Ant"><img src="../images/ant-group-logo.gif" alt="Apache Ant"
+			border="0" /></a></td>
+
+		<td class="product" width="70%" align="right" valign="middle"><img
+			src="../images/logo.png" alt="ivy" border="0" /></td>
+	</tr>
+</table>
+
+<table id="top-menu" summary="Navigation elements." border="0"
+	cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td>
+
+		<div id="navcontainer">
+		<a href="http://ant.apache.org/">Apache Ant</a> &gt; <a href="http://ant.apache.org/ivy/">Ivy</a> &gt; <span class="breadCrumb"><a href="../index.html" >Documentation</a> &gt; <a href="../reference.html" >Reference</a> &gt; <a href="../settings.html" >Settings Files</a> &gt; <a href="../settings/triggers.html" class="current">triggers</a></span>
+		</div>
+		</td>
+	</tr>
+
+</table>
+
+<table id="content" border="0" cellpadding="0" cellspacing="0"
+	width="100%">
+	<tr>
+		<td id="sidebar-left">
+		<div class="block block-book" id="block-book-0">
+		<h2>Ivy</h2>
+
+		<div class="content"><ul id="treemenu" class="treeview"><li id="xooki-index" class="submenu"><a href="../index.html" >Documentation</a><ul class="open"><li id="xooki-release-notes"><a href="../release-notes.html" >Release Notes</a></li><li id="xooki-tutorial" class="submenu"><a href="../tutorial.html" >Tutorials</a><ul class="closed"><li id="xooki-tutorial/start"><a href="../tutorial/start.html" >Quick Start</a></li><li id="xooki-tutorial/defaultconf"><a href="../tutorial/defaultconf.html" >Adjusting default settings</a></li><li id="xooki-tutorial/multiple"><a href="../tutorial/multiple.html" >Multiple Resolvers</a></li><li id="xooki-tutorial/dual"><a href="../tutorial/dual.html" >Dual Resolver</a></li><li id="xooki-tutorial/dependence"><a href="../tutorial/dependence.html" >Project dependencies</a></li><li id="xooki-tutorial/multiproject"><a href="../tutorial/multiproject.html" >Using Ivy in multiple projects environment</a></li><li id="xooki-tutorial/conf"><a href="../tutorial/conf.html" >Using Ivy Module Configurations</a></li><li id="xooki-tutorial/build-repository" class="submenu"><a href="../tutorial/build-repository.html" >Building a repository</a><ul class="closed"><li id="xooki-tutorial/build-repository/basic"><a href="../tutorial/build-repository/basic.html" >Basic repository copy</a></li><li id="xooki-tutorial/build-repository/advanced"><a href="../tutorial/build-repository/advanced.html" >Using namespaces</a></li></ul></li><li id="xooki-moreexamples"><a href="../moreexamples.html" >More examples</a></li></ul></li><li id="xooki-reference" class="submenu"><a href="../reference.html" >Reference</a><ul class="open"><li id="xooki-intro" class="submenu">Introduction<ul class="closed"><li id="xooki-terminology"><a href="../terminology.html" >Terminology</a></li><li id="xooki-concept"><a href="../concept.html" >Main Concepts</a></li><li id="xooki-textual"><a href="../textual.html" >Text Conventions</a></li><li id="xooki-principle"><a href="../principle.html" >How does it work ?</a></li><li id="xooki-bestpractices"><a href="../bestpractices.html" >Best practices</a></li><li id="xooki-install"><a href="../install.html" >Installation</a></li></ul></li><li id="xooki-settings" class="submenu"><a href="../settings.html" >Settings Files</a><ul class="open"><li id="xooki-settings/property"><a href="../settings/property.html" >property</a></li><li id="xooki-settings/properties"><a href="../settings/properties.html" >properties</a></li><li id="xooki-settings/settings"><a href="../settings/settings.html" >settings</a></li><li id="xooki-settings/include"><a href="../settings/include.html" >include</a></li><li id="xooki-settings/classpath"><a href="../settings/classpath.html" >classpath</a></li><li id="xooki-settings/typedef"><a href="../settings/typedef.html" >typedef</a></li><li id="xooki-settings/credentials"><a href="../settings/credentials.html" >credentials</a></li><li id="xooki-settings/lock-strategies"><a href="../settings/lock-strategies.html" >lock-strategies</a></li><li id="xooki-settings/caches" class="submenu"><a href="../settings/caches.html" >caches</a><ul class="closed"><li id="xooki-settings/caches/cache" class="submenu"><a href="../settings/caches/cache.html" >cache</a><ul class="closed"><li id="xooki-settings/caches/ttl"><a href="../settings/caches/ttl.html" >ttl</a></li></ul></li></ul></li><li id="xooki-settings/latest-strategies"><a href="../settings/latest-strategies.html" >latest-strategies</a></li><li id="xooki-settings/parsers"><a href="../settings/parsers.html" >parsers</a></li><li id="xooki-settings/namespaces" class="submenu"><a href="../settings/namespaces.html" >namespaces</a><ul class="closed"><li id="xooki-settings/namespace" class="submenu"><a href="../settings/namespace.html" >namespace</a><ul class="closed"><li id="xooki-settings/namespace/rule" class="submenu"><a href="../settings/namespace/rule.html" >rule</a><ul class="closed"><li id="xooki-settings/namespace/fromtosystem" class="submenu"><a href="../settings/namespace/fromtosystem.html" >fromsystem / tosystem</a><ul class="closed"><li id="xooki-settings/namespace/src"><a href="../settings/namespace/src.html" >src</a></li><li id="xooki-settings/namespace/dest"><a href="../settings/namespace/dest.html" >dest</a></li></ul></li></ul></li></ul></li></ul></li><li id="xooki-settings/macrodef" class="submenu"><a href="../settings/macrodef.html" >macrodef</a><ul class="closed"><li id="xooki-settings/macrodef/attribute"><a href="../settings/macrodef/attribute.html" >attribute</a></li></ul></li><li id="xooki-settings/resolvers" class="submenu"><a href="../settings/resolvers.html" >resolvers</a><ul class="closed"><li id="xooki-resolver/ivyrep"><a href="../resolver/ivyrep.html" >IvyRep Resolver</a></li><li id="xooki-resolver/ibiblio"><a href="../resolver/ibiblio.html" >IBiblio Resolver</a></li><li id="xooki-resolver/packager"><a href="../resolver/packager.html" >Packager resolver</a></li><li id="xooki-resolver/filesystem"><a href="../resolver/filesystem.html" >File System resolver</a></li><li id="xooki-resolver/url"><a href="../resolver/url.html" >Url Resolver</a></li><li id="xooki-resolver/chain"><a href="../resolver/chain.html" >Chain Resolver</a></li><li id="xooki-resolver/dual"><a href="../resolver/dual.html" >Dual resolver</a></li><li id="xooki-resolver/sftp"><a href="../resolver/sftp.html" >sftp resolver</a></li><li id="xooki-resolver/ssh"><a href="../resolver/ssh.html" >ssh resolver</a></li><li id="xooki-resolver/vfs"><a href="../resolver/vfs.html" >vfs</a></li></ul></li><li id="xooki-settings/conflict-managers"><a href="../settings/conflict-managers.html" >conflict-managers</a></li><li id="xooki-settings/modules" class="submenu"><a href="../settings/modules.html" >modules</a><ul class="closed"><li id="xooki-settings/module"><a href="../settings/module.html" >module</a></li></ul></li><li id="xooki-settings/outputters"><a href="../settings/outputters.html" >outputters</a></li><li id="xooki-settings/statuses" class="submenu"><a href="../settings/statuses.html" >statuses</a><ul class="closed"><li id="xooki-settings/status"><a href="../settings/status.html" >status</a></li></ul></li><li id="xooki-settings/triggers"><a href="../settings/triggers.html" class="current">triggers</a></li><li id="xooki-settings/version-matchers"><a href="../settings/version-matchers.html" >version-matchers</a></li></ul></li><li id="xooki-ivyfile" class="submenu"><a href="../ivyfile.html" >Ivy Files</a><ul class="closed"><li id="xooki-ivyfile/info" class="submenu"><a href="../ivyfile/info.html" >info</a><ul class="closed"><li id="xooki-ivyfile/license"><a href="../ivyfile/license.html" >license</a></li><li id="xooki-ivyfile/ivyauthor"><a href="../ivyfile/ivyauthor.html" >ivyauthor</a></li><li id="xooki-ivyfile/repository"><a href="../ivyfile/repository.html" >repository</a></li><li id="xooki-ivyfile/description"><a href="../ivyfile/description.html" >description</a></li></ul></li><li id="xooki-ivyfile/configurations" class="submenu"><a href="../ivyfile/configurations.html" >configurations</a><ul class="closed"><li id="xooki-ivyfile/conf"><a href="../ivyfile/conf.html" >conf</a></li><li id="xooki-ivyfile/include"><a href="../ivyfile/include.html" >include</a></li></ul></li><li id="xooki-ivyfile/publications" class="submenu"><a href="../ivyfile/publications.html" >publications</a><ul class="closed"><li id="xooki-ivyfile/artifact" class="submenu"><a href="../ivyfile/artifact.html" >artifact</a><ul class="closed"><li id="xooki-ivyfile/artifact-conf"><a href="../ivyfile/artifact-conf.html" >conf</a></li></ul></li></ul></li><li id="xooki-ivyfile/dependencies" class="submenu"><a href="../ivyfile/dependencies.html" >dependencies</a><ul class="closed"><li id="xooki-ivyfile/dependency" class="submenu"><a href="../ivyfile/dependency.html" >dependency</a><ul class="closed"><li id="xooki-ivyfile/dependency-conf" class="submenu"><a href="../ivyfile/dependency-conf.html" >conf</a><ul class="closed"><li id="xooki-ivyfile/mapped"><a href="../ivyfile/mapped.html" >mapped</a></li></ul></li><li id="xooki-ivyfile/dependency-artifact" class="submenu"><a href="../ivyfile/dependency-artifact.html" >artifact</a><ul class="closed"><li id="xooki-ivyfile/dependency-artifact-conf"><a href="../ivyfile/dependency-artifact-conf.html" >conf</a></li></ul></li><li id="xooki-ivyfile/artifact-exclude" class="submenu"><a href="../ivyfile/artifact-exclude.html" >exclude</a><ul class="closed"><li id="xooki-ivyfile/artifact-exclude-conf"><a href="../ivyfile/artifact-exclude-conf.html" >conf</a></li></ul></li><li id="xooki-ivyfile/dependency-include" class="submenu"><a href="../ivyfile/dependency-include.html" >include</a><ul class="closed"><li id="xooki-ivyfile/dependency-include-conf"><a href="../ivyfile/dependency-include-conf.html" >conf</a></li></ul></li></ul></li><li id="xooki-ivyfile/exclude"><a href="../ivyfile/exclude.html" >exclude</a></li><li id="xooki-ivyfile/override"><a href="../ivyfile/override.html" >override</a></li><li id="xooki-ivyfile/conflict"><a href="../ivyfile/conflict.html" >conflict</a></li></ul></li><li id="xooki-ivyfile/conflicts" class="submenu"><a href="../ivyfile/conflicts.html" >conflicts</a><ul class="closed"><li id="xooki-ivyfile/manager"><a href="../ivyfile/manager.html" >manager</a></li></ul></li></ul></li><li id="xooki-ant" class="submenu"><a href="../ant.html" >Ant Tasks</a><ul class="closed"><li id="xooki-use/artifactproperty"><a href="../use/artifactproperty.html" >artifactproperty</a></li><li id="xooki-use/artifactreport"><a href="../use/artifactreport.html" >artifactreport</a></li><li id="xooki-use/buildlist"><a href="../use/buildlist.html" >buildlist</a></li><li id="xooki-use/buildnumber"><a href="../use/buildnumber.html" >buildnumber</a></li><li id="xooki-use/cachefileset"><a href="../use/cachefileset.html" >cachefileset</a></li><li id="xooki-use/cachepath"><a href="../use/cachepath.html" >cachepath</a></li><li id="xooki-use/cleancache"><a href="../use/cleancache.html" >cleancache</a></li><li id="xooki-use/configure"><a href="../use/configure.html" >configure</a></li><li id="xooki-use/deliver"><a href="../use/deliver.html" >deliver</a></li><li id="xooki-use/findrevision"><a href="../use/findrevision.html" >findrevision</a></li><li id="xooki-use/info"><a href="../use/info.html" >info</a></li><li id="xooki-use/install"><a href="../use/install.html" >install</a></li><li id="xooki-use/listmodules"><a href="../use/listmodules.html" >listmodules</a></li><li id="xooki-use/makepom"><a href="../use/makepom.html" >makepom</a></li><li id="xooki-use/postresolvetask"><a href="../use/postresolvetask.html" >post resolve tasks</a></li><li id="xooki-use/publish"><a href="../use/publish.html" >publish</a></li><li id="xooki-use/repreport"><a href="../use/repreport.html" >repreport</a></li><li id="xooki-use/resolve"><a href="../use/resolve.html" >resolve</a></li><li id="xooki-use/retrieve"><a href="../use/retrieve.html" >retrieve</a></li><li id="xooki-use/report" class="submenu"><a href="../use/report.html" >report</a><ul class="closed"><li id="xooki-yed"><a href="../yed.html" >Using yEd to layout report graphs</a></li></ul></li><li id="xooki-use/settings"><a href="../use/settings.html" >settings</a></li><li id="xooki-use/var"><a href="../use/var.html" >var</a></li></ul></li><li id="xooki-standalone"><a href="../standalone.html" >Using standalone</a></li></ul></li><li id="xooki-dev" class="submenu"><a href="../dev.html" >Developer doc</a><ul class="closed"><li id="xooki-extend"><a href="../extend.html" >Extending Ivy</a></li><li id="xooki-dev/makerelease"><a href="../dev/makerelease.html" >Making a release</a></li><li id="xooki-dev/updatesite"><a href="../dev/updatesite.html" >Updating the updatesite</a></li></ul></li></ul></li></ul></div>
+
+		</div>
+
+		</td>
+		
+		<td valign="top">
+		<div id="main">
+
+		<h1 class="title">triggers</h1>
+            <br class="xooki-br"/><b>Tag:</b> triggers<br class="xooki-br"/><span class="since">since 1.4</span>
+
+<span class="tagdoc" id="ivysettings.triggers">Defines a list of triggers to activate on some Ivy events.</span>
+
+A trigger is an action which is performed whenever a particular event occurs.<br class="xooki-br"/>Ivy supports 3 type of triggers out of the box: 
+<ul>
+<li>ant-call</li> calls a target in the same build as the original one whenever a particular event occurs. 
+<li>ant-build</li> calls an ant build which may be in another ant build script. 
+<li>log</li> echo a message, usually in a file
+</ul>
+
+If you want to use a different trigger, you can <a href="../extend.html">implement your own</a>.<br class="xooki-br"/><br class="xooki-br"/>The event available in Ivy are the following ones:
+<table class="ivy-children">
+<thead>
+    <tr><th>Name</th><th>Attributes</th><th>Description</th></tr>
+</thead>
+<tbody>
+    <tr><td>pre-resolve</td>
+        <td>
+          <ul>
+            <li>organisation</li>the organisation of the module for which the dependencies will be resolved<br class="xooki-br"/>            <li>module</li>the name of the module for which the dependencies will be resolved<br class="xooki-br"/>            <li>revision</li>the revision of the module for which the dependencies will be resolved<br class="xooki-br"/>            <li>conf</li>comma separated list of configurations which will be resolved<br class="xooki-br"/>          </ul>
+        </td>
+        <td>Fired at the beginning of the resolve process, before a module dependencies and transitive dependencies are resolved.</td>
+    </tr>
+    <tr><td>pre-resolve-dependency</td>
+        <td>
+          <ul>
+            <li>organisation</li>the organisation of the dependency resolved<br class="xooki-br"/>            <li>module</li>the name of the dependency resolved<br class="xooki-br"/>            <li>req-revision</li>the requested revision for the dependency <span class="since">since 2.0</span> (provided for consistency with post-resolve-dependency)<br class="xooki-br"/>            <li>req-revision-default</li>the default requested revision constraint for the dependency <span class="since">since 2.0</span>
+            <li>req-revision-dynamic</li>the requested revision dynamic constraint for the dependency <span class="since">since 2.0</span>
+            <li>revision</li>the requested revision for the dependency<br class="xooki-br"/>            <li>resolver</li>the name of the resolver used to resolve the dependency<br class="xooki-br"/>          </ul>
+        </td>
+        <td>Fired before each dependency is resolved. In this case resolved means resolving the actual revision if the requested revision is a version constraint and not a static version, and downloading all necessary metadata information.</td>
+    </tr>
+    <tr><td>post-resolve-dependency</td>
+        <td>
+          <ul>
+            <li>organisation</li>the organisation of the dependency resolved<br class="xooki-br"/>            <li>module</li>the name of the dependency resolved<br class="xooki-br"/>            <li>req-revision</li>the requested revision for the dependency <span class="since">since 2.0</span>
+            <li>req-revision-default</li>the default requested revision constraint for the dependency <span class="since">since 2.0</span>
+            <li>req-revision-dynamic</li>the requested revision dynamic constraint for the dependency <span class="since">since 2.0</span>
+            <li>revision</li>the revision of the dependency resolved, or the requested revision if the resolution was not successful<br class="xooki-br"/>            <li>resolved</li>true if the resolution was successful, false otherwise<br class="xooki-br"/>            <li>duration</li>the time elapsed to resolve the dependency (in ms) <span class="since">since 2.0</span>
+            <li>resolver</li>the name of the resolver used to resolve the dependency<br class="xooki-br"/>            <li>any extra attribute</li>all extra attributes found on the info tag of the resolved dependency are available <span class="since">since 2.0</span>
+          </ul>
+        </td>
+        <td>Fired after each dependency is resolved</td>
+    </tr>
+    <tr><td>post-resolve</td>
+        <td>
+          <ul>
+            <li>organisation</li>the organisation of the module for which the dependencies have been resolved<br class="xooki-br"/>            <li>module</li>the name of the module for which the dependencies have been resolved<br class="xooki-br"/>            <li>revision</li>the revision of the module for which the dependencies have been resolved<br class="xooki-br"/>            <li>conf</li>comma separated list of configurations resolved<br class="xooki-br"/>            <li>resolve-id</li>the identifier of the resolution process <span class="since">since 2.0</span>
+            <li>nb-dependencies</li>total number of dependencies, including transitive and evicted ones <span class="since">since 2.0</span>
+            <li>nb-artifacts</li>total number of artifacts resolved, excluding metadata artifacts <span class="since">since 2.0</span>
+            <li>resolve-duration</li>the time (in ms) elapsed to resolve dependencies, before dowloading artifacts <span class="since">since 2.0</span>
+            <li>download-duration</li>the time (in ms) elapsed to download all artifacts, excluding metadata artifacts downloaded during the first phase of the resolution process <span class="since">since 2.0</span>
+            <li>download-size</li>the total size (in bytes) of all downloaded artifacts, excluding metadata artifacts. Only artifacts actually downloaded (not in cache or used from their original location) are considered <span class="since">since 2.0</span>
+          </ul>
+        </td>
+        <td>Fired at the end of the resolve process, when all module dependencies have been resolved</td>
+    </tr>
+    <tr><td>pre-download-artifact</td>
+        <td>
+          <ul>
+            <li>organisation</li>the organisation of the artifact which is about to be downloaded<br class="xooki-br"/>            <li>module</li>the name of the module of the artifact which is about to be downloaded<br class="xooki-br"/>            <li>revision</li>the revision of the the artifact which is about to be downloaded<br class="xooki-br"/>            <li>artifact</li>the name of the the artifact which is about to be downloaded<br class="xooki-br"/>            <li>type</li>the type of the the artifact which is about to be downloaded<br class="xooki-br"/>            <li>ext</li>the extension of the the artifact which is about to be downloaded<br class="xooki-br"/>            <li>metadata</li>true if the artifact to be downloaded is a metadata artifact, false for published artifacts <span class="since">since 2.0</span>
+            <li>resolver</li>the name of the resolver used to download the artifact<br class="xooki-br"/>            <li>origin</li>the origin location from which it will be downloaded<br class="xooki-br"/>            <li>local</li>true if it's a local artifact, false otherwise<br class="xooki-br"/>          </ul>
+        </td>
+        <td>Fired before an artifact is downloaded from a repository to the cache</td>
+    </tr>
+    <tr><td>post-download-artifact</td>
+        <td>
+          <ul>
+            <li>organisation</li>the organisation of the artifact which was just downloaded<br class="xooki-br"/>            <li>module</li>the name of the module of the artifact which was just downloaded<br class="xooki-br"/>            <li>revision</li>the revision of the the artifact which was just downloaded<br class="xooki-br"/>            <li>artifact</li>the name of the the artifact which was just downloaded<br class="xooki-br"/>            <li>type</li>the type of the the artifact which was just downloaded<br class="xooki-br"/>            <li>ext</li>the extension of the the artifact which was just downloaded<br class="xooki-br"/>            <li>metadata</li>true if the downloaded artifact is a metadata artifact, false for published artifacts <span class="since">since 2.0</span>
+            <li>resolver</li>the name of the resolver used to download the artifact<br class="xooki-br"/>            <li>origin</li>the origin location from which it was downloaded<br class="xooki-br"/>            <li>local</li>true if it's a local artifact, false otherwise<br class="xooki-br"/>            <li>size</li>the size in bytes of the downloaded artifact<br class="xooki-br"/>            <li>duration</li>the time elapsed to download the artifact (in ms) <span class="since">since 2.0</span>
+            <li>file</li>the file to which it has been downloaded<br class="xooki-br"/>          </ul>
+        </td>
+        <td>Fired after an artifact has been downloaded from a repository to the cache</td>
+    </tr>
+    <tr><td>pre-retrieve <br/><span class="since">since 2.0</span></td>
+        <td>
+          <ul>
+            <li>organisation</li>the organisation of the module for which the dependencies will be retrieved<br class="xooki-br"/>            <li>module</li>the name of the module for which the dependencies will be retrieved<br class="xooki-br"/>            <li>revision</li>the revision of the module for which the dependencies will be retrieved<br class="xooki-br"/>            <li>conf</li>comma separated list of configurations which will be retrieved<br class="xooki-br"/>            <li>symlink</li>true if Ivy will use symbolic links instead of copies on supported platforms, false otherwise<br class="xooki-br"/>            <li>sync</li>true if the retrieve process will be performed in sync mode, false otherwise<br class="xooki-br"/>          </ul>
+        </td>
+        <td>Fired at the beginning of the retrieve process.</td>
+    </tr>
+    <tr><td>post-retrieve <br/><span class="since">since 2.0</span></td>
+        <td>
+          <ul>
+            <li>organisation</li>the organisation of the module for which the dependencies have been retrieved<br class="xooki-br"/>            <li>module</li>the name of the module for which the dependencies will be retrieved<br class="xooki-br"/>            <li>revision</li>the revision of the module for which the dependencies have been retrieved<br class="xooki-br"/>            <li>conf</li>comma separated list of configurations which have been retrieved<br class="xooki-br"/>            <li>symlink</li>true if Ivy used symbolic links instead of copies on supported platforms, false otherwise<br class="xooki-br"/>            <li>sync</li>true if the retrieve process has been performed in sync mode, false otherwise<br class="xooki-br"/>            <li>duration</li>the time elapsed in ms during the retrieve process<br class="xooki-br"/>            <li>size</li>the total size of artifacts which have actually been copied (or symlinked)<br class="xooki-br"/>            <li>nbCopied</li>the number of artifacts copied or symlinked<br class="xooki-br"/>            <li>nbUptodate</li>the number of artifacts which were already present and up to date at the destination location<br class="xooki-br"/>          </ul>
+        </td>
+        <td>Fired at the end of the retrieve process.</td>
+    </tr>
+    <tr><td>pre-publish-artifact <br/><span class="since">since 2.0</span></td>
+        <td>
+          <ul>
+            <li>organisation</li>the organisation of the artifact which is about to be published<br class="xooki-br"/>            <li>module</li>the name of the module of the artifact which is about to be published<br class="xooki-br"/>            <li>revision</li>the revision of the the artifact which is about to be published<br class="xooki-br"/>            <li>artifact</li>the name of the the artifact which is about to be published<br class="xooki-br"/>            <li>type</li>the type of the the artifact which is about to be published<br class="xooki-br"/>            <li>ext</li>the extension of the the artifact which is about to be published<br class="xooki-br"/>            <li>resolver</li>the name of the resolver into which the artifact is about to be published<br class="xooki-br"/>            <li>file</li>the absolute path of the source file for the artifact<br class="xooki-br"/>            <li>overwrite</li>"true" if the new data will overwrite existing artifacts, "false" otherwise<br class="xooki-br"/>          </ul>
+        </td>
+        <td>Fired before an artifact is published into a repository</td>
+    </tr>
+    <tr><td>post-publish-artifact <br/><span class="since">since 2.0</span></td>
+        <td>
+          <ul>
+            <li>organisation</li>the organisation of the artifact that was published<br class="xooki-br"/>            <li>module</li>the name of the module of the artifact that was published<br class="xooki-br"/>            <li>revision</li>the revision of the the artifact that was published<br class="xooki-br"/>            <li>artifact</li>the name of the the artifact that was published<br class="xooki-br"/>            <li>type</li>the type of the the artifact that was published<br class="xooki-br"/>            <li>ext</li>the extension of the the artifact that was published<br class="xooki-br"/>            <li>resolver</li>the name of the resolver into which the artifact was published<br class="xooki-br"/>            <li>file</li>the absolute path of the source file for the artifact<br class="xooki-br"/>            <li>overwrite</li>"true" if the new data overwrote existing artifacts, "false" otherwise<br class="xooki-br"/>            <li>status</li>"successful" if the artifact published successfully; "failed" if the artifact failed to publish, or if the status is unknown<br class="xooki-br"/>          </ul>
+        </td>
+        <td>Fired after an artifact is published into a repository.  Note that this event is fired<br class="xooki-br"/>        whether or not the publication succeeded.  The "status" property can be checked to <br class="xooki-br"/>        verify success.</td>
+    </tr>
+</tbody>
+</table>
+
+
+The child tag used for the dependency resolver must be equal to a name of a trigger type (either built-in or added with the typedef tag).<br class="xooki-br"/><br class="xooki-br"/><h1>Child elements</h1>
+<table class="ivy-children">
+<thead>
+    <tr><th class="ivy-chld">Element</th><th class="ivy-chld-desc">Description</th><th class="ivy-chld-card">Cardinality</th></tr>
+</thead>
+<tbody>
+    <tr><td>any trigger</td><td>adds a trigger to the list of registered triggers</td>
+        <td>1..n</td></tr>
+</tbody>
+</table>
+
+<h1>Built-in Triggers</h1>
+Ivy comes with 3 built-in triggers: <br class="xooki-br"/>
+<table class="ivy-attributes">
+<thead>
+    <tr><th>Name</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>ant-build</td><td>Triggers an ant build. Note that by default the ant build is triggered only once per build file, the property onlyonce can be set to false to change this.</td></tr>
+<tr><td>ant-call</td><td>Calls a target in the current ant build.</td></tr>
+<tr><td>log</td><td>Logs a message on the console or in a log file.</td></tr>
+</tbody>
+</table>
+
+
+<h1><a name="common">Common attributes</a></h1>
+All triggers share some common attributes detailed here.<br class="xooki-br"/><br class="xooki-br"/>Among these attributes, you will find how to select when the trigger should be performed. You have to provide an event name, which is simple, but you can also use a filter expression. The syntax for this expression is very simple and limited: <br class="xooki-br"/>you can use the = operator to compare an attribute (left operande) with a value (right operande).<br class="xooki-br"/>you can use AND OR NOT as boolean operators<br class="xooki-br"/>you cannot use parenthesis to change the precedence<br class="xooki-br"/>
+<table class="ivy-attributes">
+<thead>
+    <tr><th class="ivy-att">Attribute</th><th class="ivy-att-desc">Description</th><th class="ivy-att-req">Required</th></tr>
+</thead>
+<tbody>
+    <tr><td>name</td><td>the name of the trigger for identification purpose only</td>
+        <td>Yes</td>
+    </tr>
+    <tr><td>event</td><td>the name of the event on which the trigger should be performed</td>
+        <td>Yes</td>
+    </tr>
+    <tr><td>filter</td><td>a filter expression used to restrict when the trigger should be performed</td>
+        <td>No, defaults to no filter</td>
+    </tr>
+</tbody>
+</table>
+
+<h1>Examples</h1>
+<pre>
+&lt;triggers&gt;<br class="xooki-br"/>    &lt;ant-build antfile="${ivy.settings.dir}/[module]/build.xml" target="publish"<br class="xooki-br"/>           event="pre-resolve-dependency" filter="revision=latest.integration"/&gt;<br class="xooki-br"/>&lt;/triggers&gt;
+</pre>
+Triggers an ant build of the ant file ${ivy.settings.dir}/[module]/build.xml (where [module] is replaced by the name of the dependency resolved) with the target "publish", just before resolving a dependency with a latest.integration revision.<br class="xooki-br"/>Note that by default the ant build is triggered only once per build file. See below to see how to trigger the build more than once.<br class="xooki-br"/><hr/>
+<pre>
+&lt;triggers&gt;<br class="xooki-br"/>    &lt;ant-build antfile="${ivy.settings.dir}/[module]/build.xml" target="publish"<br class="xooki-br"/>           event="pre-resolve-dependency" filter="revision=latest.integration"<br class="xooki-br"/>           onlyonce="false" /&gt;<br class="xooki-br"/>&lt;/triggers&gt;
+</pre>
+Same as before, but this time the builds will be triggered as many time as the dependency is resolved, instead of only once.<br class="xooki-br"/><hr/>
+<pre>
+&lt;triggers&gt;<br class="xooki-br"/>    &lt;ant-call target="unzip" prefix="dep"<br class="xooki-br"/>          event="post-download-artifact" filter="type=zip AND status=successful"/&gt;<br class="xooki-br"/>&lt;/triggers&gt;
+</pre>
+Triggers an ant call of the target unzip just after downloading a zip artifact, prefixing all parameters to the target with 'dep'.<br class="xooki-br"/>Here is how the target can look like:
+<pre>
+&lt;target name="unzip"&gt;<br class="xooki-br"/>     &lt;echo&gt;<br class="xooki-br"/>        unzipping artifact: <br class="xooki-br"/>        organisation=${dep.organisation} <br class="xooki-br"/>        module=${dep.module} <br class="xooki-br"/>        revision=${dep.revision}<br class="xooki-br"/>        artifact=${dep.artifact}<br class="xooki-br"/>        type=${dep.type}<br class="xooki-br"/>        ext=${dep.ext}<br class="xooki-br"/>        origin=${dep.origin}<br class="xooki-br"/>        local=${dep.local}<br class="xooki-br"/>        size=${dep.size}<br class="xooki-br"/>        file=${dep.file}<br class="xooki-br"/>     &lt;/echo&gt;<br class="xooki-br"/>     &lt;mkdir dir="${basedir}/out"/&gt;<br class="xooki-br"/>     &lt;unzip src="${dep.file}" dest="${basedir}/out"/&gt;<br class="xooki-br"/>&lt;/target&gt;
+</pre>
+<hr/>
+<pre>
+&lt;triggers&gt;<br class="xooki-br"/>    &lt;log file="ivy.log" <br class="xooki-br"/>          message='downloaded "${origin}" to "${file}" (${duration}ms - ${size}B)'<br class="xooki-br"/>          event="post-download-artifact" filter="status=successful"/&gt;<br class="xooki-br"/>&lt;/triggers&gt;
+</pre>
+Logs any successful artifact download, with information on the source and destination, and details on download size and duration.<br class="xooki-br"/><br class="xooki-br"/>The file attribute is optional, the log trigger will output messages to console if it isn't provided.
+ 		</div><!-- main -->
+		</td>
+	</tr>
+</table>
+
+<table id="footer-menu" summary="Navigation elements." border="0"
+	cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td align="center" valign="middle">
+		<div class="primary-links">:: 
+			<a href="../index.html">Home</a> ::
+			<a href="../reference.html">Reference</a> ::
+			<a href="../tutorial.html">Tutorials</a> ::
+			<a href="../dev.html">Developer's doc</a> ::
+		</div>
+		</td>
+	</tr>
+</table>
+
+
+
+<div id="footer-message"></div>
+
+
+</div><!-- body -->
+</body>
+</html>

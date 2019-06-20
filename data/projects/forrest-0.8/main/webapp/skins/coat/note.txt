@@ -1,0 +1,17 @@
+This skin is inteded to replicate the main ASF "branding" at http://www.apache.org/
+
+It does not provide the three column layout, we'll do that when the Dispatcher is more stable.
+
+This is a skin for use in the interim since many projects are demanding a simpler look and feel.
+
+There are many unsupported features in this skin, it really should be a view. But...
+
+
+TODO
+====
+
+- Colour scheme - not checked things like the MOTD colours, table backgrounds etc.
+
+- menus - make javascript switchable in skinconf.xml
+
+- search box - colour is wrong and it doesn't look right in the default position

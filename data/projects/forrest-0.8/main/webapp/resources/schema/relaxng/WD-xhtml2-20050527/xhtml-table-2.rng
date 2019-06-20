@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XHTML2: http://www.w3.org/TR/2005/WD-xhtml2-20050527
+Copyright © 1999-2004 World Wide Web Consortium, (Massachusetts Institute of Technology,
+European Research Consortium for Informatics and Mathematics, Keio University).
+All Rights Reserved. This work is distributed under the W3C® Software Licens [1]
+in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+         xmlns:x="http://www.w3.org/1999/xhtml">
+
+  <x:h1>Tables Module</x:h1>
+
+  <x:p>Note. Also include the Caption Module when this module is used.</x:p>
+
+  <div>
+    <x:h2>The table element</x:h2>
+
+    <define name="table">
+      <element name="table">
+        <ref name="table.attlist"/>
+        <optional>
+          <ref name="caption"/>
+        </optional>
+        <optional>
+          <ref name="summary"/>
+        </optional>
+        <choice>
+          <zeroOrMore>
+            <ref name="col"/>
+          </zeroOrMore>
+          <zeroOrMore>
+            <ref name="colgroup"/>
+          </zeroOrMore>
+        </choice>
+        <choice>
+          <group>
+            <optional>
+              <ref name="thead"/>
+            </optional>
+            <optional>
+              <ref name="tfoot"/>
+            </optional>
+            <oneOrMore>
+              <ref name="tbody"/>
+            </oneOrMore>
+          </group>
+          <oneOrMore>
+            <ref name="tr"/>
+          </oneOrMore>
+        </choice>
+      </element>
+    </define>
+
+    <define name="table.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The summary element</x:h2>
+
+    <define name="summary">
+      <element name="summary">
+        <ref name="summary.attlist"/>
+        <ref name="Flow.model"/>
+      </element>
+    </define>
+
+    <define name="summary.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The col element</x:h2>
+
+    <define name="col">
+      <element name="col">
+        <ref name="col.attlist"/>
+      </element>
+    </define>
+
+    <define name="col.attlist">
+      <ref name="Common.attrib"/>
+      <ref name="span.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The colgroup element</x:h2>
+
+    <define name="colgroup">
+      <element name="colgroup">
+        <ref name="colgroup.attlist"/>
+        <zeroOrMore>
+          <ref name="col"/>
+        </zeroOrMore>
+      </element>
+    </define>
+
+    <define name="colgroup.attlist">
+      <ref name="Common.attrib"/>
+      <ref name="span.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The thead element</x:h2>
+
+    <define name="thead">
+      <element name="thead">
+        <ref name="thead.attlist"/>
+        <oneOrMore>
+          <ref name="tr"/>
+        </oneOrMore>
+      </element>
+    </define>
+
+    <define name="thead.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The tfoot element</x:h2>
+
+    <define name="tfoot">
+      <element name="tfoot">
+        <ref name="tfoot.attlist"/>
+        <oneOrMore>
+          <ref name="tr"/>
+        </oneOrMore>
+      </element>
+    </define>
+
+    <define name="tfoot.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The tbody element</x:h2>
+
+    <define name="tbody">
+      <element name="tbody">
+        <ref name="tbody.attlist"/>
+        <oneOrMore>
+          <ref name="tr"/>
+        </oneOrMore>
+      </element>
+    </define>
+
+    <define name="tbody.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The tr element</x:h2>
+
+    <define name="tr">
+      <element name="tr">
+        <ref name="tr.attlist"/>
+        <oneOrMore>
+          <choice>
+            <ref name="th"/>
+            <ref name="td"/>
+          </choice>
+        </oneOrMore>
+      </element>
+    </define>
+
+    <define name="tr.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The th element</x:h2>
+
+    <define name="th">
+      <element name="th">
+        <ref name="th.attlist"/>
+        <ref name="Flow.model"/>
+      </element>
+    </define>
+
+    <define name="th.attlist">
+      <ref name="Cell.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The td element</x:h2>
+
+    <define name="td">
+      <element name="td">
+        <ref name="td.attlist"/>
+        <ref name="Flow.model"/>
+      </element>
+    </define>
+
+    <define name="td.attlist">
+      <ref name="Cell.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>Attribute definitions</x:h2>
+
+    <define name="span.attrib">
+      <optional>
+        <attribute name="span" a:defaultValue="1">
+          <ref name="spanNumber.datatype"/>
+        </attribute>
+      </optional>
+    </define>
+
+    <define name="Cell.attrib">
+      <ref name="Common.attrib"/>
+      <optional>
+        <attribute name="abbr">
+          <ref name="Text.datatype"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="axis"/>
+      </optional>
+      <optional>
+        <attribute name="colspan" a:defaultValue="1">
+          <ref name="Number.datatype"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="headers">
+          <ref name="IDREFS.datatype"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="rowspan" a:defaultValue="1">
+          <ref name="Number.datatype"/>
+        </attribute>
+      </optional>
+      <ref name="scope.attrib"/>
+    </define>
+
+    <define name="scope.attrib">
+      <optional>
+        <attribute name="scope">
+          <choice>
+            <value>row</value>
+            <value>col</value>
+            <value>rowgroup</value>
+            <value>colgroup</value>
+          </choice>
+        </attribute>
+      </optional>
+    </define>
+  </div>
+
+  <define name="Structural.class" combine="choice">
+    <ref name="table"/>
+  </define>
+
+</grammar>

@@ -1,0 +1,1227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Using Forrest</title>
+    <subtitle>A tutorial on how to use Forrest in your own projects</subtitle>
+    <version>SVN: $Revision: 527010 $ $Date: 2007-04-10 13:48:52 +1000 (Tue, 10 Apr 2007) $</version>
+  </header>
+  <body>
+    <section id="intro">
+      <title>Introduction</title>
+      <p>
+        This tutorial will lead you through the process of installing Forrest,
+        and using it to create a new project, or add Forrest-based docs to an
+        existing project.
+      </p>
+    </section>
+    <section id="installing">
+      <title>Installing Forrest</title>
+      <p>
+        <link href="ext:forrest/download">Download</link> the latest release of
+        Forrest and follow the index.html in the top-level, or if you want to
+        try the development version, then <link href="site:build">build
+        Forrest</link> from source.
+      </p>
+      <section>
+        <title>Setting up the Environment</title>
+        <p>
+          After downloading and extracting Forrest, you need to add environment
+          variables. The reason for this is so that the 'forrest' command is
+          available everywhere and it can locate its home directory and
+          resources. It is beyond the scope of Forrest to explain how to manage
+          your operating system. Some tips are listed below and this
+          <link href="http://mail-archives.apache.org/mod_mbox/forrest-user/200610.mbox/%3ceab855560610181625u6e49b49at7df6c0c5e6812c74@mail.gmail.com%3e">message</link>
+          explains further and provides other tips about using Windows.
+        </p>
+        <section>
+          <title>In Unix/Linux:</title>
+          <p class="instruction">
+            change directory to the top-level of the forrest distribution and do
+            ...
+          </p>
+          <p class="instruction">
+            ~/apache-forrest$ export FORREST_HOME=`pwd`
+          </p>
+          <p class="instruction">
+            ~/apache-forrest$ export PATH=$PATH:$FORREST_HOME/bin
+          </p>
+          <section>
+            <title>Permanently Setting The Environment Variables for Linux/Unix</title>
+            <p>
+              Export only changes the variables during that terminal session for
+              that user, this is useful for testing. To permanently add the
+              variable edit either <code>/etc/bash.bashrc</code> (for all users)
+              or <code>~/.bash_profile</code> (for individual users). Add these
+              lines to the end of the file you edit:
+            </p>
+            <source>
+      FORREST_HOME=/full/path/to/forrest
+      export FORREST_HOME
+      
+      PATH=$PATH:$FORREST_HOME/bin
+      export PATH
+          </source>
+          </section>
+        </section>
+        <section>
+          <title>Windows 2000</title>
+          <p class="instruction">
+            Go to "My Computer", "Properties", "Advanced", "Environment
+            Variables"
+          </p>
+          <p class="instruction">
+            add a new variable <code>FORREST_HOME</code> as
+            <code>C:\full\path\to\apache-forrest</code>
+          </p>
+          <p class="instruction">
+            edit <code>PATH</code> as <code>%PATH%;%FORREST_HOME%\bin</code>
+          </p>
+        </section>
+        <section>
+          <title>In Windows XP:</title>
+          <p class="instruction">
+            Go to "My Computer", "Properties", "Advanced", "Environment
+            Variables"
+          </p>
+          <p class="instruction">
+            Create a New variable with name: FORREST_HOME value:
+            C:\full\path\to\apache-forrest
+          </p>
+          <p class="instruction">
+            Edit PATH by adding ;%FORREST_HOME%\bin to the end of the current
+            value.
+          </p>
+        </section>
+      </section>
+    </section>
+    <section>
+      <title>The 'forrest' Command</title>
+      <p>
+        To see what the 'forrest' command can do, type 'forrest -projecthelp'.
+        The build targets that are marked with * are the commonly used ones.
+      </p>
+      <source>
+  Apache Forrest.  Run 'forrest -projecthelp' to list options
+  
+  Buildfile: /usr/local/svn/forrest/src/core/bin/../forrest.build.xml
+  
+      *=======================================================*
+      |                 Forrest Site Builder                  |
+      |                        X.Y-dev                        |
+      *=======================================================*
+    
+               Call this through the 'forrest' command
+    
+  Main targets:
+  
+   available-plugins     What plugins are available?
+   available-skins       What skins are available?
+   clean                 * Clean all directories and files generated during
+                          the build
+   init-plugins          Ensure the required plugins are available locally,
+                         if any are not, download them automatically
+   install-skin          Install the needed skin from the remote repository
+   package-skin          Make a package of an existing skin
+   run                   * Run Jetty (instant live webapp)
+   run_custom_jetty      Run Jetty with configuration file found in the project
+   run_default_jetty     Run Jetty with configuration file found in Forrest
+   seed                  * Seeds a directory with a template project doc structure
+   site                  * Generates a static HTML website for this project
+   validate              Validate all: xdocs, skins, sitemap, etc
+   validate-sitemap      Validate the project sitemaps
+   validate-skinchoice   Validate skin choice
+   validate-skinconf     Validate skinconf
+   validate-skins        Validate skins
+   validate-stylesheets  Validate XSL files
+   validate-xdocs        Validate the project xdocs
+   war                   * Generates a dynamic servlet-based website
+                           (a packaged .war file)
+   webapp                Generates a dynamic servlet-based website
+                           (an unpackaged webapp).
+   webapp-local          Generates a dynamic servlet-based website
+                           (an unpackaged webapp). Note this webapp is suitable
+                           for local execution only, use the 'war' or 'webapp'
+                           target if you wish to deploy remotely.
+  Default target: site
+       </source>
+      <p>
+        As 'site' is the default target, just running 'forrest' without options
+        will generate a "static HTML website". For example, typing 'forrest' in
+        the top-level "forrest/site-author" directory would build Forrest's own
+        website. But we're going to be building a new site for your project, so
+        read on.
+      </p>
+    </section>
+    <section id="seeding_new">
+      <title>Seeding a new project</title>
+      <p>
+        'Seeding' a project is our own arborial term for adding a template
+        documentation set to your project, which you can then customize.
+      </p>
+      <p>
+        To try this out, create a completely new directory (outside the Forrest
+        distribution), then change directory to it, and do 'forrest seed'. This
+        will give you a new site with lots of demonstration documents. You can
+        also do "forrest seed-business", this will ask you a number of questions
+        about the site and will create a smaller site without all the
+        demonstration pages of the standard seed site.
+      </p>
+      <note>
+        <code>forrest seed</code> is useful to see what is possible within
+        Forrest, but if you are creating a real site <code>forrest
+        seed-business</code> has less content initially, and is therefore easier
+        to edit (even if it is not a business site). We hope to include more
+        seed sites in the future.
+      </note>
+      <p>
+        If you run <code>forrest seed</code> you should see output like this
+        below:
+      </p>
+      <source>
+[/home/me/forrest/my-test]$ forrest seed
+
+Apache Forrest.  Run 'forrest -projecthelp' to list options
+
+Buildfile: /usr/local/svn/forrest/src/core/bin/../forrest.build.xml
+
+init-props:
+Loading project specific properties from
+ /home/me/forrest/my-test/forrest.properties
+...
+echo-settings:
+
+check-contentdir:
+
+ensure-nocontent:
+
+seed:
+Copying 41 files to /home/me/forrest/my-test
+
+-------------------------------
+~~ Template project created! ~~
+
+Here is an outline of the generated files:
+
+/                        # /home/me/forrest/my-test
+/forrest.properties      # Optional file describing your site layout
+/src/documentation/      # Doc-specific files
+/src/documentation/skinconf.xml    # Info about your project used by the skin
+/src/documentation/content         # Site content.
+/src/documentation/content/xdocs   # XML content.
+/src/documentation/content/xdocs/index.xml # Home page
+/src/documentation/content/xdocs/site.xml  # Navigation file for site structure
+/src/documentation/content/xdocs/tabs.xml  # Skin-specific 'tabs' file.
+/src/documentation/content/xdocs/*.html,pdf # Static content files, may have subdirs
+/src/documentation/resources/images   # Project images (logos, etc)
+# you can create other directories as needed (see forrest.properties)
+
+
+What to do now?
+
+- Render this template to static HTML by typing 'forrest'.
+  View the generated HTML in a browser to make sure everything works.
+- Alternatively 'forrest run' and browse to http://localhost:8888/ live demo.
+- Start adding content in xdocs/ remembering to declare new files in site.xml
+- Follow the document http://forrest.apache.org/docs/your-project.html
+- Provide any feedback to dev@forrest.apache.org
+
+Thanks for using Apache Forrest
+-------------------------------
+
+BUILD SUCCESSFUL
+Total time: 5 seconds
+      </source>
+      <note>
+        As you have probably noticed, we like to document things right in the
+        script, on the theory that people only read online docs when desperate
+        :)
+      </note>
+      <p>
+        You now have a template documentation structure all set up:
+      </p>
+      <source>
+[/home/me/forrest/my-test]$ tree
+.
+|-- build
+|   `-- tmp
+|       `-- projfilters.properties
+|-- forrest.properties
+|-- src
+|   `-- documentation
+|       |-- README.txt
+|       |-- classes
+|       |   `-- CatalogManager.properties
+|       |-- content
+|       |   `-- xdocs
+|       |       |-- images
+|       |       |   |-- group-logo.gif
+|       |       |   |-- group.svg
+|       |       |   |-- icon.png
+|       |       |   |-- project-logo.gif
+|       |       |   `-- project.svg
+|       |       |-- index.xml
+|       |       |-- samples
+|       |       |   |-- ascii-art.xml
+|       |       |   |-- cocoon-pyramid.aart
+|       |       |   |-- faq.xml
+|       |       |   |-- ihtml-sample.ihtml
+|       |       |   |-- index.xml
+|       |       |   |-- openoffice-writer.sxw
+|       |       |   |-- sample.xml
+|       |       |   |-- sample2.xml
+|       |       |   |-- sdocbook.xml
+|       |       |   |-- subdir
+|       |       |   |   |-- book-sample.xml
+|       |       |   |   `-- index.xml
+|       |       |-- site.xml
+|       |       |-- tabs.xml
+|       |       |-- hello.pdf
+|       |       |-- test1.html
+|       |       `-- test2.html
+|       `-- resources
+|           `-- images
+|           `-- schema
+|           `-- stylesheets
+|       |-- sitemap.xmap
+|       |-- skinconf.xml
+|       `-- translations
+|           |-- langcode.xml
+|           |-- languages_en.xml
+|           |-- languages_es.xml
+|           |-- menu.xml
+|           |-- menu_af.xml
+|           |-- menu_de.xml
+|           |-- menu_es.xml
+|           |-- menu_it.xml
+|           |-- menu_no.xml
+|           |-- menu_ru.xml
+|           |-- menu_sk.xml
+|           |-- tabs.xml
+|           `-- tabs_es.xml
+      </source>
+      <p>
+        To render this to HTML, type 'forrest'. You should have a HTML site
+        rendered into the <code>build/site</code> directory:
+      </p>
+      <figure src="images/new-project.png" height="356" width="500" alt="New project"/>
+      <p>
+        Practise with adding new content. Change to the directory
+        <code>src/documentation/content/xdocs</code> and copy the file
+        <code>index.xml</code> to create <code>my-new-file.xml</code> as a new
+        document. Edit it to change some text. Add an entry to
+        <code>site.xml</code> by copying one of the other entries and changing
+        it to suit. Now do 'forrest' to see the result.
+      </p>
+    </section>
+    <section id="seeding_existing">
+      <title>Seeding an existing project</title>
+      <p>
+        In the section above, we have run 'forrest seed' in an empty directory
+        to create a new project. If you have an existing codebase to which you
+        want to add Forrest docs, then run 'forrest seed' in your project base
+        directory, and the Forrest doc structure will be grafted onto your
+        project. This procedure only needs to be done once.
+      </p>
+      <p>
+        If your project already has XML documentation, it may be easier to tell
+        Forrest where the XML sources are, rather than rearrange your project
+        directories to accommodate Forrest. This can be done by editing
+        <code>forrest.properties</code> (consult the
+        <link href="#Changing_the_layout">Changing the layout</link> section for
+        more details).
+      </p>
+    </section>
+    <section id="customizing">
+      <title>Customizing your project</title>
+      <p>
+        Having seeded a project with template docs, you will now want to
+        customize it to your project's needs. Here we will deal with configuring
+        the skin, and changing the project layout.
+      </p>
+      <section id="skinconf.xml">
+        <title>Configuring the Forrest skin: skinconf.xml</title>
+        <p>
+          Most Forrest skins can be customized through a single XML file,
+          <code>src/documentation/skinconf.xml</code>, which looks like this:
+        </p>
+        <source>
+<![CDATA[
+<!--
+Skin configuration file. This file contains details of your project,
+which will be used to configure the chosen Forrest skin.
+-->
+
+ <!DOCTYPE skinconfig PUBLIC
+        "-//APACHE//DTD Skin Configuration V0.6-3//EN"
+        "skinconfig-v06-3.dtd">
+
+<skinconfig>
+  <!-- To enable lucene search add provider="lucene"
+    Add box-location="alt" to move the search box to an alternate location
+    (if the skin supports it) and box-location="all" to show it in all
+    available locations on the page.  Remove the <search> element to show
+    no search box.
+  -->
+  <search name="MyProject" domain="mydomain"/>
+
+  <!-- Disable the print link? If enabled, invalid HTML 4.0.1 -->
+  <disable-print-link>true</disable-print-link>  
+  <!-- Disable the PDF link? -->
+  <disable-pdf-link>false</disable-pdf-link>
+  <!-- Disable the xml source link? -->
+  <!-- The xml source link makes it possible to access the xml rendition
+    of the source frim the html page, and to have it generated statically.
+    This can be used to enable other sites and services to reuse the
+    xml format for their uses. Keep this disabled if you don't want other
+    sites to easily reuse your pages.-->
+  <disable-xml-link>true</disable-xml-link>
+  
+  <!-- Disable navigation icons on all external links? -->
+  <disable-external-link-image>false</disable-external-link-image>
+  
+  <!-- Disable w3c compliance links? -->
+  <disable-compliance-links>false</disable-compliance-links>
+  <!-- Render mailto: links unrecognisable by spam harvesters? -->
+  <obfuscate-mail-links>true</obfuscate-mail-links>
+
+  <!-- mandatory project logo
+       skin: forrest-site renders it at the top -->
+  <project-name>MyProject</project-name>
+  <project-description>MyProject Description</project-description>
+  <project-url>http://myproj.mygroup.org/</project-url>
+  <project-logo>images/project.png</project-logo>
+  <!-- Alternative static image:
+  <project-logo>images/project-logo.gif</project-logo> -->
+
+  <!-- optional group logo
+       skin: forrest-site renders it at the top-left corner -->
+  <group-name>MyGroup</group-name>
+  <group-description>MyGroup Description</group-description>
+  <group-url>http://mygroup.org</group-url>
+  <group-logo>images/group.png</group-logo>
+  <!-- Alternative static image:
+  <group-logo>images/group-logo.gif</group-logo> -->
+
+  <!-- optional host logo (e.g. sourceforge logo)
+       skin: forrest-site renders it at the bottom-left corner -->
+  <host-url></host-url>
+  <host-logo></host-logo>
+  
+  <!-- relative url of a favicon file, normally favicon.ico -->
+  <favicon-url></favicon-url>
+
+  <!-- The following are used to construct a copyright statement -->
+  <year>2005</year>
+  <vendor>The Acme Software Foundation.</vendor>
+  <!-- The optional copyright-link URL will used as a link in the
+    copyright statement
+  <copyright-link>http://www.apache.org/licenses/</copyright-link>
+  -->
+
+  <!-- Some skins use this to form a 'breadcrumb trail' of links.
+    If you don't want these, then set the attributes to blank.
+    The DTD purposefully requires them.
+    Use location="alt" to move the trail to an alternate location
+    (if the skin supports it).
+  -->
+  <trail>
+    <link1 name="myGroup" href="http://www.apache.org/"/>
+    <link2 name="myProject" href="http://forrest.apache.org/"/>
+    <link3 name="" href=""/>
+  </trail>
+
+  <!-- Configure the TOC, i.e. the Table of Contents.
+  @max-depth
+   how many "section" levels need to be included in the
+   generated Table of Contents (TOC). 
+  @min-sections
+   Minimum required to create a TOC.
+  @location ("page","menu","page,menu")
+   Where to show the TOC.
+  -->
+  <toc max-depth="2" min-sections="1" location="page"/>
+
+  <!-- Heading types can be clean|underlined|boxed  -->
+  <headings type="boxed"/>
+
+  <extra-css>
+    <!-- A sample to show how the class attribute can be used -->
+    p.quote {
+      margin-left: 2em;
+      padding: .5em;
+      background-color: #f0f0f0;
+      font-family: monospace;
+    }
+  </extra-css>
+
+  <colors>
+  <!-- CSS coloring examples omitted for brevity -->
+  </colors>
+ 
+  <!-- Settings specific to PDF output.  -->
+  <pdf>
+    <!-- 
+       Supported page sizes are a0, a1, a2, a3, a4, a5, executive,
+       folio, legal, ledger, letter, quarto, tabloid (default letter).
+       Supported page orientations are portrait, landscape (default
+       portrait).
+       Supported text alignments are left, right, justify (default left).
+    -->
+    <page size="letter" orientation="portrait" text-align="left"/>
+
+    <!--
+       Margins can be specified for top, bottom, inner, and outer
+       edges. If double-sided="false", the inner edge is always left
+       and the outer is always right. If double-sided="true", the
+       inner edge will be left on odd pages, right on even pages,
+       the outer edge vice versa.
+       Specified below are the default settings.
+    -->
+    <margins double-sided="false">
+      <top>1in</top>
+      <bottom>1in</bottom>
+      <inner>1.25in</inner>
+      <outer>1in</outer>
+    </margins>
+
+    <!--
+      Print the URL text next to all links going outside the file
+    -->
+    <show-external-urls>false</show-external-urls>
+  </pdf>
+
+  <!-- Credits are typically rendered as a set of small clickable
+    images in the page footer -->
+  <credits>
+    <credit>
+      <name>Built with Apache Forrest</name>
+      <url>http://forrest.apache.org/</url>
+      <image>images/built-with-forrest-button.png</image>
+      <width>88</width>
+      <height>31</height>
+    </credit>
+    <!-- A credit with @role='pdf' will have its name and url
+      displayed in the PDF page's footer. -->
+  </credits>
+
+</skinconfig>
+]]>
+        </source>
+        <p>
+          Customise this file for your project. The <code>images/</code>
+          directory mentioned in 'project-logo' and 'group-logo' elements
+          corresponds to the <code>src/documentation/resources/images</code>
+          directory (this mapping is done automatically by the sitemap).
+        </p>
+        <p>
+          Having edited this file (and ensured it is valid XML), re-run the
+          'forrest' command in the site root, and the site would be updated.
+        </p>
+      </section>
+      <section id="Changing_the_layout">
+        <title>Changing the layout: forrest.properties</title>
+        <p>
+          Forrest allows you to place files anywhere you want in your project,
+          so long as you tell Forrest where you have placed the major file
+          types.
+        </p>
+        <p>
+          The <code>forrest.properties</code> file maps from your directory
+          layout to Forrest's. If you generated your site with 'forrest seed',
+          you will have one pre-written, with all the entries commented out.
+        </p>
+        <note>
+          You only need to un-comment entries if you are going to change them to
+          something different. If you keep in synchronisation with the 'forrest
+          seed' defaults, then it is easy to diff each time that you update.
+        </note>
+        <p>
+          The main entries (with default values) are:
+        </p>
+        <source>
+# Properties that must be set to override the default locations
+#
+# Parent properties must be set. This usually means uncommenting
+# project.content-dir if any other property using it is uncommented
+
+#project.content-dir=src/documentation
+#project.conf-dir=${project.content-dir}/conf
+#project.sitemap-dir=${project.content-dir}
+#project.xdocs-dir=${project.content-dir}/content/xdocs
+#project.resources-dir=${project.content-dir}/resources
+#project.stylesheets-dir=${project.resources-dir}/stylesheets
+#project.images-dir=${project.resources-dir}/images
+#project.schema-dir=${project.resources-dir}/schema
+#project.skins-dir=${project.content-dir}/skins
+#project.skinconf=${project.content-dir}/skinconf.xml
+#project.lib-dir=${project.content-dir}/lib
+#project.classes-dir=${project.content-dir}/classes
+       </source>
+        <p>
+          For example, if you wish to keep XML documentation in src/xdocs rather
+          than <code>src/documentation/content/xdocs</code> simply change the
+          definition for project.xdocs-dir
+        </p>
+        <source>project.xdocs-dir=src/xdocs</source>
+        <p>
+          For example, to emulate the simple
+          <link href="http://maven.apache.org/">Maven</link> format:
+        </p>
+        <source>
+         /xdocs
+         /xdocs/images
+         /xdocs/stylesheets
+       </source>
+        <p>
+          Here are the required property definitions:
+        </p>
+        <source>
+project.content-dir=xdocs
+project.sitemap-dir=${project.content-dir}
+project.xdocs-dir=${project.content-dir}
+project.stylesheets-dir=${project.content-dir}/stylesheets
+project.images-dir=${project.content-dir}/images
+project.skinconf=${project.content-dir}/skinconf.xml
+         </source>
+<!-- FIXME: Does anyone know what this note means? -->
+        <note>
+          Internally, Forrest rearranges the specified directory into the
+          default <code>src/documentation/content/xdocs</code> structure. In the
+          layout above, we have overlapping directories, so you will end up with
+          duplicate files. This small glitch doesn't usually cause problems;
+          just always remember that all links are resolved through the sitemap.
+        </note>
+      </section>
+    </section>
+    <section id="adding_content">
+      <title>Adding content</title>
+      <p>
+        Now you can start adding content of your own, in
+        <code>src/documentation/content/xdocs</code>
+      </p>
+      <section id="site.xml">
+        <title>site.xml</title>
+        <p>
+          When adding a new xml document, you would add an entry to the
+          project's <code>site.xml</code> file. This site.xml is like a site
+          index, and is rendered as the vertical column of links in the default
+          skin. Look at Forrest's own xdocs for an example. More detailed info
+          about site.xml is provided in the document
+          <link href="site:linking">Menus and Linking</link>.
+        </p>
+      </section>
+      <section id="tabs.xml">
+        <title>tabs.xml</title>
+        <p>
+          The <code>tabs.xml</code> file is used to produce the 'tabs'. which
+          enable users to quickly jump to sections of your site. See the
+          <link href="site:menu_generation">menu generation</link> documentation
+          for more details, and again, consult Forrest's own docs for a usage
+          example.
+        </p>
+        <figure src="images/tabs.png" alt="Tabs"/>
+        <p>
+          You can have one or two levels of tabs. The images above show a single
+          level. However, you can create a second level that will only be
+          displayed when its parent tab is selected. For example, the
+          <code>tabs.xml</code> snippet below will display either one or two
+          rows of tabs, depending on which of the top level tabs is selected.
+          The first row will have two tabs: one labelled <code>How-Tos</code>
+          and the other labelled <code>Apache XML Projects</code>. When the
+          <code>How-Tos</code> tab is selected there will be no second row of
+          tabs. However, when the <code>Apache XML Projects</code> tab is
+          selected, a second row of tabs will be displayed below the first.
+        </p>
+        <source>
+<![CDATA[
+  <tab label="How-Tos" dir="community/howto/"/>
+  <tab label="Apache XML Projects" href="http://xml.apache.org">
+    <tab label="Forrest" href="http://forrest.apache.org/"/>
+    <tab label="Xerces" href="http://xml.apache.org/xerces"/>
+  </tab>
+]]>
+        </source>
+      </section>
+      <section id="images">
+        <title>Images</title>
+        <p>
+          Images usually go in the <code>resources/images/</code> directory. The
+          default sitemap maps this directory to <code>images/</code> so image
+          tags will typically look like <code>&lt;figure
+          src="images/project-logo.png" alt="Project Logo"/&gt;</code>
+        </p>
+      </section>
+    </section>
+    <section id="sitemap.xmap">
+      <title>Advanced customizations: sitemap.xmap</title>
+      <p>
+        The Cocoon sitemap is a set of rules for generating content (HTML, PDFs
+        etc) from XML sources. Forrest has a default sitemap, which is adequate
+        for everyday sites. For example, the <link href="site:forrest">Forrest
+        website</link> itself uses the default sitemap.
+      </p>
+      <p>
+        Sometimes, one needs to go beyond the default set of rules. This is
+        where Forrest really shines, because its Cocoon backend allows virtually
+        any processing pipeline to be defined. For example, one can:
+      </p>
+      <ul>
+        <li>Transform custom XML content types with XSLT stylesheets.</li>
+        <li>Generate PNG or JPEG images from 
+        <link href="http://www.w3.org/TR/SVG/">SVG</link> XML files.
+          (<strong>Note:</strong> Forrest's sitemap now does this natively.)</li>
+        <li>Integrate external XML feeds (e.g. RSS) into your site's content.
+          (<strong>Note:</strong> See issues.xmap for an example.)</li>
+        <li>Merge XML sources via aggregation, or make content from large XML
+          sources available as "virtual" files.
+          (<strong>Note:</strong> Forrest makes extensive use of aggregation
+          in the default sitemaps. It also defines a whole-site HTML
+          and PDF, available as the standard names <code>wholesite.html</code>
+          and <code>wholesite.pdf</code>.)</li>
+        <li>Read content from exotic sources like
+        <link href="http://www.rpbourret.com/xml/XMLDBLinks.htm">XML
+            databases</link>.</li>
+        <li>Integrate any of <link href="ext:cocoon">Cocoon's</link> vast array
+          of capabilities.  The possibilities are best appreciated by
+          downloading the latest Cocoon distribution and playing with the
+          samples.</li>
+      </ul>
+      <p>
+        The Forrest sitemaps are at <code>main/webapp/*.xmap</code>
+      </p>
+      <p>
+        You can add pre-processing sitemaps to your project
+        <code>src/documentation</code> directory (or wherever
+        <code>${project.sitemap-dir}</code> points to). Get a copy of a simple
+        sitemap.xmap from a 'forrest seed site'.
+      </p>
+      <p>
+        Any match that is not handled, passes through to be handled by the
+        default Forrest sitemaps - obviously extremely powerful. The capability
+        is described in "<link href="site:project-sitemap">Using project
+        sitemaps</link>" and some worked examples are shown in the following
+        sections here.
+      </p>
+      <note>
+        We advise you to spend time to understand the Apache Cocoon sitemap. See
+        <link href="ext:cocoon/sitemap">Cocoon sitemap</link> and
+        <link href="ext:cocoon/concepts">Cocoon concepts</link> and related
+        component documentation. The Forrest sitemap is broken into multiple
+        files. The main one is <strong>sitemap.xmap</strong> which delegates to
+        others. See the <link href="site:sitemap-ref">Sitemap Reference</link>
+        for a tour of the default sitemap.
+      </note>
+      <section id="adding_new_content_type">
+        <title>Example: Adding a new content type</title>
+        <p>
+          There are two methods for detecting types of documents and doing
+          special handling. The more complete solution is
+          <link href="#adding_new_content_type_2">described</link> in the
+          advanced section below. However, this basic method is also worth
+          understanding.
+        </p>
+        <p>
+          Follow this worked example. In a fresh directory do 'forrest seed'
+          then follow the steps described in this section.
+        </p>
+        <p>
+          An example scenario is that we have a specialised list of downloads
+          for a certain software package. It would be best to represent the
+          download information in a custom XML format. This means that it will
+          have its own document type declaration. We will need to detect this
+          new document type via our project sitemap and also provide a mapping
+          to a local copy of this DTD.
+        </p>
+        <source>
+<![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE document PUBLIC "-//Acme//DTD Download Documentation V1.0//EN"
+  "dtd/download-v10.dtd">
+<document> 
+  <header>
+    <title>Downloading Binaries</title>
+  </header>
+  <body>
+    <section id="download">
+      <title>Downloading binaries</title>
+      <p>
+        Here are the binaries for FooProject
+      </p>
+      <release version="0.9.13" date="2002-10-11">
+        <downloads>
+          <file
+            url="http://prdownloads.sf.net/aft/fooproj-0.9.13-bin.zip?download"
+            name="fooproj-0.9.13-bin.zip"
+            size="5738322"/>
+          <file
+            url="http://prdownloads.sf.net/aft/fooproj-0.9.13-src.zip?download"
+            name="fooproj-0.9.13-src.zip"
+            size="10239777"/>
+        </downloads>
+      </release>
+      <release version="0.9.12" date="2002-10-08">
+        <downloads>
+          <file
+            url="http://prdownloads.sf.net/aft/fooproj-0.9.12-src.zip?download"
+            name="fooproj-0.9.12-src.zip"
+            size="10022737"/>
+         </downloads>
+       </release>
+    </section>
+    <section id="cvs">
+      <title>Getting FooProject from CVS</title>
+      <p>....</p>
+    </section>
+  </body>
+</document>]]>
+        </source>
+        <p>
+          This file called "<code>download.xml</code>" would be placed in your
+          content directory (typically
+          <code>src/documentation/content/xdocs</code>) and an entry added to
+          <code>site.xml</code>
+        </p>
+        <p>
+          To handle these special tags, one would write a stylesheet to convert
+          them to the intermediate Forrest xdocs structure. Here is such a
+          stylesheet, called "<code>download-to-document.xsl</code>" ...
+        </p>
+        <source>
+<![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet
+  version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+  <xsl:template match="release">
+    <section id="{@version}">
+      <title>Version <xsl:value-of select="@version"/> (released
+          <xsl:value-of select="@date"/>)</title>
+      <table>
+        <tr><th>File</th><th>Size</th></tr>
+        <xsl:apply-templates select="downloads/*"/>
+      </table>
+    </section>
+  </xsl:template>
+
+  <xsl:template match="file">
+    <tr>
+      <td><link href="{@url}"><xsl:value-of select="@name"/></link></td>
+      <td><xsl:value-of
+           select="format-number(@size div (1024*1024), '##.##')"/> MB</td>
+    </tr>
+  </xsl:template>
+
+  <xsl:template match="@* | node() | comment()">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+      <xsl:apply-templates/>
+    </xsl:copy>
+  </xsl:template>
+
+</xsl:stylesheet>
+]]>
+        </source>
+        <p>
+          Place this file in the default stylesheets directory,
+          <code>src/documentation/resources/stylesheets</code> (or wherever
+          ${project.stylesheets-dir} points).
+        </p>
+        <p>
+          Now we will create a project sitemap to control the transformation of
+          our custom xml structure into the Forrest intermediate xdocs
+          structure.
+        </p>
+        <note>
+          The <link href="site:sitemap-ref">Sitemap Reference</link> provides
+          details about how the sitemap works.
+        </note>
+        <p>
+          Add the following match to the file
+          <code>src/documentation/sitemap.xmap</code> ...
+        </p>
+        <source>
+<![CDATA[<?xml version="1.0"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+ <map:pipelines>
+  <map:pipeline>]]>
+  ...
+  <strong>
+<![CDATA[
+   <map:match pattern="**download.xml">
+    <map:generate src="{properties:content.xdocs}{1}download.xml" />
+    <map:transform src="{properties:resources.stylesheets}/download-to-document.xsl" />
+    <map:serialize type="xml"/>
+   </map:match>
+]]></strong>
+<![CDATA[
+  </map:pipeline>
+ </map:pipelines>
+</map:sitemap>
+]]>
+        </source>
+        <p>
+          That will intercept the request for the body content, for only this
+          specific "download" document, and will transform it into the
+          intermediate Forrest "document" format. The normal Forrest machinery
+          will handle the aggregation with navigation menus etc. and will apply
+          the normal skin.
+        </p>
+        <section id="new_dtd">
+          <title>Registering a new DTD</title>
+          <p>
+            By default, Forrest requires that all XML files be valid, i.e. they
+            must have a DOCTYPE declaration and associated DTD, and validate
+            against it. Our new 'downloads' document type is no exception. The
+            <link href="site:validation">XML Validation</link> document
+            continues this example, showing how to register a new document type.
+            Briefly, this involves:
+          </p>
+          <ul>
+            <li>Create a new DTD or (in our case) extend an existing
+                   one.</li>
+            <li>Place the new DTD in the
+                   <code>${project.schema-dir}/dtd</code> directory.</li>
+            <li>Add an XML Catalog to enable a mapping from the
+                   DOCTYPE public id to the relevant DTD file.</li>
+            <li>Tell the system about your catalog.</li>
+          </ul>
+          <note>
+            Please see <link href="site:validation">XML Validation</link> for
+            the complete description for those steps.
+          </note>
+        </section>
+      </section>
+      <section id="adding_new_content_type_2">
+        <title>Example: Adding a new content type (advanced)</title>
+        <p>
+          The simple user sitemap in the previous example is fine for simple
+          situations. For a complete solution to the "Download DTD" issue we
+          need a more advanced sitemap which will do different processing
+          depending on the type of the source document.
+        </p>
+        <p>
+          We need to digress and explain the powerful
+          <link href="site:cap">SourceTypeAction (content aware
+          pipelines)</link>. It is a Cocoon sitemap component that peeks at the
+          top-part of a document to look for hints about the type of the
+          document. It has four methods: document-declaration, document-element
+          and namespace, processing-instruction, w3c-xml-schema.
+        </p>
+        <p>
+          Now to return to our specific example which uses SourceTypeAction to
+          detect the Document Type Declaration. Let us show the sitemap and then
+          explain it.
+        </p>
+        <source>
+<![CDATA[<?xml version="1.0"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+
+ <map:components>
+  <map:selectors default="parameter">
+   <map:selector logger="sitemap.selector.parameter"
+       name="parameter" src="org.apache.cocoon.selection.ParameterSelector" />
+  </map:selectors>
+  <map:actions>
+   <map:action logger="sitemap.action.sourcetype" name="sourcetype"
+       src="org.apache.forrest.sourcetype.SourceTypeAction">
+    <sourcetype name="download-v1.0">
+     <document-declaration
+        public-id="-//Acme//DTD Download Documentation V1.0//EN" />
+    </sourcetype>      
+    <sourcetype name="download-v1.1">
+     <document-declaration
+        public-id="-//Acme//DTD Download Documentation V1.1//EN" />
+    </sourcetype>      
+   </map:action>
+  </map:actions>
+ </map:components>
+
+ <map:pipelines>
+  <map:pipeline>
+   <map:match pattern="**download.xml">
+    <map:generate src="{properties:content.xdocs}{1}download.xml" />
+    <map:act type="sourcetype" src="{properties:content.xdocs}{1}download.xml">
+     <map:select type="parameter">
+      <map:parameter name="parameter-selector-test" value="{sourcetype}" />
+      <map:when test="download-v1.0">
+       <map:transform
+          src="{properties:resources.stylesheets}/download-to-document.xsl" />
+      </map:when>
+      <map:when test="download-v1.1">
+       <map:transform
+          src="{properties:resources.stylesheets}/downloadv11-to-document.xsl" />
+      </map:when>
+     </map:select>
+    </map:act>
+    <map:serialize type="xml"/>
+   </map:match>
+  </map:pipeline>
+ </map:pipelines>
+</map:sitemap>
+]]>
+        </source>
+        <p>
+          This is the type of processing that happens in the main
+          <code>main/webapp/forrest.xmap</code> sitemap. We have added similar
+          handling to our project sitemap. Basically, this uses the
+          <link href="site:cap">SourceTypeAction (content aware
+          pipelines)</link> to detect the doctype. The new document-v11.dtd
+          needs to be also added to your project Catalog as
+          <link href="#new_dtd">described above</link>.
+        </p>
+        <p>
+          Note that any sitemap component must be declared before it can be
+          used, because the project sitemap is the first sitemap to be
+          consulted.
+        </p>
+      </section>
+      <section id="integrating_rss">
+        <title>Example: integrating external RSS content</title>
+        <p>
+          Similar to the previous example, we can integrate RSS into our site
+          simply by providing a match in our project sitemap.xmap ...
+        </p>
+        <source>
+<![CDATA[<?xml version="1.0"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+ <map:pipelines>
+  <map:pipeline>]]><strong>
+<![CDATA[
+   <map:match pattern="**weblog.xml">
+    <map:generate src="http://blogs.cocoondev.org/stevenn/index.rss"/>
+    <map:transform src="{forrest:forrest.stylesheets}/rss-to-document.xsl"/>
+    <map:serialize type="xml"/>
+   </map:match>
+]]></strong>
+<![CDATA[
+   <map:match pattern=".......">
+    <!-- handle other project-specific matches -->
+   </map:match>
+  </map:pipeline>
+ </map:pipelines>
+</map:sitemap>
+]]>
+        </source>
+        <p>
+          You will probably want to copy the core Forrest
+          <code>rss-to-document.xsl</code> to your project, customise it to your
+          needs, and refer to it with
+          <code>src="{properties:resources.stylesheets}/rss-to-document.xsl"</code>.
+          Then of course you would add an entry to site.xml to link to
+          weblog.html
+        </p>
+      </section>
+    </section>
+    <section id="skins">
+      <title>Forrest skins</title>
+      <p>
+        As Forrest separates content from presentation, we can plug in different
+        "skins" to instantly change a site's look and feel. Forrest provides one
+        primary skin, <code>pelt</code>, and some others in various states of
+        development.
+      </p>
+      <p>
+        To change the skin, edit the <code>forrest.properties</code> file to set
+        <code>project.skin=pelt</code> or some other skin name. If running in
+        dynamic mode you need to restart Forrest in order to see the new skin.
+      </p>
+      <note>
+        Forrest supplies a collection of <link href="site:skins">default
+        skins</link> which are configurable and so should meet the needs of most
+        projects. The aim is to provide many capabilities so that extra skins
+        are not needed.
+      </note>
+      <section id="skin-configuration">
+        <title>Configuration of skins</title>
+        <p>
+          All configuration is done via your project
+          <code>src/documentation/skinconf.xml</code> file. It contains many
+          comments to describe each capability. Please read those, there is no
+          point repeating here.
+        </p>
+      </section>
+      <section id="new_skin">
+        <title>Defining a new skin</title>
+        <p>
+          Consider discussing your needs on the mailing lists. There may be
+          planned enhancements to the core skins. Also consider contributing
+          your extensions to the core skins, rather than write your own skin.
+          Bear in mind that you could be creating an update and management
+          issue. Anyway, ...
+        </p>
+        <p>
+          Projects can define their own skin in the
+          <code>src/documentation/skins</code> directory (or wherever
+          <code>${project.skins-dir}</code> points). The default sitemap assumes
+          a certain skin layout, so the easiest way to create a new skin is by
+          copying an existing Forrest skin. For example, copy
+          <code>main/webapp/skins/pelt</code> to your project area at
+          <code>src/documentation/skins/my-fancy-skin</code> and add
+          <code>project.skin=my-fancy-skin</code> to forrest.properties
+        </p>
+        <p>
+          The two most interesting XSLT stylesheets involved are:
+        </p>
+        <dl>
+          <dt><code>xslt/html/document-to-html.xsl</code></dt>
+          <dd>
+              This stylesheet is applied to individual Forrest xdocs XML files, and
+              converts them to HTML suitable for embedding in a larger HTML page.
+            </dd>
+          <dt><code>xslt/html/site-to-xhtml.xsl</code></dt>
+          <dd>
+              This stylesheet generates the final HTML file from an intermediate
+              'site' structure produced by the other stylesheets. It defines the general
+              layout, and adds the header and footer.
+            </dd>
+        </dl>
+        <p>
+          Typically there is a lot of commonality between skins. XSLT provides
+          an 'import' mechanism whereby one XSLT can extend another. Forrest
+          XSLTs typically 'import' from a common base:
+        </p>
+        <source>
+<![CDATA[
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+  <xsl:import href="../../../common/xslt/html/document-to-html.xsl"/>
+
+  ]]><strong>... overrides of default templates ...</strong>
+<![CDATA[ 
+</xsl:stylesheet>]]>
+        </source>
+        <p>
+          In order to use this feature in your custom skins you must copy the
+          common skin from the forrest distribution into your custom skins
+          directory (from <code>main/webapp/skins/common</code>). This will
+          protect your skin from changes in the Forrest common skin, but you
+          must remember to update this skin in order to take advantage of new
+          features added over time by the Forrest team.
+        </p>
+        <note>
+          The above paragraph means that if you do copy an existing skin as this
+          section recomends you will also need to copy the common skin since all
+          existing skins import the common skin.
+        </note>
+        <p>
+          This is particularly relevant for menu rendering (book-to-menu.xsl),
+          where the common stylesheet does the 'logic' of which item is
+          selected, and over-riding stylesheets define the presentation.
+        </p>
+      </section>
+    </section>
+    <section id="webapp">
+      <title>Interactive Forrest: faster turnaround when developing your docs</title>
+      <p>
+        In comparison to simpler tools (like
+        <link href="ext:anakia">Anakia</link>) the Cocoon command-line mode (and
+        hence Forrest command-line mode) is slow. As the
+        <link href="site:dreams">dream list</link> notes, Forrest was originally
+        intended to be used for dynamic sites, and the Cocoon crawler used only
+        to create static snapshots for mirroring. This section describes how, by
+        using a "live" Forrest webapp instance, the Forrest-based documentation
+        development can be faster and easier than with comparable tools.
+      </p>
+      <section id="forrest_run">
+        <title>Running as a webapp</title>
+        <p>
+          Type '<code>forrest run</code>' in your project root to start
+          Forrest's built-in Jetty web server. Once it has started, point your
+          browser at
+          <link href="http://localhost:8888/">http://localhost:8888/</link>,
+          which will show your website, rendered on demand as each link is
+          followed.
+        </p>
+        <p>
+          (Alternatively, if you wish to run Forrest from within an existing
+          servlet container, type <code>forrest webapp</code> to build an open
+          webapp in <code>build/webapp/</code>)
+        </p>
+        <section id="using_webapp">
+          <title>Using the webapp</title>
+          <p>
+            You can now edit the XML content in
+            <code>build/webapp/content/xdocs</code> and see the changes
+            immediately in the browser.
+          </p>
+        </section>
+      </section>
+    </section>
+    <section id="invoking_from_ant">
+      <title>Invoking Forrest from Ant</title>
+      <p>
+        Ant has an
+        <link href="http://ant.apache.org/manual/CoreTasks/import.html">&lt;import&gt;</link>
+        task which can be used to invoke Forrest from Ant. All targets and
+        properties are imported and can be used in your project build. Here is a
+        simple example:
+      </p>
+      <source>
+<![CDATA[
+<project name="myproject" default="hello">
+     <!-- FORREST_HOME must be set as an environment variable -->
+     <property environment="env"/>
+     <property name="forrest.home" value="${env.FORREST_HOME}"/>
+     <import file="${env.FORREST_HOME}/main/forrest.build.xml"/>
+
+     <!-- 'site' is a target imported from forrest.build.xml -->
+     <target name="post-build" depends="site">
+       <echo>something here</echo>
+     </target>
+</project>
+        ]]>
+      </source>
+      <warning>
+        See issue
+        <link href="http://issues.apache.org/jira/browse/FOR-145">FOR-145</link>
+        which causes clashes of Ant target names.
+      </warning>
+      <warning>
+        There is a bug in the plugin download mechanism in Forrest 0.7 that may
+        prevent your plugins being installed correctly when calling Forrest from
+        ANT. You can work around this bug by either ensuring a version number is
+        defined for the plugin in forrest.properties or by manually installing
+        the required plugins.
+      </warning>
+      <p>
+        Because you are using your own version of Ant to do Forrest's work, you
+        will need to provide the supporting catalog entity resolver: '<code>cp
+        forrest/lib/core/xml-commons-resolver-1.1.jar $ANT_HOME/lib</code>'
+      </p>
+      <p>
+        Note: The technique described above requires Ant 1.6+ otherwise the
+        &lt;import&gt; task will not be available for you to use. Forrest
+        bundles the latest version of Ant, so you can invoke your project like
+        this: '<code>forrest -f myproject.xml</code>'. This will not run the
+        '<code>forrest</code>' command. It will just use Forrest's Ant and
+        resolver to execute your buildfile.
+      </p>
+      <p>
+        Another option is to use the Forrest Antlet from the Krysalis Project's
+        <link href="http://antworks.sourceforge.net/importer/">Antworks
+        Importer</link>.
+      </p>
+      <p>
+        The <link href="site:forrestbot">Forrestbot</link> provides workstages
+        to get source, build, deploy, and notify. This is very useful for
+        automating builds; you may want to consider using the Forrestbot.
+      </p>
+    </section>
+  </body>
+</document>

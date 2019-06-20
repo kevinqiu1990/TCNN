@@ -1,0 +1,135 @@
+Lucene Benchmark Contrib Change Log
+
+The Benchmark contrib package contains code for benchmarking Lucene in a variety of ways.
+
+$Id:$
+
+9/9/08
+ LUCENE-1243: Added new sorting benchmark capabilities.  Also Reopen and commit tasks.  (Mark Miller via Grant Ingersoll)
+
+5/10/08
+  LUCENE-1090: remove relative paths assumptions from benchmark code.
+  Only build.xml was modified: work-dir definition must remain so  
+  benchmark tests can run from both trunk-home and benchmark-home.  
+  
+3/9/08
+  LUCENE-1209: Fixed DocMaker settings by round. Prior to this fix, DocMaker settings of 
+  first round were used in all rounds.  (E.g. term vectors.)
+  (Mark Miller via Doron Cohen) 
+
+1/30/08
+  LUCENE-1156: Fixed redirect problem in EnwikiDocMaker.  Refactored ExtractWikipedia to use EnwikiDocMaker.  Added property to EnwikiDocMaker to allow
+  for skipping image only documents.
+
+1/24/2008
+  LUCENE-1136: add ability to not count sub-task doLogic increment
+  
+1/23/2008
+  LUCENE-1129: ReadTask properly uses the traversalSize value
+  LUCENE-1128: Added support for benchmarking the highlighter
+
+01/20/08
+  LUCENE-1139: various fixes
+  - add merge.scheduler, merge.policy config properties
+  - refactor Open/CreateIndexTask to share setting config on IndexWriter
+  - added doc.reuse.fields=true|false for LineDocMaker
+  - OptimizeTask now takes int param to call optimize(int maxNumSegments)
+  - CloseIndexTask now takes bool param to call close(false) (abort running merges)
+
+
+01/03/08
+  LUCENE-1116: quality package improvements:
+  - add MRR computation; 
+  - allow control of max #queries to run;
+  - verify log & report are flushed.
+  - add TREC query reader for the 1MQ track.  
+      
+12/31/07
+  LUCENE-1102: EnwikiDocMaker now indexes the docid field, so results might not be comparable with results prior to this change, although
+  it is doubted that this one small field makes much difference.
+  
+12/13/07
+  LUCENE-1086: DocMakers setup for the "docs.dir" property
+  fixed to properly handle absolute paths. (Shai Erera via Doron Cohen)
+  
+9/18/07
+  LUCENE-941: infinite loop for alg: {[AddDoc(4000)]: 4} : *
+  ResetInputsTask fixed to work also after exhaustion.
+  All Reset Tasks now subclas ResetInputsTask.
+
+8/9/07
+  LUCENE-971: Change enwiki tasks to a doc maker (extending
+  LineDocMaker) that directly processes the Wikipedia XML and produces
+  documents.  Intermediate files (one per document) are no longer
+  created.
+
+8/1/07
+  LUCENE-967: Add "ReadTokensTask" to allow for benchmarking just tokenization.
+
+7/27/07
+  LUCENE-836: Add support for search quality benchmarking, running 
+  a set of queries against a searcher, and, optionally produce a submission
+  report, and, if query judgements are available, compute quality measures:
+  recall, precision_at_N, average_precision, MAP. TREC specific Judge (based 
+  on TREC QRels) and TREC Topics reader are included in o.a.l.benchmark.quality.trec
+  but any other format of queries and judgements can be implemented and used.
+  
+7/24/07
+  LUCENE-947: Add support for creating and index "one document per
+  line" from a large text file, which reduces per-document overhead of
+  opening a single file for each document.
+
+6/30/07
+  LUCENE-848: Added support for Wikipedia benchmarking.
+
+6/25/07
+- LUCENE-940: Multi-threaded issues fixed: SimpleDateFormat; logging for addDoc/deleteDoc tasks.
+- LUCENE-945: tests fail to find data dirs. Added sys-prop benchmark.work.dir and cfg-prop work.dir.
+(Doron Cohen)
+
+4/17/07
+- LUCENE-863: Deprecated StandardBenchmarker in favour of byTask code.
+  (Otis Gospodnetic)
+
+4/13/07
+
+Better error handling and javadocs around "exhaustive" doc making.
+
+3/25/07
+
+LUCENE-849: 
+1. which HTML Parser is used is configurable with html.parser property.
+2. External classes added to classpath with -Dbenchmark.ext.classpath=path.
+3. '*' as repeating number now means "exhaust doc maker - no repetitions".
+
+3/22/07
+
+-Moved withRetrieve() call out of the loop in ReadTask
+-Added SearchTravRetLoadFieldSelectorTask to help benchmark some of the FieldSelector capabilities
+-Added options to store content bytes on the Reuters Doc (and others, but Reuters is the only one w/ it enabled)
+
+3/21/07
+
+Tests (for benchmarking code correctness) were added - LUCENE-840.
+To be invoked by "ant test" from contrib/benchmark. (Doron Cohen)
+
+3/19/07
+
+1. Introduced an AbstractQueryMaker to hold common QueryMaker code. (GSI)
+2. Added traversalSize parameter to SearchTravRetTask and SearchTravTask.  Changed SearchTravRetTask to extend SearchTravTask. (GSI)
+3. Added FileBasedQueryMaker to run queries from a File or resource. (GSI)
+4. Modified query-maker generation for read related tasks to make further read tasks addition simpler and safer. (DC)
+5. Changed Taks' setParams() to throw UnsupportedOperationException if that task does not suppot command line param. (DC)
+6. Improved javadoc to specify all properties command line params currently supported. (DC)
+7. Refactored ReportTasks so that it is easy/possible now to create new report tasks. (DC)
+
+01/09/07
+
+1. Committed Doron Cohen's benchmarking contribution, which provides an easily expandable task based approach to benchmarking.  See the javadocs for information. (Doron Cohen via Grant Ingersoll)
+
+2. Added this file.
+
+3. 2/11/07: LUCENE-790 and 788:  Fixed Locale issue with date formatter. Fixed some minor issues with benchmarking by task.  Added a dependency
+ on the Lucene demo to the build classpath.  (Doron Cohen, Grant Ingersoll)
+
+4. 2/13/07: LUCENE-801: build.xml now builds Lucene core and Demo first and has classpath dependencies on the output of that build.  (Doron Cohen, Grant Ingersoll)

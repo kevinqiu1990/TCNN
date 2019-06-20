@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE howto PUBLIC "-//APACHE//DTD How-to V2.0//EN"
+"http://forrest.apache.org/dtd/howto-v20.dtd">
+<howto>
+  <header>
+    <title>How to Participate in Forrest Tuesday Events</title>
+    <version>0.1</version>
+    <abstract></abstract>
+    <last-modified-content-date date="2005-07-18" />
+  </header>
+  <audience title="Intended Audience">
+    <p>
+      Developers wanting to participate in the collaborative meetings known as
+      "Forrest Tuesday". Users interested in what goes on at these events.
+    </p>
+    <warning>
+      This is a document written whilst testing the Gobby software. It is
+      included here for reference only. Gobby is not currently the preferred
+      choice of communication media for Forrest Tuesdays, we still use IRC at
+      this time.
+    </warning>
+  </audience>
+  <purpose title="Purpose">
+    <p>
+      On the first Tuesday of each month we have a 24-hour get-together using
+      the dev mailing list, Internet Relay Chat (IRC), and other collaborative
+      tools, to work on Forrest development and get to know each other.
+    </p>
+    <p>
+      We exploring the use of a <a href="http://gobby.0x539.de">Gobby</a>, a
+      collaborative editor, to assist in focused development tasks. This HowTo
+      will show you how.
+    </p>
+    <p>
+      ForrestTuesday starts at 06:00 UTC (6am Greenwich Mean Time in London) and
+      lasts for 24 hours.
+    </p>
+  </purpose>
+  <prerequisites title="Prerequisites">
+    <p>
+      You will not need anything more than knowledge of how to install software
+      on your computer. You will also need an Internet connection to participate
+      in the meetings.
+    </p>
+  </prerequisites>
+  <steps title="Steps">
+    <section id="preparation">
+      <title>Perparing for Participation</title>
+      <section id="gobby">
+        <title>What is Gobby?</title>
+        <p>
+          From the <a href="http://gobby.0x539.de">Gobby web site</a>:
+        </p>
+        <p>
+          <em> Gobby is a free collaborative editor based on libobby, a library
+          which provides synced document buffers. It supports multiple documents
+          in one session and a multi-user chat. It runs on Microsoft Windows,
+          Mac OS X, Linux and other Unix-like platforms. </em>
+        </p>
+        <p>
+          You can see some of its
+          <a href="http://gobby.0x539.de/features.html">features</a>. People
+          interested in the technical details of how Gobby works should read
+          <a href="http://darcs.0x539.de/trac/obby/cgi-bin/trac.cgi/wiki/ObbyInternals">this
+          document</a>.
+        </p>
+      </section>
+      <section id="software">
+        <title>Installing Required Software</title>
+        <p class="instruction">
+          Download Gooby from Gobby's web site
+          (http://gobby.0x539.de/download.html). If you use one of the popular
+          Linux distributions, chances are that Gobby is already available as a
+          binary package for you. Debian/Ubuntu users, for instance, can simply
+          <code>apt-get install gobby</code>.
+        </p>
+      </section>
+      <section id="session">
+        <title>Creating a Collaborative Session</title>
+        <p>
+          When you first fire up Gobby, you will be presented with a blank
+          screen with a toolbar on the top. Click on "Create Session" to host a
+          session. If you need to join an existing session, click "Join session"
+          instead.
+        </p>
+        <p>
+          To create a session, you need a computer connected to the Internet and
+          you need to know its IP address. On Linux, this can be obtained with a
+          <code>ifconfig -a</code>. On windows, try doing <code>ipcongfig
+          /all</code>. For most cases, leaving the port values at default should
+          be sufficient. Once you have specified the IP address and the name of
+          the session, click "Create".
+        </p>
+        <p>
+          There is an early version of a server available for Gobby. This allows
+          you to run a (semi-)permanent server. It is currently only available
+          for linux.
+        </p>
+      </section>
+    </section>
+    <section id="participation">
+      <title>Participating in a Forrest Tuesday event</title>
+      <section id="login">
+        <title>Logging in to the session</title>
+        <p>
+          To join a Gobby session, click on "Join session" on the toolbar. You
+          will need to know the IP address of the machine the session is being
+          hosted at. In the "Name" field, just put in your name. Choose a color
+          (which you can change later) and click OK. You will then be prompted
+          for the session password before joining.
+        </p>
+        <p>
+          When you first enter the Gobby session, if a document is already open,
+          you will be informed the document exists but that you are not
+          currently subscribed to it. There will be a "Subscribe" button below
+          this notice that will give you access to the document once clicked.
+          Documents that are created or opened during the session will also need
+          to be subscribed to in a similar manner.
+        </p>
+      </section>
+      <section id="discussion">
+        <title>Using Chat for Discussion</title>
+        <p>
+          Gobby has a chat session at the bottom of the window. This can be used
+          to discuss what needs to be done and who is going to be doing it. Here
+          is an (edited) chat session log from when this document was written.
+        </p>
+        <source>
+<![CDATA[
+[22:24:16] <addi> we should also make note about the preferences
+[22:24:40] <addi> in the editor
+[22:25:02] <addi> tab width, tab spaces, etc
+[22:25:30] <Ross> +1, are you going to do that?
+[22:25:39] <diwaker> I am
+[22:25:58] <diwaker> under FAQ
+[22:26:07] <addi> ok
+        ]]>
+        </source>
+        <source>
+<![CDATA[
+[22:26:38] <Ross> Note that the last sections of this document are cut and paste from the how-to-howto
+[22:26:46] <Ross> feel free to delete irrelevant content
+]]>
+        </source>
+        <source>
+<![CDATA[
+[22:29:52] <Ross> Do either of you have a problem with me putting some
+[22:30:04] <Ross> of the content from the chat log in section <section id="discussion">
+[22:30:18] <addi> nope, fine with me
+        ]]>
+        </source>
+        <source>
+<![CDATA[
+[22:41:47] <diwaker> hey do we have a blockquote/cite element in the v20 dtd?
+[22:42:01] <diwaker> i can't seem to find one
+[22:42:26] <diwaker> tip: the text entry widget has history (if you press Up, you can see earlier messages)
+[22:46:07] <Ross> There is no blockquote.cite element
+[22:46:24] <Ross> there may be a class in the CSS (<p class="cite"> or similar)
+        ]]>
+        </source>
+      </section>
+      <section id="authoring">
+        <title>Using Gobby for Collaborative Authoring</title>
+        <p>
+          Gobby uses colors to identify the edits being done by participants. In
+          order to make it easier to follow whats going on, its a good idea to
+          choose visibly distinct colors. While joining a session, if you choose
+          a color thats already in use by someone else, Gobby will refuse to
+          connect to the session. Just choose some color that gets you in,
+          because you can always change your color later on while a session is
+          in progress (see "Set Color" under the "User" menu item).
+        </p>
+        <warning>
+          If you close a document it closes for everyone, and remote users are
+          not given the option to save any changes. So think carefully before
+          closing anything. Generally speaking you should not close a document
+          without asking all participants first.
+        </warning>
+      </section>
+    </section>
+    <section id="wrapup">
+      <title>Wrapping up</title>
+      <section id="closingSession">
+        <title>Closing the Session</title>
+        <p>
+          To close, or leave a session, simply click on the "Quit Session"
+          button in the toolbar. Be sure to save the files before doing so,
+          especially if you "own" the file.
+        </p>
+        <p>
+          Note that the host must be careful not to quit the session until all
+          participants ahve finished their work. It is a good idea to use chat
+          to ensure everyone is done, alternatively, you could leave the session
+          open until everyone else has quit.
+        </p>
+        <warning>
+          With the current version of Gobby (0.2.2) if any user leaves a session
+          the document is closed in all remaining users sessions. Any unsaved
+          changes are lost. Do not leave a session without agreeing to do so
+          with all other participants.
+        </warning>
+      </section>
+      <section id="logs">
+        <title>Recording the logs</title>
+        <note>
+          At this point, we're not very sure if Gobby stores the chat logs
+          somewhere on disk (we were not able to locate them). If you know the
+          location of the logs, please let us know.
+        </note>
+      </section>
+      <section id="commit">
+        <title>Committing Documents to SVN</title>
+        <p>
+          Any user can save a copy of a file being edited locally. However, it
+          is recomended that someone be nominated as the person responsible for
+          committing the file to SVN at the end of the session.
+        </p>
+        <p>
+          As mentioned before, the person responsible for committing should make
+          sure that the document is properly formatted before committing.
+        </p>
+      </section>
+    </section>
+  </steps>
+<!--
+  <extension title="Extension">
+    <p>Solutions can be extended to cover many different problem domains. A
+    nearly unlimited number of potential How-To topics, from simple to
+    complex, are available right now, limited only by your imagination.</p>
+  </extension>
+-->
+  <faqs id="faqs">
+    <title>Frequently Asked Questions</title>
+    <faqsection id="faq-general">
+      <title>General issues</title>
+      <faq id="faq-difference">
+        <question>What is the difference between a How-To and a
+        tutorial?</question>
+        <answer>
+          <p>
+            The goal of a How-To is to help the reader to accomplish a specific
+            task with clear and consise instructions. While tutorials may
+            contain How-To-like instructions and content, they also include
+            additional background and conceptual content to help teach their
+            readers higher order concepts along the way. How-Tos are concerned
+            about filling an immediate, short-term need. Tutorials often provide
+            long-term knowledge which can be applied across a range of needs.
+          </p>
+        </answer>
+      </faq>
+    </faqsection>
+    <faqsection id="faq-style">
+      <title>Style issues</title>
+      <faq id="coding">
+        <question>What coding convention should I follow?</question>
+        <answer>
+          <p>
+            Gobby is a good collaborative editor, but not a very good editor. It
+            allows minimalistic configuration flexibility for editing. For Gobby
+            sessions, it is sufficient to choose a convention and stick with it.
+            For instance, using 4 spaces for a tab indent, and using spaces to
+            fill up the tabs -- this can be done through the "Preferences" item
+            under the "Edit" menu.
+          </p>
+          <p>
+            The nominated committer should make sure that the document is
+            properly formatted before committing to SVN.
+          </p>
+          <note>
+            The current version of Gobby is 0.2.2, hopefully the editor will
+            improve.
+          </note>
+        </answer>
+      </faq>
+      <faq id="spelling">
+        <question>What spelling convention should I follow?</question>
+        <answer>
+          <p>
+            Use whatever spelling convention (American, British, etc.) that is
+            most intuitive to you.
+          </p>
+        </answer>
+      </faq>
+    </faqsection>
+  </faqs>
+  <tips title="Tips">
+    <section id="tip-jotlive">
+      <title>Collaborative Note Taking</title>
+      <p>
+        <a href="http://www.jotlive.com">JotLive</a> is a nice little web-app
+        for taking notes collaboratively. Its almost like Gobby (each user has a
+        different color, you can see the edits in <em>real time</em>), except
+        that its web based. From the same folks who did
+        <a href="http://jot.com">Jotspot</a>.
+      </p>
+    </section>
+    <section id="editing-tips">
+      <title>Editing Tips</title>
+      <section>
+        <title>Is Anyone Editing?</title>
+        <p>
+          A quick way to see if someone is currently working on a document is to
+          look at the revision number in the status bar. This number will
+          increase by one with each keypress.
+        </p>
+      </section>
+    </section>
+    <section id="chat-tips">
+      <title>Chat Tips</title>
+      <section>
+        <title>History</title>
+        <p>
+          The text entry widget (where you type for chat) can show you an
+          editable history of your previous entries by hitting the up arrow on
+          your keyboard. This functions much like the up arrow key in a Linux
+          terminal.
+        </p>
+      </section>
+    </section>
+<!--
+     <section id="tip-dtd">
+      <title>How-To dtd</title>
+
+      <p>The document structure is likely to change at some time. Please note that
+      this HOWTO page is likely to change as well.</p>
+    </section>
+    -->
+  </tips>
+<!--
+  <references title="References">
+    <p>This is not the first, nor will it be the last, How-To on writing
+    How-Tos. For other ideas and opinions on the matter, check out the
+    following sources.</p>
+  </references>
+-->
+</howto>

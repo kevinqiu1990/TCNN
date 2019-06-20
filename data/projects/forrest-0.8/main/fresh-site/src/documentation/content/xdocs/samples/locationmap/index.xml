@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Locationmaps</title>
+  </header>
+  <body>
+    <section id="overview">
+      <title>About Locationmaps</title>
+      <p>
+        A locationmap defines a mapping from requests to location strings.
+      </p>
+      <p>
+        It was conceived to:
+      </p>
+      <ul>
+        <li>Provide a more powerful means for semantic linking.</li>
+        <li>Enable Forrest with a standard configuration override mechanism.</li>
+        <li>decouple the conceptual source space used by Cocoon from
+        the concrete source space, so that a change in the concrete sources
+        does not impact on the sitemap</li>
+      </ul>
+      <p>
+        The syntax of a locationmap resembles that of the sitemap in that it
+        also makes use of Matchers and Selectors to traverse a tree of nodes
+        towards a leaf. In the case of the locationmap however the leaf does not
+        identify a pipeline but instead identifies a location string.
+      </p>
+    </section>
+    <section id="examples">
+      <title>Locationmap Examples</title>
+      <section>
+        <title>Retrieving an XDoc via HTTP</title>
+        <p>
+          Normally files are generated from
+          <code>{properties:content.xdocs}</code>. Using the Locationmap it is
+          possible to make these files come from elsewhere. This is useful if
+          you want to pull files from different directory structures, oe even
+          remote repositories.
+        </p>
+        <p>
+          The target of "/remote.**.html" is generated from a source retrieved
+          from the Forrest SVN.
+        </p>
+        <note>
+          Because the above URL retrieves the source file from SVN it will only
+          work if you are online. For this reason we have not enabled this link
+          as it would stop you building this site offline. However, if you are
+          online you can enter the URL into the browser and it will work
+          (however, note the issue described below, regarding the site: and ext:
+          protocols).
+        </note>
+        <p>
+          Go to <code>http://localhost:8888/remote.index.html</code> which will
+          virtually re-load this page. However, rather than use the local xml
+          source, the locationamp has retrieved the up-to-date source directly
+          from the svn server. Similarly
+          <code>http://localhost:8888/remote.samples/index.html</code>
+        </p>
+        <p>
+          The match in src/documentation/content/locationmap.xml for this demo
+          is ...
+        </p>
+        <source>
+ &lt;match pattern="project.remote.**.xml"&gt;
+   &lt;location src="http://svn.apache.org/repos/asf/forrest/trunk/main/fresh-site/src/documentation/content/xdocs/{1}.xml" /&gt;
+ &lt;/match&gt;
+        </source>
+        <p>
+          Since we are using the locationmap naming convention, our new match
+          get resolved via the core forrest.xmap and we do not have to change
+          any other files.
+        </p>
+        <source>
+<![CDATA[
+<map:match pattern="**.xml">
+  <map:generate src="{lm:project.{0}}"/>
+  <map:serialize type="xml"/>
+</map:match>
+]]>
+        </source>
+        <p>
+          Note that because this is a wildcard matcher you can request any page
+          from SVN simply by requesting
+          <code>/remote.PATH/TO/FILE/FILENAME.html</code>. In addition, we can
+          request any other output format available via Forrest plugins.
+        </p>
+        <p>
+          When including resources from remote repositories one has to be
+          careful about things like <code>site:</code> and <code>ext:</code>
+          linking. If the targets are not defined in the local
+          <code>site.xml</code> file then these links will be broken, which is
+          the normal situation.
+        </p>
+      </section>
+      <section>
+        <title>Link Rewriting</title>
+        <p>
+          The locationmap can be used to rewrite URLs when the page is
+          generated. For example, when the locationmap has:
+        </p>
+        <source>
+ &lt;match pattern="project.rewrite.**"&gt;
+   &lt;location src="http://cocoon.apache.org/{1}.html" /&gt;
+ &lt;/match&gt;
+        </source>
+        <p>
+          <a href="lm:rewrite.index">This link is rewritten to an offsite
+          address</a> not specified in the link, which has
+          <code>href="lm:rewrite.index"</code>.
+        </p>
+      </section>
+    </section>
+  </body>
+</document>

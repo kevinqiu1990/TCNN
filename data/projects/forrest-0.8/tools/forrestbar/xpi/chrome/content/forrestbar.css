@@ -1,0 +1,111 @@
+/*
+* Licensed to the Apache Software Foundation (ASF) under one or more
+* contributor license agreements.  See the NOTICE file distributed with
+* this work for additional information regarding copyright ownership.
+* The ASF licenses this file to You under the Apache License, Version 2.0
+* (the "License"); you may not use this file except in compliance with
+* the License.  You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+*.forrestbar {
+  font-family: tahoma,verdana;
+  font-size: 11px;
+  padding: 1px 0px 1px 6px;
+  margin: 0px 1px 0px 1px;
+}
+
+textbox.forrestbar {
+  font-size: 11px;
+  padding: 2px;
+}
+
+image.forrestbar {
+  border: 0px;
+  margin: 0px 0px 0px 0px;
+}
+
+image#forrestbar-logo {
+  list-style-image: url("images/apache-down.png");
+}
+
+
+#forrestbar-community:hover  {
+  list-style-image: url("images/apache-down.png");
+}
+#forrestbar-community {
+  list-style-image: url("images/apache.png");
+}
+
+#forrestbar-search:hover {
+  list-style-image: url("images/search-down.png");
+}
+#forrestbar-search {
+  list-style-image: url("images/search.png");
+}
+
+#forrestbar-news:hover {
+  list-style-image: url("images/news-down.png");
+}
+#forrestbar-news {
+  list-style-image: url("images/news.png");
+}
+
+#forrestbar-code:hover {
+  list-style-image: url("images/code-down.png");
+}
+#forrestbar-code {
+  list-style-image: url("images/code.png");
+}
+
+#forrestbar-download:hover {
+  list-style-image: url("images/download-down.png");
+}
+#forrestbar-download {
+  list-style-image: url("images/download.png");
+}
+
+#forrestbar-tools:hover {
+  list-style-image: url("images/tools-down.png");
+}
+#forrestbar-tools {
+  list-style-image: url("images/tools.png");
+}
+
+#forrestbar-faqs:hover {
+  list-style-image: url("images/faq-down.png");
+}
+#forrestbar-faqs {
+  list-style-image: url("images/faq.png");
+}
+
+#forrestbar-gump-nightly:hover {
+  list-style-image: url("images/gump-down.png");
+}
+#forrestbar-gump-nightly {
+  list-style-image: url("images/gump.png");
+}
+
+#forrestbar-local-forrest:hover {
+  list-style-image: url("images/forrest-down.png");
+}
+
+#forrestbar-local-forrest {
+  list-style-image: url("images/forrest.png");
+}
+
+#forrestbar-projects:hover {
+  list-style-image: url("images/projects-down.png");
+}
+#forrestbar-projects {
+  list-style-image: url("images/projects.png");
+}
+
+
+

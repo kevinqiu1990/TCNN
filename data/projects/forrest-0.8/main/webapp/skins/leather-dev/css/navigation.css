@@ -1,0 +1,204 @@
+/*
+* Licensed to the Apache Software Foundation (ASF) under one or more
+* contributor license agreements.  See the NOTICE file distributed with
+* this work for additional information regarding copyright ownership.
+* The ASF licenses this file to You under the Apache License, Version 2.0
+* (the "License"); you may not use this file except in compliance with
+* the License.  You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+/**
+ * Navigation menus
+ */
+/*
+#nav-main
+Main or primary navigation AKA tabs.
+*/
+/*
+#nav-main-sub
+Secondary navigation AKA level2.
+*/
+#nav {
+clear:both;
+font-size : 75%;
+bottom:0;
+}
+
+#nav-main {
+list-style: none;
+padding-left: 10px;
+margin: 0;
+}
+
+#nav-main li {
+float: left;
+background-image: url(images/rc-t-r-5-1header-2tab-unselected-3tab-unselected.png);
+background-repeat: no-repeat;
+background-position: top right;
+background-color: #ccc;
+margin: 0 3px 0 0;
+padding: 0;
+}
+
+#nav-main li a {
+float: left;
+display: block;
+font-family: verdana, arial, sans-serif;
+/*text-transform: uppercase;*/
+text-decoration: none;
+color: black;
+white-space: nowrap;
+background-image: url(images/rc-t-l-5-1header-2tab-unselected-3tab-unselected.png);
+background-repeat: no-repeat;
+background-position: top left;
+padding: 5px 15px 4px;
+width: .1em; /* IE/Win fix */
+}
+
+#nav-main > li a { width: auto; } /* Rest of IE/Win fix */
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#nav-main a { float: none; }
+/* End IE5-Mac hack */
+
+#nav-main .current {
+/*Main or primary navigation that is currently selected.
+*/
+background-color: #4C6C8F;
+background-image: url(images/rc-t-r-5-1header-2tab-selected-3tab-selected.png);
+background-repeat: no-repeat;
+background-position: top right;
+}
+
+#nav-main .current a {
+font-weight: bold;
+padding-bottom: 5px;
+color: white;
+background-image: url(images/rc-t-l-5-1header-2tab-selected-3tab-selected.png);
+background-repeat: no-repeat;
+background-position: top left;
+}
+
+#nav-main-sub {
+padding-left: 25px;
+margin: 0;
+float:left; 
+position:relative;
+}
+
+#nav-section a {  
+color: black;
+font-weight: normal;
+}
+
+#nav-section a:visited {  
+color: black;
+font-weight: normal; 
+}
+
+#nav-section a:active {  
+color: black;
+font-weight: normal; 
+}
+
+#nav-section a:hover {  
+color: black;
+font-weight: normal; 
+}
+
+#nav-section {
+/*Navigation to pages within the current site section AKA menu.
+*/
+position: relative;
+float: left;
+width: 160px;
+padding-top: 0px;
+top:-17px; 
+left:10px; 
+z-index: 20;
+background-color: #4C6C8F;
+font-size : 70%;
+}
+
+#nav-section .roundbottom {
+padding-bottom: 5px;
+}
+
+.nav-section-title { 
+/*Navigation title within the current site section.
+*/
+cursor:pointer;
+padding: 3px 12px;
+margin: 0px 10px; 
+font-weight : bold;
+background-color: #7099C5;
+}
+
+#nav-section .menuitemgroup { 
+margin: 0px 10px 6px 10px; 
+padding: 0px;  
+font-weight : bold; 
+background-color: #ccc;
+}
+        
+#nav-section .currentmenuitemgroup{ 
+margin: 0px 10px 6px 10px; 
+padding: 2px;  
+font-weight : bold; 
+background-color: #ccc;
+}
+
+#nav-section .menuitem { 
+padding: 0px 0px 2px 12px;  
+background-image: url('images/page.gif');
+background-repeat: no-repeat;
+background-position: center left;
+font-weight : normal; 
+margin-left: 10px;
+margin-right: 10px;
+}
+
+#nav-section .menupage { 
+margin: 5px 0px 5px 10px; 
+padding: 0px 3px 0px 12px;  
+background-image: url('images/current.gif');
+background-repeat: no-repeat;
+background-position: top left;
+font-style : normal;
+}
+
+#nav-section .menupagetitle { 
+padding: 0px 0px 0px 6px;     
+font-style : normal;
+border-style: solid; 
+border-width: 1px;
+margin-right: 10px;
+background-color: #CFDCED;
+}
+
+#nav-section .menupageitemgroup { 
+padding: 3px 0px 4px 6px;    
+font-style : normal;
+border-bottom: 1px solid ;
+border-left: 1px solid ;
+border-right: 1px solid ;
+margin-right: 10px;
+background-color: #fff#CFDCED;
+}
+
+#nav-section .menupageitem {     
+font-style : normal;
+font-weight : normal; 
+border-width: 0px;
+font-size : 90%;
+}
+
+#nav-section #credit {
+text-align: center;  
+}

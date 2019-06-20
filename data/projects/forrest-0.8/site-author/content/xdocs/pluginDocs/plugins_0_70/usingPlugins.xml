@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Extending Forrest with Plugins</title>
+  </header>
+  <body>
+    <section id="overview">
+      <title>Overview</title>
+      <p>
+        Forrest provides the core functionality for generating documentation in
+        various output formats from a range of input formats. However, it does
+        not end there. Forrest can be extended through the addition of plugins.
+        This document serves as an introduction to the Forrest plugin mechanism.
+      </p>
+      <section>
+        <title>What plugins are available?</title>
+        <p>
+          You can run the command <code>forrest available-plugins</code> to get
+          a list of the known plugins for Forrest.
+        </p>
+        <p>
+          If you would like to have your own plugin added to this list then
+          contact the <a href="site:mail-lists">developer mailing list</a>.
+        </p>
+      </section>
+    </section>
+    <section>
+      <title>How is a Plugin Installed?</title>
+      <p>
+        If a site requires one or more plugins then the site designer will have
+        named them in the <code>project.required.plugins</code> property in the
+        projects <code>forrest.properties</code> file. When Forrest builds the
+        site it will automatically discover the plugin and install it. In
+        otherwords, the user need do nothing. For example,
+        <code>project.required.plugins=org.apache.forrest.plugin.input.OpenOffice.org,org.apache.forrest.plugin.input.simplifiedDocbook</code>
+        will cause Forrest to load the plugins called
+        "org.apache.forrest.plugin.input.OpenOffice.org" and
+        "org.apache.forrest.plugin.input.simplifiedDocbook".
+      </p>
+      <p>
+        In the absence of a version number for the plugin (as is the case in the
+        examples above) the most recent version that is applicabe to your
+        release of Forrest will be used. This may result in unexpected behaviour
+        if a new version of the plugin has been released that is incompatible
+        with your current site. To force Forrest into using a specific version
+        of a plugin you shuld add "-VERSION_NUMBER" to the end of the plugin
+        name. For example, to force forrest to use the 1.0 version of the
+        OpenOffice.org plugin you would use
+        <code>org.apache.forrest.plugin.input.OpenOffice.org-1.0</code> If you
+        define a version of the plugin that does not exist then it will fall
+        back to using the most recent version avialable. This feature is useful
+        when developing a new site as you can quickly force a plugin upgrade by
+        deleting all installed plugins (use the command 'ant cleanPlugins').
+        However, this might result in the installation of an in-development
+        plugin, therefore in a production environment you should always specify
+        a known working version.
+      </p>
+      <p>
+        By default a new forrest project includes plugins to generate PDF output
+        from your source documents.
+      </p>
+      <section>
+        <title>Upgrading from a Version of Forrest Without Plugins</title>
+        <p>
+          The plugin functionality was introduced in version 0.7 of Forrest. At
+          this time some of the functionality previously in Forrest was
+          extracted into a plugin. However, we have not broken backward
+          compatability with earlier versions. In the absence of a
+          <code>project.required.plugins</code> property in the projects
+          <code>forrest.properties</code> file all plugins that contain
+          functionality previously part of Forrest itself will be loaded
+          automatically. Unless you intend to use new functionality provided by
+          a plugin you will not need to make any changes top your project.
+        </p>
+        <p>
+          If you do require additional plugin functionality, be sure to include
+          all required plugins in the <code>project.required.plugins</code>
+          property in the project's <code>forrest.properties</code>. You can
+          view <code>main/webapp/default-forrest.properties</code> to see the
+          names of plugins that provide previously core functionality.
+        </p>
+        <p>
+          It is also worth noting that there is a small performance improvement
+          if you remove plugins that are not in use. Therefore, if you do not
+          use one or more of the plugins named in the
+          <code>project.required.plugins</code> property of
+          <code>main/webapp/default-forrest.properties</code> it is recomended
+          that you override this value in your project's
+          <code>forrest.properties</code> file.
+        </p>
+      </section>
+    </section>
+    <section>
+      <title>Avoiding Plugin Conflicts</title>
+      <p>
+        Clashes between plugins can occur. For example, the simplified-docbook
+        and full docbook plugins may try and process the same files. In this
+        instance the one that is mounted first will take precedence. Plugins are
+        mounted in the order they appear in the
+        <code>project.required.plugins</code> property, therefore the mounting
+        order and therefore processing precedence is under user control.
+      </p>
+    </section>
+    <section>
+      <title>Further Reading</title>
+      <ul>
+        <li><a href="site:plugins/infrastructure">Plugin Infrastructure</a></li>
+        <li><a href="site:v0.70//buildPlugin">How to build a Plugin</a></li>
+      </ul>
+    </section>
+  </body>
+</document>

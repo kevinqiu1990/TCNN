@@ -1,0 +1,377 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--*** This is a generated file.  Do not edit.  ***-->
+<link rel="stylesheet" href="../skin/tigris.css" type="text/css">
+<link rel="stylesheet" href="../skin/mysite.css" type="text/css">
+<link rel="stylesheet" href="../skin/site.css" type="text/css">
+<link media="print" rel="stylesheet" href="../skin/print.css" type="text/css">
+<title>Formula Evaluation</title>
+</head>
+<body bgcolor="white" class="composite">
+<!--================= start Banner ==================-->
+<div id="banner">
+<table width="100%" cellpadding="8" cellspacing="0" summary="banner" border="0">
+<tbody>
+<tr>
+<!--================= start Group Logo ==================-->
+<td align="left">
+<div class="groupLogo">
+<a href="http://jakarta.apache.org"><img border="0" class="logoImage" alt="Jakarta" src="../resources/images/group-logo.gif"></a>
+</div>
+</td>
+<!--================= end Group Logo ==================-->
+<!--================= start Project Logo ==================--><td align="right">
+<div class="projectLogo">
+<a href="http://jakarta.apache.org/poi/"><img border="0" class="logoImage" alt="POI" src="../resources/images/project-logo.gif"></a>
+</div>
+</td>
+<!--================= end Project Logo ==================-->
+</tr>
+</tbody>
+</table>
+</div>
+<!--================= end Banner ==================-->
+<!--================= start Main ==================-->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" summary="nav" id="breadcrumbs">
+<tbody>
+<!--================= start Status ==================-->
+<tr class="status">
+<td>
+<!--================= start BreadCrumb ==================--><a href="http://www.apache.org/">Apache</a> | <a href="http://jakarta.apache.org/">Jakarta</a> | <a href="http://jakarta.apache.org/poi/">POI</a>
+<!--================= end BreadCrumb ==================--></td><td id="tabs">
+<!--================= start Tabs ==================-->
+<div class="tab">
+<span class="selectedTab"><a class="base-selected" href="../index.html">Home</a></span> | <script language="Javascript" type="text/javascript">
+function printit() {  
+if (window.print) {
+    window.print() ;  
+} else {
+    var WebBrowser = '<OBJECT ID="WebBrowser1" WIDTH="0" HEIGHT="0" CLASSID="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2"></OBJECT>';
+document.body.insertAdjacentHTML('beforeEnd', WebBrowser);
+    WebBrowser1.ExecWB(6, 2);//Use a 1 vs. a 2 for a prompting dialog box    WebBrowser1.outerHTML = "";  
+}
+}
+</script><script language="Javascript" type="text/javascript">
+var NS = (navigator.appName == "Netscape");
+var VERSION = parseInt(navigator.appVersion);
+if (VERSION > 3) {
+    document.write('  <a title="PRINT this page OUT" href="javascript:printit()">PRINT</a>');
+}
+</script> | <a title="PDF file of this page" href="eval.pdf">PDF</a>
+</div>
+<!--================= end Tabs ==================-->
+</td>
+</tr>
+</tbody>
+</table>
+<!--================= end Status ==================-->
+<table id="main" width="100%" cellpadding="8" cellspacing="0" summary="" border="0">
+<tbody>
+<tr valign="top">
+<!--================= start Menu ==================-->
+<td id="leftcol">
+<div id="navcolumn">
+<div class="menuBar">
+<div class="menu">
+<span class="menuLabel">Jakarta POI</span>
+        
+<div class="menuItem">
+<a href="../index.html">Top</a>
+</div>
+    
+</div>
+<div class="menu">
+<span class="menuLabel">HSSF</span>
+        
+<div class="menuItem">
+<a href="index.html">Overview</a>
+</div>
+        
+<div class="menuItem">
+<a href="quick-guide.html">Quick Guide</a>
+</div>
+        
+<div class="menuItem">
+<a href="how-to.html">HOWTO</a>
+</div>
+        
+<div class="menuItem">
+<a href="formula.html">Formula Support</a>
+</div>
+        
+<div class="menuItem">
+<span class="menuSelected">Formula Evaluation</span>
+</div>
+		
+<div class="menuItem">
+<a href="eval-devguide.html">Eval Dev Guide</a>
+</div>
+        
+<div class="menuItem">
+<a href="use-case.html">Use Case</a>
+</div>
+        
+<div class="menuItem">
+<a href="diagrams.html">Pictorial Docs</a>
+</div>
+        
+<div class="menuItem">
+<a href="limitations.html">Limitations</a>
+</div>
+    
+</div>
+<div class="menu">
+<span class="menuLabel">Contributer's Guide</span>
+        
+<div class="menuItem">
+<a href="hacking-hssf.html">Hacking HSSF</a>
+</div>
+        
+<div class="menuItem">
+<a href="record-generator.html">Record Generator</a>
+</div>
+        
+<div class="menuItem">
+<a href="chart.html">Charts</a>
+</div>
+    
+</div>
+</div>
+</div>
+<form target="_blank" action="http://www.google.com/search" method="get">
+<table summary="search" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td><img height="1" width="1" alt="" src="../skin/images/spacer.gif" class="spacer"></td><td nowrap="nowrap"><input value="jakarta.apache.org" name="sitesearch" type="hidden"><input size="10" name="q" id="query" type="text"><img height="1" width="5" alt="" src="../skin/images/spacer.gif" class="spacer"><input name="Search" value="GO" type="submit">
+<br>
+                          Search jakarta</td><td><img height="1" width="1" alt="" src="../skin/images/spacer.gif" class="spacer"></td>
+</tr>
+<tr>
+<td colspan="3"><img height="7" width="1" alt="" src="../skin/images/spacer.gif" class="spacer"></td>
+</tr>
+<tr>
+<td class="bottom-left-thick"></td><td bgcolor="#a5b6c6"><img height="1" width="1" alt="" src="../skin/images/spacer.gif" class="spacer"></td><td class="bottom-right-thick"></td>
+</tr>
+</table>
+</form>
+</td>
+<!--================= end Menu ==================-->
+<!--================= start Content ==================--><td>
+<div id="bodycol">
+<div class="app">
+<div align="center">
+<h1>Formula Evaluation</h1>
+</div>
+<div class="h3">
+    
+    
+		
+<div class="h3">
+<h3>Introduction</h3>
+</div>
+			
+<p>The POI formula evaluation code enables you to calculate the result of 
+				formulas in Excels sheets read-in, or created in POI. This document explains
+				how to use the API to evaluate your formulas. 
+			</p>
+			
+<div class="frame note">
+<div class="label">Note</div>
+<div class="content"> This code currently lives the scratchpad area of the POI CVS repository. 
+				Ensure that you have the scratchpad jar or the scratchpad build area in your
+				classpath before experimenting with this code.
+			</div>
+</div>
+		
+		
+<div class="h3">
+<h3>Status</h3>
+</div>
+			
+<p>	The code currently provides implementations for all the arithmatic operators.
+				It also provides implementations for approx. 20 built in 
+				functions in Excel. The framework however makes is easy to add 
+			 	implementation of new functions. See the <a href="eval-devguide.html"> Formula
+				evaluation development guide</a> for details. </p>
+			
+<p> Note that user-defined functions are not supported, and is not likely to done
+				any time soon... at least, not till there is a VB implementation in Java!
+			</p>
+		
+		
+<div class="h3">
+<h3>User API How-TO</h3>
+</div>
+			
+<p>The following code demonstrates how to use the HSSFFormulaEvaluator 
+				in the context of other POI excel reading code.
+			</p>
+			
+<p>There are two ways in which you can use the HSSFFormulaEvalutator API.</p>
+			
+<div class="h4">
+<h4>Using HSSFFormulaEvaluator.evaluate(HSSFCell cell)</h4>
+</div>
+				
+<pre class="code">
+FileInputStream fis = new FileInputStream("c:/temp/test.xls");
+HSSFWorkbook wb = new HSSFWorkbook(fis);
+HSSFSheet sheet = wb.getSheetAt(0);
+HSSFFormulaEvaluator evaluator = new HSSFFormulaEvaluator(sheet, wb);
+
+// suppose your formula is in B3
+CellReference cellReference = new CellReference("B3"); 
+HSSFRow row = sheet.getRow(cellReference.getRow());
+HSSFCell cell = row.getCell(cellReference.getCol()); 
+HSSFFormulaEvaluator.CellValue cellValue = evaluator.evaluate(cell);
+
+switch (cellValue.getCellType()) {
+	case HSSFCell.CELL_TYPE_BOOLEAN:
+    	System.out.println(cellValue.getBooleanValue());
+    	break;
+	case HSSFCell.CELL_TYPE_NUMERIC:
+    	System.out.println(cellValue.getNumberValue());
+    	break;
+	case HSSFCell.CELL_TYPE_STRING:
+    	System.out.println(cellValue.getStringValue());
+    	break;
+	case HSSFCell.CELL_TYPE_BLANK:
+    	break;
+	case HSSFCell.CELL_TYPE_ERROR:
+    	break;
+
+	// CELL_TYPE_FORMULA will never happen
+	case HSSFCell.CELL_TYPE_FORMULA: 
+    	break;
+}				
+				</pre>
+				
+<p>Thus using the retrieved value (of type 
+					HSSFFormulaEvaluator.CellValue - a nested class) returned 
+					by HSSFFormulaEvaluator is similar to using a HSSFCell object 
+					containing the value of the formula evaluation. CellValue is 
+					a simple value object and does not maintain reference 
+					to the original cell.
+				</p>
+				
+			
+			
+<div class="h4">
+<h4>Using HSSFFormulaEvaluator.evaluateInCell(HSSFCell cell)
+				</h4>
+</div>
+				
+<pre class="code">
+FileInputStream fis = new FileInputStream("/somepath/test.xls");
+HSSFWorkbook wb = new HSSFWorkbook(fis);
+HSSFSheet sheet = wb.getSheetAt(0);
+HSSFFormulaEvaluator evaluator = new HSSFFormulaEvaluator(sheet, wb);
+
+// suppose your formula is in B3
+CellReference cellReference = new CellReference("B3"); 
+HSSFRow row = sheet.getRow(cellReference.getRow());
+HSSFCell cell = row.getCell(cellReference.getCol()); 
+
+
+if (cell!=null) {
+	switch (<strong>evaluator.evaluateInCell</strong>(cell).getCellType()) {
+		case HSSFCell.CELL_TYPE_BOOLEAN:
+		    System.out.println(cell.getBooleanCellValue());
+		    break;
+		case HSSFCell.CELL_TYPE_NUMERIC:
+		    System.out.println(cell.getNumberCellValue());
+		    break;
+		case HSSFCell.CELL_TYPE_STRING:
+		    System.out.println(cell.getStringCellValue());
+		    break;
+		case HSSFCell.CELL_TYPE_BLANK:
+		    break;
+		case HSSFCell.CELL_TYPE_ERROR:
+		    System.out.println(cell.getErrorCellValue());
+		    break;
+		
+		// CELL_TYPE_FORMULA will never occur
+		case HSSFCell.CELL_TYPE_FORMULA: 
+		    break;
+	}
+}
+					</pre>
+
+				
+		
+		
+		
+<div class="h3">
+<h3>Performance Notes</h3>
+</div>
+			
+<ul>
+				
+<li>Generally you should have to create only one HSSFFormulaEvaluator 
+					instance per sheet, but there really is no overhead in creating 
+					multiple HSSFFormulaEvaluators per sheet other than that of the 
+					HSSFFormulaEvaluator object creation. 
+				</li>
+				
+<li>Also note that HSSFFormulaEvaluator maintains a reference to 
+					the sheet and workbook, so ensure that the evaluator instance 
+					is available for garbage collection when you are done with it 
+					(in other words don't maintain long lived reference to 
+					HSSFFormulaEvaluator if you don't really need to - unless 
+					all references to the sheet and workbook are removed, these 
+					don't get garbage collected and continue to occupy potentially 
+					large amounts of memory). 
+				</li>	
+				
+<li>CellValue instances however do not maintain reference to the 
+					HSSFCell or the sheet or workbook, so these can be long-lived 
+					objects without any adverse effect on performance.
+				</li>
+			
+</ul>
+		
+	
+
+<div id="authors" align="right">by&nbsp;Amol Deshmukh</div>
+</div>
+</div>
+</div>
+</td>
+<!--================= end Content ==================-->
+</tr>
+</tbody>
+</table>
+<!--================= end Main ==================-->
+<!--================= start Footer ==================-->
+<div id="footer">
+<table summary="footer" cellspacing="0" cellpadding="4" width="100%" border="0">
+<tbody>
+<tr>
+<!--================= start Copyright ==================-->
+<td colspan="2">
+<div align="center">
+<div class="copyright">
+              Copyright &copy; 2002-2006&nbsp;The Apache Software Foundation. All rights reserved.
+            </div>
+</div>
+</td>
+<!--================= end Copyright ==================-->
+</tr>
+<tr>
+<td align="left">
+<!--================= start Host ==================-->
+<!--================= end Host ==================--></td><td align="right">
+<!--================= start Credits ==================-->
+<div align="right">
+<div class="credit"></div>
+</div>
+<!--================= end Credits ==================-->
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!--================= end Footer ==================-->
+</body>
+</html>

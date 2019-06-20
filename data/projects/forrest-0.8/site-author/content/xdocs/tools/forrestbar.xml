@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd">
+<document>
+  <header>
+    <title>The ForrestBar</title>
+  </header>
+  <body>
+    <section>
+      <title>What's the ForrestBar?</title>
+      <p>
+        The ForrestBar is a toolbar extension made for the
+        <link href="http://www.mozilla.org/products/mozilla1.x/">Mozilla</link>
+        and <link href="http://www.mozilla.org/products/firefox/">Firefox</link>
+        browsers that eases the navigation of online Forrest resources
+        (including local instances of Forrest running on jetty or as a webapp),
+        Apache links and other Apache projects.
+      </p>
+      <p>
+        Navigation and developer assistance for Apache Forrest-related
+        documentation frameworks.
+      </p>
+    </section>
+    <section>
+      <title>Installing the ForrestBar</title>
+      <p>
+        ForrestBar is currently compatible with Firefox 0.9 - 1.5+ and Mozilla
+        1.x browsers.
+      </p>
+      <p>
+        Select this link to <link href="forrestbar.xpi">install</link>
+        ForrestBar.
+      </p>
+      <p>
+        If the extension does not automatically install for you when clicking on
+        the link, download ForrestBar by right clicking on the link and select
+        Save As... to save the file to your computer. To install, simply drag
+        the downloaded .xpi file into your browser's window and drop it.
+      </p>
+      <p>
+        To build ForrestBar locally rather than downloading, go to
+        FORREST_HOME/tools/forrestbar and run the following command:
+        <code>forrest -f build.xml</code> and the .xpi file will be built for
+        you in the FORREST_HOME/tools/forrestbar/build directory. You can then
+        install it by dragging and dropping as indicated above.
+      </p>
+    </section>
+  </body>
+</document>

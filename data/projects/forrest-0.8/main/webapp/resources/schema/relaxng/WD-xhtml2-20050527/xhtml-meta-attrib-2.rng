@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XHTML2: http://www.w3.org/TR/2005/WD-xhtml2-20050527
+Copyright © 1999-2004 World Wide Web Consortium, (Massachusetts Institute of Technology,
+European Research Consortium for Informatics and Mathematics, Keio University).
+All Rights Reserved. This work is distributed under the W3C® Software Licens [1]
+in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:x="http://www.w3.org/1999/xhtml">
+
+<x:h1>MetaInformation Attributes Module</x:h1>
+
+  <div>
+    <x:h2>Metadata Attribute Collection</x:h2>
+
+    <define name="about.attrib">
+      <optional>
+        <attribute name="about">
+          <ref name="URI.datatype"/>
+        </attribute>
+      </optional>
+    </define>
+
+    <define name="content.attrib">
+      <optional>
+        <attribute name="content">
+          <ref name="CDATA.datatype"/>
+        </attribute>
+      </optional>
+    </define>
+
+    <define name="datatype.attrib">
+      <optional>
+        <attribute name="datatype">
+          <ref name="QName.datatype"/>
+        </attribute>
+      </optional>
+    </define>
+
+    <define name="property.attrib">
+      <optional>
+        <attribute name="property">
+          <ref name="QName.datatype"/>
+        </attribute>
+      </optional>
+    </define>
+
+    <define name="rel.attrib">
+      <optional>
+        <attribute name="rel">
+          <!--ref name="QName.datatype"/-->
+          <ref name="LinkTypes.datatype"/>
+        </attribute>
+      </optional>
+    </define>
+
+    <define name="resource.attrib">
+      <optional>
+        <attribute name="resource">
+          <ref name="URI.datatype"/>
+        </attribute>
+      </optional>
+    </define>
+
+    <define name="restype.attrib">
+      <optional>
+        <attribute name="restype">
+          <ref name="ContentTypes.datatype"/>
+        </attribute>
+      </optional>
+    </define>
+
+    <define name="rev.attrib">
+      <optional>
+        <attribute name="rev">
+          <!--ref name="QName.datatype"/-->
+          <ref name="LinkTypes.datatype"/>
+        </attribute>
+      </optional>
+    </define>
+
+    <define name="Metadata.attrib">
+      <ref name="about.attrib"/>
+      <ref name="content.attrib"/>
+      <ref name="datatype.attrib"/>
+      <ref name="property.attrib"/>
+      <ref name="rel.attrib"/>
+      <ref name="resource.attrib"/>
+      <ref name="restype.attrib"/>
+      <ref name="rev.attrib"/>
+    </define>
+  </div>
+
+  <define name="Common.extra.attrib" combine="interleave">
+    <ref name="Metadata.attrib"/>
+  </define>
+
+</grammar>

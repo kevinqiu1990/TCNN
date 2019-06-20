@@ -1,0 +1,63 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+---------------
+############### 
+classical approach comp. http://web.nwe.ufl.edu/writing/help/web/authoring/html/css/div.html
+#header
+#side
+#spacer
+#content
+#footer
+
+is saying about the location of elements rather then the data which is represented.
+****************
+
+css-contracts 
+##########################################################
+
+#branding (b)
+Container used for all elements that is branding the site.
+Everything releated to brand the site goes in here.
+
+#b-trail -> branding-trail
+Used for a trail or tagline to define the site's purpose
+
+#branding-logo (bl)
+Contains all logos to brand the site.
+Everything releated with logos to brand the site goes in here.
+
+#bl-group -> branding-logo-group
+Used for the grouplogo.
+
+#search (se)
+Related to search interface and search results
+
+#nav or #navigation (n)
+Used to contain the navigation devices
+
+#content (c)
+Used for content rather than for another purpose such as navigation
+
+#siteinfo (si)
+Used for various site related information
+
+The problem that I am facing if I want to use e.g. the nav container for all nav elements is to still have the same style. 
+The style depends on overall (IMO style specific) style-divs that are just for web-design reason. 
+That would denegate a single skeleton for css-contracts like css-garden. 
+One could introduce a raster approach but that would be more or less the top-main-footer approach.
+
+Breaking down the problem again to #id basis. The pathing of them makes the final style.

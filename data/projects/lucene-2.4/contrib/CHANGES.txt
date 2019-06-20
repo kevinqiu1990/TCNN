@@ -1,0 +1,48 @@
+Lucene contrib change Log
+
+======================= Release 2.4.0 2008-10-06 =======================
+
+Changes in runtime behavior
+
+ (None)
+
+API Changes
+
+ 1. 
+
+ (None)
+
+Bug fixes
+
+ 1. LUCENE-1312: Added full support for InstantiatedIndexReader#getFieldNames()
+    and tests that assert that deleted documents behaves as they should (they did).
+    (Jason Rutherglen, Karl Wettin)
+
+ 2. LUCENE-1318: InstantiatedIndexReader.norms(String, b[], int) didn't treat
+    the array offset right. (Jason Rutherglen via Karl Wettin)
+
+New features
+
+ 1. LUCENE-1320: ShingleMatrixFilter, multidimensional shingle token filter. (Karl Wettin)
+
+ 2. LUCENE-1142: Updated Snowball package, org.tartarus distribution revision 500.
+    Introducing Hungarian, Turkish and Romanian support, updated older stemmers
+    and optimized (reflectionless) SnowballFilter.
+    IMPORTANT NOTICE ON BACKWARDS COMPATIBILITY: an index created using the 2.3.2 (or older)
+    might not be compatible with these updated classes as some algorithms have changed.
+    (Karl Wettin)
+
+ 3. LUCENE-1016: TermVectorAccessor, transparent vector space access via stored vectors
+    or by resolving the inverted index. (Karl Wettin) 
+
+Documentation
+
+ (None)
+
+Build
+
+ (None)
+
+Test Cases
+
+ (None)

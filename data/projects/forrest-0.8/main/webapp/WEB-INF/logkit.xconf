@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<logkit>
+  <factories>
+    <factory type="priority-filter" class="org.apache.avalon.excalibur.logger.factory.PriorityFilterTargetFactory"/>
+    <factory type="servlet" class="org.apache.avalon.excalibur.logger.factory.ServletTargetFactory"/>
+    <factory type="cocoon" class="org.apache.forrest.log.ForrestLogTargetFactory"/>
+  </factories>
+
+  <targets>
+    <cocoon id="core">
+      <filename>${context-root}/WEB-INF/logs/core.log</filename>
+      <format type="cocoon">
+        %7.7{priority} %{time}   [%{category}] (%{uri}) %{thread}/%{class:short}: %{message}\n%{throwable}
+      </format>
+      <!--
+        append=false: Will override existing log files on Cocoon startup
+        append=true: Will append to the existing log files
+      -->
+      <append>false</append>
+      <!--
+        rotation: allows you to rotate log files one they meet certain
+                  criteria. In example below, files are rotated once they
+                  are one hour old or bigger than 100 Mb.
+
+      <rotation type="revolving" init="1" max="4">
+        <or>
+          <size>100m</size>
+          <time>01:00:00</time>
+        </or>
+      </rotation>
+      -->
+    </cocoon>
+
+    <cocoon id="sitemap">
+      <filename>${context-root}/WEB-INF/logs/sitemap.log</filename>
+
+      <format type="cocoon">
+        %7.7{priority} %{time}   [%{category}] (%{uri}) %{thread}/%{class:short}: %{message}\n%{throwable}
+      </format>
+      <append>false</append>
+    </cocoon>
+
+    <cocoon id="linkrewriter">
+      <filename>${context-root}/WEB-INF/logs/linkrewriter.log</filename>
+      <format type="cocoon">
+        %7.7{priority} [%{category}] (%{uri}): %{message}\n%{throwable}
+      </format>
+      <append>false</append>
+    </cocoon>
+
+    <cocoon id="locationmap">
+      <filename>${context-root}/WEB-INF/logs/locationmap.log</filename>
+      <format type="cocoon">
+        %7.7{priority} [%{category}] (%{uri}): %{message}\n%{throwable}
+      </format>
+      <append>false</append>
+    </cocoon>
+
+    <cocoon id="idgen">
+      <filename>${context-root}/WEB-INF/logs/idgen.log</filename>
+      <format type="cocoon">
+        %7.7{priority} [%{category}] (%{uri}) %{thread}/%{class:short}: %{message}\n%{throwable}
+      </format>
+      <append>false</append>
+    </cocoon>
+
+    <cocoon id="access">
+      <filename>${context-root}/WEB-INF/logs/access.log</filename>
+      <format type="cocoon">
+        %7.7{priority} %{time}   [%{category}] (%{uri}) %{thread}/%{class:short}: %{message}\n%{throwable}
+      </format>
+      <append>false</append>
+    </cocoon>
+
+    <!-- The logger for the flow layer -->
+    <cocoon id="flow">
+      <filename>${context-root}/WEB-INF/logs/flow.log</filename>
+      <format type="cocoon">
+        %7.7{priority} %{time}   [%{category}] (%{uri}) %{thread}/%{class:short}: %{message}\n%{throwable}
+      </format>
+      <append>false</append>
+    </cocoon>
+
+    <!-- The logger for the xmlform components -->
+    <cocoon id="xmlform">
+      <filename>${context-root}/WEB-INF/logs/xmlform.log</filename>
+      <format type="cocoon">
+        %7.7{priority} %{time}   [%{category}] (%{uri}) %{thread}/%{class:short}: %{message}\n%{throwable}
+      </format>
+      <append>false</append>
+    </cocoon>
+
+    <!--
+      This log file gets only messages with log level ERROR and below.
+    -->
+    <priority-filter id="error" log-level="ERROR">
+      <cocoon>
+        <filename>${context-root}/WEB-INF/logs/error.log</filename>
+        <format type="cocoon">
+          %7.7{priority} %{time}   [%{category}] (%{uri}) %{thread}/%{class:short}: %{message}\n%{throwable}
+        </format>
+        <append>false</append>
+      </cocoon>
+    </priority-filter>
+
+     <!-- Sitemap execution messages -->
+      <cocoon id="debug" >
+        <filename>${context-root}/WEB-INF/logs/debug.log</filename>
+        <format type="cocoon">
+          %7.7{priority} %{time}   [%{category}] (%{uri}) %{thread}/%{class:short}: %{message}\n%{throwable}
+        </format>
+        <append>false</append>
+      </cocoon>
+  </targets>
+
+  <categories>
+    <!--
+      log-level: One of DEBUG, INFO, WARN, ERROR, FATAL_ERROR.
+      Log level could be different for every category and subcategory.
+
+      Not all subcategories are defined in this file. Not defined
+      subcategories will be created automatically inheriting settings
+      of the parent subcategory.
+      When defining subcategory manually, it is required to specify log
+      targets, because they are not inherited in this case.
+    -->
+    <category name="core" log-level="WARN">
+      <!-- Startup component manager logger -->
+      <category name="startup" log-level="WARN">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <category name="roles" log-level="WARN">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <category name="instrument" log-level="WARN">
+        <category name="values" log-level="WARN">
+          <log-target id-ref="core"/>
+          <log-target id-ref="error"/>
+        </category>
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <!-- Cocoon component manager logger -->
+      <category name="manager" log-level="WARN">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <!-- Cocoon cache and stores logger -->
+      <category name="store" log-level="WARN">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <!-- Cocoon source repository logger -->
+      <category name="repositories" log-level="WARN">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <!-- Cocoon store logger -->
+      <category name="store" log-level="WARN">
+        <category name="janitor" log-level="ERROR">
+          <log-target id-ref="core"/>
+          <log-target id-ref="error"/>
+        </category>
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <!-- LinkRewriter logger -->
+      <category name="modules.mapper.link" log-level="INFO">
+        <log-target id-ref="linkrewriter"/>
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <!-- Locationmap logger -->
+      <category name="modules.mapper.lm" log-level="INFO">
+        <log-target id-ref="locationmap"/>
+        <!-- duplicate the locationmap messages into the linkrewriter log
+             to provide context:
+        <log-target id-ref="linkrewriter"/>
+        -->
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <log-target id-ref="core"/>
+      <log-target id-ref="error"/>
+    </category>
+
+    <category name="sitemap" log-level="WARN">
+      <category name="transformer.idgen" log-level="INFO">
+        <log-target id-ref="idgen"/>
+        <log-target id-ref="error"/>
+      </category>
+      <category name="transformer.linkrewriter" log-level="INFO">
+        <log-target id-ref="linkrewriter"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <log-target id-ref="sitemap"/>
+      <log-target id-ref="error"/>
+    </category>
+    
+    <category name="debug" log-level="DEBUG">
+      <log-target id-ref="debug"/>
+    </category>
+      
+    <category name="" log-level="WARN">
+      <log-target id-ref="core"/>
+      <log-target id-ref="error"/>
+    </category>
+      
+  </categories>
+</logkit>

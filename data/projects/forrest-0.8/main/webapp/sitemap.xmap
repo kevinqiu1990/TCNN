@@ -1,0 +1,639 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- ===============================================
+Default Forrest sitemap, defining the whole site.
+Delegates to the other *.xmap files.  See
+http://forrest.apache.org/docs/sitemap-ref.html
+
+$Revision: 1.12 $
+==================================================== -->
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  <map:components>
+    <map:generators default="file">
+      <map:generator name="file"  src="org.apache.cocoon.generation.FileGenerator" />
+      <map:generator name="html"  src="org.apache.cocoon.generation.HTMLGenerator">
+        <jtidy-config>WEB-INF/jtidy.properties</jtidy-config>
+      </map:generator>
+      <map:generator name="exception"
+                  src="org.apache.cocoon.generation.ExceptionGenerator"/>
+      <map:generator name="notifier" src="org.apache.cocoon.sitemap.NotifyingGenerator" />
+      <map:generator name="text2xml" logger="sitemap.generator.textgenerator"
+                     src="org.apache.cocoon.generation.TextGenerator">
+        <parameter name="localizable" value="true"/>
+      </map:generator>
+    </map:generators>
+    <map:transformers default="xslt">
+<!-- Add values to skinconf that need extra processing like the color shades -->
+      <map:transformer name="skinconf" src="org.apache.forrest.conf.SkinconfTransformer"/>
+<!-- Generates @id attributes from <title> strings -->
+      <map:transformer name="idgen" src="org.apache.forrest.util.IdGeneratorTransformer">
+        <element>//*[local-name() = 'section']</element>
+        <id>title/text()</id>
+      </map:transformer>
+<!-- Rewrites links, e.g. transforming href="site:index" to href="../index.html" -->
+<!-- See http://forrest.apache.org/docs/sitemap-ref.html#linkrewriting_impl -->
+      <map:transformer name="linkrewriter" logger="sitemap.transformer.linkrewriter" src="org.apache.cocoon.transformation.LinkRewriterTransformer">
+        <link-attrs>href src</link-attrs>
+        <schemes>site ext lm</schemes>
+        <input-module name="lm"/>
+        <input-module name="site">
+          <input-module name="linkmap">
+            <file src="{src}" reloadable="true" />
+          </input-module>
+          <prefix>/site//</prefix>
+          <suffix>/@href</suffix>
+        </input-module>
+        <input-module name="ext">
+          <input-module name="linkmap">
+            <file src="{src}" reloadable="true" />
+          </input-module>
+          <prefix>/site/external-refs//</prefix>
+          <suffix>/@href</suffix>
+        </input-module>
+      </map:transformer>
+      <map:transformer name="xpath" logger="sitemap.transformer.xpath" src="org.apache.forrest.util.XPathTransformer" />
+      <map:transformer name="xslt" src="org.apache.cocoon.transformation.TraxTransformer" logger="sitemap.transformer.xslt" pool-max="32" pool-min="8" pool-grow="2">
+        <use-request-parameters>false</use-request-parameters>
+        <use-browser-capabilities-db>false</use-browser-capabilities-db>
+        <use-deli>false</use-deli>
+        <transformer-factory>org.apache.xalan.processor.TransformerFactoryImpl</transformer-factory>
+<!--<transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>-->
+<!--<transformer-factory>com.icl.saxon.TransformerFactoryImpl</transformer-factory>-->
+<!--<transformer-factory>org.apache.xalan.xsltc.trax.TransformerFactoryImpl</transformer-factory>-->
+      </map:transformer>
+      <map:transformer name="xsltc" src="org.apache.cocoon.transformation.TraxTransformer" logger="sitemap.transformer.xslt" pool-max="32" pool-min="8" pool-grow="2">
+        <use-request-parameters>false</use-request-parameters>
+        <use-browser-capabilities-db>false</use-browser-capabilities-db>
+        <use-deli>false</use-deli>
+        <transformer-factory>org.apache.xalan.xsltc.trax.TransformerFactoryImpl</transformer-factory>
+      </map:transformer>
+      <map:transformer name="xslt-saxon"
+         pool-grow="2" pool-max="32" pool-min="8"
+         src="org.apache.cocoon.transformation.TraxTransformer">
+        <use-request-parameters>false</use-request-parameters>
+        <use-browser-capabilities-db>false</use-browser-capabilities-db>
+        <xslt-processor-role>saxon</xslt-processor-role>
+      </map:transformer>
+      <map:transformer name="xinclude" src="org.apache.cocoon.transformation.XIncludeTransformer" logger="sitemap.transformer.xinclude" pool-grow="2" pool-max="16" pool-min="2" />
+      <map:transformer name="cinclude" pool-grow="2" pool-max="16" pool-min="2" src="org.apache.cocoon.transformation.CIncludeTransformer" logger="sitemap.transformer.cinclude"/>
+      <map:transformer name="pattern" 
+       src="org.apache.cocoon.transformation.PatternTransformer" 
+       logger="sitemap.transformer.pattern">
+        <parameter name="groups" value="true"/>
+      </map:transformer>
+      <map:transformer name="extparser"
+        src="org.apache.cocoon.transformation.ExtendedParserTransformer"
+        logger="sitemap.transformer.extendedparser"></map:transformer>
+      <map:transformer name="lexer" 
+                    src="org.apache.cocoon.transformation.LexicalTransformer" 
+                    logger="sitemap.transformer.lexer">
+        <parameter name="localizable" value="true"/>
+      </map:transformer>
+      <map:transformer name="parser" 
+                    src="org.apache.cocoon.transformation.ParserTransformer" 
+                    logger="sitemap.transformer.parser">
+        <parameter name="flatten" value="true"/>
+        <parameter name="recovery" value="true"/>
+        <parameter name="localizable" value="true"/>
+      </map:transformer>
+      <map:transformer name="i18n" src="org.apache.cocoon.transformation.I18nTransformer">
+        <catalogues default="common">
+          <catalogue id="common" name="CommonMessages" location="{properties:skins-dir}common/translations"/>
+        </catalogues>
+        <cache-at-startup>true</cache-at-startup>
+      </map:transformer>
+      <map:transformer name="log"
+      src="org.apache.cocoon.transformation.LogTransformer"
+      logger="sitemap.transformer.log" pool-max="16"/>
+      <map:transformer name="validate"
+    logger="sitemap.transformer.validate"
+    src="org.apache.cocoon.transformation.ValidatingTransformer">
+<!--+ The "grammar" an optional configuration element specifying the default
+          | grammar used by the validator. When the "grammar" element is specified,
+          | the automatic detection of schema types will be disabled.
+          |
+          | This can also be specifed in pipelines as a parameter:
+          |   <map:parameter name="grammar" value="... grammar identifier ..."/>
+          |
+          | For a list of well known grammars, see the JavaDoc documentation for the
+          | org.apache.cocoon.components.validation.Validator interface.
+          +-->
+<!-- <grammar>... grammar identifier ...</grammar> -->
+      </map:transformer>
+      <map:transformer name="validation-report"
+    logger="sitemap.transformer.validate"
+    src="org.apache.cocoon.transformation.ValidationReportTransformer">
+<!--+ The "grammar" an optional configuration element specifying the default
+          | grammar used by the validator. When the "grammar" element is specified,
+          | the automatic detection of schema types will be disabled.
+          |
+          | This can also be specifed in pipelines as a parameter:
+          |   <map:parameter name="grammar" value="... grammar identifier ..."/>
+          |
+          | For a list of well known grammars, see the JavaDoc documentation for the
+          | org.apache.cocoon.components.validation.Validator interface.
+          +-->
+<!-- <grammar>... grammar identifier ...</grammar> -->
+      </map:transformer>
+    </map:transformers>
+    <map:readers default="resource">
+      <map:reader name="resource" src="org.apache.cocoon.reading.ResourceReader"/>
+    </map:readers>
+    <map:serializers default="html">
+      <map:serializer name="html" mime-type="text/html" src="org.apache.cocoon.serialization.HTMLSerializer">
+        <doctype-public>-//W3C//DTD HTML 4.01 Transitional//EN</doctype-public>
+        <doctype-system>http://www.w3.org/TR/html4/loose.dtd</doctype-system>
+        <encoding>UTF-8</encoding>
+      </map:serializer>
+      <map:serializer name="xml" mime-type="text/xml" src="org.apache.cocoon.serialization.XMLSerializer"/>
+      <map:serializer name="xml-document" mime-type="text/xml" src="org.apache.cocoon.serialization.XMLSerializer">
+        <cdata-section-elements>source</cdata-section-elements>
+        <doctype-public>-//APACHE//DTD Documentation V1.3//EN</doctype-public>
+        <doctype-system>document-v13.dtd</doctype-system>
+      </map:serializer>
+      <map:serializer name="links" src="org.apache.cocoon.serialization.LinkSerializer">
+        <encoding>ISO-8859-1</encoding>
+      </map:serializer>
+      <map:serializer name="svgxml" src="org.apache.cocoon.serialization.XMLSerializer" mime-type="image/svg+xml">
+        <doctype-public>-//W3C//DTD SVG 1.0//EN</doctype-public>
+        <doctype-system>http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd</doctype-system>
+      </map:serializer>
+      <map:serializer logger="sitemap.serializer.text" mime-type="text/plain" name="text" src="org.apache.cocoon.serialization.TextSerializer">
+        <encoding>UTF-8</encoding>
+      </map:serializer>
+<!--
+      <map:serializer mime-type="application/x-shockwave-flash" name="swf" src="org.apache.cocoon.serialization.SWFSerializer"/>
+      <map:serializer mime-type="application/msword" name="fo2rtf" src="org.apache.cocoon.serialization.RTFSerializer"/>
+      -->
+    </map:serializers>
+    <map:matchers default="wildcard">
+      <map:matcher name="wildcard" src="org.apache.cocoon.matching.WildcardURIMatcher"/>
+      <map:matcher name="regexp" src="org.apache.cocoon.matching.RegexpURIMatcher"/>
+      <map:matcher name="i18n" src="org.apache.cocoon.matching.LocaleMatcher">
+<!--  FIXME (FOR-887): make these configurable, using same parameters for LocaleMatcher and LocaleAction -->
+<!-- See http://cocoon.apache.org/2.1/apidocs/org/apache/cocoon/matching/LocaleMatcher.html for a description of these parameters -->
+        <default-locale language="en" country="US"/>
+        <negotiate>true</negotiate>
+        <use-locale>true</use-locale>
+        <use-locales>false</use-locales>
+        <use-blank-locale>true</use-blank-locale>
+        <locale-attribute>locale</locale-attribute>
+      </map:matcher>
+    </map:matchers>
+    <map:actions>
+      <map:action name="locale" src="org.apache.cocoon.acting.LocaleAction">
+<!-- See http://cocoon.apache.org/2.1/apidocs/org/apache/cocoon/acting/LocaleAction.html for a description of these parameters -->
+<!--  FIXME (FOR-887): make these configurable, using same parameters for LocaleMatcher and LocaleAction -->
+        <default-locale language="en" country="US"/>
+        <use-locale>true</use-locale>
+        <store-in-request>false</store-in-request>
+        <create-session>false</create-session>
+        <store-in-session>false</store-in-session>
+        <store-in-cookie>false</store-in-cookie>
+        <locale-attribute>locale</locale-attribute>
+      </map:action>
+    </map:actions>
+    <map:selectors>
+      <map:selector name="exists" logger="sitemap.selector.exists"  
+                    src="org.apache.forrest.sourceexists.SourceExistsSelector" />
+      <map:selector name="exception" src="org.apache.cocoon.selection.ExceptionSelector">
+        <exception name="resourceNotFound" class="org.apache.cocoon.ResourceNotFoundException"/>
+        <exception class="java.lang.Throwable" unroll="true"/>
+      </map:selector>
+      <map:selector name="config" logger="sitemap.selector.config" 
+                   src="org.apache.cocoon.selection.SimpleSelector" />
+    </map:selectors>
+    <map:pipes default="caching">
+<!-- standard pipes -->
+      <map:pipe name="caching" src="org.apache.cocoon.components.pipeline.impl.CachingProcessingPipeline"/>
+      <map:pipe name="noncaching" src="org.apache.cocoon.components.pipeline.impl.NonCachingProcessingPipeline"/>
+<!-- profiling pipes -->
+<!-- When you want to do profiling, then replace the
+        standard map:pipes above.
+        See docs/howto/howto-dev.html#debug-cocoon-profiler
+        See FOR-572
+      -->
+<!--
+      <map:pipe name="caching" src="org.apache.cocoon.components.profiler.ProfilingCachingProcessingPipeline"/>
+      <map:pipe name="noncaching" src="org.apache.cocoon.components.profiler.ProfilingNonCachingProcessingPipeline"/>
+      -->
+    </map:pipes>
+  </map:components>
+<!-- NOTE: the 'links view' is no longer used to discover a page's links.
+       Instead of filterlinks.xsl, use cli.xconf include/exclude nodes to define which pages to render.
+  <map:views>
+    <map:view name="links" from-position="last">
+      <map:transform src="{forrest:forrest.stylesheets}/filterlinks.xsl">
+        <map:parameter name="ctxbasedir" value="{realpath:.}/"/>
+      </map:transform>
+      <map:serialize type="links"/>
+    </map:view>
+  </map:views>
+  -->
+  <map:resources>
+    <map:resource name="skinit">
+      <map:transform src="{lm:{type}}">
+        <map:parameter name="notoc" value="{notoc}"/>
+<!-- For backwards-compat with 0.2 - 0.4 skins -->
+        <map:parameter name="isfaq" value="{notoc}"/>
+        <map:parameter name="nopdf" value="{nopdf}"/>
+        <map:parameter name="path" value="{path}"/>
+        <map:parameter name="config-file" value="{properties:skinconf}"/>
+      </map:transform>
+      <map:select type="config">
+        <map:parameter name="value" value="{properties:forrest.i18n}"/>
+        <map:when test="true">
+          <map:act type="locale">
+            <map:transform type="i18n">
+              <map:parameter name="locale" value="{locale}"/>
+            </map:transform>
+          </map:act>
+        </map:when>
+        <map:otherwise>
+<!--
+              FIXME: strip remaining i18n elements and attributes.
+              workaround for http://issues.apache.org/jira/browse/FOR-592
+            -->
+          <map:transform src="{lm:transform.xml.xml-i18n-stripped}"/>
+        </map:otherwise>
+      </map:select>
+<!--
+        FIXME: strip_namespace is because this bug: http://issues.apache.org/bugzilla/show_bug.cgi?id=35348
+      -->
+      <map:transform src="{lm:transform.xml.xml-namespace-stripped}"/>
+      <map:serialize/>
+    </map:resource>
+  </map:resources>
+<!-- =========================== Pipelines ================================= -->
+  <map:pipelines>
+<!-- Cocoon sitemap profiler -->
+    <map:pipeline internal-only="false">
+      <map:match pattern="cprofile.*">
+        <map:mount uri-prefix="" src="profiler.xmap" check-reload="yes" />
+      </map:match>
+    </map:pipeline>
+<!-- The navigation and links file "site.xml" -->
+    <map:pipeline internal-only="true">
+      <map:match pattern="site.navigation.links.xml">
+        <map:select type="exists">
+          <map:when test="{lm:project.xml.site}">
+            <map:generate src="{lm:project.xml.site}"/>
+          </map:when>
+          <map:when test="{lm:site.xml}">
+            <map:generate src="{lm:site.xml}"/>
+          </map:when>
+        </map:select>
+        <map:transform type="xinclude"/>
+<!-- FIXME: This is a workaround to Issue FOR-675 and commons-jxpath-1.2 -->
+        <map:transform src="{lm:transform.xml.xml-namespace-stripped}"/>
+<!-- end FIXME: FOR-675 -->
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+    <map:pipeline type="caching" internal-only="true">
+      <map:match pattern="*.xlex">
+        <map:select type="exists">
+          <map:when test="{lm:chaperon.lexicon.{1}}">
+            <map:read src="{lm:chaperon.lexicon.{1}}"/>
+          </map:when>
+          <map:otherwise>
+<!-- FIXME: FOR-718 "The Chaperon grammars were mistakenly moved to the Wiki plugin"
+  So this autogenerated *.xlex will fail.
+-->
+            <map:generate  type="text2xml"   src="{lm:chaperon.grammar.{1}}"/>
+            <map:transform type="lexer"  src="{lm:chaperon.lexicon.grm}"/>
+            <map:transform type="parser" src="{lm:chaperon.xgrammar.grm}"/>
+            <map:transform               src="{lm:transform.chaperon.text4regex}"/>
+            <map:transform type="lexer"  src="{lm:chaperon.lexicon.regex}"/>
+            <map:transform type="parser" src="{lm:chaperon.xgrammar.regex}"/>
+            <map:transform               src="{lm:transform.chaperon.grammar.lexicon}"/>
+            <map:serialize type="xml"/>
+          </map:otherwise>
+        </map:select>
+      </map:match>
+    </map:pipeline>
+<!-- 
+         This is the user pipeline, that can answer requests instead
+         of the Forrest one, or let requests pass through.
+         To take over the rendering of a file it must match the file name and path.
+         To take over the generation of the intermediate format, it must give
+         Forrest the same filename but ending with xml, and a DTD that Forrest
+         recognizes.
+      -->
+    <map:pipeline internal-only="false">
+      <map:select type="exists">
+        <map:when test="{properties:sitemap}">
+          <map:mount uri-prefix=""
+                          src="{properties:sitemap}" 
+                          check-reload="yes" 
+                          pass-through="true"/>
+        </map:when>
+      </map:select>
+    </map:pipeline>
+<!-- 
+          This is the Plugin Sitemap that is responsible for calling
+          all the configured plug-ins before default processing takes place.              
+      -->
+    <map:pipeline internal-only="false">
+      <map:select type="exists">
+        <map:when test="{properties:temp-dir}/internal.xmap">
+          <map:mount uri-prefix="" src="{properties:temp-dir}/internal.xmap" check-reload="yes" pass-through="true"/>
+        </map:when>
+      </map:select>
+    </map:pipeline>
+<!-- Project supplied locationmap. Projects can override this
+         matcher if they want to generate the locationmap dynamically -->
+    <map:pipeline internal-only="true">
+      <map:match pattern="locationmap-project.xml">
+        <map:generate src="{properties:content}locationmap.xml"/>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+    <map:pipeline internal-only="false">
+<!-- 
+          Delivers skin configuration information in a usable form            
+         -->
+      <map:match pattern="skinconf.xml">
+        <map:generate src="{lm:project.skinconf}" />
+        <map:transform src="{lm:transform.xml.xml-doctype-stripped}"/>
+        <map:transform src="{lm:transform.old-skinconf.new-skinconf}"/>
+        <map:select type="exists">
+          <map:when test="{lm:project-skinconf.xsl}">
+            <map:transform src="{lm:project-skinconf.xsl}"/>
+          </map:when>
+          <map:when test="{lm:forrest-skinconf.xsl}">
+            <map:transform src="{lm:forrest-skinconf.xsl}"/>
+          </map:when>
+        </map:select>
+        <map:transform src="{lm:common-skinconf.xsl}"/>
+        <map:transform type="skinconf"/>
+        <map:serialize type="xml" />
+      </map:match>
+<!-- Add some build information, which is added to the html head -->
+      <map:match pattern="build-info">
+        <map:generate src="{lm:project.build-info}"/>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+    <map:pipeline internal-only="false">
+<!-- ============================================================ -->
+<!-- SOURCE FORMATS                                               -->
+<!--                 Raw XML sources, typically doc-v12 format    -->
+<!-- ============================================================ -->
+<!-- http://forrest.apache.org/docs/sitemap-ref.html#source_pipelines -->
+<!-- Body content -->
+      <map:match pattern="**.xml">
+        <map:match pattern="locationmap.xml">
+          <map:generate src="{forrest:forrest.locationmap}" />
+          <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="plugins.xml">
+          <map:mount uri-prefix="" src="plugins.xmap" check-reload="yes" />
+        </map:match>
+        <map:match pattern="pluginDocs/plugins_(.*)/index(|\.source).xml" type="regexp">
+          <map:mount uri-prefix="" src="plugins.xmap" check-reload="yes" />
+        </map:match>
+        <map:match pattern="linkmap.*">
+          <map:mount uri-prefix="" src="linkmap.xmap" check-reload="yes" />
+        </map:match>
+        <map:match pattern="**faq.xml">
+          <map:mount uri-prefix="" src="faq.xmap" check-reload="yes" />
+        </map:match>
+        <map:match pattern="community/**index.xml">
+          <map:mount uri-prefix="" src="forrest.xmap" check-reload="yes" />
+        </map:match>
+        <map:match pattern="community/*/**.xml">
+          <map:mount uri-prefix="" src="revisions.xmap" check-reload="yes" />
+        </map:match>
+<!-- wholesite is preferred; site is here for compatibility -->
+        <map:match pattern="wholesite.xml">
+          <map:mount uri-prefix="" src="aggregate.xmap" check-reload="yes" />
+        </map:match>
+        <map:match pattern="site.xml">
+          <map:mount uri-prefix="" src="aggregate.xmap" check-reload="yes" />
+        </map:match>
+<!-- Lucene index update and search -->
+        <map:match pattern="lucene-*.xml">
+          <map:mount uri-prefix="" src="search.xmap" check-reload="yes"/>
+        </map:match>
+<!-- Default source types -->
+        <map:mount uri-prefix="" src="forrest.xmap" check-reload="yes" />
+      </map:match>
+<!-- Menu content -->
+      <map:match pattern="abs-menulinks">
+        <map:mount uri-prefix="" src="menu.xmap" check-reload="yes" />
+      </map:match>
+      <map:match pattern="**menulinks-*">
+        <map:mount uri-prefix="" src="menu.xmap" check-reload="yes" />
+      </map:match>
+<!-- Link maps -->
+      <map:match pattern="abs-linkmap">
+        <map:mount uri-prefix="" src="linkmap.xmap"/>
+      </map:match>
+      <map:match pattern="**linkmap-*">
+        <map:match pattern="linkmap-wholesite.*">
+          <map:mount uri-prefix="" src="aggregate.xmap" check-reload="yes" />
+        </map:match>
+        <map:match pattern="linkmap-site.*">
+          <map:mount uri-prefix="" src="aggregate.xmap" check-reload="yes" />
+        </map:match>
+        <map:mount uri-prefix="" src="linkmap.xmap" check-reload="yes" />
+      </map:match>
+    </map:pipeline>
+<!-- ============================================================ -->
+<!-- INTERMEDIATE FORMATS                                         -->
+<!--                          Tabs, menus and body HTML.          -->
+<!--                       Called from output format pipelines    -->
+<!-- ============================================================ -->
+<!-- http://forrest.apache.org/docs/sitemap-ref.html#intermediate_pipelines -->
+    <map:pipeline internal-only="false">
+<!-- External matches -->
+<!-- (HTML rendered directly from special formats) -->
+      <map:match pattern="**body-faq.html">
+        <map:mount uri-prefix="" src="faq.xmap" check-reload="yes" />
+      </map:match>
+      <map:match pattern="**body-*.html">
+        <map:select type="exists">
+          <map:when test="{lm:project.{1}{2}.ehtml}">
+            <map:generate src="{lm:project.{1}{2}.ehtml}" />
+            <map:transform src="{lm:transform.html.htmlbody}" />
+            <map:transform type="linkrewriter" src="cocoon:/{1}linkmap-{2}.html"/>
+            <map:transform src="{lm:transform.html.broken-links}" />
+            <map:serialize type="xml" />
+          </map:when>
+        </map:select>
+      </map:match>
+<!-- Default matches -->
+<!-- (HTML rendered from doc-v13 intermediate format -->
+      <map:match pattern="**body-*.html">
+        <map:generate src="cocoon:/{1}{2}.xml"/>
+        <map:transform type="idgen"/>
+        <map:transform type="xinclude"/>
+        <map:transform type="linkrewriter" src="cocoon:/{1}linkmap-{2}.html"/>
+        <map:transform src="{lm:transform.html.broken-links}" />
+        <map:call resource="skinit">
+          <map:parameter name="type" value="transform.xdoc.html"/>
+          <map:parameter name="path" value="{1}{2}.html"/>
+          <map:parameter name="notoc" value="false"/>
+        </map:call>
+      </map:match>
+      <map:match pattern="**menu-*.html">
+        <map:generate src="cocoon:/{1}book-{2}.html"/>
+        <map:transform type="linkrewriter" src="cocoon:/{1}linkmap-{2}.html"/>
+        <map:transform src="{lm:transform.html.broken-links}" />
+        <map:call resource="skinit">
+          <map:parameter name="type" value="transform.book.menu"/>
+          <map:parameter name="path" value="{1}{2}.html"/>
+        </map:call>
+        <map:serialize type="xml"/>
+      </map:match>
+      <map:match pattern="**tab-*.html">
+        <map:mount uri-prefix="" src="tabs.xmap" check-reload="yes" />
+      </map:match>
+      <map:match pattern="**i18n-*.html">
+        <map:mount uri-prefix="" src="i18n.xmap" check-reload="yes" />
+      </map:match>
+      <map:match pattern="**book-*.html">
+        <map:mount uri-prefix="" src="menu.xmap" check-reload="yes" />
+      </map:match>
+    </map:pipeline>
+<!-- ============================================================ -->
+<!-- OUTPUT FORMATS                                               -->
+<!--                  Serves content directly to the user         -->
+<!-- +==========================================================+ -->
+<!-- http://forrest.apache.org/docs/sitemap-ref.html#output_pipelines -->
+    <map:pipeline internal-only="false">
+      <map:select type="exists">
+        <map:when test="{lm:plugin.xmap.output}">
+          <map:mount uri-prefix="" src="{lm:plugin.xmap.output}" check-reload="yes" pass-through="true"/>
+        </map:when>
+      </map:select>
+    </map:pipeline>
+    <map:pipeline internal-only="false">
+<!--pipeline that "marries" the docs in the root dir with the skin to produce html-->
+      <map:match pattern="*.html">
+        <map:aggregate element="site">
+          <map:part src="cocoon:/skinconf.xml"/>
+          <map:part src="cocoon:/build-info"/>
+          <map:part src="cocoon:/tab-{0}"/>
+          <map:part src="cocoon:/menu-{0}"/>
+          <map:part src="cocoon:/body-{0}"/>
+        </map:aggregate>
+        <map:call resource="skinit">
+          <map:parameter name="type" value="transform.site.xhtml"/>
+          <map:parameter name="path" value="{0}"/>
+        </map:call>
+      </map:match>
+<!--pipeline that "marries" the docs in all other dirs then root with the skin to produce html-->
+      <map:match pattern="**/*.html">
+        <map:aggregate element="site">
+          <map:part src="cocoon:/skinconf.xml"/>
+          <map:part src="cocoon:/build-info"/>
+          <map:part src="cocoon:/{1}/tab-{2}.html"/>
+          <map:part src="cocoon:/{1}/menu-{2}.html"/>
+          <map:part src="cocoon:/{1}/body-{2}.html"/>
+        </map:aggregate>
+        <map:call resource="skinit">
+          <map:parameter name="type" value="transform.site.xhtml"/>
+          <map:parameter name="path" value="{0}"/>
+        </map:call>
+      </map:match>
+<!-- generate faq.fo specially  -->
+      <map:match pattern="**faq.fo">
+        <map:mount uri-prefix="" src="faq.xmap" check-reload="yes" />
+      </map:match>
+<!-- generate .fo from .xml  -->
+      <map:match type="regexp" pattern="^(.*?)([^/]*).fo$">
+        <map:select type="exists">
+          <map:when test="{lm:project.{1}{2}.fo}">
+            <map:generate src="{lm:project.{1}{2}.fo}"/>
+          </map:when>
+          <map:otherwise>
+            <map:aggregate element="site">
+              <map:part src="cocoon:/skinconf.xml"/>
+              <map:part src="cocoon:/{1}{2}.xml"/>
+            </map:aggregate>
+<!-- <map:transform type="idgen"/> -->
+            <map:transform type="xinclude"/>
+            <map:transform type="linkrewriter" src="cocoon://{1}linkmap-{2}.fo"/>
+            <map:transform src="{lm:transform.document.fo}">
+              <map:parameter name="imagesdir" value="{properties:resources.images}/"/>
+              <map:parameter name="xmlbasedir" value="{properties:content.xdocs}{1}"/>
+            </map:transform>
+          </map:otherwise>
+        </map:select>
+        <map:serialize type="xml"/>
+      </map:match>
+      <map:match pattern="**.lucene">
+        <map:mount uri-prefix="" src="search.xmap" check-reload="yes" />
+      </map:match>
+      <map:select type="exists">
+        <map:when test="{lm:plugin.xmap.resources}">
+          <map:mount uri-prefix="" 
+                      src="{lm:plugin.xmap.resources}" 
+                      check-reload="yes" 
+                      pass-through="true"/>
+        </map:when>
+      </map:select>
+      <map:match pattern="**.js">
+        <map:mount uri-prefix="" src="resources.xmap" check-reload="yes" />
+      </map:match>
+      <map:match pattern="**.css">
+        <map:mount uri-prefix="" src="resources.xmap" check-reload="yes" />
+      </map:match>
+      <map:match pattern="**images**">
+        <map:mount uri-prefix="" src="resources.xmap" check-reload="yes" />
+      </map:match>
+      <map:match pattern="**.png">
+        <map:mount uri-prefix="" src="resources.xmap" check-reload="yes" />
+      </map:match>
+      <map:match pattern="**.ico">
+        <map:mount uri-prefix="" src="resources.xmap" check-reload="yes" />
+      </map:match>
+      <map:match type="regexp" pattern="^.+$">
+        <map:select type="exists">
+          <map:when test="{lm:project.{0}}">
+            <map:mount uri-prefix="" src="raw.xmap" check-reload="yes" />
+          </map:when>
+        </map:select>
+      </map:match>
+    </map:pipeline>
+<!-- ============================================================ -->
+<!-- REDIRECTS                                                    -->
+<!-- ============================================================ -->
+    <map:pipeline internal-only="false">
+      <map:match pattern="">
+        <map:redirect-to uri="index.html" />
+      </map:match>
+      <map:match type="regexp" pattern="^.+/$">
+        <map:redirect-to uri="index.html"/>
+      </map:match>
+    </map:pipeline>
+<!-- 
+     <map:handle-errors>
+      <map:select type="exception">
+       <map:when test="resourceNotFound">
+         <map:generate  type="exception"/>
+         <map:transform src="{lm:transform.exception.html}"/>
+         <map:serialize type="html"/>
+       </map:when>
+      </map:select>
+    </map:handle-errors>
+    -->
+  </map:pipelines>
+</map:sitemap>

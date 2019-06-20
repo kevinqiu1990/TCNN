@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd">
+<document>
+  <header>
+    <title>Upgrading to Forrest 0.5</title>
+    <version>$Revision: 1.8 $</version>
+  </header>
+  <body>
+    <section>
+      <title>Introduction</title>
+      <p>
+        This page describes changes to Forrest that affect people who are
+        upgrading from 0.4 and earlier to the 0.5 version. Please post your
+        upgrade experiences to the
+        <link href="site:mail-lists/forrest-dev">forrest-dev mailing
+        list</link>. As more experience is gained, this document will be
+        updated.
+      </p>
+    </section>
+    <section>
+      <title>New Features</title>
+      <p>
+        This new version includes many changes, as it as been under development
+        for seven months (in part, awaiting the Cocoon 2.1 release). The
+        following list shows some of the key new features for Forrest 0.5 (for
+        the full list of changes, see the
+        <link href="site:v0.50//changes">change log</link>).
+      </p>
+      <ul>
+        <li>Significantly faster (100% - 300%) command-line rendering</li>
+        <li>Docbook support. The DTDs are shipped. Document types are
+        automatically detected by the sitemap and there is a basic stylesheet
+        which converts DocBook documents to intermediate forrest document-v12
+        for standard rendering. For rendering as full DocBook, see
+        <link href="site:v0.50//faq/docbook">this FAQ entry</link>.
+       </li>
+        <li>Configuration of URLs to ignore with cli.xconf configuration.</li>
+        <li>Skin enhancements.</li>
+        <li>The document-v12 DTDs are added. You can still use the old
+        document-v11 DTDs if you would rather. However it is easy to upgrade
+        - just change the document type declarations in you project's xdocs
+        and run '<code>forrest validate-xdocs</code>'.</li>
+        <li>Automated handling of documents in Wiki syntax. See the
+         fresh-site example which are generated when you
+         '<code>forrest seed</code>' a new project.</li>
+        <li>The '<code>forrest backcopy</code>' target copies all
+         types of content that you may have edited under the webapp while
+         doing a '<code>forrest run</code>'.</li>
+        <li>Flag for email obfuscation.</li>
+        <li>Support for raw un-processed content. See 
+        <link href="site:v0.50//faq/link_raw">this FAQ entry</link>.
+        </li>
+        <li>Element <code>&lt;abstract&gt;</code> is now rendered in the 
+        HTML output.</li>
+        <li>Images scale properly in PDF output. See also
+        <link href="site:v0.50//faq/pdf_images">this FAQ entry</link>.
+        </li>
+        <li>Configurable table-of-content depth with new 'toc' element in
+        the <code>skinconf.xml</code> configuration.</li>
+      </ul>
+    </section>
+    <section>
+      <title>Upgrading the sitemap</title>
+      <p>
+        In brief, Forrest 0.5 is <em>mostly</em> backwards-compatible for sites
+        that do not define a custom sitemap. Between 0.4 and 0.5, the Forrest
+        sitemap was completely rewritten. Instead of a single sitemap.xmap doing
+        everything, a 'driver' sitemap.xmap now delegates to a number of mounted
+        subsitemaps handling different functional areas. The new sitemap is
+        fully described in the <link href="site:v0.50//sitemap-ref">Sitemap
+        Reference</link>.
+      </p>
+      <p>
+        Users that have overridden and augmented the Forrest 0.4 sitemap.xmap
+        (run '<code>forrest overrides</code>' to see if your project has) will
+        need to:
+      </p>
+      <ol>
+        <li>Move their overridden sitemap (<code>src/documentation/sitemap.xmap</code>) out the way</li>
+        <li>Copy the new sitemap, $FORREST_HOME/context/sitemap.xmap, to <code>src/documentation</code></li>
+        <li>Reapply your customizations to the new sitemap.xmap.  Customizations can be determined by comparing your modified
+          sitemap.xmap with 
+          <link href="http://cvs.apache.org/viewcvs.cgi/*checkout*/xml-forrest/src/resources/conf/sitemap.xmap?rev=1.66&amp;only_with_tag=FORREST_04">original
+            Forrest 0.4 sitemap</link>.</li>
+      </ol>
+    </section>
+    <section>
+      <title>Version-specific sitemaps</title>
+      <p>
+        Forrest 0.5 now supports <em>version-specific sitemaps</em>. Ie., if
+        your project's overridden sitemap is called
+        <code>sitemap-0.5.xmap</code>, then this sitemap will be used in
+        preference to <code>sitemap.xmap</code>, or any other sitemap-*.xmap
+        variants.
+      </p>
+      <p>
+        So if, for example, one has:
+      </p>
+      <source>
+        src/documentation/sitemap.xmap
+        src/documentation/sitemap-0.5.xmap
+      </source>
+      <p>
+        Then Forrest 0.4 will use sitemap.xmap, and Forrest 0.5 will use
+        sitemap-0.5.xmap. This means users don't need to all upgrade to 0.5 at
+        once.
+      </p>
+      <p>
+        As Forrest 0.5 has been split into multiple sitemaps, this
+        version-specific behaviour is triggered for any *-0.5.xmap file. For
+        example, if one has:
+      </p>
+      <source>
+        src/documentation/sitemap.xmap
+        src/documentation/forrest-0.5.xmap
+      </source>
+      <p>
+        Then Forrest 0.4 will use sitemap.xmap, and Forrest 0.5 will use
+        Forrest's own sitemap.xmap, plus the user-defined forrest-0.5.xmap file.
+      </p>
+      <p>
+        The same system prevents future compatibility problems, so Forrest 0.5
+        should continue to work when future (incompatible) sitemaps are present:
+      </p>
+      <source>
+        src/documentation/sitemap.xmap
+        src/documentation/sitemap-0.5.xmap
+        src/documentation/sitemap-0.6.xmap
+        src/documentation/sitemap-0.7.xmap
+      </source>
+      <note>
+        If your <code>forrest.properties</code> defines the
+        <code>forrest.validate.sitemap.{includes,excludes}</code> properties,
+        these will have to be updated to prevent validation of sitemaps from
+        unused versions. If undefined, Forrest will only validate sitemaps from
+        the current version.
+      </note>
+    </section>
+    <section>
+      <title>Excluding URLs: filterlinks.xsl removed and cli.xconf added</title>
+      <p>
+        In Forrest 0.4 certain URLs could be excluded from command-line
+        processing by overriding and editing <code>filterlinks.xsl</code> and so
+        excluding the link nodes.
+      </p>
+      <p>
+        Forrest 0.5 uses the re-written command-line from Cocoon 2.1.1 which,
+        apart from being much faster, <strong>does not use
+        filterlinks.xsl</strong>. Instead, patterns for command-line inclusion
+        and exclusion can be specified in cli.xconf, as described in
+        <link href="site:v0.50//faq/cli-xconf">this FAQ entry</link>. There is
+        already a default cli.xconf but you can over-ride that with your own if
+        needed by copying <code>resources/conf/cli.xconf</code> from the Forrest
+        distribution into your project's top-level directory.
+      </p>
+    </section>
+    <section>
+      <title>Skin invocation changes</title>
+      <p>
+        Users with custom skins <em>may</em> need to update them, depending on
+        what use they make of passed-in XSLT parameters. If your custom skin
+        does not appear to work with 0.5, look in Forrest's
+        <code>sitemap.xmap</code> for occurrences of
+        <code>{forrest:forrest.skin}</code>, and check that the callee (your
+        XSLT) is expecting what the caller (the sitemap) is passing it. Forrest
+        skins can be used as a reference.
+      </p>
+    </section>
+    <section>
+      <title>Upgrading skinconf.xml</title>
+      <p>
+        Look at the
+        <link href="http://cvs.apache.org/viewcvs/xml-forrest/src/resources/fresh-site/src/documentation/skinconf.xml.diff?r1=1.7%3AFORREST_04&#38;r2=1.15%3AFORREST_05&#38;diff_format=h">differences
+        for the sample skinconf.xml</link> as a guide. You will need to update
+        the internal DTD and add several new elements.
+      </p>
+    </section>
+    <section>
+      <title>Upgrading forrest.properties</title>
+      <p>
+        Look at the
+        <link href="http://cvs.apache.org/viewcvs/xml-forrest/src/resources/fresh-site/forrest.properties.diff?r1=1.20%3AFORREST_04&#38;r2=1.32%3AFORREST_05&#38;diff_format=h">differences
+        for the sample forrest.properties</link> as a guide. Note that
+        project.sitemap has changed to project.sitemap-dir and note that
+        cli.xconf now controls some settings that were previously controlled by
+        forrest.properties, such as project.start-uri
+      </p>
+    </section>
+    <section>
+      <title>Run a clean target after upgrade</title>
+      <p>
+        To avoid any issue with old classes being loaded, run a '<code>forrest
+        clean</code>' just after you upgraded to this version.
+      </p>
+    </section>
+    <section>
+      <title>SVGs should omit DOCTYPE declarations</title>
+      <fixme author="forrest-dev">
+        Is this note still relevant?
+      </fixme>
+      <p>
+        In Forrest 0.5, sites that render SVGs may encounter
+        ClassCastExceptions:
+      </p>
+      <source>
+javax.xml.transform.TransformerException: java.lang.ClassCastException
+    at org.apache.xalan.transformer.TransformerImpl.transformNode(TransformerImpl.java:1326)
+    at org.apache.xalan.transformer.TransformerImpl.run(TransformerImpl.java:3329)
+...</source>
+      <p>
+        There appears to be a bug in Cocoon 2.1.1's SVG component where the DTD
+        associated with SVGs cannot be resolved. The workaround is to edit your
+        <code>src/documentation/resources/images/*.svg</code> files, and comment
+        out the <strong>&lt;!DOCTYPE ... &gt;</strong> declaration.
+      </p>
+    </section>
+    <section>
+      <title>To be continued...</title>
+      <p>
+        ..as more issues are discovered/remembered :) Please send feedback to
+        the <link href="site:mail-lists/forrest-dev">mailing list</link>.
+      </p>
+    </section>
+  </body>
+</document>

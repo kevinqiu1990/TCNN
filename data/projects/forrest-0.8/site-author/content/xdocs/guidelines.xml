@@ -1,0 +1,844 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Apache Forrest project guidelines</title>
+  </header>
+  <body>
+    <p>
+      This document provides the guidelines under which the Apache Forrest
+      project operates. It defines the roles and responsibilities, who may vote,
+      how voting works, how conflicts are resolved, etc. Apache Forrest is a
+      project of The Apache Software Foundation
+      (<link href="http://www.apache.org/foundation/">ASF</link>) which is a
+      non-profit corporation. As with all such organisations there are some
+      procedures to be followed. The ASF website explains the operation and
+      background of the ASF. These project guidelines supplement that ASF
+      documentation. Normally these guidelines are not needed - the project just
+      gets on with its day-to-day operation - but they enable all people to
+      understand how the project operates.
+    </p>
+    <section id="mission">
+      <title>The mission of Apache Forrest</title>
+      <p>
+        The creation and maintenance of open-source software for distribution at
+        no charge to the public, with the purpose of generation of aggregated
+        multi-channel documentation maintaining a separation of content and
+        presentation.
+      </p>
+    </section>
+    <section id="way">
+      <title>Open development</title>
+      <p>
+        Forrest is typical of Apache projects, in that it operates under a set
+        of principles that encourage open development. There is no clear
+        definition (perhaps that is part of it) and it is ever-evolving. Each
+        ASF project is different in its own way - there is healthy diversity
+        rather than uniformity across all projects. The main principles are to
+        facilitate open collaborative development, with respect for others; to
+        ensure that there is a healthy community (even to give community issues
+        higher priority than code issues); to use a consensus-based approach; to
+        ensure that each <link href="#contribution">contributor</link> is
+        recognised and feels a productive part of the community; to encourage
+        diversity; to make the project a nice place to be.
+      </p>
+      <p>
+        Each project, as part of the
+        <link href="http://www.apache.org/foundation/records/minutes/2004/board_minutes_2004_05_26.txt">resolution</link>
+        that formed its Project Management Committee
+        (<link href="#pmc">PMC</link>), creates its set of project guidelines
+        intended to encourage open development and increased participation.
+        These facilitate the project to conduct its main charge, which is the
+        creation and maintenance of open-source software for distribution at no
+        charge to the public with the purpose of its
+        <link href="#mission">mission</link>.
+      </p>
+      <p>
+        For more information about the way that Apache projects operate, please
+        refer to the <link href="http://www.apache.org/foundation/">ASF
+        foundation</link> and <link href="http://www.apache.org/dev/">ASF
+        developer</link> sections of the ASF website, including the
+        <link href="http://www.apache.org/foundation/bylaws.html">ASF
+        ByLaws</link> and the <link href="ext:how-it-works">How it works</link>
+        document, the
+        <link href="http://www.apache.org/foundation/faq.html">FAQs</link> about
+        the Foundation, and the
+        <link href="http://incubator.apache.org/">Incubator project</link>.
+      </p>
+    </section>
+    <section id="roles">
+      <title>Roles and responsibilities</title>
+      <p>
+        The meritocracy enables various roles as defined in the
+        <link href="ext:how-it-works">How it works</link> document.
+      </p>
+      <p>
+        <link href="http://www.apache.org/foundation/how-it-works.html#users">user</link>
+        |
+        <link href="http://www.apache.org/foundation/how-it-works.html#developers">developer</link>
+        |
+        <link href="http://www.apache.org/foundation/how-it-works.html#committers">committer</link>
+        |
+        <link href="http://www.apache.org/foundation/how-it-works.html#pmc-members">PMC
+        member</link> |
+        <link href="http://www.apache.org/foundation/how-it-works.html#asf-members">ASF
+        member</link>
+      </p>
+      <p>
+        The Apache Forrest committers and PMC members are
+        <link href="site:who">listed</link>.
+      </p>
+    </section>
+    <section id="pmc">
+      <title>Project Management Committee (PMC)</title>
+      <p>
+        The Apache Forrest project was established in January 2002 and became a
+        top-level project in May 2004. The Project Management Committee (PMC)
+        was created by a
+        <link href="http://www.apache.org/foundation/records/minutes/2004/board_minutes_2004_05_26.txt">resolution</link>
+        of the board of the Apache Software Foundation. See explanation of the
+        role of the PMC in that resolution and also the
+        <link href="http://www.apache.org/foundation/bylaws.html">ASF
+        Bylaws</link> and
+        <link href="http://www.apache.org/foundation/how-it-works.html#pmc">How-it-works</link>
+        and this
+        <link href="http://mail-archives.apache.org/mod_mbox/incubator-general/200311.mbox/%3C7025D8A1-1D0F-11D8-8AF4-000393753936@apache.org%3E">mail
+        thread</link>.
+      </p>
+      <p id="pmc-committers">
+        At Forrest, the group of PMC members essentially equates to the group of
+        committers. We encourage all committers to be PMC members. See
+        explanation <link href="#elect">below</link>. See the
+        "<link href="site:who">who we are</link>" page for explanation of why
+        some committers from the old project are not PMC members.
+      </p>
+      <p>
+        PMC members can be as active as they choose, with no pressure from the
+        project. People can be quiet and speak up occasionally when they see a
+        topic that motivates them enough to contribute to the discussion or to
+        cast a vote. Individual PMC members do not need to be involved in every
+        aspect of the project. As a group, the PMC will maintain sufficient
+        oversight.
+      </p>
+      <p>
+        The responsibilities of the PMC include:
+      </p>
+      <ul>
+        <li>Be familiar with these project guidelines, and the
+      ASF Bylaws, and with the ASF documentation and procedures
+      in general.</li>
+        <li>Keep oversight of the commit log messages and ensure that
+       the codebase does not have copyright and license issues, and that the
+       project is heading in the desired direction.</li>
+        <li>Keep oversight of the mailing lists and community to ensure that
+       the <link href="#way">open development</link> ideals are upheld.</li>
+        <li>Resolve license disputes regarding products of the project,
+        including other supporting software that is re-distributed.</li>
+        <li>Decide what is distributed as products of the project.
+        In particular all releases must be approved by the PMC.</li>
+        <li>Guide the direction of the project.</li>
+        <li>Strive for and help to facilitate a harmonious productive community.</li>
+        <li>Nominate new PMC members and committers.</li>
+        <li>Maintain the project's shared resources, including the
+        codebase repository, mailing lists, websites.</li>
+        <li>Speak on behalf of the project.</li>
+        <li>Maintain these and other guidelines of the project.</li>
+      </ul>
+      <p>
+        The PMC does have a private mailing list on which it can discuss certain
+        issues. However this list is rarely used and every effort is made to
+        conduct all discussion on the public mailing lists.
+      </p>
+      <p>
+        Membership of the PMC is by invitation only and must receive consensus
+        approval of the PMC members.
+      </p>
+      <p>
+        The actual list of PMC members is in the SVN "committers" repository at
+        /board/committee-info.txt and is reflected at the
+        "<link href="site:who">who we are</link>" page.
+      </p>
+      <p id="emeritus">
+        A PMC member is considered "emeritus" by their own declaration, e.g.
+        perhaps personal reasons. Please send a note to the PMC private mail
+        list and we will follow up to request acknowledgement of the Board. An
+        emeritus member may request reinstatement to the PMC. Such reinstatement
+        is subject to consensus approval of the PMC members. Membership of the
+        PMC can be revoked by unanimous consensus of PMC members (other than the
+        member in question).
+      </p>
+      <p>
+        The chair of the PMC is appointed by the Board and is an officer of the
+        ASF (Vice President). The chair has primary responsibility to the Board,
+        and has the power to establish rules and procedures for the day-to-day
+        management of the communities for which the PMC is responsible,
+        including the composition of the PMC itself. The chair reports to the
+        board every three months about the status of the project. The PMC may
+        consider the position of PMC chair annually and may recommend a new
+        chair to the board. Ultimately, however, it is the board's
+        responsibility who it chooses to appoint as the PMC chair. See further
+        explanation of the role of the chair in the
+        <link href="http://www.apache.org/foundation/bylaws.html">ASF
+        Bylaws</link> and the
+        <link href="http://www.apache.org/dev/pmc.html#chair">PMC FAQ</link>
+      </p>
+      <section id="report">
+        <title>Quarterly reports to ASF Board</title>
+        <p>
+          Every three months, it is the responsibility of our PMC chair to send
+          a report to the ASF Board. This is mainly concerned with the status of
+          our community, but can also include the technical progress. Further
+          details are in the "committers" SVN in the /board/ directory.
+        </p>
+        <p>
+          The minutes are available for each
+          <link href="http://www.apache.org/foundation/board/calendar.html">
+          board meeting</link>. Our reporting schedule is: Feb, May, Aug, Nov.
+        </p>
+      </section>
+      <section id="elect">
+        <title>Electing new committers and PMC members</title>
+        <p>
+          When we see new people who are committed and consistent, we will
+          discuss each case to ensure that the PMC is in agreement. See the list
+          of <link href="site:committed">qualities</link> that we look for. We
+          conduct the vote on the private PMC mailing list to enable a frank
+          discussion and so that we do not conduct public discussions about
+          people.
+        </p>
+        <p>
+          In most cases we will be inviting people to go straight from developer
+          to PMC member, i.e. they simultaneously become committer and PMC
+          member. We always want new committers to also be PMC members.
+          Otherwise they do not have a binding vote and so we would create
+          classes of committers. Another issue is
+          <link href="http://mail-archives.apache.org/mod_mbox/incubator-general/200311.mbox/%3C7025D8A1-1D0F-11D8-8AF4-000393753936@apache.org%3E">indemnification</link>.
+          However, when we invite a new committer we do let them choose not to
+          be on the PMC, though we do not encourage that.
+        </p>
+        <p>
+          However, there may be extraordinary cases where we want limited
+          work-related commit access and so the committer is not also a PMC
+          member (e.g. perhaps temporary access for
+          <link href="http://wiki.apache.org/general/SummerOfCode">GSoC</link>).
+          This will be resolved during the discussion and vote.
+        </p>
+        <p>
+          PMC members can also see further
+          <link href="https://svn.apache.org/repos/private/pmc/forrest/pmc-member-vote.txt">notes</link>
+          about the process of electing new people.
+        </p>
+      </section>
+    </section>
+    <section id="decision">
+      <title>Decision making</title>
+      <p>
+        Different types of decisions require different forms of approval. For
+        example, the previous section describes several decisions which require
+        "consensus approval". This section defines how voting is performed, the
+        types of approval, and which types of decision require which type of
+        approval.
+      </p>
+      <p>
+        Most day-to-day operations do not require explicit voting - just get on
+        and do the work. See the "Lazy approval" type described below.
+      </p>
+      <section id="voting">
+        <title>Voting</title>
+        <p>
+          Certain actions and decisions regarding the project are made by votes
+          on the project development mailing list. Where necessary, PMC voting
+          may take place on the private PMC mailing list.
+        </p>
+        <p>
+          Votes are clearly indicated by subject line starting with [VOTE].
+          Discussion and proposal should have happened prior to the vote. Voting
+          is carried out by replying to the vote mail. See
+          <link href="#procedure">voting procedure</link> below. Votes are
+          expressed using one of the following symbols:
+        </p>
+        <table>
+          <tr>
+            <td><strong>+1</strong>
+            </td>
+            <td>
+            "Yes," "Agree," or "the action should be
+            performed." In general, this vote also indicates a willingness
+            on the behalf of the voter to assist with "making it happen".
+          </td>
+          </tr>
+          <tr>
+            <td><strong>+0</strong>
+            </td>
+            <td>
+            This vote indicates a willingness for the action under
+            consideration to go ahead. The voter, however will not be able
+            to help.
+          </td>
+          </tr>
+          <tr>
+            <td><strong>-0</strong>
+            </td>
+            <td>
+            This vote indicates that the voter does not, in general, agree with
+            the proposed action but is not concerned enough to prevent the
+            action going ahead.
+          </td>
+          </tr>
+          <tr>
+            <td><strong>-1</strong>
+            </td>
+            <td>
+            This is a negative vote. On issues where consensus is required,
+            this vote counts as a <link href="#veto">veto</link>.
+            All vetoes must
+            contain an explanation of why the veto is appropriate. Vetoes with
+            no explanation are void. It may also be appropriate for a -1 vote
+            to include an alternative course of action.
+          </td>
+          </tr>
+          <tr>
+            <td><strong>abstain</strong>
+            </td>
+            <td>People can abstain from voting. They can either remain
+          silent or express their reason.
+          </td>
+          </tr>
+        </table>
+        <p>
+          All participants in the project are encouraged to show their
+          preference for a particular action by voting. When the votes are
+          tallied, only the votes of PMC members are binding. Non-binding votes
+          are still useful to enable everyone to understand the perception of an
+          action by the wider community.
+        </p>
+        <p>
+          Voting can also be applied to changes made to the project codebase.
+          These typically take the form of a veto (-1) in reply to the commit
+          message sent when the commit is made.
+        </p>
+      </section>
+      <section id="approvals">
+        <title>Types of approval</title>
+        <p>
+          Different actions require different types of approval:
+        </p>
+        <table>
+          <tr>
+            <td><strong>Consensus approval</strong>
+            </td>
+            <td>
+            Consensus approval requires 3 binding +1 votes and no binding vetoes.
+          </td>
+          </tr>
+          <tr>
+            <td><strong>Lazy majority</strong>
+            </td>
+            <td>
+            A lazy majority vote requires 3 binding +1 votes and more binding +1
+            votes than -1 votes.
+          </td>
+          </tr>
+          <tr>
+            <td><strong>Lazy approval</strong>
+            </td>
+            <td>
+            An action with lazy approval is implicitly allowed unless a -1 vote
+            is received, at which time, depending on the type of action, either
+            lazy majority or consensus approval must be obtained.
+          </td>
+          </tr>
+          <tr>
+            <td><strong>2/3 majority</strong>
+            </td>
+            <td>
+            Some actions require a 2/3 majority of PMC members.
+            Such actions typically affect the foundation
+            of the project (e.g. adopting a new codebase to replace an existing
+            product). The higher threshold is designed to ensure such changes
+            are strongly supported. To pass this vote requires at least 2/3 of
+            the votes that are cast to be +1.
+          </td>
+          </tr>
+          <tr>
+            <td><strong>Unanimous consensus</strong>
+            </td>
+            <td>
+            All of the votes that are cast are to be +1 and there
+            can be no binding vetoes (-1).
+          </td>
+          </tr>
+        </table>
+      </section>
+      <section id="veto">
+        <title>Vetoes</title>
+        <p>
+          A valid veto cannot be over-ruled, it can only be withdrawn by its
+          issuer. Any veto must be accompanied by reasoning and be prepared to
+          defend it.
+        </p>
+        <p>
+          The validity of a veto, if challenged, can be confirmed by anyone who
+          has a binding vote. This does not necessarily signify agreement with
+          the veto - merely that the veto is valid. In case of disputes about
+          whether a veto is valid, then opinion of the PMC chair is final.
+        </p>
+        <p>
+          If you disagree with a valid veto, then you must engage the person
+          casting the veto to further discuss the issues. The vetoer is obliged
+          to vote early and to then work with the community to resolve the
+          matter.
+        </p>
+        <p>
+          If a veto is not withdrawn, the action that has been vetoed must be
+          reversed in a timely manner.
+        </p>
+      </section>
+      <section id="actions">
+        <title>Actions</title>
+        <p>
+          This section describes the various actions which are undertaken within
+          the project, the corresponding approval required for that action, and
+          those who have binding votes over the action.
+        </p>
+        <table>
+          <tr>
+            <th>Action</th>
+            <th>Description</th>
+            <th>Approval</th>
+            <th>Binding Votes</th>
+          </tr>
+          <tr>
+            <td><strong>Code change</strong>
+            </td>
+            <td>
+            A change made to a codebase of the project by a committer.
+            This includes source code, documentation, website content, etc.
+          </td>
+            <td>
+            Lazy approval
+          </td>
+            <td>
+            PMC members
+          </td>
+          </tr>
+          <tr>
+            <td><strong>Release plan</strong>
+            </td>
+            <td>
+            Defines the timetable and actions for a release.
+          </td>
+            <td>
+            Lazy majority
+          </td>
+            <td>
+            PMC members
+          </td>
+          </tr>
+          <tr>
+            <td><strong>Product release</strong>
+            </td>
+            <td>
+            When a release of one of the project's products is ready, a vote is
+            required to accept the release as an official release of the
+            project.
+          </td>
+            <td>
+            Lazy majority
+          </td>
+            <td>
+            PMC members
+          </td>
+          </tr>
+          <tr>
+            <td><strong>Adoption of new codebase</strong>
+            </td>
+            <td>
+            When the codebase for an existing, released product is to be
+            replaced with an alternative codebase. If such a vote fails to
+            gain approval, the existing code base will continue.
+            This also covers the creation of new sub-projects
+            within the project.
+          </td>
+            <td>
+            2/3 majority
+          </td>
+            <td>
+            PMC members
+          </td>
+          </tr>
+          <tr>
+            <td><strong>New committer</strong>
+            </td>
+            <td>
+            When a new committer is proposed for the project.
+          </td>
+            <td>
+            Consensus approval
+          </td>
+            <td>
+           PMC members
+          </td>
+          </tr>
+          <tr>
+            <td><strong>New PMC member</strong>
+            </td>
+            <td>
+            When a new member is proposed for the PMC.
+          </td>
+            <td>
+            Consensus approval
+          </td>
+            <td>
+            PMC members
+          </td>
+          </tr>
+          <tr>
+            <td><strong>Reinstate emeritus member</strong>
+            </td>
+            <td>
+            An emeritus PMC member can be reinstated.
+          </td>
+            <td>
+            Consensus approval
+          </td>
+            <td>
+            PMC members (excluding the member in question)
+          </td>
+          </tr>
+          <tr>
+            <td><strong>Committer removal</strong>
+            </td>
+            <td>
+            When removal of commit privileges is sought.
+          </td>
+            <td>
+            Unanimous consensus
+          </td>
+            <td>
+            PMC members (excluding the committer in question if a
+            member of the PMC)
+          </td>
+          </tr>
+          <tr>
+            <td><strong>PMC member removal</strong>
+            </td>
+            <td>
+            When removal of a PMC member is sought.
+            See also section 6.5 of the ASF Bylaws whereby the ASF Board may
+            remove a PMC member.
+          </td>
+            <td>
+            Unanimous consensus
+          </td>
+            <td>
+            PMC members (excluding the member in question)
+          </td>
+          </tr>
+        </table>
+      </section>
+      <section id="timeframe">
+        <title>Voting timeframes</title>
+        <p>
+          Votes are normally open for a period of one week to allow all active
+          voters time to consider the vote. If the vote has not achieved a
+          quorum (the chair decides if sufficient people have voted), then it
+          can be extended for another week. If still no quorum, then the vote
+          fails, and would need to be raised again later. Votes relating to code
+          changes are not subject to a strict timetable, but should be made as
+          timely as possible.
+        </p>
+        <p>
+          Be careful about holidays when calling a vote. This is hard when we do
+          not know customs in every part of the world. So if someone knows that
+          there is a problem with the vote timing, then please say so.
+        </p>
+      </section>
+      <section id="procedure">
+        <title>Voting procedure</title>
+        <p>
+          Discussion about the topic would have already happened in a [Proposal]
+          email thread to express the issues and opinions. The [Vote] thread is
+          to ratify the proposal if that is felt to be necessary.
+        </p>
+        <p>
+          The instigator sends the Vote email to the dev mailing list. Describe
+          the issue with no ambiguity and in a positive sense. Define the date
+          and time for the end of the vote period.
+        </p>
+        <p>
+          Votes are expressed by replying email using the
+          <link href="#voting">voting symbols</link> defined above. Voters can
+          change their vote during the timeframe. At the end of the vote period,
+          the instigator tallies the number of final votes and reports the
+          results.
+        </p>
+      </section>
+      <section id="ultimatum">
+        <title>Ultimatum and breakdown</title>
+        <p>
+          For breakdown situations and those requiring unanimous consensus, if
+          this consensus cannot be reached within the extended timeframe, then
+          the Board expects the chair to act as the officer of the Foundation
+          and make the ultimate decision.
+        </p>
+      </section>
+    </section>
+    <section id="communication">
+      <title>Communication channels</title>
+      <p>
+        The primary mechanism for communication is the mailing lists. Anyone can
+        participate, no matter what their time zone. A reliable searchable
+        archive of past discussion is built. Oversight is enabled. Many eyes
+        ensures that the project evolves in a consistent direction.
+      </p>
+      <p>
+        All decisions are made on the "dev" mailing list.
+      </p>
+      <p>
+        The main channel for user support is the "user" mailing list. As is
+        usual with mailing lists, be prepared to wait for an answer.
+      </p>
+      <p>
+        Occasionally we will use other communication channels such as IRC. These
+        are used only for a specific purpose and are not permanently available.
+        This policy ensures that solutions are available in the mailing list
+        archives and enables people to respond at whatever time that they
+        choose. Permanent IRC channels are poor from a community-building
+        point-of-view, as they tend to create time-zone based cliques. So we
+        don't.
+      </p>
+      <p>
+        Similarly, private discussions are discouraged. The rest of the
+        community would not benefit from the understanding that is developed.
+        Off-list discussions put too much load on overworked volunteers.
+      </p>
+    </section>
+    <section id="code">
+      <title>Code management</title>
+      <p>
+        The term "patch" has two meanings: Developers provide a set of changes
+        via our <link href="site:bugs">Issue Tracker</link> marked for
+        inclusion, which will be applied by a committer. Committers apply their
+        own work directly, but it is still essentially a patch.
+      </p>
+      <p>
+        We use the
+        <link href="http://www.apache.org/foundation/glossary.html#CommitThenReview">Commit-then-review</link>
+        method for decision-making about code changes. Please refer to that
+        glossary definition. Note that it does not preclude the committer from
+        making changes to patches prior to their commit, nor mean that the
+        committer can be careless. Rather it is a policy for decision-making.
+      </p>
+      <p>
+        There is an important issue where both developers and committers need to
+        pay special attention: "licenses". We must not introduce licensing
+        conditions that go beyond the terms of the <link href="ext:asl">Apache
+        License</link>. If such issues do creep in to our repository, then we
+        must work as quickly as possible to address it and definitely before the
+        next release.
+      </p>
+      <p>
+        There are some other problem areas: What should a committer do if the
+        patch is sloppy, containing inconsistent whitespace and other code
+        formatting, which mean that actual changes are not easily visible in the
+        svn diff messages. What if there is poorly constructed (yet working) xml
+        or java code? What if the new functionality is beyond the scope of the
+        project? What if there is a better way to do the task? What if the patch
+        will break the build, thereby preventing other developers from working
+        and causing an unstable trunk?
+      </p>
+      <p>
+        The committer has various options: ask the developer to resubmit the
+        patch; change the patch to fix the problems prior to committing; discuss
+        the issues on the dev list; commit it and then draw attention to the
+        issues so that the rest of the community can review and fix it. A
+        combination of these options would appear to be the best approach.
+        Please aim to not break the build, or introduce license problems, or
+        make noisy changes that obscure the real differences.
+      </p>
+      <p>
+        Committers should not be afraid to add changes that still need
+        attention. This enables prompt patch application and eases the load on
+        the individual committer. An interesting side-effect is that it
+        encourages community growth.
+      </p>
+    </section>
+    <section id="contribution">
+      <title>Contribution and acknowledgement</title>
+      <p>
+        Some <link href="#way">principles</link> of open development at ASF are
+        to ensure that each contributor is recognised and feels a productive
+        part of the community, and to encourage diversity, respect, and
+        equality. Key to this is the recognition of contributions from
+        individuals in a manner that also recognises the community effort that
+        made it all possible. It is important to remember that there is no
+        concept of individual leadership. See the discussion of
+        <link href="http://www.apache.org/foundation/how-it-works.html#meritocracy">meritocracy</link>
+        and other sections of the
+        <link href="http://www.apache.org/foundation/how-it-works.html">How the
+        ASF works</link> document.
+      </p>
+      <p>
+        In an Open Source Project, or more importantly, a project developed
+        using an open process, such as Apache Forrest, most contributions of
+        actual code are supported by, or at least *should* be supported by,
+        design discussion, oversight, testing, documentation, bug fixes and much
+        more. No code contribution is an independent unit of work (or should not
+        be). It is therefore impossible to credit individual contributors, it is
+        simply unmanageable, even if it is possible to identify each part of a
+        contribution.
+      </p>
+      <p>
+        At Apache Forrest we use the following method to provide recognition:
+      </p>
+      <ul>
+        <li>
+        All developers encourage other developers to participate on the
+        mailing lists, treat each other with respect, and openly collaborate.
+        This enables the contributors to feel a part of the project and shows
+        that their discussion and ideas are valuable. These replies enhance
+        the presence of their name in the email archives and search engines.
+      </li>
+        <li>
+        Encourage contributors to add patches via the
+        <link href="site:bugs">issue tracker</link>. This also enables clear
+        tracking of the issue and by default specifically shows who was the
+        contributor.
+      </li>
+        <li>
+        When committers apply the patch, they refer to the issue number
+        and the contributor's name. This enables linkage between the issue
+        tracker and the Subversion history. It adds the contributor's name
+        to the mail archives.
+      </li>
+        <li>
+        Committers apply patches as soon as possible. This keeps the contributor
+        enthused and shows them that their work is valuable.
+      </li>
+        <li>
+        Committers add an entry for each significant contribution to the
+        top-level <link href="site:v0.70//changes">changes</link> document (site-author/status.xml)
+        and detailed entries to the relevant plugin's changes document. This enables linkage
+        to the relevant issue and shows the contributor's name. It also shows
+        the initials of the committer who did the work to add the patch.
+      </li>
+        <li>
+        When committers are adding their own work, they similarly add entries
+        to the "changes" documents. Their initials are added to the entry.
+      </li>
+        <li>
+        The existing PMC will notice new contributors who are committed. It eventually
+        <link href="#elect">invites</link> them to become new committers/PMC members. See the 
+        <link href="site:committed">notes</link> about this topic.
+      </li>
+        <li>
+        Committers/PMC members are
+        <link href="site:who">listed</link>.
+      </li>
+      </ul>
+      <p>
+        As discussed above, there is no specific documentation which lists each
+        contributor and their work. For those who are interested there are
+        various mechanisms: Use general internet search services; use search
+        services provided by various third-party mail archives; search the "svn"
+        mailing list using committer IDs and using contributor names; browse the
+        <link href="site:changes">changes</link> page; use 'svn log' and 'svn
+        blame'.
+      </p>
+    </section>
+    <section id="develop">
+      <title>Development procedure</title>
+      <note>
+        This section is still under development. The issues have been discussed
+        on the mailing list. Decisions need to be put into words, so that we do
+        not need to revisit the topic.
+      </note>
+      <p>
+        Development work is done on the trunk of SVN. Wherever possible,
+        functionality is contained in "plugins". There are "release branches" of
+        SVN, e.g. forrest_07_branch.
+      </p>
+      <fixme author="open">
+        The following issues still need to be added above. There are also some
+        relevant email threads, from which we need to extract info.
+      </fixme>
+      <source>
+* Define our policy for adding changes to release branch.
+* Define the purpose of the "whiteboard/incubator".
+* Declare that we only really maintain the current release branch
+  (although contributed patches will be applied).
+* When to create a temporary branch for development and when/how to merge.
+  
+
+Some of the many relevant threads in no particular order ...
+
+http://marc.theaimsgroup.com/?t=113344003500003
+Whiteboard usage - rename it to incubator
+
+http://marc.theaimsgroup.com/?t=112798856400001
+Starting a 1.0 development  (Re: [Proposal] rollback)
+
+http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=111968323717620
+http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=111983663526246
+http://marc.theaimsgroup.com/?t=111970529900001
+Project participation and hackability    (was: [VOTE] merge locationmap
+
+http://marc.theaimsgroup.com/?t=112507381300001
+use of whiteboard in forrest
+
+http://marc.theaimsgroup.com/?t=112504310100005
+[Proposal] Development process and a stable trunk
+
+http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=113521408020541
+when to make a release of a branch
+http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=112643002807899
+How to apply an update to 0.7
+
+http://marc.theaimsgroup.com/?t=113616009300002
+[RT] "Last known working snapshot" of Forrest head
+
+http://marc.theaimsgroup.com/?t=113830245600001
+[Proposal] code freeze on dispatcher related resources
+
+http://marc.theaimsgroup.com/?t=114667400800004
+[Proposal] Refining our Development Process
+
+Document our use of Branches for development
+http://issues.apache.org/jira/browse/FOR-631
+    </source>
+    </section>
+<!-- FIXME:
+
+The default is lazy consensus. So just get on with the job
+unless someone asks to stop, review, perhaps revert.
+
+==================
+> We should make mention somewhere of our relationship to other projects
+> Cocoon committers are Forrest committers; something with xml-commons
+
+==================
+Mention the "Contributer License Agreement".
+Who needs to send it? ... is it committers plus major contributers?
+
+==================
+
+-->
+  </body>
+</document>

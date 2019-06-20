@@ -1,0 +1,31 @@
+
+-------------------------------
+~~ Template project created! ~~
+
+Here is an outline of the generated files:
+
+/                        # ${basedir}
+/forrest.properties      # Optional file describing your site layout
+/src/documentation/      # Doc-specific files
+/src/documentation/skinconf.xml    # Info about your project used by the skin
+/src/documentation/content         # Site content.
+/src/documentation/content/xdocs   # XML content.
+/src/documentation/content/xdocs/index.xml # Home page
+/src/documentation/content/xdocs/site.xml  # Navigation file for site structure
+/src/documentation/content/xdocs/tabs.xml  # Skin-specific 'tabs' file.
+/src/documentation/content/xdocs/*.html,pdf # Static content files, may have subdirs
+/src/documentation/resources/images   # Project images (logos, etc)
+# you can create other directories as needed (see forrest.properties)
+
+
+What to do now?
+
+- Render this template to static HTML by typing 'forrest'.
+  View the generated HTML in a browser to make sure everything works.
+- Alternatively 'forrest run' and browse to http://localhost:8888/ live demo.
+- Start adding content in xdocs/ remembering to declare new files in site.xml
+- Follow the document http://forrest.apache.org/docs/your-project.html
+- Provide any feedback to dev@forrest.apache.org
+
+Thanks for using Apache Forrest
+-------------------------------

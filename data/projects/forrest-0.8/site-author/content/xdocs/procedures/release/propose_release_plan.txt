@@ -1,0 +1,51 @@
+FIXME: http://www.mail-archive.com/dev@forrest.apache.org/msg02310.html
+incorporate that into this
+
+Subject: [VOTE] Release Plan for Forrest x.xx
+
+We are about to work on releasing a new version of Forrest. 
+Below I have proposed the important milestones. 
+
+Please check with your time schedules and comment.
+We want to have as many people available as possible
+to test the release candidate. So we can adjust the
+time schedule a bit.
+
+Please vote on this release plan.
+   
+Proposed Java version to test this release is [Version].  
+
+Proposed milestones are:
+
+- Start of code-freeze on [Date]
+   [www.timeanddate.com-URL]
+
+- Start of test-period [Date]
+   [www.timeanddate.com-URL]
+
+- Vote on release candidate #1 [Date]
+   [www.timeanddate.com-URL]
+
+- Start of test-period [Date]
+   [www.timeanddate.com-URL]
+
+- Vote on release candidate [Date]
+   [www.timeanddate.com-URL]
+
+- If there are bugs in RC1
+
+    = Creation of release candidate #2 
+        (only when there are bugs) [Date]
+        [www.timeanddate.com-URL]
+
+    = Start of test-period #2 [Date]
+        [www.timeanddate.com-URL]
+    
+    = Vote on release candidate #2 [Date]
+        [www.timeanddate.com-URL]
+
+- Scheduled release Date [Date]
+   [www.timeanddate.com-URL]
+
+For background info on this step and the release process in general see 
+http://forrest.apache.org/procedures/release/How_to_release.html#PrepRelPlan

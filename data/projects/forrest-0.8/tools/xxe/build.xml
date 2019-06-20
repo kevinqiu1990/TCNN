@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project basedir="." name="xxe-forrest" default="dist">
+  <target name="-init">
+    <property environment="env"/>
+    <property name="version" value="1.4"/>
+    <property name="dist.dir" location="dist"/>
+    <property name="dist.name" value="XXE_forrest_config"/>
+  </target>
+  <target name="clean" depends="-init" description="Clean all generated files">
+<!-- created files -->
+    <delete dir="${dist.dir}"/>
+<!-- copied files -->
+    <delete dir="entity"/>
+    <delete dir="dtd"/>
+    <delete file="catalog.xml"/>
+  </target>
+  <target name="dist" depends="-init, update" description="Build zip file">
+    <mkdir dir="${dist.dir}"/>
+    <zip destfile="${dist.dir}/${dist.name}-${version}.zip">
+      <zipfileset prefix="forrest" dir="." excludes="dist/**"/>
+    </zip>
+  </target>
+  <target name="update" depends="clean, copy-dtds, copy-catalog" description="Update schemas from FORREST_HOME"/>
+  <target name="copy-dtds" depends="-init" description="Copy DTDs from FORREST_HOME">
+    <copy todir=".">
+      <fileset dir="${env.FORREST_HOME}/main/webapp/resources/schema/">
+        <include name="entity/**"/>
+        <include name="dtd/**"/>
+      </fileset>
+    </copy>
+  </target>
+  <target name="copy-catalog" depends="-init" description="Copy Catalog from FORREST_HOME">
+    <copy file="${env.FORREST_HOME}/main/webapp/resources/schema/catalog.forrest.xcat" tofile="catalog.xml"/>
+  </target>
+</project>

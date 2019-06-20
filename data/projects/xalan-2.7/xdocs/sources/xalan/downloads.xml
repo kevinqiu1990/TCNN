@@ -1,0 +1,72 @@
+<?xml version="1.0" standalone="no"?>  
+<!DOCTYPE s1 SYSTEM "../../style/dtd/document.dtd">
+<!--
+ * Copyright 2003-2004 The Apache Software Foundation.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<!-- $Id$ -->
+<s1 title="Downloads &amp; Dependencies">
+<ul>
+  <li><link anchor="download">Downloading what you need</link></li>
+  <li><link anchor="whereis_xml4j">Where do I get &xml4j;? </link></li>
+</ul>
+<anchor name="download"/>
+<s2 title="Downloading what you need">
+<p>To use &xslt4j;, you need the following:</p> 
+  <ul>
+    <li>The JDK or JRE 1.3.x, 1.4.x, or 5.x</li>
+    <p>You can get the JDK or JRE from <jump href="http://www-128.ibm.com/developerworks/java/jdk/index.html">
+       IBM developerWorks</jump> or <jump href="http://www.java.sun.com">java.sun.com</jump>.</p> 
+    <li>xml-apis.jar (JAXP APIs)</li>
+    <li>&xml4j-jar; (or another <link idref="usagepatterns" anchor="plug">XML Parser</link>)</li>
+    <li>xalan.jar or xsltc.jar</li>
+    <li>serializer.jar</li>
+    <li>(Optional) Xalan Java source code</li>    
+    <li>(Optional) Packages to support extension functions and elements</li>    
+  </ul>    
+  <p>There are 2 binary distributions available; you only need to choose one of them.  
+     Both binary distributions contain xml-apis.jar and &xml4j-jar; from <resource-ref idref="xml4j-used"/>.</p>
+  <ul>
+    <li>The first binary distribution, &xslt4j-dist-bin;.zip or &xslt4j-dist-bin;.tar.gz, 
+      contains the Xalan Interpretive processor, the Xalan Compiled processor (XSLTC) and the 
+      runtime support packages in a single jar, called xalan.jar.  </li><br/><br/>
+    <li>The second binary distribution, &xslt4j-dist-bin;-2jars.zip or &xslt4j-dist-bin;-2jars.tar.gz
+      contains the Xalan Interpretive processor in xalan.jar, and the Xalan Compiled 
+      processor (XSLTC) and the runtime support packages in xsltc.jar.  </li>
+  </ul>
+  <p>The binary distributions can be downloaded from the <resource-ref idref="xslt4j-distdir"/>.</p>
+  <p>There is an optional source distribution available for doing your own &xslt4j; builds; see 
+     <link idref="readme" anchor="build">Build notes</link>. You can download the source distribution from 
+     the <resource-ref idref="xslt4j-distdir"/>.</p>     
+  <p>If you plan to run <link idref="extensions">XSLT extensions</link> implemented in languages
+     other than Java, then you will need an implementation of the Bean Scripting Framework (BSF).
+     An open source implementation is available for download from Apache.  See the 
+     <jump href="http://jakarta.apache.org/bsf/index.html">Apache Jakarta
+     BSF project</jump>. If you plan to run XSLT extensions implemented in scripting 
+     languages, you will need bsf.jar and one or more additional files as indicated in 
+     <link idref="extensions" anchor="supported-lang">extensions language requirements</link>.</p>     
+  <p>To access previous releases, see the <resource-ref idref="xslt4j-distdir-previous"/>.</p>
+</s2>
+<anchor name="whereis_xml4j"/>
+<s2 title="Where do I get &xml4j;?">
+<p>The &xslt4j; download includes &xml4j-jar; from &xml4j-used;. In conjunction with xml-apis.jar, 
+this is all you need to run &xslt4j; with the &xml4j; XML parser. You can, however, download the 
+complete &xml4j; binary or source distribution from the <resource-ref idref="xml4j-distdir"/>.
+If you cannot find &xml4j-used; at that location, have a look at the 
+<jump href="http://archive.apache.org/dist/xml/xerces-j/">Apache archive location for
+Xerces Java</jump>.</p>
+<note>If you plan to use a different XML parser, see <link idref="usagepatterns" anchor="plug">Plugging 
+in a Transformer and XML parser</link>.</note> 
+</s2>
+</s1>

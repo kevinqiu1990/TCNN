@@ -1,0 +1,496 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<site label="Forrest" href="" xmlns="http://apache.org/forrest/linkmap/1.0" tab="home">
+<!-- General documentation that applies to all versions -->
+  <about label="About">
+    <index label="About Forrest" href="index.html" description="Welcome and introduction"/>
+    <linkmap label="Documentation ToC" href="linkmap.html" description="Table of Contents for all Forrest documentation"/>
+    <download label="Download" href="ext:forrest/download"
+      description="Download a release from your nearest mirror or get the latest from SVN"/>
+    <mail-lists label="Mail lists and discussion" href="mail-lists.html"
+      description="Discussion mail lists are the heart of the project: dev, user, svn"/>
+    <license label="License" href="license.html" description="Notes and FAQs about the licensing"/>
+    <forrest-contract label="Our contract" href="forrest-contract.html"
+      description="What each party can expect"/>
+    <compliance label="Standards compliance" href="compliance.html"
+      description="Declare the status of HTML, WAI, CSS compliance"/>
+    <forrest-issues label="Open issues" href="forrest-issues.html"
+      description="List of currently open issues"/>
+    <who label="Who we are" href="who.html" description="Explain who is involved"/>
+    <flyer label="Flyer" href="flyer.html" description="One-page description"/>
+    <live-sites label="Example sites" href="live-sites.html"
+      description="Some sites created using Apache Forrest technology"/>
+    <thanks label="Thanks" href="thanks.html"
+      description="Acknowledgment to those who have become involved"/>
+<!-- Entry with no @label causes correct Tab to be selected.
+      Also enables additional page to be generated. -->
+    <download_html href="mirrors.html"/>
+  </about>
+  <getting-involved label="Getting involved" tab="project">
+    <contrib label="Contributing" href="contrib.html"
+      description="Everyone is a developer and has something to contribute">
+      <patch href="#patch"/>
+    </contrib>
+    <mail-lists label="Mail lists and discussion" href="mail-lists.html"
+      description="Discussion mail lists are the heart of the project: dev, user, svn"/>
+    <bugs label="Reporting bugs and issues" href="issues.html"
+      description="Issue tracker manages known issues and desired enhancements"/>
+    <forrest-friday label="ForrestFriday IRC" href="forrest-friday.html"
+      description="ForrestFriday monthly get-together"/>
+    <events label="Events" href="events.html"
+      description="List of upcoming related conferences and meetings"/>
+    <project label="Project">
+      <guidelines label="Project guidelines" href="guidelines.html"
+        description="Open development guidelines to encourage participation">
+        <way href="#way"/>
+      </guidelines>
+      <committed label="Being committed" href="committed.html" description="Notes about contribution"/>
+      <roles label="Project roles" href="roles.html" description="Tasks to keep the project flowing"/>
+    </project>
+  </getting-involved>
+  <infrastructure label="Resources and Infrastructure" tab="project"
+    description="Tools and services that help us do our work">
+    <overview label="Introduction" href="asf-infrastructure.html"
+      description="Explain the ASF infrastructure"/>
+    <mail-lists label="Mail lists" href="mail-lists.html"
+      description="Discussion mail lists are the heart of the project: dev, user, svn">
+      <forrest-user href="#forrest-user"/>
+      <forrest-dev href="#forrest-dev"/>
+      <forrest-svn href="#forrest-svn"/>
+    </mail-lists>
+    <jira label="Issue management" href="issues.html"
+      description="Issue tracker manages known issues and desired enhancements"/>
+    <version-control label="Version control" href="svn.html"
+      description="Access to the Subversion (SVN) version control system"/>
+    <zone label="Demonstrations" href="http://forrest.zones.apache.org/"
+      description="Demonstrations and testbed at forrest.zones.apache.org" />
+    <gump-forrest label="Gump integration" href="gump.html"/>
+    <plan label="Planning notes" href="plan/">
+      <overview label="Overview" href="index.html"/>
+      <internal-xhtml label="Internal XHTML" href="internal-xhtml.html"/>
+    </plan>
+    <todo label="Todo" href="todo.html"/>
+  </infrastructure>
+  <procedures label="Best Practices and Procedures" tab="project"
+      description="Procedures and best practices for common tasks">
+    <forrest-dev label="Development tips" href="howto-dev.html"
+      description="Describes tips and procedures for efficiently developing with Forrest.">
+      <sitemap href="#sitemap"/>
+      <debug href="#debug"/>
+      <debug-cocoon-profiler href="#debug-cocoon-profiler"/>
+      <debug-modes href="#debug-modes"/>
+      <debug-sitemap-exec href="#debug-sitemap-exec"/>
+      <debug-validation href="#debug-validation"/>
+    </forrest-dev>
+    <svnBP label="Subversion" href="subversion_bestpractices.html"
+        description="Best practice notes for Subversion"/>
+    <docsBP label="Documentation" href="documentation_bestpractices.html"
+        description="Best practice notes for documentation"/>
+    <write-howto label="Write a How-to" href="howto-howto.html"
+        description="Instructions for writing
+            a new howto-document"/>
+    <committers label="Committer notes">
+      <zoneMangement label="Zone management" href="zone.html"
+          description="Notes for committers to manage forrest.zones.apache.org"/>
+      <howToRelease label="How to release" href="procedures/release/How_to_release.html"
+          description="Instructions on preparing and creating a new Forrest release."/>
+      <howToPublishDocs label="Publishing Forrest documentation" href="procedures/How_to_publish_docs.html" description="Instructions on publishing the Forrest
+            Website"/>
+    </committers>
+  </procedures>
+  <proposals label="Proposals" tab="project">
+    <asf-forrestbot label="ASF Forrestbot" href="proposal-asf-forrestbot.html"/>
+  </proposals>
+  <references label="Related projects">
+    <gump label="Apache Gump" href="http://gump.apache.org/"/>
+    <cocoon label="Apache Cocoon" href="http://cocoon.apache.org/"/>
+    <lenya label="Apache Lenya" href="http://lenya.apache.org/"/>
+    <xml label="Apache XML" href="http://xml.apache.org/"/>
+    <pao label="projects.apache.org" href="http://projects.apache.org/"/>
+  </references>
+<!-- Uncomment this if we want aggregate HTML/PDFs for this site 
+  <pdfs label="PDFs">
+    <whole_site_html label="Whole site HTML" href="wholesite.html"/>
+    <whole_site_pdf label="Whole site PDF" href="wholesite.pdf"/>
+  </pdfs>
+  -->
+  <external-refs>
+    <asf href="http://www.apache.org/">
+      <asl href="licenses/"/>
+      <dev href="dev/"/>
+      <how-it-works href="foundation/how-it-works.html"/>
+      <voting href="foundation/voting.html"/>
+    </asf>
+    <cocoon href="http://cocoon.apache.org/2.1/">
+      <ml href="mail-lists.html"/>
+      <actions href="userdocs/concepts/actions.html"/>
+      <catalogs href="userdocs/concepts/catalog.html"/>
+      <features href="features.html"/>
+      <concepts href="userdocs/concepts/"/>
+      <sitemap href="userdocs/concepts/sitemap.html"/>
+      <protocols href="userdocs/concepts/sitemap.html#Protocols"/>
+      <file-url href="userdocs/concepts/sitemap.html#file-url"/>
+      <input-modules href="userdocs/concepts/modules.html"/>
+      <views href="userdocs/concepts/views.html"/>
+    </cocoon>
+    <forrest href="http://forrest.apache.org/">
+      <download href="mirrors.cgi"/>
+      <docs href="docs/">
+<!-- FIXME: Might not need these when we have the local docs happening -->
+        <versions>
+          <overview href="../docs.html"/>
+          <v0.9 href="../0.9/"/>
+          <v0.8 href="../0.8/"/>
+          <v0.7 href="../0.7/"/>
+        </versions>
+      </docs>
+    </forrest>
+    <forrest-zone href="http://forrest.zones.apache.org/"></forrest-zone>
+    <java href="http://java.sun.com/">
+      <j2ee href="j2ee/">
+        <patterns href="patterns/">
+          <dispatcherView href="DispatcherView.html" />
+        </patterns>
+      </j2ee>
+      <java-blueprints-pattern href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/">
+        <dispatcherView href="DispatcherView.html"/>
+        <viewHelper href="ViewHelper.html"/>
+      </java-blueprints-pattern>
+    </java>
+    <corej2eepatterns href="http://corej2eepatterns.com/">
+      <patterns href="Patterns2ndEd/">
+        <dispatcherView href="DispatcherView.htm" />
+      </patterns>
+    </corej2eepatterns>
+    <xml.apache.org href="http://xml.apache.org/">
+      <commons href="commons/">
+        <resolver href="components/resolver/"/>
+      </commons>
+    </xml.apache.org>
+    <xmlgraphics.apache.org href="http://xmlgraphics.apache.org/">
+      <fop href="fop/"/>
+      <batik href="batik/"/>
+    </xmlgraphics.apache.org>
+    <jakarta href="http://jakarta.apache.org/">
+      <anakia href="velocity/anakia.html"/>
+    </jakarta>
+    <apache-stats href="http://people.apache.org/~vgritsenko/stats/"/>
+    <ant href="http://ant.apache.org/"/>
+    <gump href="http://gump.apache.org/"/>
+    <lenya href="http://lenya.apache.org/"/>
+    <cool-uris href="http://www.w3.org/Provider/Style/URI.html"/>
+    <uri-rfc href="http://zvon.org/tmRFC/RFC2396/Output/index.html"/>
+    <catalog_spec href="http://www.oasis-open.org/committees/entity/spec.html"/>
+<!--<catalog_spec href="http://www.oasis-open.org/committees/entity/background/9401.html"/>-->
+    <catalog_intro href="http://xml.apache.org/commons/components/resolver/resolver-article.html"/>
+    <mail>
+      <linkmaps href="http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=103444028129281&amp;w=2"/>
+      <semantic-linking href="http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=103097808318773&amp;w=2"/>
+      <inputmoduletransformer
+        href="http://marc.theaimsgroup.com/?t=103992708800001&amp;r=1&amp;w=2"/>
+      <linkrewritertransformer href="http://issues.apache.org/bugzilla/show_bug.cgi?id=15611"/>
+    </mail>
+  </external-refs>
+  <versions tab="docs">
+    <overview label="Overview" href="versions/index.html"/>
+    <v0.9 label="0.9-dev" href="site:index"/>
+    <v0.8 label="0.8 (current)" href="site:v0.80//index"/>
+    <v0.7 label="0.7" href="site:v0.70//index"/>
+  </versions>
+  <pluginVersions tab="plugins">
+    <overview label="Overview" href="pluginDocs/index.html"/>
+    <v0.9 label="0.9-dev" href="site:plugins/index"/>
+    <v0.8 label="0.8 (current)" href="site:v0.80//plugins/index"/>
+    <v0.7 label="0.7" href="site:v0.70//plugins/index"/>
+  </pluginVersions>
+  <tools label="Tools" href="tools/" tab="tools">
+    <index label="Index" href="index.html"/>
+    <forrestbar label="ForrestBar" href="forrestbar.html"/>
+    <forrestbot label="Forrestbot" href="forrestbot.html"/>
+    <forrestbot-web-interface label="Forrestbot Webapp" href="forrestbot-web-interface.html"/>
+    <eclipse label="Eclipse Plugin" href="eclipse.html"/>
+    <xxe label="XXE-Editor" href="xxe.html"/>
+  </tools>
+<!-- Versioned Documentation
+       
+       The surrounding version number element allows linking to a specific
+       version of a document with the site:protocol by specifiying an access 
+       path such as 'site:v0.70/documentation/faq'
+       
+       To create a new release see f.a.o/procedures/release/How_to_release.html
+       -->
+  <v0.90 label="Documentation in development" description="Set of documents for the in-development version, i.e. SVN head">
+    <documentation label="0.90-dev" href="docs_0_90/" tab="v0_90">
+      <index label="Overview" href="index.html"/>
+      <upgrading_09 label="Upgrading to 0.9" href="upgrading_09.html"/>
+    </documentation>
+    <plugins label="0.90 Plugins" href="pluginDocs/plugins_0_90/" tab="p0_90">
+      <index label="Index" href="index.html"/>
+      <using label="Using Plugins" href="usingPlugins.html"/>
+      <infrastructure label="Plugin Infrastructure" href="pluginInfrastructure.html"/>
+    </plugins>
+  </v0.90>
+  <v0.80 label="Documentation current" description="Set of documents for the released version">
+    <documentation label="0.80-dev" tab="v0_80" href="docs_0_80/">
+      <index label="Overview" href="index.html"/>
+<!-- FIXME: Needed to avoid moving files -->
+      <catalog href="catalog.html"/>
+      <project-sitemap href="project-sitemap.html"/>
+      <upgrading_08 href="upgrading_08.html"/>
+<!-- Insert all instructional documentation here -->
+      <your-project label="Using Forrest" href="your-project.html">
+        <new_content_type href="#adding_new_content_type"/>
+        <new_dtd href="#new_dtd"/>
+        <webapp href="#webapp"/>
+        <skins href="#skins"/>
+        <new-skin href="#new_skin"/>
+        <invoking_from_ant href="#invoking_from_ant"/>
+      </your-project>
+      <howto label="How-To" href="howto/">
+        <overview label="Overview" href="index.html"/>
+        <ForrestInstall label="Install Forrest">
+          <build label="Building Forrest from Source" href="../build.html" description="Build and install the current
+                    unreleased version">
+            <run href="#run"/>
+          </build>
+        </ForrestInstall>
+        <upgrading_08Ref label="Upgrading to 0.8" href="site:upgrading_08"/>
+        <ForrestUse label="Use Forrest"></ForrestUse>
+        <ForrestCustomize label="Customize Forrest" description="Adapt and tune Forrest for your needs">
+          <sitemap-explain label="Sitemaps explained" href="../sitemap-explain.html"/>
+          <custom-html-source label="Custom html source" href="howto-custom-html-source.html"/>
+          <project-sitemapRef label="Project sitemap" href="site:project-sitemap"/>
+          <editcss label="Edit CSS (WYSIWYG)" href="howto-editcss.html"/>
+          <pdf-tab label="Create tab PDF" href="howto-pdf-tab.html" 
+                    description="Generate one pdf-document for all pages of a tab"/>
+          <corner-css label="CSS corner SVG" href="howto-corner-images.html"/>
+        </ForrestCustomize>
+        <ForrestIntegrate label="Integrate Forrest with tools">
+          <maven label="Maven Integration" href="howto-forrest-from-maven.html"/>
+          <catalogRef1 label="Using DTD Catalogs" href="site:catalog"/>
+        </ForrestIntegrate>
+        <ForrestExtend label="Extend Forrest" description="Extend Forrest with new functionalities">
+          <buildPlugin label="Build a Plugin" href="howto-buildPlugin.html"/>
+          <skin-package label="Package new Skins" href="../skin-package.html"/>
+        </ForrestExtend>
+        <asf-mirror label="Download mirror" href="howto-asf-mirror.html"/>
+        <documentationCreate label="Adding Documentation" description="Instructions to enhance Forrest by writing
+                new pieces of documentation.">
+          <write-howto label="Write a How-to" href="site:write-howto" description="Instructions for writing
+                a new howto-document"/>
+          <multi label="Multipage HowTo" href="multi/">
+            <intro label="Introduction" href="howto-multi.html"/>
+            <step1 label="Step 1" href="step1.html"/>
+            <step2 label="Step 2" href="step2.html"/>
+            <step3 label="Step 3" href="step3.html"/>
+          </multi>
+        </documentationCreate>
+      </howto>
+      <faq label="FAQs" href="faq.html">
+        <build_msg_a href="#build_msg_a"/>
+        <docbook href="#docbook"/>
+        <docs href="#docs"/>
+        <checksums href="#checksums"/>
+        <edit-content href="#edit-content"/>
+        <ignoring_javadocs href="#ignoring_javadocs"/>
+        <jobs href="#jobs"/>
+        <link_raw href="#link_raw"/>
+        <logs href="#logs"/>
+        <pdf_images href="#pdf_images"/>
+        <rawHTML href="#rawHTML"/>
+        <single-document href="#single-document"/>
+        <tab-index href="#tab-index"/>
+        <cli-xconf href="#cli-xconf"/>
+        <pageBreaks href="#pageBreaks"/>
+        <site-xml href="#site-xml"/>
+        <requirements href="#requirements"/>
+        <xml-entities href="#xml-entities"/>
+      </faq>
+      <whitepapers label="Background" description="Background documentation about Forrest and the technologies used">
+        <linking label="Menus and Linking" href="linking.html">
+          <menu_generation href="#menu_generation"/>
+          <tab-site href="#tab-site"/>
+        </linking>
+        <searching label="Search Options in Forrest" href="searching.html"/>
+        <locationmap label="Locationmap" href="locationmap.html">
+          <namingConvention href="#namingConvention"/>
+        </locationmap>
+        <sitemap-ref label="Sitemap Reference" href="sitemap-ref.html">
+          <linkrewriting_impl href="#linkrewriting_impl"/>
+          <menu_generation_impl href="#menu_generation_impl"/>
+          <source_pipelines href="#source_pipelines"/>
+          <forrest_xmap href="#forrest_xmap"/>
+        </sitemap-ref>
+        <skins label="Skins" href="skins.html" description="About default skins, their naming and features"/>
+        <status-themes label="Dispatcher versus Skins" href="status-themes.html"/>
+        <cap label="Sourcetype Action" href="cap.html"/>
+        <validation label="XML validation and entity resolution" href="validation.html">
+          <catalog href="#catalog"/>
+          <debug-catalog href="#debug-catalog"/>
+        </validation>
+      </whitepapers>
+      <changes label="Changes" href="changes.html"/>
+      <changes-rss href="changes.rss"/>
+      <glossary label="Glossary" href="glossary.html"/>
+      <samples label="Reference docs">
+        <dtd-docs-container label="DTD documentation">
+          <dtd-docs label="Overview" href="../dtdx/dtd-docs.html"/>
+          <document-v20-dtd label="document-v20" href="../dtdx/document-v20.dtdx.html"/>
+          <howto-v20-dtd label="howto-v20" href="../dtdx/howto-v20.dtdx.html"/>
+          <faq-v20-dtd label="faq-v20" href="../dtdx/faq-v20.dtdx.html"/>
+          <document-v13-dtd label="document-v13" href="../dtdx/document-v13.dtdx.html"/>
+          <howto-v13-dtd label="howto-v13" href="../dtdx/howto-v13.dtdx.html"/>
+          <faq-v13-dtd label="faq-v13" href="../dtdx/faq-v13.dtdx.html"/>
+        </dtd-docs-container>
+        <samples-container label="Doc samples">
+          <document-v12 href="../dtdx/document-v12.html"/>
+          <document-v13 label="document-v13" href="../dtdx/document-v13.html"/>
+          <document-v20 label="document-v20" href="../dtdx/document-v20.html"/>
+        </samples-container>
+      </samples>
+<!-- FIXME: Consider moving these documents into their own tab as there is no point in
+                    coying historic info from version to version.
+                    Options: Subtab "Old Stuff" in Docs tab or as a main tab 
+        -->
+      <older_documentation label="Older Docs">
+        <primer label="Forrest Primer" href="primer.html">
+          <cvs href="#cvs"/>
+        </primer>
+        <libre-intro label="Libre" href="libre-intro.html"/>
+        <dreams label="Dream list" href="dreams.html"/>
+        <cvsssh label="CVS over SSH" href="howto/cvs-ssh/howto-cvs-ssh.html"/>
+      </older_documentation>
+    </documentation>
+    <plugins label="0.80 Plugins" href="pluginDocs/plugins_0_80/" tab="p0_80">
+      <index label="Index" href="index.html"/>
+      <using label="Using Plugins" href="usingPlugins.html"/>
+      <infrastructure label="Plugin Infrastructure" href="pluginInfrastructure.html"/>
+    </plugins>
+  </v0.80>
+<!-- Removing the label from the past release, stops it being in the ToC and cluttering -->
+  <v0.70>
+    <documentation label="0.70" tab="v0_70" href="docs_0_70/">
+      <index label="Overview" href="index.html"/>
+      <faq label="FAQs" href="faq.html">
+        <docbook href="#docbook"/>
+        <ignoring_javadocs href="#ignoring_javadocs"/>
+        <link_raw href="#link_raw"/>
+        <pdf_images href="#pdf_images"/>
+        <tab-index href="#tab-index"/>
+        <cli-xconf href="#cli-xconf"/>
+        <pageBreaks href="#pageBreaks"/>
+        <site-xml href="#site-xml"/>
+        <requirements href="#requirements"/>
+      </faq>
+      <changes label="Changes" href="changes.html"/>
+      <changes-rss href="changes.rss"/>
+      <todo label="Todo" href="todo.html"/>
+      <your-project label="Using Forrest" href="your-project.html">
+        <new_content_type href="#adding_new_content_type"/>
+        <new_dtd href="#new_dtd"/>
+        <webapp href="#webapp"/>
+        <skins href="#skins"/>
+        <new-skin href="#new_skin"/>
+        <invoking_from_ant href="#invoking_from_ant"/>
+      </your-project>
+      <validation label="XML Validation" href="validation.html"/>
+      <linking label="Menus and Linking" href="linking.html">
+        <menu_generation href="#menu_generation"/>
+        <tab-site href="#tab-site"/>
+      </linking>
+      <searching label="Searching" href="searching.html"/>
+      <skins label="Default Skins" href="skins.html"/>
+      <skin-package label="Skin Packages" href="skin-package.html"/>
+      <views label="Views-dev" href="views.html"/>
+      <forrest-contract label="Our Contract" href="forrest-contract.html"/>
+      <compliance label="Standards Compliance" href="compliance.html"/>
+      <howto label="How-To" href="howto/">
+        <overview label="Overview" href="index.html"/>
+        <write-howto label="Write a How-to" href="howto-howto.html"/>
+        <asf-mirror label="Download mirror" href="howto-asf-mirror.html"/>
+        <pdf-tab label="Create tab PDF" href="howto-pdf-tab.html"/>
+        <editcss label="Edit CSS (WYSIWYG)" href="howto-editcss.html"/>
+        <corner-css label="CSS corner SVG" href="howto-corner-images.html"/>
+        <maven label="Maven Integration" href="howto-forrest-from-maven.html"/>
+        <buildPlugin label="Build a Plugin" href="howto-buildPlugin.html"/>
+        <custom-html-source label="Custom html source" href="howto-custom-html-source.html"/>
+        <multi label="Multipage HowTo" href="multi/">
+          <intro label="Introduction" href="howto-multi.html"/>
+          <step1 label="Step 1" href="step1.html"/>
+          <step2 label="Step 2" href="step2.html"/>
+          <step3 label="Step 3" href="step3.html"/>
+        </multi>
+        <view label="Views">
+          <install label="Install views" href="howto-view-install.html"/>
+          <DSL label="forrest:view DSL" href="howto-view-dsl.html"/>
+          <contracts label="contract implementations" href="howto-view-contracts.html"/>
+        </view>
+      </howto>
+      <developers label="Advanced Topics">
+        <build label="Building Forrest" href="build.html">
+          <run href="#run"/>
+        </build>
+        <catalog label="Using DTD Catalogs" href="catalog.html"/>
+        <sitemap-ref label="Sitemap Reference" href="sitemap-ref.html">
+          <linkrewriting_impl href="#linkrewriting_impl"/>
+          <menu_generation_impl href="#menu_generation_impl"/>
+          <source_pipelines href="#source_pipelines"/>
+          <forrest_xmap href="#forrest_xmap"/>
+        </sitemap-ref>
+        <project-sitemap label="Project sitemap" href="project-sitemap.html"/>
+        <cap label="Sourcetype Action" href="cap.html"/>
+      </developers>
+      <upgrading_07 label="Upgrading to 0.7" href="upgrading_07.html">
+        <raw href="#raw"/>
+      </upgrading_07>
+      <samples label="Reference docs">
+        <dtd-docs-container label="DTD documentation">
+          <dtd-docs label="Overview" href="../dtdx/dtd-docs.html"/>
+          <document-v20-dtd label="document-v20" href="../dtdx/document-v20.dtdx.html"/>
+          <howto-v20-dtd label="howto-v20" href="../dtdx/howto-v20.dtdx.html"/>
+          <faq-v20-dtd label="faq-v20" href="../dtdx/faq-v20.dtdx.html"/>
+          <document-v13-dtd label="document-v13" href="../dtdx/document-v13.dtdx.html"/>
+          <howto-v13-dtd label="howto-v13" href="../dtdx/howto-v13.dtdx.html"/>
+          <faq-v13-dtd label="faq-v13" href="../dtdx/faq-v13.dtdx.html"/>
+        </dtd-docs-container>
+        <samples-container label="Doc samples">
+          <document-v12 href="../dtdx/document-v12.html"/>
+          <document-v13 label="document-v13" href="../dtdx/document-v13.html"/>
+          <document-v20 label="document-v20" href="../dtdx/document-v20.html"/>
+        </samples-container>
+      </samples>
+<!-- FIXME: Consider moving these documents into their own tab as there is no point in
+                    coying historic info from version to version.
+                    Options: Subtab "Old Stuff" in Docs tab or as a main tab 
+        -->
+      <older_documentation label="Older Docs">
+        <primer label="Forrest Primer" href="primer.html">
+          <cvs href="#cvs"/>
+        </primer>
+        <libre-intro label="Libre" href="libre-intro.html"/>
+        <dreams label="Dream list" href="dreams.html"/>
+        <cvsssh label="CVS over SSH" href="howto/cvs-ssh/howto-cvs-ssh.html"/>
+      </older_documentation>
+    </documentation>
+    <plugins label="0.70 Plugins" href="pluginDocs/plugins_0_70/" tab="p0_70">
+      <index label="Index" href="index.html"/>
+      <using label="Using Plugins" href="usingPlugins.html"/>
+      <infrastructure label="Plugin Infrastructure" href="pluginInfrastructure.html"/>
+    </plugins>
+  </v0.70>
+</site>

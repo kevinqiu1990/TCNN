@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Apache Forrest: Events</title>
+  </header>
+  <body>
+    <section id="upcoming">
+      <title>Upcoming events</title>
+      <section id="apachecon-eu-2007">
+        <title>ApacheCon Europe 2007 (1-4 May 2007)</title>
+        <p>
+          <a href="http://www.eu.apachecon.com/">ApacheCon Europe 2007</a> - Please
+          make plans to join us for the conference in Amsterdam, The Netherlands on 1-4
+          May 2007.
+        </p>
+      </section>
+      <section id="forrest-friday">
+        <title>ForrestFriday monthly get-together</title>
+        <p>
+          On the second Friday of each month we have a 24-hour get-together
+          using IRC and other collaborative tools, to work on Forrest
+          development and get to know each other. See how to
+          <a href="site:forrest-friday">participate</a>.
+        </p>
+        <p>Note that these sessions are currently on hold.</p>
+      </section>
+    </section>
+    <section id="past">
+      <title>Past events</title>
+      <section id="apachecon-us-2006">
+        <title>ApacheCon US 2006 (9-13 October 2006)</title>
+        <p>
+          <a href="http://www.us.apachecon.com/">ApacheCon US 2006</a> - Please
+          make plans to join us for the conference in Austin, Texas, USA on 9-13
+          October 2006.
+        </p>
+        <p>
+          Apart from all of the general ApacheCon events, there are a number of
+          Forrest-specific events. In chronological order ...
+        </p>
+        <section id="WE21-austin-2006">
+          <title>ApacheCon Session: WE21: Single Source Publishing with Apache Forrest</title>
+          <p>
+            Wednesday 11 October - Official ApacheCon session conducted by
+            Ferdinand Soethe.
+            <a href="http://www.us.apachecon.com/html/sessions.html">Read
+            more</a>.
+          </p>
+        </section>
+      </section>
+      <section id="apachecon-eu-2006">
+        <title>ApacheCon EU 2006 (26-30 June)</title>
+        <p>
+          <a href="http://apachecon.com/2006/EU/">ApacheCon EU 2006</a> - Please
+          make plans to join us for the conference in Dublin, Ireland on 26-30
+          June 2006.
+        </p>
+        <p>
+          Apart from all of the general ApacheCon events, there are a number of
+          Forrest-specific events. In chronological order ...
+        </p>
+        <section id="FR19-dublin-2006">
+          <title>ApacheCon Session: FR19: Single Source Publishing with Apache Forrest</title>
+          <p>
+            Friday 30 June - Official ApacheCon session conducted by Ferdinand
+            Soethe.
+            <a
+                  href="http://www.eu.apachecon.com/konferenzen/psecom,id,488,track,3,nodeid,,_language,uk.html#session-fr19">Read
+            more ...</a>
+          </p>
+          <note>
+            This session was re-scheduled for Friday 30 June 14:30-15:30.
+          </note>
+        </section>
+      </section>
+      <section id="apachecon-us-2005">
+        <title>ApacheCon US 2005 (10-14 December)</title>
+        <p>
+          <a href="http://apachecon.com/2005/US/">ApacheCon US 2005</a> took
+          place in San Diego, California, USA on 10-14 December 2005.
+        </p>
+        <p>
+          Apart from all of the general ApacheCon events, there is one
+          Forrest-specific event.
+        </p>
+        <section id="fs-ac-us-2005">
+          <title>ApacheCon Session: Single Source Publishing with Apache Forrest</title>
+          <p>
+            Tuesday 13 December at 09:00 to 10:00 - Official ApacheCon session
+            conducted by Ferdinand Soethe. See the
+            <a href="http://apachecon.com/2005/US/html/sessions.html">ApacheCon
+            Schedule</a> Session TU01. The event is only open to ApacheCon
+            attendees.
+          </p>
+        </section>
+      </section>
+      <section id="apachecon-eu-2005">
+        <title>ApacheCon Europe 2005 (18-22 July)</title>
+        <p>
+          <a href="http://apachecon.com/2005/EU/">ApacheCon Europe 2005</a> in
+          Stuttgart, Germany on 18-22 July 2005. For the first time there is a
+          session related to Apache Forrest.
+        </p>
+        <p>
+          Apart from all of the general ApacheCon events, there are a number of
+          Forrest-specific events. In chronological order ...
+        </p>
+        <section id="ht-stuttgart-2005">
+          <title>Apache committers hackathon</title>
+          <p>
+            Monday 18 July and Tuesday 19 July all day - Open to any Apache
+            committer. Among the many topics, some of us will informally chat
+            about Apache Forrest and maybe fix some bugs. We will probably
+            collaborate with the Apache Lenya committers too.
+          </p>
+        </section>
+        <section id="ws-stuttgart-2005">
+          <title>Apache Forrest workshop on Views</title>
+          <p>
+            Monday 18 July commencing at 18:30 - We will go out to dinner and
+            then meet for a developers workshop specifically about the new Views
+            plugin development. Topics will include Views, XHTML2 internal
+            format, and general project planning. Discussions will be technical
+            and will assume knowledge of Forrest. We will certainly answer
+            questions to ensure that people understand the background. However
+            the main aim is an intensive project design session. The event is
+            open to anybody, you don't need to be attending ApacheCon. Venue and
+            Directions: Gather at the foyer of the ApacheCon.
+          </p>
+        </section>
+        <section id="ua-stuttgart-2005">
+          <title>Usability professionals meeting</title>
+          <p>
+            Tuesday 19 July commencing at 18:30 - Johannes Schaefer will present
+            Apache Forrest to an informal meeting of usability professionals.
+            The event is open to other German-speaking people. See
+            <a href="http://www.gui-design.de/ak/ak_050719.htm">further
+            information</a>.
+          </p>
+        </section>
+        <section id="rf-stuttgart-2005">
+          <title>ApacheCon Session: Single Source Publishing with Apache Forrest</title>
+          <p>
+            Wednesday 20 July at 14:30 to 15:30 - Official ApacheCon session
+            conducted by Ross Gardler and Ferdinand Soethe. See the
+            <a href="http://apachecon.com/2005/EU/html/sessions.html">ApacheCon
+            Schedule</a> Session WE16. The event is only open to ApacheCon
+            attendees.
+          </p>
+        </section>
+        <section id="gt-stuttgart-2005">
+          <title>Apache Forrest get-together</title>
+          <p>
+            Wednesday 20 July commencing at 20:00 - Informal get together to
+            discuss any topic related to Apache Forrest. Follows on from the
+            session earlier in the day. Please come and meet other Forrest
+            developers and users. Describe your own use cases. The event is open
+            to anybody, you don't need to be attending ApacheCon. Venue and
+            Directions: Gather at the foyer of the ApacheCon at 20:00. The event
+            will be held at Stuttgart University of Applied Sciences Many thanks
+            to HfT. See
+            (<a href="http://www.hft-stuttgart.de/Hochschule/wirueberuns/Lageplan/">HfT
+            map</a>) which is just a few steps north-west of the ApacheCon-site:
+          </p>
+          <p>
+            <img src="apacheconsites.jpg" alt="map of sites"/>
+          </p>
+        </section>
+      </section>
+    </section>
+  </body>
+</document>

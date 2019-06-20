@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XHTML2: http://www.w3.org/TR/2005/WD-xhtml2-20050527
+Copyright © 1999-2004 World Wide Web Consortium, (Massachusetts Institute of Technology,
+European Research Consortium for Informatics and Mathematics, Keio University).
+All Rights Reserved. This work is distributed under the W3C® Software Licens [1]
+in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:x="http://www.w3.org/1999/xhtml">
+
+  <x:h1>Document Module</x:h1>
+
+  <start>
+    <ref name="html"/>
+  </start>
+
+  <div>
+    <x:h2>The html element</x:h2>
+
+    <define name="html">
+      <element name="html">
+        <ref name="html.attlist"/>
+        <ref name="head"/>
+        <ref name="body"/>
+      </element>
+    </define>
+
+    <define name="html.attlist">
+      <ref name="Common.attrib"/>
+      <ref name="version.attrib"/>
+      <ref name="XSI.schemaLocation"/>
+    </define>
+
+    <define name="version.attrib">
+      <optional>
+        <attribute name="version">
+          <ref name="CDATA.datatype"/>
+        </attribute>     
+      </optional>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The head element</x:h2>
+
+    <define name="head">
+      <element name="head">
+        <ref name="head.attlist"/>
+        <ref name="head.content"/>
+      </element>
+    </define>
+
+    <define name="head.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+
+    <define name="head.content">
+      <ref name="title"/>
+      <zeroOrMore>
+        <choice>
+          <ref name="head.misc"/>
+        </choice>
+      </zeroOrMore>
+    </define>
+
+    <define name="head.misc">
+      <notAllowed/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The title element</x:h2>
+
+    <define name="title">
+      <element name="title">
+        <ref name="title.attlist"/>
+        <ref name="Text.model"/>
+      </element>
+    </define>
+
+    <define name="title.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>The body element</x:h2>
+
+    <define name="body">
+      <element name="body">
+        <ref name="body.attlist"/>
+        <ref name="Structural.model"/>
+      </element>
+    </define>
+
+    <define name="body.attlist">
+      <ref name="Common.attrib"/>
+    </define>
+  </div>
+
+</grammar>

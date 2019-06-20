@@ -1,0 +1,103 @@
+#container
+    Page container makes it possible to have an overall sourrounding box in the pages. e.g. [1]&[2] have a black sourrounding box.
+
+#branding
+Container used for a header and banner to brand the site. That is the former "top".
+
+#branding-logo
+Contains all logos to brand the site.
+
+#branding-logo-group
+Used for the grouplogo.
+
+#branding-logo-group-ax
+Used for the grouplogo in alternativ location. x stands for a variable that represents the number of the alternativ.
+
+#branding-logo-project
+Used for the projectlogo.
+
+#branding-logo-project-ax
+Used for the projectlogo in alternativ location. x stands for a variable that represents the number of the alternativ.
+
+#branding-tagline
+Used for a strapline or tagline to define the site's purpose. Can be as well used for site slogans.
+
+#branding-trail
+Used for a trail or tagline to define the site's purpose
+
+#branding-published
+Used for the last published note of the site.
+
+#branding-published-ax
+Used for the last published note of the site in alternativ location. x stands for a variable that represents the number of the alternativ.
+
+#search
+Related to search interface and search results
+
+#search-input
+Search form container
+
+#search-input-ax
+Search form container in alternativ location. x stands for a variable that represents the number of the alternativ.
+
+#search-output
+Search results which could include a <div> or other markup
+including definition lists
+
+#nav or #navigation
+Used to contain the navigation devices
+
+#nav-main
+Main or primary navigation AKA tabs.
+
+#nav-main-current
+Main or primary navigation that is currently selected.
+
+#nav-main-sub
+Secondary navigation AKA level2.
+
+#nav-section
+Navigation to pages within the current site section AKA menu.
+
+#nav-section-current
+Navigation to page within the current site section that is currently selected.
+
+#nav-supplementary or #nav-supp
+A supplementary list of links, perhaps in a footer. This can
+replace the common, but presentational #footer
+
+#nav-supp-feedback
+A feedback link like mentioned in http://issues.apache.org/eyebrowse/ReadMsg?listName=forrest-user@xml.apache.org&msgNo=71.
+
+#content
+Used for content rather than for another purpose such as navigation
+
+#content-main
+The main content area
+
+#content-pdf
+The pdf link for the content
+
+#content-xml
+The xml link for the content
+
+#content-fixme
+Fixme related content
+
+#content-warning
+Warning related content
+
+#content-note
+Note related content
+
+#content-code
+Code related content
+
+#siteinfo
+Used for various site related information
+
+#siteinfo-legal
+Copyright information etc.
+
+#siteinfo-credits
+Designer or other credits 

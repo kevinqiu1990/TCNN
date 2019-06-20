@@ -1,0 +1,12 @@
+add-xml-decl: yes
+input-xml: yes
+output-xml:yes
+indent: auto
+indent-attributes: yes
+indent-spaces: 2
+write-back: yes
+preserve-entities: yes
+quiet: yes
+vertical-space: yes
+wrap: 80
+wrap-sections: no

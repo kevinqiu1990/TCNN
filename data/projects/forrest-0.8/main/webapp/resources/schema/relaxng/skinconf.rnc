@@ -1,0 +1,102 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Skin configuration file. This file contains details of your project, which
+# will be used to configure the chosen Forrest skin.
+
+start      = skinconfig
+
+skinconfig = element skinconfig {
+            (
+	    element disable-lucene {xsd:boolean}?,   # Disable lucene search feature. 'true' or 'false'
+            element disable-search {xsd:boolean}?,   # Disable search feature. 'true' or 'false'
+            element disable-print-link{xsd:boolean}?,   # Disable print link feature. 'true' or 'false'
+            element disable-pdf-link{xsd:boolean}?,   # Disable print link feature. 'true' or 'false'
+            element disable-xml-link{xsd:boolean}?,   # Disable print link feature. 'true' or 'false'
+            element disable-external-link-image{xsd:boolean}?,   # Disable images on external links feature. 'true' or 'false'
+            element disable-compliance-links {xsd:boolean}?,   # Disable standards-compliance logos
+            element obfuscate-mail-links {xsd:boolean}?,   # Render mailto: links unrecognisable by spam harvesters
+            element obfuscate-mail-value {text}?,   # value to use to replace the @ symbol
+            element searchsite-domain {text}?,       # DNS domain to search. Eg 'xml.apache.org'
+            element searchsite-name {text}?,         # "Search the ... site"
+            element project-name {text},             # Eg 'Forrest'
+            element project-description {text}?,      # Eg 'XML standards-oriented project documentation framework'
+            element project-url {xsd:anyURI},    
+            element project-logo {text},             # Eg 'images/project-logo.gif'
+            element group-name {text}?,              # Group/Organization owning project, eg 'Apache XML'
+            element group-description {text}?,       # 
+            element group-url {xsd:anyURI}?,
+            element group-logo {text}?,              # Eg images/group-logo.gif
+            element host-url {xsd:anyURI}?,          # Eg Sourceforge URL
+            element host-logo {text}?,
+            element favicon-url {text}?,
+            element year {text}?,                    # Used in Copyright
+            element vendor {text}?,                  # Used in Copyright
+            trail?,                                  # 'Breadcrumbs' trail in skins that support it
+            element toc {(attribute max-depth {text}?,
+              attribute min-sections {text}?,
+              attribute location {string})}?,        # toc generation
+
+            element headings {attribute type {text}}?, # heading style
+            colors?,                                 # colors
+            element extra-css {text}?,               # extra css to be included in the CSS output
+            pdf?,
+            credits?
+            )*
+           }
+
+trail   =  element trail {
+             element link1 { link_attrs },
+             element link2 { link_attrs },
+             element link3 { link_attrs }
+           }
+
+link_attrs = (attribute name {text}, attribute href {text}?)  # Leave these attributes blank if you don't want a trail
+
+colors   =  element colors {
+            element color {(attribute name {text}, 
+                            attribute value {text},
+                            attribute font {text}?,
+                            attribute link {text}?,
+                            attribute vlink {text}?,
+                            attribute hlink {text}?)}* # each color
+           }
+
+pdf      = element pdf {
+             element page {(attribute size{text}, attribute orientation {text})},
+             element margins {
+                attribute double-sided {xsd:boolean},
+                element top {text}?,
+                element bottom {text}?,
+                element inner {text}?,
+                element outer {text}?
+             }
+           }
+
+## Credits are typically rendered as a set of small clickable images in the
+## page footer 
+credits = element credits { credit* }
+credit  = element credit {
+## Unique identifier, in case the skin has some special rendering for it
+            attribute id {text}?,
+## Role played by this creditee, eg 'pdf' for PDF generation
+			attribute role {text}?,
+            element name {text},             # Eg 'Built with Apache Forrest'
+            element url {text},
+            element image {xsd:anyURI}?,     # Eg 'images/built-with-forrest-button.png'
+            element width {xsd:nonNegativeInteger}?,
+            element height {xsd:nonNegativeInteger}?
+          }
+

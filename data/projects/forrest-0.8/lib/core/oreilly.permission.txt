@@ -1,0 +1,81 @@
+From cindyw@oreilly.com Thu Jun  3 09:05:16 2004
+Return-Path: <cindyw@oreilly.com>
+Delivered-To: user0009-dave@brondsema.net
+Received: (qmail 14470 invoked from network); 2 Jun 2004 21:12:58 -0000
+Received: from minotaur.apache.org (209.237.227.194)
+  by 0 with SMTP; 2 Jun 2004 21:12:58 -0000
+Received: (qmail 87257 invoked by uid 1775); 2 Jun 2004 21:13:44 -0000
+Delivered-To: brondsem@locus.apache.org
+Received: (qmail 87184 invoked from network); 2 Jun 2004 21:13:43 -0000
+Received: from hermes.apache.org (HELO mail.apache.org) (209.237.227.199)
+  by minotaur.apache.org with SMTP; 2 Jun 2004 21:13:43 -0000
+Received: (qmail 35227 invoked by uid 500); 2 Jun 2004 21:14:00 -0000
+Delivered-To: apmail-brondsem@apache.org
+Received: (qmail 35134 invoked by uid 99); 2 Jun 2004 21:14:00 -0000
+Received: from [209.204.146.35] (HELO smtp1.oreilly.com) (209.204.146.35)
+  by apache.org (qpsmtpd/0.27.1) with ESMTP; Wed, 02 Jun 2004 14:14:00 -0700
+Received: from cindyw.oreilly.com (dhcp-172-24-30-220.west.ora.com
+    [172.24.30.220])
+	by smtp1.oreilly.com (Postfix) with ESMTP
+	id 93D2E14A1C; Wed,  2 Jun 2004 14:13:39 -0700 (PDT)
+Message-Id: <4.3.2.7.2.20040602140354.00c45838@pop3.west.ora.com>
+X-Sender: cindyw@pop3.west.ora.com
+X-Mailer: QUALCOMM Windows Eudora Version 4.3.2
+Date: Wed, 02 Jun 2004 14:13:01 -0700
+To: Dave Brondsema <brondsem@apache.org>, permissions@oreilly.com
+From: Cindy Wetterlund <cindyw@oreilly.com>
+Subject: Re: using code in an Apache project
+Cc: simonstl@oreilly.com
+In-Reply-To: <1085402426.40b1ed3a86ef4@secure.solidusdesign.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"; format=flowed
+X-Virus-Checked: Checked
+X-Spam-Rating: minotaur.apache.org 1.6.2 0/1000/N
+X-Spam-Checker-Version: SpamAssassin 2.63 (2004-01-11) on 
+	ferrari.solidusdesign.com
+X-Spam-Level: 
+X-Spam-Status: No, hits=0.0 required=4.0 tests=none autolearn=no version=2.63
+
+Hi Dave,
+
+Thanks for your mail and interest.
+
+Yes, you have O'Reilly's permission (and the author's who
+was happy to hear of your interest) to re-use some of the code
+from XSLT Cookbook for the Forrest project.
+
+It would be great if you would cite the usage by acknowledging
+the original title/author with a standard credit line.
+
+Thanks Dave.
+
+Cindy
+
+At 08:40 AM 5/24/2004 -0400, Dave Brondsema wrote:
+
+>The Apache Forrest project (http://xml.apache.org/forrest/) would like to use
+>some of the code included in the XSLT Cookbook.  Forrest is licensed under the
+>Apache License 2.0 (http://www.apache.org/licenses/)
+>
+>According to 
+>http://www.oreilly.com/pub/a/oreilly/ask_tim/2001/codepolicy.html,
+>I think this would be ok.  However, we would feel more comfortable if explicit
+>permission was given for us to use and distribute your code as part of our 
+>project.
+>
+>Personally, I would suggest that O'Reilly code be licensed under a known Open
+>Source license, such as the Apache License.  This would make it clear to all
+>what is allowed and what is not.
+>
+>Thanks!
+>
+>--
+>Dave Brondsema : brondsem@apache.org
+>http://www.brondsema.net  : personal
+>http://www.splike.com  : programming
+
+Cindy Wetterlund
+International Rights and
+Licensing Manager
+cindyw@oreilly.com
+

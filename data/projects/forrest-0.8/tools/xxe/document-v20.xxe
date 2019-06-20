@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<configuration name="Forrest Document v2.x"
+  xsi:schemaLocation="http://www.xmlmind.com/xmleditor/schema/configuration
+                      xsd/configuration.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.xmlmind.com/xmleditor/schema/configuration"
+  xmlns:cfg="http://www.xmlmind.com/xmleditor/schema/configuration">
+  <include location="common_config.xml" />
+  <detect>
+    <or>
+      <dtdPublicId substring="true">DTD Documentation V2.0</dtdPublicId>
+    </or>
+  </detect>
+  <dtd publicId="-//APACHE//DTD Documentation V2.0//EN" 
+       systemId="dtd/document-v20.dtd" />
+  <template name="Document DTD v2.0" location="template/document20.xml" />
+  <css name="Formatted v2.x" location="css/document2x.css" />
+<!-- v1.x versus v2.x commands -->
+<!-- no forrest.convertFork because <a> doesn't have @target -->
+  <command name="forrest.convertLink">
+    <macro trace="false">
+      <choice>
+        <command name="convert" parameter="[implicitElement] a" />
+        <command name="removeAttribute" parameter="target"/>
+      </choice>
+    </macro>
+  </command>
+  <command name="forrest.crossReference">
+    <class>com.xmlmind.xmleditapp.xhtml.CrossReference</class>
+  </command>
+  <menu label="Forrest" mnemonic="F">
+    <insert/>
+    <separator />
+    <item label="Go to Opposite Link End"
+          mnemonic="G" 
+          command="forrest.crossReference"
+          parameter="swap"/>
+    <item label="Go to Next Link"
+          mnemonic="N"
+          command="forrest.crossReference"
+          parameter="next"/>
+    <item label="Go to Previous Link"
+          mnemonic="P"
+          command="forrest.crossReference"
+          parameter="previous"/>
+  </menu>
+</configuration>

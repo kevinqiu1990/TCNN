@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE howto PUBLIC "-//APACHE//DTD How-to V2.0//EN"
+"http://forrest.apache.org/dtd/howto-v20.dtd">
+<howto>
+  <header>
+    <title>How to run Forrest from within Maven</title>
+    <abstract>
+      This How-To describes how to run Forrest from within Maven.
+    </abstract>
+    <last-modified-content-date date="2004-11-12" />
+  </header>
+  <audience title="Intended Audience">
+    <p>
+      Users who want to run Forrest from within Maven.
+    </p>
+  </audience>
+  <purpose title="Purpose">
+    <p>
+      One may want to generate their project's documentation and/or website
+      using Forrest in lieu of Maven's site plugin.
+    </p>
+  </purpose>
+  <prerequisites title="Prerequisites">
+    <ul>
+      <li>Understand how to add goals to <a
+      href="http://maven.apache.org/reference/user-guide.html#maven_xml">maven.xml</a>.</li>
+    </ul>
+  </prerequisites>
+  <steps title="Steps">
+    <p>
+      The procedure outlined below describes how to add a goal to your project's
+      maven.xml that will invoke Forrest's <code>site</code> target.
+    </p>
+    <section id="set-maven-home">
+      <title>Set the FORREST_HOME environment variable</title>
+      <p>
+        Make sure the FORREST_HOME environment variable points to your Forrest
+        home directory (i.e. the directory that contains
+        <code>forrest.build.xml</code>) (e.g. C:\opt\apache-forrest-0.7)
+      </p>
+    </section>
+    <section id="define-ant-environment-prop">
+      <title>Initialize an Ant environment property at the top of
+      maven.xml</title>
+      <p>
+        Paste the following line at the top of your maven.xml:
+      </p>
+      <source>
+&lt;property environment="env" /&gt;
+      </source>
+    </section>
+    <section id="add-forrest-goal-to-maven-xml">
+      <title>Add forrest goal to maven.xml</title>
+      <p>
+        Paste the following goal into your project's maven.xml:
+      </p>
+      <source>
+&lt;goal name="forrest" description="runs Forrest"&gt;
+  &lt;property name="forrest.home" location="${env.FORREST_HOME}" /&gt;
+  &lt;property name="forrest.ant.home" location="${forrest.home}/tools/ant" /&gt;
+  &lt;java classname="org.apache.tools.ant.Main" fork="true" failonerror="true" maxmemory="128M"&gt;
+    &lt;classpath&gt;
+      &lt;fileset dir="${forrest.ant.home}/lib"&gt;
+        &lt;include name="*.jar" /&gt;
+      &lt;/fileset&gt;
+      &lt;pathelement path="${java.home}/../lib/tools.jar" /&gt;
+    &lt;/classpath&gt;
+    &lt;sysproperty key="ant.home" value="${forrest.ant.home}" /&gt;
+    &lt;sysproperty key="forrest.home" value="${forrest.home}" /&gt;
+    &lt;sysproperty key="basedir" value="${basedir}" /&gt;
+    &lt;sysproperty key="java.endorsed.dirs" value="${forrest.home}/lib/endorsed" /&gt;
+    &lt;arg line="-f ${forrest.home}/main/forrest.build.xml" /&gt;
+  &lt;/java&gt;
+&lt;/goal&gt;      
+      </source>
+      <p>
+        It is necessary to fork a separate java process because Maven 1.0 embeds
+        Ant 1.5.2, but Forrest's forrest.build.xml requires Ant 1.6. The goal
+        makes use of the copy of Ant 1.6 that is bundled with Forrest, so it's
+        not even necessary to have Ant 1.6 installed separately.
+      </p>
+    </section>
+    <section>
+      <title>Alternative file</title>
+      <p>
+        Under <code>$FORREST_HOME/tools/targets/maven.xml</code>
+      </p>
+    </section>
+  </steps>
+  <feedback title="Feedback">
+    <p>
+      Please provide feedback about this document via the
+      <a
+    href="site:mail-lists">mailing lists</a>.
+<!-- Original author: Ian Springer (ips AT apache DOT org) -->
+    </p>
+  </feedback>
+</howto>

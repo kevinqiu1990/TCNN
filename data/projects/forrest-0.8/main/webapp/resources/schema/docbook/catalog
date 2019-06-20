@@ -1,0 +1,182 @@
+-- OASIS TR 9401 Catalog for Forrest --
+
+-- This file is not used directly by Forrest (see catalog.xcat instead), but is
+provided for compatibility with older XML validation tools --
+
+OVERRIDE YES
+
+  -- ...................................................................... --
+  -- Catalog data for DocBook XML V4.2 .................................... --
+  -- File docbook.cat ..................................................... --
+
+  -- Please direct all questions, bug reports, or suggestions for
+     changes to the docbook@lists.oasis-open.org mailing list. For more
+     information, see http://www.oasis-open.org/.
+  --
+
+  -- This is the catalog data file for DocBook XML V4.2. It is provided as
+     a convenience in building your own catalog files. You need not use
+     the filenames listed here, and need not use the filename method of
+     identifying storage objects at all.  See the documentation for
+     detailed information on the files associated with the DocBook DTD.
+     See SGML Open Technical Resolution 9401 for detailed information
+     on supplying and using catalog data.
+  --
+
+  -- ...................................................................... --
+  -- DocBook driver file .................................................. --
+
+PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+       "4.2/docbookx.dtd"
+
+  -- ...................................................................... --
+  -- DocBook modules ...................................................... --
+
+PUBLIC "-//OASIS//DTD DocBook CALS Table Model V4.2//EN"
+       "4.2/calstblx.dtd"
+PUBLIC "-//OASIS//DTD XML Exchange Table Model 19990315//EN"
+       "4.2/soextblx.dtd"
+PUBLIC "-//OASIS//ELEMENTS DocBook Information Pool V4.2//EN"
+       "4.2/dbpoolx.mod"
+PUBLIC "-//OASIS//ELEMENTS DocBook Document Hierarchy V4.2//EN"
+       "4.2/dbhierx.mod"
+PUBLIC "-//OASIS//ENTITIES DocBook Additional General Entities V4.2//EN"
+       "4.2/dbgenent.mod"
+PUBLIC "-//OASIS//ENTITIES DocBook Notations V4.2//EN"
+       "4.2/dbnotnx.mod"
+PUBLIC "-//OASIS//ENTITIES DocBook Character Entities V4.2//EN"
+       "4.2/dbcentx.mod"
+
+  -- ...................................................................... --
+  -- ISO entity sets ...................................................... --
+
+PUBLIC "ISO 8879:1986//ENTITIES Diacritical Marks//EN//XML"
+       "4.2/ent/iso-dia.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Numeric and Special Graphic//EN//XML"
+       "4.2/ent/iso-num.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Publishing//EN//XML"
+       "4.2/ent/iso-pub.ent"
+PUBLIC "ISO 8879:1986//ENTITIES General Technical//EN//XML"
+       "4.2/ent/iso-tech.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Latin 1//EN//XML"
+       "4.2/ent/iso-lat1.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Latin 2//EN//XML"
+       "4.2/ent/iso-lat2.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Greek Letters//EN//XML"
+       "4.2/ent/iso-grk1.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Monotoniko Greek//EN//XML"
+       "4.2/ent/iso-grk2.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Greek Symbols//EN//XML"
+       "4.2/ent/iso-grk3.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Alternative Greek Symbols//EN//XML"
+       "4.2/ent/iso-grk4.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Math Symbols: Arrow Relations//EN//XML"
+       "4.2/ent/iso-amsa.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Math Symbols: Binary Operators//EN//XML"
+       "4.2/ent/iso-amsb.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Math Symbols: Delimiters//EN//XML"
+       "4.2/ent/iso-amsc.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Math Symbols: Negated Relations//EN//XML"
+       "4.2/ent/iso-amsn.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Math Symbols: Ordinary//EN//XML"
+       "4.2/ent/iso-amso.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Math Symbols: Relations//EN//XML"
+       "docbook/4.2/ent/iso-amsr.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Box and Line Drawing//EN//XML"
+       "4.2/ent/iso-box.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Russian Cyrillic//EN//XML"
+       "4.2/ent/iso-cyr1.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Non-Russian Cyrillic//EN//XML"
+       "4.2/ent/iso-cyr2.ent"
+
+  -- End of catalog data for DocBook XML V4.2 ............................. --
+  -- ...................................................................... --
+
+
+  -- ...................................................................... --
+  -- ...................................................................... --
+  -- Catalog data for DocBook XML V4.1.2 .................................. --
+  -- File docbook.cat ..................................................... --
+
+  -- Please direct all questions, bug reports, or suggestions for
+     changes to the docbook@lists.oasis-open.org mailing list. For more
+     information, see http://www.oasis-open.org/.
+  --
+
+  -- This is the catalog data file for DocBook XML V4.1.2. It is provided as
+     a convenience in building your own catalog files. You need not use
+     the filenames listed here, and need not use the filename method of
+     identifying storage objects at all.  See the documentation for
+     detailed information on the files associated with the DocBook DTD.
+     See SGML Open Technical Resolution 9401 for detailed information
+     on supplying and using catalog data.
+  --
+
+  -- ...................................................................... --
+  -- DocBook driver file .................................................. --
+
+PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "4.1.2/docbookx.dtd"
+
+  -- ...................................................................... --
+  -- DocBook modules ...................................................... --
+
+PUBLIC "-//OASIS//DTD DocBook XML CALS Table Model V4.1.2//EN" 
+       "4.1.2/calstblx.dtd"
+PUBLIC "-//OASIS//DTD XML Exchange Table Model 19990315//EN"
+       "4.1.2/soextblx.dtd"
+PUBLIC "-//OASIS//ELEMENTS DocBook XML Information Pool V4.1.2//EN"
+       "4.1.2/dbpoolx.mod"
+PUBLIC "-//OASIS//ELEMENTS DocBook XML Document Hierarchy V4.1.2//EN"
+       "4.1.2/dbhierx.mod"
+PUBLIC "-//OASIS//ENTITIES DocBook XML Additional General Entities V4.1.2//EN"
+       "docbook/4.1.2/dbgenent.mod"
+PUBLIC "-//OASIS//ENTITIES DocBook XML Notations V4.1.2//EN"
+       "4.1.2/dbnotnx.mod"
+PUBLIC "-//OASIS//ENTITIES DocBook XML Character Entities V4.1.2//EN"
+       "4.1.2/dbcentx.mod"
+
+  -- ...................................................................... --
+  -- ISO entity sets ...................................................... --
+
+PUBLIC "ISO 8879:1986//ENTITIES Diacritical Marks//EN"
+       "4.1.2/ent/iso-dia.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Numeric and Special Graphic//EN" 
+       "4.1.2/ent/iso-num.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Publishing//EN"
+       "4.1.2/ent/iso-pub.ent"
+PUBLIC "ISO 8879:1986//ENTITIES General Technical//EN"
+       "4.1.2/ent/iso-tech.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Latin 1//EN"
+       "4.1.2/ent/iso-lat1.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Latin 2//EN"
+       "4.1.2/ent/iso-lat2.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Greek Letters//EN"
+       "4.1.2/ent/iso-grk1.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Monotoniko Greek//EN"
+       "4.1.2/ent/iso-grk2.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Greek Symbols//EN"
+       "4.1.2/ent/iso-grk3.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Alternative Greek Symbols//EN"
+       "4.1.2/ent/iso-grk4.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Math Symbols: Arrow Relations//EN"
+       "4.1.2/ent/iso-amsa.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Math Symbols: Binary Operators//EN"
+       "4.1.2/ent/iso-amsb.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Math Symbols: Delimiters//EN"
+       "4.1.2/ent/iso-amsc.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Math Symbols: Negated Relations//EN"
+       "4.1.2/ent/iso-amsn.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Math Symbols: Ordinary//EN"
+       "4.1.2/ent/iso-amso.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Added Math Symbols: Relations//EN"
+       "4.1.2/ent/iso-amsr.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Box and Line Drawing//EN"
+       "4.1.2/ent/iso-box.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Russian Cyrillic//EN" 
+       "4.1.2/ent/iso-cyr1.ent"
+PUBLIC "ISO 8879:1986//ENTITIES Non-Russian Cyrillic//EN" 
+       "4.1.2/ent/iso-cyr2.ent"
+
+  -- End of catalog data for DocBook XML V4.1.2 ........................... --
+  -- ...................................................................... --
+

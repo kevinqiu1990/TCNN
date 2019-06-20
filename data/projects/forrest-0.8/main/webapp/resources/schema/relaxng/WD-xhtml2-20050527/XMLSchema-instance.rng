@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XHTML2: http://www.w3.org/TR/2005/WD-xhtml2-20050527
+Copyright © 1999-2004 World Wide Web Consortium, (Massachusetts Institute of Technology,
+European Research Consortium for Informatics and Mathematics, Keio University).
+All Rights Reserved. This work is distributed under the W3C® Software Licens [1]
+in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         ns="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+
+  <define name="XSI.type">
+    <attribute name="xsi:type">
+      <data type="QName"/>
+    </attribute>
+  </define>
+
+  <define name="XSI.nil">
+    <attribute name="xsi:nil">
+      <data type="boolean"/>
+    </attribute>
+  </define>
+
+  <define name="XSI.schemaLocation">
+    <attribute name="xsi:schemaLocation">
+      <list>
+        <oneOrMore>
+          <data type="anyURI"/>
+          <data type="anyURI"/>
+        </oneOrMore>
+      </list>
+    </attribute>
+  </define>
+
+  <define name="XSI.noNamespaceSchemaLocation">
+    <attribute name="xsi:noNamespaceSchemaLocation">
+      <data type="anyURI"/>
+    </attribute>
+  </define>
+
+</grammar>

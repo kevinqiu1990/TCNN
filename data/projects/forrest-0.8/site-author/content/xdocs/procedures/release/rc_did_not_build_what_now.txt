@@ -1,0 +1,9 @@
+Subject: [Important] Release Candidate did NOT build, what now?
+
+The release candidate/documentation for the new release failed the tests. 
+A quick attempt at to solve the problems has failed. 
+
+What shall we do now? 
+
+If anybody can suggest a solution please do, otherwise we will have to abort
+this release attempt for now and write up a new release plan.

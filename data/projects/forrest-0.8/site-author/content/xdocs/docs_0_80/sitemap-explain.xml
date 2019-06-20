@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Cocoon sitemap explained</title>
+  </header>
+  <body>
+    <p>
+      This document is intended to be a concise explanation of the Apache Cocoon
+      <a href="site:sitemap-ref">Sitemap</a> and its use in Apache Forrest. This
+      is a worked example showing the automatically generated Table of Contents.
+      Please follow the various sitemaps as we explain.
+    </p>
+    <source>
+cd $FORREST_HOME/site-author
+forrest run
+</source>
+    <p>
+      In a separate browser window, open
+      <a href="site:linkmap"><code>localhost:8888/linkmap.html</code></a> to see
+      the generated Table of Contents. This has been transformed from the
+      site.xml navigation configuration to show the layout of the whole site as
+      a ToC.
+    </p>
+    <p>
+      Cocoon consults the sitemaps to find out how to process the
+      <code>linkmap.html</code> request.
+    </p>
+    <p>
+      The main sitemap is <code>$FORREST_HOME/main/webapp/sitemap.xmap</code>
+      and if the match is not found there then other sitemaps are consulted. The
+      first match wins. Various sitemaps are responsible for different types of
+      processing and there are also sitemaps in the many plugins.
+    </p>
+    <p>
+      So let us see how <code>linkmap.html</code> is handled.
+    </p>
+    <p>
+      Open <code>$FORREST_HOME/main/webapp/sitemap.xmap</code> in another
+      window. Search for "linkmap" to find the following snippet:
+    </p>
+    <source>
+<![CDATA[<map:match pattern="linkmap.*">
+  <map:mount uri-prefix="" src="linkmap.xmap" check-reload="yes" />
+</map:match>]]>
+    </source>
+    <p>
+      Cocoon has passed through the other potential matches earlier in the
+      sitemap and now does further handling via the <code>linkmap.xmap</code>
+      sitemap.
+    </p>
+    <p>
+      Before going any further, it is necessary to understand the "**" and "*"
+      pattern matching and replacements. See the email thread: "Re: explain
+      sitemap matches and pass parameters to transformers"
+      <a href="http://issues.apache.org/jira/browse/FOR-874">FOR-874</a>.
+    </p>
+    <p>
+      Okay we will skip some explanation of processing. At this stage we are
+      only concerned with generating the internal xml. Later steps of processing
+      will transform that into the final html output and adorn it with
+      navigation menus and headers, etc. This is your main aim for most of your
+      sitemap work for input formats: handle the incoming requests, and
+      transform into the standard internal xml format. Then Forrest
+      automatically does the rest.
+    </p>
+    <p>
+      In another browser window, open <code>localhost:8888/linkmap.xml</code> to
+      see the internal xml format.
+    </p>
+    <p>
+      Open <code>$FORREST_HOME/main/webapp/linkmap.xmap</code> sitemap. Move to
+      the "map:pipeline" section.
+    </p>
+    <p>
+      A digression: The first match is not triggered because our request is for
+      <code>linkmap.xml</code> and this match handles
+      <code>linkmap.source.xml</code> to essentially re-direct it to
+      <code>linkmap.xml</code> instead. That is what the cocoon:// means:
+      generate it via a different request within this sitemap. Try
+      <code>localhost:8888/linkmap.source.xml</code> to see the exact same
+      internal xml format.
+    </p>
+    <p>
+      The second match exactly meets our pattern <code>linkmap.xml</code>
+    </p>
+    <source>
+<![CDATA[<map:match pattern="linkmap.xml">
+  <map:generate src="cocoon://abs-linkmap" />
+  <map:transform src="{lm:transform.linkmap.document}"/>
+  <map:serialize type="xml" />
+</map:match>]]>
+    </source>
+    <p>
+      As with all pipelines, it starts with a generator to commence the xml
+      stream, then transforms it with a single transformer (there could be
+      multiple sequential transformers) and finally the serializer component.
+      Here it is:
+    </p>
+    <p>
+      The generator is not simply reading an xml file. It produces the xml via a
+      different part of this sitemap. Let us explain that later and assume for
+      now that it produces the xml from your site.xml file.
+    </p>
+    <p>
+      Move on to the transformer. It transforms the xml obtained from the
+      site.xml into the internal document xml format using an XSLT stylesheet.
+      The locationmap reference defines the source for that stylesheet:
+      "lm:transform.linkmap.document" is evaluated by the Locationmap to be the
+      <code>main/webapp/resources/stylesheets/linkmap-to-document.xsl</code>
+      stylesheet. See the <a href="site:locationmap">Locationmap</a>
+      documentation for explanation.
+    </p>
+    <p>
+      Now let us get back to that new request for "abs-linkmap". This is used a
+      number of times within this sitemap, hence it is its own pipeline. As
+      usual it starts with a generator, then a transformer, then a serializer.
+    </p>
+    <p>
+      Again the generator is sent to some other part of the sitemap hierarchy,
+      because this request is needed by many other parts of the system beyond
+      just this linkmap handling. You see that it is not matched within this
+      linkmap.xmap sitemap. Go to the main sitemap.xmap and search for
+      "site.navigation.links.xml" where you find the match that handles this by
+      looking for various Locationmap definitions to find and transform the
+      site.xml file.
+    </p>
+    <p>
+      Don't get lost, come back to the linkmap.xmap sitemap.
+    </p>
+    <p>
+      Following this generator, the transformer turns the links into absolute
+      references. This is then serialized as xml to finish this "abs-linkmap"
+      match which is the end of the generator in our main match.
+    </p>
+    <p>
+      A developer's trick will help to understand what is happening. Edit the
+      linkmap.xmap to comment-out the transformer ...
+    </p>
+    <source>
+<![CDATA[
+      <map:match pattern="linkmap.xml">
+        <map:generate src="cocoon://abs-linkmap" />
+<!--
+        <map:transform src="{lm:transform.linkmap.document}"/>
+-->
+        <map:serialize type="xml" />
+      </map:match>
+]]>
+    </source>
+    <p>
+      Browser <code>localhost:8888/linkmap.xml</code> to see the result of the
+      "abs-linkmap" generation before it is transformed into the internal
+      document xml.
+    </p>
+    <p>
+      So now you understand some of the power of sitemaps.
+    </p>
+    <p>
+      A basic understanding of Cocoon's pipelines and their components will help
+      you to realise the true power. You should know about matchers, generators,
+      transformers and serializers and have a rough idea how they work together
+      in a pipeline. A good place to start learning about Cocoon is
+      <a href="http://cocoon.apache.org/2.1/userdocs/concepts/">Understanding
+      Apache Cocoon</a>. The Forrest <a href="site:sitemap-ref">Sitemap
+      Reference</a> will also be helpful.
+    </p>
+  </body>
+</document>

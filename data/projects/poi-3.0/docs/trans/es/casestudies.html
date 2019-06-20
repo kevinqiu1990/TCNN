@@ -1,0 +1,506 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--*** This is a generated file.  Do not edit.  ***-->
+<link rel="stylesheet" href="../../skin/tigris.css" type="text/css">
+<link rel="stylesheet" href="../../skin/mysite.css" type="text/css">
+<link rel="stylesheet" href="../../skin/site.css" type="text/css">
+<link media="print" rel="stylesheet" href="../../skin/print.css" type="text/css">
+<title>Jakarta POI - Estudio de Casos</title>
+</head>
+<body bgcolor="white" class="composite">
+<!--================= start Banner ==================-->
+<div id="banner">
+<table width="100%" cellpadding="8" cellspacing="0" summary="banner" border="0">
+<tbody>
+<tr>
+<!--================= start Group Logo ==================-->
+<td align="left">
+<div class="groupLogo">
+<a href="http://jakarta.apache.org"><img border="0" class="logoImage" alt="Jakarta" src="../../resources/images/group-logo.gif"></a>
+</div>
+</td>
+<!--================= end Group Logo ==================-->
+<!--================= start Project Logo ==================--><td align="right">
+<div class="projectLogo">
+<a href="http://jakarta.apache.org/poi/"><img border="0" class="logoImage" alt="POI" src="../../resources/images/project-logo.gif"></a>
+</div>
+</td>
+<!--================= end Project Logo ==================-->
+</tr>
+</tbody>
+</table>
+</div>
+<!--================= end Banner ==================-->
+<!--================= start Main ==================-->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" summary="nav" id="breadcrumbs">
+<tbody>
+<!--================= start Status ==================-->
+<tr class="status">
+<td>
+<!--================= start BreadCrumb ==================--><a href="http://www.apache.org/">Apache</a> | <a href="http://jakarta.apache.org/">Jakarta</a> | <a href="http://jakarta.apache.org/poi/">POI</a>
+<!--================= end BreadCrumb ==================--></td><td id="tabs">
+<!--================= start Tabs ==================-->
+<div class="tab">
+<span class="selectedTab"><a class="base-selected" href="../../index.html">Home</a></span> | <script language="Javascript" type="text/javascript">
+function printit() {  
+if (window.print) {
+    window.print() ;  
+} else {
+    var WebBrowser = '<OBJECT ID="WebBrowser1" WIDTH="0" HEIGHT="0" CLASSID="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2"></OBJECT>';
+document.body.insertAdjacentHTML('beforeEnd', WebBrowser);
+    WebBrowser1.ExecWB(6, 2);//Use a 1 vs. a 2 for a prompting dialog box    WebBrowser1.outerHTML = "";  
+}
+}
+</script><script language="Javascript" type="text/javascript">
+var NS = (navigator.appName == "Netscape");
+var VERSION = parseInt(navigator.appVersion);
+if (VERSION > 3) {
+    document.write('  <a title="PRINT this page OUT" href="javascript:printit()">PRINT</a>');
+}
+</script> | <a title="PDF file of this page" href="casestudies.pdf">PDF</a>
+</div>
+<!--================= end Tabs ==================-->
+</td>
+</tr>
+</tbody>
+</table>
+<!--================= end Status ==================-->
+<table id="main" width="100%" cellpadding="8" cellspacing="0" summary="" border="0">
+<tbody>
+<tr valign="top">
+<!--================= start Menu ==================-->
+<td id="leftcol">
+<div id="navcolumn">
+<div class="menuBar">
+<div class="menu">
+<span class="menuLabel">Apache POI</span>
+        
+<div class="menuItem">
+<a href="index.html">TOP</a>
+</div>
+    
+</div>
+<div class="menu">
+<span class="menuLabel">Marketing</span>
+    
+<div class="menuItem">
+<span class="menuSelected">Casos</span>
+</div>
+  
+</div>
+<div class="menu">
+<span class="menuLabel">Proyecto</span>
+    
+<div class="menuItem">
+<a href="overview.html">Descripci&oacute;n General</a>
+</div>
+    
+<div class="menuItem">
+<a href="../../poifs/index.html">POIFS [EN]</a>
+</div>
+    
+<div class="menuItem">
+<a href="../../hssf/index.html">HSSF [EN]</a>
+</div>
+    
+<div class="menuItem">
+<a href="../../hwpf/index.html">HWPF [EN]</a>
+</div>
+    
+<div class="menuItem">
+<a href="../../hpsf/index.html">HPSF [EN]</a>
+</div>
+    
+<div class="menuItem">
+<a href="../../utils/index.html">POI-Utils [EN]</a>
+</div>
+    
+<div class="menuItem">
+<a href="http://www.apache.org/dyn/closer.cgi/jakarta/poi/">Descargas</a>
+</div>
+  
+</div>
+<div class="menu">
+<span class="menuLabel">Comunidad</span>
+    
+<div class="menuItem">
+<a href="news.html">Noticias</a>
+</div>    
+    
+<div class="menuItem">
+<a href="../../mirrors.html">Espejos [EN]</a>
+</div>    
+    
+<div class="menuItem">
+<a href="../../changes.html">Cambios [EN]</a>
+</div>
+    
+<div class="menuItem">
+<a href="todo.html">Tareas</a>
+</div> 
+    
+<div class="menuItem">
+<a href="../../getinvolved/index.html">Contribuya [EN]</a>
+</div>
+    
+<div class="menuItem">
+<a href="http://jakarta.apache.org/site/mail2.html#poi">Listas de Correo</a>
+</div>
+    
+<div class="menuItem">
+<a href="../../plan/POI20Vision.html">Visi&oacute;n [EN]</a>
+</div>
+    
+<div class="menuItem">
+<a href="historyandfuture.html">Historia y Futuro</a>
+</div>
+    
+<div class="menuItem">
+<a href="who.html">Qui&eacute;nes Somos</a>
+</div> 
+    
+<div class="menuItem">
+<a href="../../resolutions/index.html">Resoluciones [EN]</a>
+</div>    
+  
+</div>
+<div class="menu">
+<span class="menuLabel">Documentaci&oacute;n</span>
+    
+<div class="menuItem">
+<a href="http://jakarta.apache.org/poi/javadocs/">Javadocs</a>
+</div>  
+    
+<div class="menuItem">
+<a href="faq.html">FAQ</a>
+</div>
+    
+<div class="menuItem">
+<a href="../../references/index.html">Referencias</a>
+</div>  
+  
+</div>
+<div class="menu">
+<span class="menuLabel">Traducciones</span>
+    
+<div class="menuItem">
+<a href="../../trans/index.html">&Iacute;ndice</a>
+</div>
+    
+<div class="menuItem">
+<a href="../../trans/guidelines.html">Procedimientos</a>
+</div>
+        
+<div class="menuItem">
+<a href="../de/index.html">Alem&aacute;n (DE)</a>
+</div>
+    
+<div class="menuItem">
+<a href="index.html">Espa&ntilde;ol</a>
+</div>
+        
+<div class="menuItem">
+<a href="http://jakarta.terra-intl.com/poi/">Japon&eacute;s (Web)</a>
+</div>
+        
+<div class="menuItem">
+<a href="http://jakarta.apache-korea.org/poi/">Coreano(Web)</a>
+</div>
+  
+</div>
+<div class="menu">
+<span class="menuLabel">C&oacute;digo</span>
+           
+    
+<div class="menuItem">
+<a href="http://jakarta.apache.org/site/cvsindex.html">CVS</a>
+</div>  
+        
+    
+<div class="menuItem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?votes=1&product=POI&order=bugs.votes">Fallos (Bugs) M&aacute;s Votados</a>
+</div>
+    
+<div class="menuItem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?product=POI">Base de Datos de Fallos</a>
+</div>
+    
+<div class="menuItem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?product=POI&short_desc=%5BPATCH%5D&short_desc_type=allwordssubstr">Parches</a>
+</div>  
+
+    
+<div class="menuItem">
+<a href="../../junit/index.html">Resultados de Pruebas Junit</a>
+</div>  
+    
+<div class="menuItem">
+<a href="../../jdepend/index.html">M&eacute;tricas de Dependencia</a>
+</div> 
+     
+  
+</div>
+</div>
+</div>
+<form target="_blank" action="http://www.google.com/search" method="get">
+<table summary="search" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td><img height="1" width="1" alt="" src="../../skin/images/spacer.gif" class="spacer"></td><td nowrap="nowrap"><input value="jakarta.apache.org" name="sitesearch" type="hidden"><input size="10" name="q" id="query" type="text"><img height="1" width="5" alt="" src="../../skin/images/spacer.gif" class="spacer"><input name="Search" value="GO" type="submit">
+<br>
+                          Search jakarta</td><td><img height="1" width="1" alt="" src="../../skin/images/spacer.gif" class="spacer"></td>
+</tr>
+<tr>
+<td colspan="3"><img height="7" width="1" alt="" src="../../skin/images/spacer.gif" class="spacer"></td>
+</tr>
+<tr>
+<td class="bottom-left-thick"></td><td bgcolor="#a5b6c6"><img height="1" width="1" alt="" src="../../skin/images/spacer.gif" class="spacer"></td><td class="bottom-right-thick"></td>
+</tr>
+</table>
+</form>
+</td>
+<!--================= end Menu ==================-->
+<!--================= start Content ==================--><td>
+<div id="bodycol">
+<div class="app">
+<div align="center">
+<h1>Jakarta POI - Estudio de Casos</h1>
+</div>
+<div class="h3">
+  
+  
+  
+    
+<div class="h3">
+<h3>Introducci&oacute;n</h3>
+</div>
+       
+       
+<p>
+          Mucha gente est&aacute; utilizando POI para distintos prop&oacute;sitos. Como con cualquier
+          nueva API o tecnologia, la primera pregunta que la gente pregunta normalmente
+          no es "c&oacute;mo puedo" sino "Qui&eacute;n m&aacute;s est&aacute; haciendo lo que yo estoy a punto de 
+          hacer?" Esto es comprensible con el abismal porcentage de &eacute;xito en el negocio
+          del software. Estos Casos pretenden ayudar a crear
+          confianza y comprensi&oacute;n.
+       </p>
+    
+        
+<div class="h3">
+<h3>Enviando un Estudio de un Caso</h3>
+</div>
+            
+            
+<p>
+                Estamos buscando activamente estudios de casos para esta p&aacute;gina (despu&eacute;s de todo
+                acaba de comenzarse). Andrew C. Oliver (acoliver at apache dot org) ha
+                accedido a entregar unas cuantas Camisetas con el logotipo de POI para
+                los primeros y mejores env&iacute;os. Para enviar un estudio de un caso, puedes
+                <a href="http://jakarta.apache.org/poi/getinvolved/index.html">
+                enviar un parche para esta p&aacute;gina</a> o enviarlo por correo electr&oacute;nico
+                a la <a href="http://jakarta.apache.org/site/mail2.html#poi">lista de correo
+                </a> (con [PATCH] como prefijo en el asunto, por favor).
+            </p>
+        
+        
+<div class="h3">
+<h3>Estudios de Casos</h3>
+</div>
+            
+              
+<div class="h4">
+<h4>Sunshine Systems</h4>
+</div>
+               
+<p>
+           
+<a href="http://www.sunshinesys.com/">Sunshine Systems</a> desarroll&oacute; una
+            soluci&oacute;n de informes basada en POI para un paquete software de optimizaci&oacute;n de precios
+            que se usa en grandes cadenas de venta.
+         </p>
+         
+<p> La soluci&oacute;n permiti&oacute; a los planificadores y gestores de la mercanc&iacute;a mercanc&iacute;a pedir 
+           unos informes de soporte a la decisi&oacute;n e informes de cambios de precios utilizando un 
+           navegador est&aacute;ndar. Los usuarios pueden especificar el tipo de informe, las opciones, as&iacute;
+           como criterios de filtros como la divisi&oacute;n de la compa&ntilde;&iacute;a
+           o departamento. La generaci&oacute;n de informes se llev&oacute; a cabo en el 
+           servidor de aplicaciones multi-hilo
+           y fue capaz de soportar muchas peticiones de informe simult&aacute;neas.
+         </p>
+         
+<p>La aplicaci&oacute;n de informes recog&iacute;a informaci&oacute;n del negocio de la base
+         de datos Oracle de la aplicaci&oacute;n de optimizaci&oacute;n de precios. 
+         Los datos se agregaban y resum&iacute;an bas&aacute;ndose en el tipo espec&iacute;fico 
+         de informe y los criterios de filtro pedidos por el usuario. El
+         informe final se generaba como una hoja de c&aacute;lculo de Microsoft Excel utilizando
+         el API de POI HSSF y se almacenaba en el
+         servidor de base de datos de informes para ese usuario espec&iacute;fico como un BLOB.
+         Los informes pueden ser vistos
+         f&aacute;cilmente y bien integrados utilizando el mismo navegador.
+         </p>
+         
+<p>A los vendedores les gusto la soluci&oacute;n porque as&iacute; ten&iacute;an acceso instant&aacute;neo
+         a datos del negocio cr&iacute;ticios
+         a trav&eacute;s de una interfaz basada en navegador extremadamente f&aacute;cil de usar.
+         No necesitaban entrenar a su amplia comunidad de usuarios en las complejidades de la
+         aplicaci&oacute;n de optimizaci&oacute;n. Lo que es m&aacute;s, los informes se generaban en un formato de 
+         hoja de c&aacute;lculo Excel,
+         que todo el mundo conoc&iacute;a y que tambi&eacute;n permit&iacute;a an&aacute;lisis
+         de datos adicionales utilizando
+         caracter&iacute;sticas est&aacute;ndares de Excel.
+         </p>
+         
+<p>Rob Stevenson (rstevenson at sunshinesys dot com)
+         </p>
+       
+            
+<div class="h4">
+<h4>Banco de Lituania</h4>
+</div>
+                
+                
+<p>
+                    El
+                    <a href="http://www.lbank.lt/">Banco de Lituania</a>
+                    genera informes de datos estad&iacute;sticos financieros en formato Excel 
+                    utilizando el API <a href="http://jakarta.apache.org/poi/hssf/">
+                        HSSF</a> del proyecto 
+                    <a href="http://jakarta.apache.org/poi/">Jakarta POI</a>
+                    El sistema est&aacute; basado en Oracle JServer y utiliza
+                    un procedimiento almacenado Java que utilizando el API HSSF 
+                    responde en formato XLS.  - Arian Lashkov (alaskov at lbank.lt)
+                </p>
+            
+<!--            <section>-->
+<!--                <title>Bit Tracker by Tracker Inc., and ThinkVirtual</title>-->
+<!--                <p>-->
+<!--                    Bit Tracker (http://www.bittracker.com/) es el primer sistema a nivel mundial -->
+<!--                    basado en web de registro de brocas (drill bit) para gestionar la información crítica -->
+<!--                    de brocas de la compañía y sacar el mayor partido a esos datos. Gestiona todos los datos -->
+<!--                    relacionados con las brocas, incluyendo su uso, localización, cómo se utilizan, y -->
+<!--                    resultados como su relación de penetración y grado de desgaste con el uso. Estos datos -->
+<!--                    necesitan estar disponibles en formato Excel para obtener compatibilidad hacia atrás -->
+<!--                    y otros usos en la industria. Después de utilizar los formatos CSV y HTML, necesitábamos-->
+<!--                    algo mejor para la creación de hojas de cálculo y POI es la respuesta. Funciona fenomenal-->
+<!--                    y fue muy sencillo de implementar. Gracias al equipo de POI.-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    Travis Reeder (travis at thinkvirtual dot com)-->
+<!--                </p>-->
+<!--            </section>-->
+            
+<div class="h4">
+<h4>Edwards And Kelcey Technology</h4>
+</div>
+                
+                
+<p>
+                    Edwards and Kelcey Technology (http://www.ekcorp.com/) desarroll&oacute;
+                    un Sistema de Mantenimiento y Gesti&oacute;n de Instalaciones
+                    para la industria de las Telecomunicaciones.
+                    basado en Turbine y Velocity.
+                    Originalmente la factura se hac&iacute;a con una sencilla
+                    hoja CVS que era entonces 
+                    marcada por cada cuenta y particularizada para cada cliente.
+                    Como el crecimiento ha sido consistente con la aplicaci&oacute;n, las necesidades de
+                    facturas que no necesitasen ser retocadas a mano aumentaron. POI proporcion&oacute; la
+                    soluci&oacute;n a este problema, integrandose f&aacute;cil y transparentemente en el sistema.
+                    Se utiliz&oacute; POI HSSF para crear las facturas directamente desde el servidor
+                    en formato Excel 97
+                    y ahora sirve m&aacute;s de 150 facturas diferentes cada mes.
+                </p>
+                
+<p>
+                    Cameron Riley (crileyNO@ SPAMekmail.com)
+                </p>
+            
+            
+<div class="h4">
+<h4>ClickFind</h4>
+</div>
+                
+                
+<p>
+                    
+<a href="http://www.clickfind.com/">ClickFind Inc.</a> utiliz&oacute; el API
+                    HSSF del proyecto POI para proporcionar a sus clientes
+                    de investigaci&oacute;n m&eacute;dica la capacidad de exportar a Excel desde su servicio
+                    web de recolecci&oacute;n de datos electr&oacute;nicos Data Collector 3.0. La asistencia del equipo de POI
+                    permiti&oacute; que ClickFind proporcionara a sus clientes un formato de datos que requiere menos
+                    conocimentos t&eacute;cnicos que el formato XML utilizado por la aplicaci&oacute;n Data Collector.
+                    Esto era importante para ClickFind ya que muchos de sus clientes actuales y potenciales
+                    estaban utilizando Excel en sus operaciones del d&iacute;a-a-d&iacute;a
+                    as&iacute; como en procedimientos establecidos para el manejo de sus datos cl&iacute;nicos
+                    generados.  - Jared Walker (jared.walker at clickfind.com)
+                </p>
+            
+            
+<div class="h4">
+<h4>IKAN Software NV</h4>
+</div>
+                
+                    
+<p>Adem&aacute;s de Gesti&oacute;n del Cambio y Modelado de Base de Datos, IKAN Software NV
+                        (http://www.ikan.be/) desarrolla y da soporte a su propia herramienta ETL
+                        (Extrae/Transforma/Carga &oacute; Extract/Transform/Load).</p>
+
+                    
+<p>El &uacute;ltimo producto de IKAN en este dominio se llama ETL4ALL
+                        (http://www.ikan.be/etl4all/). ETL4ALL es una herramienta de c&oacute;digo abierto
+                        que permite la transferencia de datos desde y hacia virtualmente cualquier
+                        or&iacute;gen de datos. Los usuarios pueden combinar y examinar datos almacenados en
+                        base de datos relacionales, bases de datos XML, PDF, ficheros, EDI, CSV, etc.
+                    </p>
+
+                    
+<p>Es evidente que los ficheros de Microsoft Excel tambi&eacute;n estan soportados.
+                        POI se ha utilizado para implementar con &eacute;xito este soporte en ETL4ALL.</p>
+            
+            
+       
+      
+  
+
+<div id="authors" align="right">by&nbsp;Andrew C. Oliver,&nbsp;Cameron Riley,&nbsp;Agust&iacute;n Mart&iacute;n Barbero</div>
+</div>
+</div>
+</div>
+</td>
+<!--================= end Content ==================-->
+</tr>
+</tbody>
+</table>
+<!--================= end Main ==================-->
+<!--================= start Footer ==================-->
+<div id="footer">
+<table summary="footer" cellspacing="0" cellpadding="4" width="100%" border="0">
+<tbody>
+<tr>
+<!--================= start Copyright ==================-->
+<td colspan="2">
+<div align="center">
+<div class="copyright">
+              Copyright &copy; 2002-2006&nbsp;The Apache Software Foundation. All rights reserved.
+            </div>
+</div>
+</td>
+<!--================= end Copyright ==================-->
+</tr>
+<tr>
+<td align="left">
+<!--================= start Host ==================-->
+<!--================= end Host ==================--></td><td align="right">
+<!--================= start Credits ==================-->
+<div align="right">
+<div class="credit"></div>
+</div>
+<!--================= end Credits ==================-->
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!--================= end Footer ==================-->
+</body>
+</html>

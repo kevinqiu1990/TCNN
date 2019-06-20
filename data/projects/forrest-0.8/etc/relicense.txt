@@ -1,0 +1,27 @@
+The relicense task is described at
+http://issues.cocoondev.org/jira/secure/ViewIssue.jspa?key=FOR-123
+
+See ./relicense-tree.txt for listing of what sections have already been done
+and the issues that remain.
+
+------------------------------------------------------------------------
+Here is one technique ...
+* Do the whole tree, a section at a time, using insert_license.pl script.
+* cd to a directory as high as you dare, e.g. src/documentation/
+* In another window, do a practice run:
+insert_license.pl -p /path/to/svn/forrest/src/documentation 2002-2004 > relicense.log
+* Review the summary output and grep the relicence.log file.
+* Investigate the files that are listed as having problems.
+* When happy do a production run:
+insert_license.pl /path/to/svn/forrest/src/documentation 2002-2004 > relicense.log
+* Again review the summary output and grep the relicence.log file.
+* Note any files that need fixing by hand
+* Note sections that are finished and remaining issues in etc/relicense-tree.txt
+* Do a 'svn diff' and make sure it is what you expected, then 'svn commit'.
+
+* At some stage, use the Java or Python "relicense" script. This only deals
+with the *.java files.
+
+* Tweak the insert_license.pl script to address new issues.
+
+------------------------------------------------------------------------

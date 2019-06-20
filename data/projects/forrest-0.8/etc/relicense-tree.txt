@@ -1,0 +1,220 @@
+Mark section which have had the licence applied,
+using a code in the left-hand column:
+L = The AL-2.0 license is applied
+N = Do not apply any license here - foreign stuff
+* = There are issues to be addressed
+------------------------------------------------------------------------
+L    .
+L    |-- etc
+L    |-- legal
+L    |-- lib
+L    |   |-- core
+L    |   |-- endorsed
+-    |   `-- optional
+L    |-- scratchpad
+L    |   |-- charts
+L    |   |-- convert
+L    |   |   `-- anakiaNmaven
+L    |   |-- forrestbot2
+L    |   |   |-- core
+N    |   |   |-- lib
+L    |   |   `-- webapp
+L    |   |       `-- src
+L    |   |           |-- conf
+L    |   |           |-- java
+L    |   |           |   `-- org
+L    |   |           |       `-- apache
+L    |   |           |           `-- forrest
+L    |   |           |               `-- forrestbot
+L    |   |           |                   `-- webapp
+L    |   |           |                       |-- action
+L    |   |           |                       |-- dto
+L    |   |           |                       |-- form
+L    |   |           |                       `-- util
+L    |   |           `-- webapp
+*L   |   |               |-- WEB-INF                    # apply to web.xml ?
+L    |   |               |   `-- tld
+L    |   |               `-- common
+L    |   |-- forrestdoc
+*    |   |   |-- legal     # LICENSE.sat.txt is still AL-1.1
+N    |   |   |-- lib
+L    |   |   `-- src
+L    |   |       |-- ant
+L    |   |       |-- java
+L    |   |       |   `-- org
+L    |   |       |       `-- apache
+L    |   |       |           `-- forrest
+L    |   |       |               `-- forrestdoc
+L    |   |       |                   |-- ant
+L    |   |       |                   |   `-- doc
+L    |   |       |                   |-- java
+L    |   |       |                   |   |-- doc
+L    |   |       |                   |   `-- src
+L    |   |       |                   |       |-- symtab
+*L   |   |       |                   |       |-- util    # QuickSort.java
+L    |   |       |                   |       `-- xref
+L    |   |       |                   `-- js
+L    |   |       |                       `-- doc
+L    |   |       |-- resources
+L    |   |       |   |-- common
+L    |   |       |   |   `-- resources
+L    |   |       |   |-- javadoc
+L    |   |       |   |-- javasrc
+L    |   |       |   |-- touchgraph
+L    |   |       |   |-- vizant
+L    |   |       |   `-- ws
+L    |   |       `-- test
+L    |   |           |-- java
+L    |   |           |   `-- org
+L    |   |           |       `-- apache
+L    |   |           |           `-- alexandria
+L    |   |           |               `-- vizant
+L    |   |           `-- resources
+L    |   |               |-- javasrc
+L    |   |               `-- jsdoc
+L    |   `-- layout
+L    |       |-- resources
+L    |       `-- xml.apache.org
+L    |-- src
+L    |   |-- core
+L    |   |   |-- bin
+*    |   |   |-- context    # jettyconf.xml ?
+*L   |   |   |   |-- WEB-INF         # apply to web.xml and jtidy.properties ?
+L    |   |   |   |   `-- classes
+L    |   |   |   |       `-- org
+L    |   |   |   |           `-- apache
+L    |   |   |   |               `-- cocoon
+L    |   |   |   |                   `-- util
+L    |   |   |   |-- resources
+L    |   |   |   |   |-- chaperon
+L    |   |   |   |   |   |-- grammars
+L    |   |   |   |   |   |-- misc
+L    |   |   |   |   |   |-- stylesheets
+L    |   |   |   |   |   `-- wiki
+L    |   |   |   |   |-- schema
+N    |   |   |   |   |   |-- docbook
+L    |   |   |   |   |   |-- dtd
+L    |   |   |   |   |   |   |-- v10
+L    |   |   |   |   |   |   `-- v20a
+N    |   |   |   |   |   |-- entity
+N    |   |   |   |   |   |-- open-office
+L    |   |   |   |   |   |-- relaxng
+L    |   |   |   |   |   |   `-- unstable
+N    |   |   |   |   |   |-- sdocbook
+N    |   |   |   |   |   `-- w3c-dtd
+L    |   |   |   |   `-- stylesheets
+L    |   |   |   |       `-- aggregates
+L    |   |   |   `-- skins
+L    |   |   |       |-- avalon-tigris
+L    |   |   |       |   |-- css
+L    |   |   |       |   |-- images
+L    |   |   |       |   `-- xslt
+L    |   |   |       |       |-- fo
+L    |   |   |       |       `-- html
+L    |   |   |       |-- common
+L    |   |   |       |   |-- css
+L    |   |   |       |   |-- images
+L    |   |   |       |   |-- scripts
+L    |   |   |       |   `-- xslt
+L    |   |   |       |       |-- fo
+L    |   |   |       |       |-- html
+L    |   |   |       |       `-- svg
+L    |   |   |       |-- forrest-css
+L    |   |   |       |   |-- css
+L    |   |   |       |   |-- images
+L    |   |   |       |   `-- xslt
+L    |   |   |       |       |-- fo
+L    |   |   |       |       `-- html
+L    |   |   |       |-- forrest-site
+L    |   |   |       |   |-- css
+L    |   |   |       |   |-- images
+L    |   |   |       |   `-- xslt
+L    |   |   |       |       |-- fo
+L    |   |   |       |       `-- html
+L    |   |   |       |-- krysalis-site
+L    |   |   |       |   |-- css
+L    |   |   |       |   |-- images
+L    |   |   |       |   `-- xslt
+L    |   |   |       |       |-- fo
+L    |   |   |       |       `-- html
+L    |   |   |       |-- template
+L    |   |   |       |   |-- css
+L    |   |   |       |   |-- images
+L    |   |   |       |   |-- scripts
+L    |   |   |       |   `-- xslt
+L    |   |   |       |       |-- fo
+L    |   |   |       |       `-- html
+L    |   |   |       `-- tigris-style
+L    |   |   |           |-- css
+L    |   |   |           |-- images
+L    |   |   |           |-- scripts
+L    |   |   |           `-- xslt
+L    |   |   |               |-- fo
+L    |   |   |               `-- html
+L    |   |   |-- fresh-site
+L    |   |   |   `-- src
+L    |   |   |       `-- documentation
+L    |   |   |           |-- content
+L    |   |   |           |   `-- xdocs
+L    |   |   |           |       |-- images
+*L   |   |   |           |       `-- samples      # to do *.cwiki ?
+L    |   |   |           |           `-- subdir
+L    |   |   |           `-- translations
+L    |   |   |-- targets
+L    |   |   |-- tasks
+L    |   |   `-- var
+L    |   |-- documentation
+L    |   |   |-- conf
+L    |   |   |-- content
+L    |   |   |   |-- skins
+*L   |   |   |   `-- xdocs                               # to do *.cwiki ?
+L    |   |   |       `-- community
+L    |   |   |           `-- howto
+L    |   |   |               |-- bugzilla-patch
+L    |   |   |               |-- cvs-ssh
+L    |   |   |               |-- multi
+L    |   |   |               `-- v10
+L    |   |   `-- resources
+L    |   |-- forrestbar
+L    |   |   `-- xpi
+L    |   |       `-- content
+L    |   |           `-- forrestbar
+L    |   |-- forrestbot
+L    |   |   |-- ant
+L    |   |   |-- bin
+*    |   |   |-- lib                       # do we need licenses next to jars
+L    |   |   |-- samples
+L    |   |   |   `-- entities
+L    |   |   |-- scripts
+L    |   |   |-- webapp
+*L   |   |   |   |-- WEB-INF               # apply to web.xml ?
+L    |   |   |   |   `-- classes
+L    |   |   |   |       `-- forrestbot
+L    |   |   |   `-- images
+L    |   |   `-- xslt
+L    |   `-- java
+L    |       `-- org
+L    |           `-- apache
+L    |               |-- cocoon
+L    |               |   |-- acting
+L    |               |   |   `-- sourcetype
+L    |               |   |-- components
+L    |               |   |   |-- modules
+L    |               |   |   |   `-- input
+L    |               |   |   |       `-- lm
+L    |               |   |   `-- source
+L    |               |   |       `-- impl
+L    |               |   |-- generation
+L    |               |   |-- matching
+L    |               |   |-- selection
+L    |               |   `-- transformation
+L    |               `-- forrest
+L    |                   |-- search
+L    |                   `-- skinconf
+L    `-- tools
+N        |-- ant                         # done by Ant project
+N        |   |-- bin
+N        |   `-- lib
+*N       |-- dtdconverters               # need update from ~andyc
+*N       |-- jetty                       # do we need licenses next to jars
+L        `-- targets

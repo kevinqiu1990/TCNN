@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project default="validate" basedir="." name="validate">
+  <target name="validate" depends="validation-props, validate-xdocs,
+    validate-skinconf, validate-sitemap, validate-skins, validate-skinchoice,
+    validate-stylesheets"  description="Validate all: xdocs, skins, sitemap, etc"/>
+  <target name="validation-props" depends="examine-proj">
+<!-- Validation flags -->
+    <property name="forrest.validate" value="true" />
+    <condition property="validate">
+      <istrue value="${forrest.validate}"/>
+    </condition>
+    <property name="forrest.validate.failonerror" value="true" />
+    <property name="forrest.validate.includes" value="**/*"/>
+    <property name="forrest.validate.excludes" value=""/>
+    <property name="forrest.validate.xdocs" value="${forrest.validate}"/>
+    <condition property="validate.xdocs">
+      <and>
+        <istrue value="${forrest.validate.xdocs}"/>
+        <isset property="xdocs.present"/>
+      </and>
+    </condition>
+    <property name="forrest.validate.xdocs.includes" value="**/*.xml"/>
+    <property name="forrest.validate.xdocs.excludes" value="site.xml,.*.swp"/>
+    <property name="forrest.validate.xdocs.failonerror"
+      value="${forrest.validate.failonerror}" />
+    <property name="forrest.validate.skinconf" value="${forrest.validate}"/>
+    <condition property="validate.skinconf">
+      <and>
+        <istrue value="${forrest.validate.skinconf}"/>
+        <isset property="skinconf.present"/>
+      </and>
+    </condition>
+    <basename file="${skinconf}" property="skinconf-file"/>
+    <property name="forrest.validate.skinconf.includes" value="${skinconf-file}"/>
+    <property name="forrest.validate.skinconf.excludes" value=""/>
+    <property name="forrest.validate.skinconf.failonerror"
+      value="${forrest.validate.failonerror}" />
+    <property name="forrest.validate.sitemap" value="${forrest.validate}"/>
+    <condition property="validate.sitemap">
+      <and>
+        <istrue value="${forrest.validate.sitemap}"/>
+        <isset property="sitemap.present"/>
+      </and>
+    </condition>
+    <property name="forrest.validate.sitemap.includes" value=""/>
+    <property name="forrest.validate.sitemap.excludes" value=""/>
+    <property name="forrest.validate.sitemap.failonerror"
+      value="${forrest.validate.failonerror}" />
+    <property name="forrest.validate.stylesheets" value="${forrest.validate}"/>
+    <condition property="validate.stylesheets">
+      <and>
+        <istrue value="${forrest.validate.stylesheets}"/>
+        <isset property="stylesheets.present"/>
+      </and>
+    </condition>
+    <property name="forrest.validate.stylesheets.includes" value="**/*.xsl"/>
+    <property name="forrest.validate.stylesheets.excludes" value=""/>
+    <property name="forrest.validate.stylesheets.failonerror"
+      value="${forrest.validate.failonerror}" />
+    <property name="forrest.validate.skins" value="${forrest.validate}"/>
+    <condition property="validate.skins">
+      <and>
+        <istrue value="${forrest.validate.skins}"/>
+        <isset property="skins.present"/>
+      </and>
+    </condition>
+    <property name="forrest.validate.skins.includes" value="**/*"/>
+    <property name="forrest.validate.skins.excludes" value="**/*.xsl"/>
+    <property name="forrest.validate.skins.failonerror"
+      value="${forrest.validate.failonerror}" />
+    <property name="forrest.validate.skins.stylesheets" value="${forrest.validate.skins}"/>
+    <condition property="validate.skins.stylesheets">
+      <and>
+        <istrue value="${forrest.validate.skins.stylesheets}"/>
+        <isset property="skins.present"/>
+      </and>
+    </condition>
+    <property name="forrest.validate.skins.stylesheets.includes" value="**/*.xsl"/>
+    <property name="forrest.validate.skins.stylesheets.excludes" value=""/>
+    <property name="forrest.validate.skins.stylesheets.failonerror"
+      value="${forrest.validate.skins.failonerror}" />
+  </target>
+  <target name="validate-site" depends="load-project-props">
+    <condition property="forrest.validate.skinconf.disable-xml-link">
+      <and>
+        <istrue value="${skinconfig.disable-xml-link}"/>
+      </and>
+    </condition>
+    <fail if="forrest.validate.skinconf.disable-xml-link">
+---------------------------------------     
+${skinconfig.project-name} has configured disable-xml-link=true
+To validate this site, please change to disable-xml-link=false
+${skinconf}
+then generate your site with 'forrest', then do 'forrest validate-site'.
+---------------------------------------     
+    </fail>
+    <xmlvalidate failonerror="${forrest.validate.site.failonerror}" lenient="no" warn="yes">
+      <attribute name="http://apache.org/xml/features/validation/dynamic"  value="true"/>
+      <xmlcatalog id="fcatalog" >
+        <catalogpath>
+          <pathelement
+            location="${forrest.core.webapp}/resources/schema/catalog.xcat"/>
+          <pathelement
+            location="${forrest.plugins-dir}/catalog.xcat"/>
+          <pathelement location="${catalog}"/>
+        </catalogpath>
+      </xmlcatalog>
+      <fileset dir="${project.site-dir}"
+        includes="${forrest.validate.xdocs.includes}"
+        excludes="${forrest.validate.xdocs.excludes}"/>
+    </xmlvalidate>
+    <echo message="...validated site"/>
+  </target>
+  <target name="validate-xdocs" depends="validation-props" if="validate.xdocs"
+      description="Validate the project xdocs">
+    <echo level="verbose" message="Using these catalog descriptors:
+forrest.core.webapp=${forrest.core.webapp}/resources/schema/catalog.xcat
+forrest.plugins-dir=${forrest.plugins-dir}/catalog.xcat
+catalog=${catalog}"/>
+    <xmlvalidate failonerror="${forrest.validate.xdocs.failonerror}" lenient="no" warn="yes" classpathref="forrest.cp" classname="org.apache.xerces.parsers.SAXParser">
+      <attribute name="http://apache.org/xml/features/validation/dynamic"  value="true"/>
+      <xmlcatalog refid="fcatalog" />
+      <fileset dir="${xdocs-dir}"
+        includes="${forrest.validate.xdocs.includes}"
+        excludes="${forrest.validate.xdocs.excludes}"/>
+    </xmlvalidate>
+    <echo message="...validated xdocs"/>
+  </target>
+  <target name="validate-skinconf" depends="validation-props"
+          if="validate.skinconf" description="Validate skinconf">
+    <xmlvalidate failonerror="${forrest.validate.skinconf.failonerror}" 
+                 lenient="no" warn="yes">
+      <xmlcatalog refid="fcatalog" />
+      <fileset dir="${content-dir}"
+               includes="${forrest.validate.skinconf.includes}"
+               excludes="${forrest.validate.skinconf.excludes}"/>
+    </xmlvalidate>
+    <echo message="...validated skinconf"/>
+  </target>
+  <target name="validate-sitemap" depends="validation-props"
+    if="validate.sitemap" description="Validate the project sitemap">
+    <jing rngfile="${forrest.core.webapp}/resources/schema/relaxng/sitemap-v06.rng">
+      <fileset dir="${content-dir}"
+        includes="${forrest.validate.sitemap.includes}"
+        excludes="${forrest.validate.sitemap.excludes}">
+        <include name="sitemap.xmap"/>
+      </fileset>
+    </jing>
+    <echo message="...validated project sitemap"/>
+  </target>
+  <target name="validate-stylesheets" depends="validation-props"
+    if="validate.stylesheets" description="Validate XSL files">
+    <jing rngfile="${forrest.core.webapp}/resources/schema/relaxng/xslt.rng">
+      <fileset dir="${stylesheets-dir}"
+        includes="${forrest.validate.stylesheets.includes}"
+        excludes="${forrest.validate.stylesheets.excludes}" />
+    </jing>
+    <echo message="...validated stylesheets"/>
+  </target>
+  <target name="validate-skins" depends="validate-skins-stylesheets" description="Validate skins"/>
+  <target name="validate-skins-stylesheets" depends="validation-props"
+    if="validate.skins.stylesheets">
+    <jing rngfile="${forrest.core.webapp}/resources/schema/relaxng/xslt.rng">
+      <fileset dir="${skins-dir}"
+        includes="${forrest.validate.skins.stylesheets.includes}"
+        excludes="${forrest.validate.skins.stylesheets.excludes}"/>
+    </jing>
+    <echo message="...validated skin stylesheets"/>
+  </target>
+<!-- Check that ${project.skin} points to an existing skin. -->
+  <target name="validate-skinchoice" depends="validation-props" description="Validate skin choice">
+    <condition property="project.skin.present">
+      <available file="${project.skin}" type="dir">
+        <filepath path="${skins-dir}"/>
+        <filepath path="${forrest.skins-dir}"/>
+      </available>
+    </condition>
+    <loadfile property="skin-not-found-message" srcFile="${forrest.core}/var/skin-not-found-message.txt">
+      <filterchain>
+        <expandproperties/>
+      </filterchain>
+    </loadfile>
+    <fail unless="project.skin.present">
+      ${skin-not-found-message}
+    </fail>
+    <echo message="...validated existence of skin '${project.skin}'"/>
+  </target>
+</project>

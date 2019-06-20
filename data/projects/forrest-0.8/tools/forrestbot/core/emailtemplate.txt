@@ -1,0 +1,9 @@
+Automated build for ${ant.project.name} ${notify.completion-status}
+Log attached.
+
+----------
+Forrestbot run ended at ${NOW}
+Using Forrest ${forrest.version}
+Forrestbot administrator: ${notify.administrator}
+----------
+

@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- ===============================================
+Serves 'raw' content from files in src/documentation/content/xdocs
+This allows the inclusion of binary content (*.doc, *.pdf etc) in Forrest sites.
+
+This pipeline *relies* on the caller checking if the {properties:content.xdocs}/ actually exists!
+If the caller doesn't do this, this sitemap's '**' pipeline will match everything.
+
+Generates  :  Exact bytes read from {properties:content.xdocs}/**
+Example URL:  http://localhost:8888/blah.doc
+Used by    :  sitemap.xmap
+Uses       :  {properties:content.xdocs}/**
+
+$Revision: 1.2 $
+==================================================== -->
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  <map:components>
+    <map:generators default="file">
+      <map:generator name="html" src="org.apache.cocoon.generation.HTMLGenerator" />
+    </map:generators>
+    <map:serializers default="html"/>
+    <map:transformers default="xslt"/>
+    <map:readers default="resource"/>
+    <map:matchers default="wildcard"/>
+  </map:components>
+  <map:pipelines>
+    <map:pipeline>
+<!-- ============================================================ -->
+<!-- OUTPUT FORMATS                                               -->
+<!-- ============================================================ -->
+      <map:match pattern="**">
+        <map:match pattern="**.html">
+<!--
+          Use this instead if you want JTidy to clean up your HTML
+          <map:generate type="html" src="{lm:project.{0}}" />
+          <map:serialize type="html"/>
+          -->
+          <map:read src="{lm:project.{0}}" mime-type="text/html"/>
+        </map:match>
+        <map:match pattern="**.xml">
+          <map:generate type="file" src="{lm:project.{0}}" />
+          <map:serialize type="xml" />
+        </map:match>
+        <map:match pattern="skin/**.css">
+          <map:read src="{lm:project:{1}}" mime-type="text/css" />
+        </map:match>
+        <map:match pattern="**.js">
+          <map:read src="{lm:project.{0}}" mime-type="application/javascript" />
+        </map:match>
+        <map:match pattern="**.gif">
+          <map:read src="{lm:project.{0}}" mime-type="image/gif" />
+        </map:match>
+        <map:match pattern="**.jpg">
+          <map:read src="{lm:project.{0}}" mime-type="image/jpeg" />
+        </map:match>
+        <map:match pattern="**.jpeg">
+          <map:read src="{lm:project.{0}}" mime-type="image/jpeg" />
+        </map:match>
+        <map:match pattern="**.pdf">
+          <map:read src="{lm:project.{0}}" mime-type="application/pdf" />
+        </map:match>
+        <map:match pattern="**.swf">
+          <map:read src="{lm:project.{0}}" mime-type="application/x-shockwave-flash" />
+        </map:match>
+        <map:match pattern="**.txt">
+          <map:read src="{lm:project.{0}}" mime-type="text/plain" />
+        </map:match>
+        <map:match pattern="**">
+          <map:read src="{lm:project.{0}}"/>
+        </map:match>
+      </map:match>
+    </map:pipeline>
+  </map:pipelines>
+</map:sitemap>

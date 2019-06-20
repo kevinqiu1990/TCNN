@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!--
+Allows to create a alternative language menu
+It is not been used as default
+-->
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  <map:components>
+    <map:generators>
+      <map:generator name="directory" src="org.apache.cocoon.generation.DirectoryGenerator" />
+    </map:generators>
+    <map:serializers default="html"/>
+    <map:matchers default="wildcard"/>
+    <map:transformers default="xslt">
+      <map:transformer name="i18n" src="org.apache.cocoon.transformation.I18nTransformer">
+        <catalogues default="languages">
+          <catalogue id="languages" name="languages" location="{lm:project.translations}"/>
+          <catalogue id="langcode" name="langcode" location="{lm:project.translations}"/>
+        </catalogues>
+      </map:transformer>
+    </map:transformers>
+  </map:components>
+  <map:pipelines>
+    <map:pipeline>
+      <map:act type="locale" >
+        <map:match pattern="**i18n-*.*">
+          <map:generate type="directory" src="{properties:content.xdocs}{1}">
+            <map:parameter name="dateFormat" value="yyyy-MM-dd hh:mm" />
+            <map:parameter name="include" value="^{2}" />
+            <map:parameter name="exclude" value="^{2}\.|{2}.{../language}" />
+          </map:generate>
+          <map:transform src="{lm:directory.i18n}">
+            <map:parameter name="ext"    value="{3}" />
+          </map:transform>
+          <map:transform type="i18n">
+            <map:parameter name="locale" value="{../locale}"/>
+          </map:transform>
+          <map:serialize />
+        </map:match>
+      </map:act>
+    </map:pipeline>
+  </map:pipelines>
+</map:sitemap>

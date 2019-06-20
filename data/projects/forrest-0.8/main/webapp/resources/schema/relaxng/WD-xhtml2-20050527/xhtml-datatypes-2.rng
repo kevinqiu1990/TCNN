@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XHTML2: http://www.w3.org/TR/2005/WD-xhtml2-20050527
+Copyright © 1999-2004 World Wide Web Consortium, (Massachusetts Institute of Technology,
+European Research Consortium for Informatics and Mathematics, Keio University).
+All Rights Reserved. This work is distributed under the W3C® Software Licens [1]
+in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:x="http://www.w3.org/1999/xhtml"
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+
+  <x:h1>Datatypes Module</x:h1>
+
+  <div>
+    <x:h2>Datatypes defined in XML 1.0</x:h2>
+
+    <define name="CDATA.datatype">
+      <text/>
+    </define>
+
+    <define name="ID.datatype">
+      <data type="ID"/>
+    </define>
+
+    <define name="IDREF.datatype">
+      <data type="IDREF"/>
+    </define>
+
+    <define name="IDREFS.datatype">
+      <data type="IDREFS"/>
+    </define>
+
+    <define name="NAME.datatype">
+      <data type="Name"/>
+    </define>
+
+    <define name="NMTOKEN.datatype">
+      <data type="NMTOKEN"/>
+    </define>
+
+    <define name="NMTOKENS.datatype">
+      <data type="NMTOKENS"/>
+    </define>
+  </div>
+
+  <div>
+    <x:h2>Additional Datatypes</x:h2>
+
+    <define name="Character.datatype">
+      <x:p>A single character, as per section 2.2 of [XML].</x:p>
+      <data type="string">
+        <param name="length">1</param>
+      </data>
+    </define>
+
+    <define name="Charset.datatype">
+      <x:p>A character encoding, as per [RFC2045].</x:p>
+      <data type="string">
+        <param name="pattern">\S+</param>
+      </data>
+    </define>
+
+    <define name="ContentTypes.datatype">
+      <x:p>A list of media ranges with optional accept parameters,
+        as defined in section 14.1 of [RFC2616] as the field value
+        of the accept request header.</x:p>
+      <text/>
+    </define>
+
+    <define name="Coordinates.datatype">
+      <x:p>Comma separated list of Lengths used in defining areas.</x:p>
+      <data type="string">
+        <param name="pattern">(\d+|\d+(\.\d+)?%)(,\s*(\d+|\d+(\.\d+)?%))*</param>
+      </data>
+    </define>
+
+    <define name="Datetime.datatype">
+      <x:p>Date and time information, as defined by the type dateTime
+        in [XMLSCHEMA].</x:p>
+      <data type="dateTime"/>
+    </define>
+
+    <define name="HrefTarget.datatype">
+      <x:p>Name used as destination for results of certain actions.</x:p>
+      <ref name="NMTOKEN.datatype"/>
+    </define>
+
+    <define name="LanguageCode.datatype">
+      <x:p>A language code, as per [RFC3066].</x:p>
+      <data type="language"/>
+    </define>
+
+    <define name="LanguageCodes.datatype">
+      <x:p>A comma-separated list of language ranges.</x:p>
+      <text/>
+    </define>
+
+    <define name="Length.datatype">
+      <x:p>The value may be either in pixels or a percentage of the available
+        horizontal or vertical space. Thus, the value "50%" means half of
+        the available space.</x:p>
+      <data type="string">
+        <param name="pattern">(\d+|\d+(\.\d+)?%)</param>
+      </data>
+    </define>
+
+    <define name="LocationPath.datatype">
+      <x:p>A location path as defined in [XPATH].</x:p>
+      <text/>
+    </define>
+
+    <define name="LinkTypes.datatype">
+      <x:p>The value is a QName.</x:p>
+      <choice>
+        <value>alternate</value>
+        <value>start</value>
+        <value>next</value>
+        <value>prev</value>
+        <value>up</value>
+        <value>contents</value>
+        <value>index</value>
+        <value>glossary</value>
+        <value>copyright</value>
+        <value>chapter</value>
+        <value>section</value>
+        <value>subsection</value>
+        <value>appendix</value>
+        <value>help</value>
+        <value>bookmark</value>
+        <value>meta</value>
+        <value>icon</value>
+        <value>p3pv1</value>
+        <value>profile</value>
+        <ref name="QName.datatype"/>
+      </choice>
+    </define>
+
+    <define name="MediaDesc.datatype">
+      <x:p>A comma-separated list of media descriptors as described by [CSS].
+        The default is all.</x:p>
+      <data type="string">
+        <param name="pattern">[^,]+(,\s*[^,]+)*</param>
+      </data>
+    </define>
+
+    <define name="Number.datatype">
+      <x:p>One or more digits (NUMBER).</x:p>
+      <data type="nonNegativeInteger">
+        <param name="pattern">[0-9]+</param>
+      </data>
+    </define>
+
+    <define name="spanNumber.datatype">
+      <x:p>span: this attribute value must be an integer > 0;
+        the default value is 1.</x:p>
+      <data type="positiveInteger">
+        <param name="pattern">[0-9]+</param>
+      </data>
+    </define>
+
+    <define name="QName.datatype">
+      <x:p>An [XMLNS]-qualified name.</x:p>
+      <data type="QName"/>
+    </define>
+
+    <define name="Shape.datatype">
+      <x:p>The shape of a region.</x:p>
+      <choice>
+        <value>rect</value>
+        <value>circle</value>
+        <value>poly</value>
+        <value>default</value>
+      </choice>
+    </define>
+
+    <define name="Text.datatype">
+      <x:p>Arbitrary textual data, likely meant to be human-readable.</x:p>
+      <text/>
+    </define>
+
+    <define name="URI.datatype">
+      <x:p>A Uniform Resource Identifier Reference, as defined by the type
+        anyURI in [XMLSCHEMA].</x:p>
+      <data type="anyURI"/>
+    </define>
+
+    <define name="URIs.datatype">
+      <x:p>A space-separated list of URIs as defined above.</x:p>
+      <list>
+        <oneOrMore>
+          <data type="anyURI"/>
+        </oneOrMore>
+      </list>
+    </define>
+  </div>
+
+</grammar>

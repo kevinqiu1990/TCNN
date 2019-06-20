@@ -1,0 +1,76 @@
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one
+   or more contributor license agreements.  See the NOTICE file
+   distributed with this work for additional information
+   regarding copyright ownership.  The ASF licenses this file
+   to you under the Apache License, Version 2.0 (the
+   "License"); you may not use this file except in compliance
+   with the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.    
+-->
+<ivysettings>
+	<settings defaultCache="${ivy.basedir}/build/cache" defaultResolver="ns"/>
+	<namespaces>
+		<namespace name="test" chainrules="true">
+			<rule>
+				<fromsystem>
+					<src org="systemorg"/>
+					<dest org="A"/>
+				</fromsystem>
+				<tosystem>
+					<src org="A"/>
+					<dest org="systemorg"/>
+				</tosystem>
+			</rule>
+			<rule>
+				<fromsystem>
+					<src org="systemorg2" module="system\-(.+)"/>
+					<dest org="B" module="$m1"/>
+				</fromsystem>
+				<tosystem>
+					<src org="B" module=".+"/>
+					<dest org="systemorg2" module="system-$m0"/>
+				</tosystem>
+			</rule>
+			<rule>
+				<fromsystem>
+					<src module="systemmod"/>
+					<dest module="A"/>
+				</fromsystem>
+				<tosystem>
+					<src module="A"/>
+					<dest module="systemmod"/>
+				</tosystem>
+			</rule>
+			<rule>
+				<fromsystem>
+					<src module="systemmod2"/>
+					<dest module="B"/>
+				</fromsystem>
+				<tosystem>
+					<src module="B"/>
+					<dest module="systemmod2"/>
+				</tosystem>
+			</rule>
+		</namespace>
+	</namespaces>
+	<resolvers>
+		<filesystem name="ns" namespace="test" m2compatible="true">
+			<ivy pattern="${ivy.settings.dir}/[organisation]/[module]/[revision]/ivy.xml"/>
+			<ivy pattern="${ivy.settings.dir}/[organisation]/[module]/[revision]/[module]-[revision].pom"/>
+			<artifact pattern="${ivy.settings.dir}/[organisation]/[module]/[revision]/[artifact](-[classifier]).[ext]"/>
+		</filesystem>
+		<filesystem name="install">
+			<ivy pattern="${ivy.basedir}/build/test/install/[organisation]/[module]/[artifact]-[revision].[ext]"/>
+			<artifact pattern="${ivy.basedir}/build/test/install/[organisation]/[module]/[artifact](-[classifier])-[revision].[ext]"/>
+		</filesystem>
+	</resolvers>
+</ivysettings>

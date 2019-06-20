@@ -1,0 +1,4 @@
+jakarta.oro.jar=../../jakarta-oro-2.0.5/jakarta-oro-2.0.5.jar
+deprecation=on
+
+# junit must be on the classpath! It can't be handled as a property.

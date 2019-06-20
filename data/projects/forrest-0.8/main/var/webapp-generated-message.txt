@@ -1,0 +1,23 @@
+---------------------------------
+Webapp generated in ${project.webapp}
+
+NOTE
+This webapp is suitable for deployment to a remote machine, however, it
+does not allow editing in the project src directory. For local testing
+of your project files you should use "forrest run" or "forrest webapp-local".
+These create a webapp, only suitable for local deployment, but that allow
+editing of your project files in the src directory.
+
+To run in Tomcat, add this to the config file (usually server.xml):
+
+&lt;Context path='/${skinconfig.project-name}'
+            docBase='${project.webapp}'
+            reloadable='true'/&gt;
+
+If using JDK 1.4, make sure to set the Java environment variable
+-Djava.endorsed.dirs=${forrest.home}${file.separator}lib${file.separator}endorsed
+e.g. in the TOMCAT_OPTS (3.3.x) or CATALINA_OPTS (4.x) env variable. 
+If you are using 1.4 and JETTY as standalone servlet container then try:
+java -Djava.endorsed.dirs=${forrest.home}${file.separator}lib${file.separator}endorsed -jar start.jar
+
+---------------------------------

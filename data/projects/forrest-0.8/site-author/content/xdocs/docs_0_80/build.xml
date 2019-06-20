@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd">
+<document>
+  <header>
+    <title>Building Forrest</title>
+  </header>
+  <body>
+    <section id="getting_from_source">
+      <title>Getting the Forrest source</title>
+      <section>
+        <title>Step-by-step Subversion (SVN) instructions for developers</title>
+        <note>
+          If you are behind a proxy, see
+          <link href="http://subversion.tigris.org/project_faq.html#proxy">this
+          FAQ</link>.
+        </note>
+        <ol>
+          <li>Make sure you have a recent release of a
+           <link href="http://subversion.tigris.org/">Subversion</link>
+           client installed and properly configured.</li>
+          <li>Read the ASF notes about source repositories and
+           <link href="http://www.apache.org/dev/version-control.html">version control</link>.
+          </li>
+          <li>At a command prompt, enter
+           '<code>svn co http://svn.apache.org/repos/asf/forrest/trunk forrest</code>'
+           (committers should replace <code>http</code> with <code>https</code>).</li>
+          <li>This will create a directory called "<code>forrest</code>" where the Forrest source will be stored.</li>
+        </ol>
+        <p>
+          Whenever you want to update your Forrest source tree to the current
+          version, change to the top-level "<code>forrest</code>" directory and
+          invoke '<code>svn update</code>'.
+        </p>
+        <p>
+          To see what changes you've made, invoke '<code>svn status</code>'
+        </p>
+        <p>
+          SVN is really powerful. See
+          <link href="http://svnbook.red-bean.com/">Version Control with
+          Subversion</link> - the opensource SVN book.
+        </p>
+      </section>
+      <section id="release">
+        <title>Sources are also available in the release</title>
+        <p>
+          Each release of forrest contains a copy of all sources as at the time
+          of the release. So the building instructions below do apply to that.
+          Of course the svn method described above will provide the most up-to-date
+          version for developers.
+        </p>
+      </section>
+    </section>
+    <section id="building">
+      <title>Building and installing Forrest</title>
+      <note>
+        This document applies to this specific version. See other
+        instructions for the 
+        <link href="http://forrest.apache.org/docs/dev/build.html">development</link>
+        version.
+      </note>
+      <p>
+        To build Forrest, change directory to '<code>forrest/main</code>', and
+        then type '<code>build</code>' on Windows or '<code>./build.sh</code>'
+        on Unix. (Requires Java 1.4) If everything is successful, you should see
+        a message similar to:
+      </p>
+      <source>
+  *-----------------------------------------------------------------
+  | Installation notice
+  *-----------------------------------------------------------------
+  | You have built the X.Y-dev version of Forrest.
+  | Please set the environment variable FORREST_HOME point to
+  |  /svn/forrest
+  | It is recommended to add
+  |    unix: $FORREST_HOME/bin: to your $PATH
+  |    win: %FORREST_HOME%\bin; to your %PATH%
+  | Then do 'forrest -projecthelp' to list options for the 'forrest' command
+  | More help at http://forrest.apache.org/
+  *-----------------------------------------------------------------
+     </source>
+      <p>
+        As the message says, you need to add the distribution's
+        <code>bin/</code> ("binary") directory to your PATH variable, so the
+        <code>'forrest'</code> command is available everywhere:
+      </p>
+      <source>
+[~]$ cd /path/to/svn/forrest
+[/svn/forrest]$ export FORREST_HOME=`pwd`
+[/svn/forrest]$ export PATH=$PATH:$FORREST_HOME/bin
+     </source>
+      <warning>
+        After updating the Forrest source from SVN, if there have been certain
+        types of updates (e.g. Java sources, supporting libraries, build system,
+        etc.) you will need to clean and build forrest again. Do 'cd
+        forrest/main; build clean; build".
+      </warning>
+    </section>
+    <section id="run">
+      <title>Run Forrest, run!</title>
+      <p>
+        Forrest is now ready to go. To view and edit the local copy of Forrest
+        core documentation, cd to site-author and do '<code>forrest run</code>'
+        to see the local webapp using the bundled Jetty server. Edit something
+        in content/xdocs/*.xml see the immediate effect.
+      </p>
+      <p>
+        The document <link href="site:your-project">Using Forrest</link> is your
+        next step.
+      </p>
+    </section>
+  </body>
+</document>

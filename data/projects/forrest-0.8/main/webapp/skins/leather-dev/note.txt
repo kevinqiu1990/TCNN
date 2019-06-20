@@ -1,0 +1,11 @@
+Notes for developer:
+
+--Legend-------------------
+TODO -> blocker
+DONE -> blocker
+ToDo -> enhancement bug
+done -> enhancement bug
+
+--Issues-------------------
+TODO ->A1-> Add color profiling
+TODO ->A2-> Add all features of pelt

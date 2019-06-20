@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd">
+<document>
+  <header>
+    <title>Contributing to Apache Forrest</title>
+  </header>
+  <body>
+    <section id="introduction">
+      <title>Introduction</title>
+      <p>
+        The Forrest Project is an <link href="http://www.opensource.org/">Open
+        Source</link> volunteer project released under a very liberal license.
+        This means there are many ways to contribute to the project - either
+        with direct participation (coding, documenting, answering questions,
+        proposing ideas, reporting bugs, suggesting bug-fixes, etc..) or by
+        resource donations (staff time, conference presentations, publicity,
+        software) and even general hardware/money
+        <link href="http://www.apache.org/foundation/thanks.html">donations</link>
+        via the ASF.
+      </p>
+      <p>
+        To begin with, we suggest you to subscribe to the
+        <link href="site:mail-lists">Forrest mailing lists</link> (follow the
+        link for information on how to subscribe and to access the mail list
+        archives). Listen-in for a while, to hear how others make contributions.
+      </p>
+      <p>
+        You can get your local working copy of the
+        <link href="site:build">latest and greatest code</link> (which you find
+        in the Forrest module in the Subversion code repository). Review the
+        todo list and the issue tracker, choose a task. Perhaps you have noticed
+        something that needs patching, or have a new feature to contribute. Make
+        the changes, do the testing, generate a patch, and discuss on the dev
+        mailing list. (Do not worry - the process is easy and explained below.)
+      </p>
+      <p>
+        Document writers are usually the most wanted people so if you like to
+        help but you're not familiar with the innermost technical details, don't
+        worry: we have work for you!
+      </p>
+    </section>
+    <section id="wanted">
+      <title>Help Wanted Here</title>
+      <p>
+        We would be glad to have extra help in any of the following areas:
+      </p>
+      <ul>
+        <li>Assisting to improve documentation.</li>
+        <li>Testing Forrest (especially its less-frequently-used features) on
+          various configurations and reporting back.</li>
+        <li>New samples for the 'forrest seed-sample' to concisely describe
+          and demonstrate features. Such samples can also enable automated testing.</li>
+        <li>Debugging - producing reproduceable test cases and/or finding
+          causes of bugs. Some known bugs are informally listed on To Do, and some are
+          recorded as issues (see <link href="#procedure">explanation
+      below</link>).</li>
+        <li>Providing new use-cases and requirements. If you think that
+        Forrest does not quite meet your needs then tell us about it.</li>
+        <li>Specifying/analysing/designing new features - and beyond. If you
+        wish to get further involved with this, please join the <code>forrest-dev</code> mailing
+        list, install and try out Forrest and read some of the
+        <link href="site:mail-lists">mail archives</link>. You should have a reasonable
+      fluency in XML technologies, some Java and Ant skills, and a basic understanding of the Forrest
+      architecture - don't just say "it should have XYZ" without reading anything
+      first - because chances are, somebody has already thought of that feature!)</li>
+        <li>Packaging easy-to-install packages (such as RPMs) for the myriad of
+        possible configurations out there. (The project does not maintain anything but
+        the basic <code>.zip</code> and <code>.tar.gz</code> packages, but anyone is
+        welcome to build their own specific packages and announce them on the
+        <code>forrest-dev</code> list)</li>
+        <li>... and there is just one other thing - don't forget to tell everyone
+        who asks, how great Forrest is! The more people that know about and start
+        to use Forrest, the larger the pool of potential contributors will be.
+        </li>
+      </ul>
+    </section>
+    <section id="issues">
+      <title>Procedure for reporting bugs and issues and enhancement suggestions</title>
+      <p>
+        If you think that you have found a bug or you have a suggestion for
+        improvement, then please discuss it on one of the
+        <link href="site:mail-lists">mailing lists</link>. However, please check
+        our Issue Tracker first as it may be already reported.
+      </p>
+      <p>
+        The <link href="site:bugs">Apache Forrest Issue Tracker</link> collates
+        our known issues. Obviously not every issue is listed there. Some issues
+        have been discussed on the mailing list but do not yet have an issue
+        recorded.
+      </p>
+      <p>
+        The Roadmap is the best way to get an overview. The Unscheduled list
+        also needs regular review, and committers will schedule some of those
+        for the next release.
+      </p>
+      <p>
+        When creating a new issue, please provide a concise Summary Title and a
+        short Description. Add further information as Comments and include links
+        to the mail archives. The normal procedure is to discuss the issue on
+        the mailing list and then add relevant notes to the issue tracker,
+        otherwise it becomes cluttered.
+      </p>
+    </section>
+    <section id="cvshowto">
+      <title>SVN Usage</title>
+      <p>
+        An overview of how to use Subversion (SVN) to participate in Forrest
+        development. Do not be afraid - you cannot accidently destroy the actual
+        code repository, because you are working with a local copy as an
+        anonymous user. Therefore, you do not have the system permissions to
+        change anything. You can only update your local repository and compare
+        your revisions with the real repository. The
+        <link href="site:v0.70//build">Building Forrest</link> document
+        explains.
+      </p>
+    </section>
+    <section id="ssh">
+      <title>SVN Committer with Secure Shell access</title>
+      <p>
+        After a developer has consistently provided contributions (code,
+        documentation and discussion) and demonstrated committment, then the
+        rest of the dev community may vote to grant this developer commit access
+        to the Subversion repository. See the
+        <link href="http://www.apache.org/dev/">ASF developers resources</link>
+        especially the
+        <link href="http://www.apache.org/dev/version-control.html">Source code
+        repositories</link>.
+      </p>
+      <p>
+        You will need secure access to the repository to be able to commit
+        patches. Commits to the SVN repository must use the https: protocol. If
+        you already have the codebase checked out via the http: protocol, then
+        the following command will convert it.
+      </p>
+      <source>svn sw https://svn.apache.org/repos/asf/forrest/trunk</source>
+      <p id="svn-config">
+        Line ending issues can be a problem when committing, since developers
+        use both Linux and Windows. SVN can understand that files are text (as
+        opposed to binary like images), but this must be specified for every new
+        file added. Your SVN client can be
+        <link href="http://www.apache.org/dev/version-control.html#https-svn">configured</link>
+        to automatically do this for certain file extensions. To do it manually,
+        make sure all line endings are in your current OS's native format (the
+        dos2unix and unix2dos utilities may be useful) and then do a <code>svn
+        propset svn:eol-style native myfilename.txt</code> and <code>svn commit
+        -m "fix line endings" myfilename.txt</code>
+      </p>
+    </section>
+    <section id="procedure">
+      <title>Procedure for Raising Development Issues</title>
+      <p>
+        There are two methods for discussing development and submitting patches.
+        So that everyone can be productive, it is important to know which method
+        is appropriate for a certain situation and how to go about it without
+        confusion. This section explains when to use the developer
+        <link href="site:mail-lists">mailing list</link> and the
+        <link href="site:bugs">issue tracker</link>.
+      </p>
+      <p>
+        Research your topic thoroughly before beginning to discuss a new
+        development issue. Search and browse through the email archives - your
+        issue may have been discussed before. Prepare your post clearly and
+        concisely.
+      </p>
+      <p>
+        Most issues will be discovered, resolved, and then patched quickly via
+        the developer mailing list. Larger issues, and ones that are not yet
+        fully understood or are hard to solve, are destined for the issue
+        tracker.
+      </p>
+      <p>
+        Experienced developers use the issue tracker directly, as they are very
+        sure when they have found a bug and when not. However, less experienced
+        users should first discuss it on the user or developer mailing list (as
+        appropriate). Impatient people always enter everything into the issue
+        tracker without caring if it is a bug of Forrest or their own
+        installation/configuration mistake - please do not do this.
+      </p>
+      <p>
+        As a rule-of-thumb, discuss an issue on the developers mailing list
+        first to work out any details. After it is confirmed to be worthwhile,
+        and you are clear about it, then submit the bug description or patch via
+        Bug Tracking.
+      </p>
+      <p>
+        Perhaps you do not get any answer on your first reply, so just post it
+        again until you get one. (But please not every hour - allow a few days
+        for the list to deal with it.) Do not be impatient - remember that the
+        whole world is busy, not just you. Bear in mind that other countries
+        will have holidays at different times to your country and that they are
+        in different time zones. You might also consider rewriting your initial
+        posting - perhaps it was not clear enough and the readers eyes glazed
+        over.
+      </p>
+    </section>
+    <section id="patch">
+      <title>How to prepare and contribute patches</title>
+      <p>
+        If you use the current development version of Forrest via Subversion,
+        then do '<code>svn update; svn status</code>' to see what files that you
+        have changed. Do '<code>svn diff > mypatch.txt</code>' to make a patch
+        which includes every change. To make a patch for a specific file, do
+        <code>svn diff src/documentation/content/xdocs/faq.xml >
+        faq.xml.diff</code>'. It is better to prepare the patch from the
+        $FORREST_HOME directory so that it contains a definite path to the
+        document. However, be careful that the patch does not contain other
+        work-in-progress.
+      </p>
+      <p>
+        For more information about working with SVN, see
+        <link href="http://svnbook.red-bean.com/">Version Control with
+        Subversion</link> - the opensource SVN book.
+      </p>
+      <p>
+        If you use a downloaded released version of Forrest (or don't use SVN),
+        then use the 'diff' command of your operating system: '<code>diff -u
+        faq.xml.orig faq.xml > mypatch.txt</code>' (better to do that from
+        $FORREST_HOME directory). If you want to use the most recent version of
+        the documentation then grab its source file directly from the
+        <link href="http://svn.apache.org/repos/asf/forrest/trunk/site-author/content/xdocs/">SVN
+        server</link> (and tell us which Revision number you used).
+      </p>
+      <note>
+        Please send all contributions via our <link href="site:bugs">issue
+        tracker</link>. and specify the Forrest version or svn version of the
+        source.
+      </note>
+      <p>
+        It is always a good idea to check the Forrest
+        <link href="site:bugs">issue tracker</link> before diving in.
+      </p>
+    </section>
+    <section id="revert">
+      <title>How to revert changes in SVN</title>
+      <p>
+        Check out
+        <link href="http://svnbook.red-bean.com/en/1.0/ch04s04.html#svn-ch-4-sect-4.2">http://svnbook.red-bean.com/en/1.0/ch04s04.html#svn-ch-4-sect-4.2</link>
+        for instructions on how to revert (roll back) changes to svn.
+      </p>
+    </section>
+    <section id="tips">
+      <title>Contribution Notes and Tips</title>
+      <p>
+        This is a collection of tips for contributing to the project in a manner
+        that is productive for all parties.
+      </p>
+      <ul>
+        <li>See general ASF
+          <link href="http://www.apache.org/dev/contrib-email-tips.html">Tips for email contributors</link></li>
+        <li> Every contribution is worthwhile. Even if the ensuing discussion
+          proves it to be off-beam, then it may jog ideas for other people. </li>
+        <li> Use sensible and concise email subject headings. Search engines,
+          and humans trying to browse a voluminous list, will respond favourably to a
+          descriptive title. </li>
+        <li>Start new threads with new Subject for new topics, rather than
+          reusing the previous Subject line. </li>
+        <li>Keep each topic focused. If some new topic arises then start a new
+          discussion. This leaves the original topic to continue uncluttered. </li>
+        <li>Whenever you decide to start a new topic, then start with a fresh
+          new email message window. Do not use the &quot;Reply to&quot; button, because
+          threaded mail-readers get confused (they utilise the <code>In-reply-to</code>
+          header). If so, then your new topic will get lost in the previous thread and go
+          unanswered. </li>
+        <li> Prepend your email subject line with a marker when that is
+          appropriate, e.g. <code>[Proposal]</code>,
+          <code>[RT]</code> (Random Thought which quickly blossom into research topics
+          :-), <code>[STATUS]</code> (development status of a certain facility). </li>
+        <li> When making changes to XML documentation, or any XML document for
+          that matter, use a validating XML editor. Here is some assistance
+          with editor
+          <link href="site:v0.70//catalog">configuration</link>.
+        </li>
+        <li> Remember that most people are participating in development on a
+        volunteer basis and in their "spare time". These enthusiasts will attempt to
+        respond to issues. It may take a little while to get your answers. </li>
+        <li> Research your topic thoroughly before beginning to discuss a new
+        development issue. Search and browse through the email archives - your issue
+        may have been discussed before. Do not just perceive a problem and then rush
+        out with a question - instead, delve. </li>
+        <li> Try to at least offer a partial solution and not just a problem
+        statement. </li>
+        <li> Take the time to clearly explain your issue and write a concise
+        email message. Less confusion facilitates fast and complete resolution. </li>
+        <li> Do not bother to send an email reply that simply says "thanks". When
+        the issue is resolved, that is the finish - end of thread. Reduce clutter.
+        </li>
+        <li> You would usually do any development work against the trunk of
+        SVN. </li>
+        <li> When sending a patch, you usually do not need to worry about which
+        SVN branch it should be applied to. The maintainers of the repository will
+        decide. </li>
+        <li>Keep all project-related discussion on the mailing list. It is much
+        better to utilise the wider audience, rather than to break off into
+        private discussion groups. You never know who else will have the
+        answer to your issues, and anyway other people are interested in
+        the outcome.
+      </li>
+        <li> Become familiar with the mailing lists. As you browse and search,
+        you will see the way other people do things. Follow the leading examples. </li>
+      </ul>
+    </section>
+  </body>
+</document>

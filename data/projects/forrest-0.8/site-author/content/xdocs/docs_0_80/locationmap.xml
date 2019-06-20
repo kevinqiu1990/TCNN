@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Locationmaps</title>
+  </header>
+  <body>
+    <section id="overview">
+      <title>About Locationmaps</title>
+      <p>
+        A locationmap defines a mapping from requests to location strings.
+      </p>
+      <p>
+        It was conceived to:
+      </p>
+      <ul>
+        <li>Provide a more powerful means for semantic linking.</li>
+        <li>Enable Forrest with a standard configuration override mechanism.</li>
+        <li>Decouple the conceptual source space used by Cocoon from
+        the concrete source space, so that a change in the concrete sources
+        does not impact on the sitemap.</li>
+      </ul>
+      <p>
+        In other words, the locationmap enables content to be retrieved from a
+        location that is defined in a locationmap file (located at
+        <code>PROJECT_HOME/src/documentation/content/locationmap.xml</code>
+        file. The advantage of this is that the URL seen by the user need bear
+        no relation to the location of the source document, thus Forrest can
+        separate the client URL space from the source document URL space. Thus,
+        using the locationmap it is possible to pull together documents from
+        many different locations into a single uniform site.
+      </p>
+      <p>
+        In addition, since the user URL space is now not connected to the source
+        URL space it is possible to move source documents without breaking any
+        existing user links.
+      </p>
+      <p>
+        The syntax of a locationmap resembles that of the sitemap, in that it
+        also makes use of Matchers and Selectors to traverse a tree of nodes
+        towards a leaf. In the case of the locationmap however the leaf does not
+        identify a pipeline, but instead identifies a location string.
+      </p>
+      <p>
+        Apache Forrest looks in the standard location for the source file first
+        (by default <code>PROJECT_HOME/src/documentation/content/...</code>), if
+        a file is found in this location then the locationmap is not consulted.
+        However, if one is not found then the locationmap is used to resolve the
+        source file. The locationmap is resolved via the core sitemap, this
+        means that you can generate it dynamically if you so wish. Simply add a
+        match that looks something like this to your projects sitemap:
+      </p>
+      <source>
+<![CDATA[
+   <map:match pattern="locationmap-project.xml">
+     <map:generate src="..."/>
+     <map:transform src="..."/>
+     <map:serialize type="xml"/>
+   </map:match>
+      ]]>
+      </source>
+    </section>
+    <section id="namingConvention">
+      <title>Naming Convention</title>
+      <p>
+        For those that are familiar with name resolution servers or the Handles
+        Service, it might be easier to think of the locationmap as a name
+        resolution module or sort of a handle resolution module that it accepts
+        "names" or whatever you desire to call these "hints" and returns the
+        location.
+      </p>
+      <p>
+        The thought is that by using hints that look a little like a file name
+        it disguises what locationmaps are really doing for us. By using
+        URN-style names, we are truly disassociating the name/hint from the
+        physical location.
+      </p>
+      <p>
+        For example, here is a locationmap entry based purely on filename:
+      </p>
+      <source>
+<![CDATA[
+<map:transform src="{lm:html-to-document.xsl}"/>
+      ]]>
+      </source>
+      <p>
+        and here is that same entry using a "name" style. One implies a certain
+        physical location, whereas the one below is truly a name that needs to
+        be resolved to a physical location.
+      </p>
+      <source>
+<![CDATA[
+<map:transform src="{lm:transform.html.document}"/>
+      ]]>
+      </source>
+      <p>
+        Locationmaps are also used by plugins, and your project can also have
+        its own locationmap.
+      </p>
+      <p>
+        Where the resource is provided by a plugin rather than Forrest itself,
+        this is prefixed with the last part of the plugin name. For example:
+      </p>
+      <source>
+<![CDATA[
+<map:transform src="{lm:projectInfo.transform.changes.document}"/>
+      ]]>
+      </source>
+      <p>
+        The above match means look in the projectInfo plugin for a transformer
+        stylesheet with filename changes-to-document.xsl
+      </p>
+      <p>
+        The naming convention is essentially one of:
+      </p>
+      <source>
+[PLUGIN_NAME.]resource-type(dot)from-format(dot)to-format
+      </source>
+      <p>
+        or
+      </p>
+      <source>
+[PLUGIN_NAME.]resource-type(dot)type(dot)name
+      </source>
+      <p>
+        Examples of these:
+      </p>
+      <source>
+transform.xthml2.html
+graphic.png.project-logo
+projectInfo.transform.changes.rss
+      </source>
+    </section>
+    <section id="process">
+      <title>Explanation of Locationmap processing</title>
+      <p>
+        Some specific examples will explain. Please follow the relevant source
+        files.
+      </p>
+      <p>
+        The document <a href="site:sitemap-explain">Cocoon sitemaps
+        explained</a> (better understand that document before trying to
+        understand locationmaps) has two specific transformers which use
+        locationmap references. The first one is: <code>
+<![CDATA[<map:transform src="{lm:transform.linkmap.document}"/>]]>
+        </code>
+      </p>
+      <p>
+        The Locationmap component first consults the primary locationmap
+        <code>$FORREST_HOME/main/webapp/locationmap.xml</code> file. This first
+        mounts any project locationmap if available, then the locationmaps from
+        plugins, then the rest of the core locationmaps in the
+        <code>$FORREST_HOME/main/webapp/</code> directory. As with sitemaps, the
+        first match wins. So matches in your project locationmap have
+        precedence, then plugins, then core.
+      </p>
+      <p>
+        So let us get back to our specifc example,
+        "<code>lm:transform.linkmap.document</code>". The "lm:" part means use
+        the locationmap protocol. There is no specific match for this in your
+        project locationmap, nor in any of the plugin locationmaps, so this
+        falls through to the core locationmaps. However, you will not find any
+        specific match for this in the core locationmaps, so what is happening?
+      </p>
+      <p>
+        See the last match in
+        <code>$FORREST_HOME/main/webapp/locationmap-transforms.xml</code> file.
+        This a catchall matcher for any reference starting with
+        "<code>transform.</code>"
+      </p>
+      <source>
+<![CDATA[
+    <match pattern="transform.*.*">
+      <select>
+        ...
+        ...
+        <location src="{forrest:forrest.stylesheets}/{1}-to-{2}.xsl"/>
+      </select>
+    </match>]]>
+      </source>
+      <p>
+        As you know from your understanding of Cocoon sitemaps, the first
+        asterisk yields "linkmap" and the second asterisk yields "document". So,
+        ignoring the other possible locations in this group which look in the
+        various skins stylesheet directories (see locationmap-transforms.xml
+        source), it will finally resolve to that last possible location to look
+        for a stylesheet called <code>linkmap-to-document.xsl</code> in the core
+        stylesheets directory
+        <code>$FORREST_HOME/main/webapp/resources/stylesheets/</code>
+      </p>
+      <p>
+        That explains the magic of the locationmap naming convention.
+      </p>
+    </section>
+    <section id="selector">
+      <title>Multiple Location Selectors</title>
+      <p>
+        You can define multiple possble locations for a file in the locationmap
+        with the following code:
+      </p>
+      <source>
+<![CDATA[
+<match pattern="tabs.xml">
+  <select type="exists">      
+    <location src="{properties:content.xdocs}tabs1.xml"/>
+    <location src="{properties:content.xdocs}tabs2.xml"/>
+  </select>   
+</match>
+    ]]>
+      </source>
+      <p>
+        Each location will be tested in turn, if the file exists then it will be
+        returned as a match, otherwise testing will continue.
+      </p>
+    </section>
+    <section id="examples">
+      <title>Other Locationmap examples</title>
+      <section id="source-via-http">
+        <title>Retrieving an XDoc via HTTP</title>
+        <p>
+          Normally files are generated from
+          <code>{properties:content.xdocs}</code>. Using the Locationmap it is
+          possible to make these files come from elsewhere. This is useful if
+          you want to pull files from different directory structures, or even
+          remote repositories. For example, the following location match will
+          match any request for a document below "remote." and will retrieve the
+          source file from the Apache Forrest SVN repository (directly from the
+          ASF's SVN webserver). This is an ideal way to ensure that your
+          published docs are always up-to-date.
+        </p>
+        <source>
+ &lt;match pattern="project.remote.**.xml"&gt;
+   &lt;location src="http://svn.apache.org/repos/asf/forrest/trunk/site-author/content/xdocs/{1}.xml" /&gt;
+ &lt;/match&gt;
+        </source>
+        <p>
+          Note that because this is a wildcard matcher you can request any page
+          from the svn server simply by requesting
+          <code>/remote.PATH/TO/FILE/FILENAME.html</code>. In addition, we can
+          request any other output format available via Forrest plugins.
+        </p>
+        <p>
+          When including resources from remote repositories one has to be
+          careful about things like <code>site</code> and <code>ext</code>
+          linking. If the targets are not defined in the local
+          <code>site.xml</code> file then these links will be broken.
+        </p>
+        <warning>
+          Because of the above limitation many of the links in the page
+          generated from the above example are broken.
+        </warning>
+      </section>
+      <section id="source-from-remote-cms">
+        <title>Retrieving HTML from a CMS</title>
+        <p>
+          Using the locationmap you can use Forrest to retrieve data from a
+          Content Management System (CMS), wither local or remote. As an example
+          we will consider Apache Lenya.
+        </p>
+        <p>
+          <a href="http://lenya.apache.org">Apache Lenya</a> is a Java
+          Open-Source Content Management System based on open standards such as
+          XML and XSLT and the Apache Software Stack, in particular the XML
+          publishing framework Apache Cocoon.
+        </p>
+        <p>
+          The following locationmap matcher will instruct Forrest to retrieve
+          content from
+          <code>http://lenya.zones.apache.org:8888/default/live/*.html?raw=true</code>,
+          whenever a local URL of <code>lenya/**</code> is encountered.
+        </p>
+        <source>
+ &lt;match pattern="lenya/**.xml"&gt;
+   &lt;location src="http://lenya.zones.apache.org:8888/default/live/{1}.html?raw=true" /&gt;
+ &lt;/match&gt;
+        </source>
+        <p>
+          However, since the source returned by this match is HTML and not XDoc
+          we must convert this to our internal XDoc format before we can use it.
+          We do this by adding the match below to our project's
+          <code>sitemap.xmap</code> file.
+        </p>
+        <source>
+&lt;map:match pattern="lenya/**.xml"&gt;
+  &lt;map:generate type="html" src="{lm:{0}}" /&gt;
+  &lt;map:transform src="{forrest:forrest.stylesheets}/html-to-document.xsl" /&gt;
+  &lt;map:serialize type="xml"/&gt;
+&lt;/map:match&gt;
+        </source>
+        <p>
+          Since this snippet uses the HTML generator you must also ensure that
+          your sitemap has the HTML generator component defined. That is, your
+          sitemap must also include:
+        </p>
+        <source>
+&lt;map:components&gt;
+  &lt;map:generators default="file"&gt;
+    &lt;map:generator name="html"
+      src="org.apache.cocoon.generation.HTMLGenerator"&gt;
+      &lt;jtidy-config&gt;WEB-INF/jtidy.properties&lt;/jtidy-config&gt;
+    &lt;/map:generator&gt;
+  &lt;/map:generators&gt;
+&lt;/map:components&gt;
+        </source>
+        <p>
+          Since the HTML generator uses JTidy we need to make available a JTidy
+          configuration file. This is placed in
+          <code>PROJECT_HOME/src/documentation/WEB-INF/jtidy.properties</code>
+          (the location can be changed in the above sitemap snippet). A sample
+          config file is given below:
+        </p>
+        <source>
+indent=yes
+indent-spaces=8
+wrap=72
+markup=no
+output-xml=no
+input-xml=no
+show-warnings=yes
+numeric-entities=yes
+quote-marks=yes
+quote-nbsp=yes
+quote-ampersand=yes
+break-before-br=yes
+uppercase-tags=no
+uppercase-attributes=no
+char-encoding=latin1
+        </source>
+        <note>
+          This requirement to add items to your project sitemap will be removed
+          in a future version either by Lenya outputting XDoc, or by Forrest
+          switching to using XHTML as its internal format, or through the
+          development of a plugin for Lenya that will include the necessary
+          processing (whichever comes first).
+        </note>
+        <warning>
+          This demo is an example only, it does not fully work at this time. For
+          example, absolute URLs in the source document need to be rewritten to
+          ensure that they are matched by the locationmap.
+        </warning>
+      </section>
+      <section id="sourceResolving">
+        <title>Source Resolving</title>
+        <p>
+          As well as being able to use the locationmap as a parameter in the
+          sitemap, it is also possible to use it as a psuedo-protocol within
+          resources processed by Forrest. For example, you can use it to import
+          an XSL provided by one plugin within another plugin:
+        </p>
+        <source>
+<![CDATA[
+          <xsl:import src="lm://OOo.transform.write.xdoc"/>
+        ]]>
+        </source>
+      </section>
+      <section id="linkrewriting">
+        <title>Link Rewriting</title>
+        <p>
+          The locationmap can be used to rewrite URLs when the page is
+          generated. For example, when the locationmap has:
+        </p>
+        <source>
+ &lt;match pattern="rewriteDemo/**"&gt;
+   &lt;location src="http://www.domain.org/{1}.xml" /&gt;
+ &lt;/match&gt;
+        </source>
+        <p>
+          With the above match in the locationmap, a link which has
+          <code>href="lm:rewriteDemo/index"</code> will be rewritten to an
+          offsite address at <code>domain.org</code>
+        </p>
+      </section>
+      <section id="debugging">
+        <title>Debugging Locationmaps</title>
+        <p>
+          Debugging the locationmap can be difficult because Cocoons error
+          messages no longer provide meaningful data. We hope to improve this
+          over time, in the meantime we recommend that you increase the log
+          level of the locationmap logger. To do this edit the following line in
+          $FORREST_HOME/main/webapp/WEB-INF/logkit.conf:
+        </p>
+        <source>
+<![CDATA[<category name="modules.mapper.lm" log-level="INFO">]]>
+        </source>
+        <p>
+          For example, you could change the log level to "DEBUG".
+        </p>
+        <p>
+          Output from this logger can be found in
+          $PROJECT_HOME/build/webapp/WEB-INF/logs/locationmap.log
+        </p>
+        <p>
+          You should not run production systems with this logger set higher than
+          "INFO as each request can generate large amounts of log information.
+        </p>
+      </section>
+    </section>
+  </body>
+</document>

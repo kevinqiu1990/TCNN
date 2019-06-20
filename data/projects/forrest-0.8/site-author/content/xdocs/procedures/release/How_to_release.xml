@@ -1,0 +1,974 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN"
+  "http://forrest.apache.org/dtd/document-v20.dtd" [
+<!ENTITY c '0.7'>
+<!ENTITY cd 'docs_0_70'>
+<!ENTITY cs '0.70'>
+<!ENTITY d '0.8'>
+<!ENTITY dd 'docs_0_80'>
+<!ENTITY ds '0.80'>
+<!ENTITY dt '0.8-dev'>
+<!ENTITY n '0.9'>
+<!ENTITY nd 'docs_0_90'>
+<!ENTITY ns '0.90'>
+<!ENTITY nt '0.9-dev'>
+<!ENTITY p '0.6'>
+<!ENTITY pd 'docs_0_60'>
+<!ENTITY ps '0.60'>
+<!ENTITY rdate '2007-04-16'>
+]>
+<!-- The entities above are for the current state,
+  i.e. preparing for the upcoming release:
+  &c;  = current release version, e.g. 0.7
+  &cd; = current release version docs, e.g. docs_0_70
+  &cs; = current release version site URI, e.g. 0.70 (as in site:v0.70)
+  &d;  = development version, e.g. 0.8
+  &dd; = development version docs, e.g. docs_0_80
+  &ds; = development version site URI, e.g. 0.80 (as in site:v0.80)
+  &dt; = development version with -dev, e.g. 0.8-dev
+  &n;  = next version, e.g. 0.9
+  &nd; = next version docs, e.g. docs_0_90
+  &ns; = next version site URI, e.g. 0.90 (as in site:v0.90)
+  &nt; = next version with -dev, e.g. 0.9-dev
+  &p;  = previous version, e.g. 0.6
+  &ps; = previous version site URI, e.g. 0.60 (as in site:v0.60)
+  &pd; = previous version docs, e.g. docs_0_60
+  &rdate; = anticipated release date
+-->
+<document>
+  <header>
+    <title>How to release Forrest</title>
+    <abstract>
+      This documents the steps that the Release Manager (RM) should follow when
+      doing a Forrest release.
+    </abstract>
+  </header>
+  <body>
+    <section id="About">
+      <title>About this document</title>
+      <warning>
+        This document is still being developed and some steps might need to be
+        re-arranged. There are some fixme notes that we will review after this
+        release.
+      </warning>
+      <p>
+        This documents the steps that the Release Manager (RM) should follow
+        when doing a Forrest release. Note that it might have mistakes - we seem
+        to discover something new each time and some steps might need to happen
+        in a different order. Fine tune these notes for next time. Do some
+        practice runs. Read through these notes often in the lead up to the
+        release to imagine the effect and order of some steps.
+      </p>
+      <p>
+        There are some steps that other committers, and even developers, can
+        assist with, especially in the areas of getting ready for the release
+        and the final testing. Many of the steps can be done only by the Release
+        Manager.
+      </p>
+    </section>
+    <section id="rm">
+      <title>Who is the Release Manager</title>
+      <p>
+        The Release Manager is a single person who does the final work of the
+        release process to prepare and sign release packages, co-ordinate
+        testing and voting, uploading to the dist area and ensuring mirrors, and
+        sending the announcement.
+      </p>
+      <p>
+        The project developers have the role of preparing the product to release
+        quality, testing, fixing issues, and voting for the release candidate.
+        The votes of the PMC will decide whether the product is fit for release.
+      </p>
+      <p>
+        The RM makes all the decisions regarding the actual preparations and the
+        doing of the release. Many projects have the same release manager for
+        years.
+      </p>
+      <p>
+        The RM could do the job alone, which enables speedy process. There are
+        not actually many tasks where assistants can help. However it is a good
+        idea to have an assistant so as to pass on the knowledge, to help
+        document the process, and to perceive potential flaws. More than one
+        assistant would probably hinder.
+      </p>
+      <p>
+        The RM should be comfortable with using SVN and be familiar with the ASF
+        hardware, with the distribution mirror system, and with ASF release
+        procedures. The following notes are terse. If you don't understand, then
+        probably not ready to be RM.
+      </p>
+    </section>
+    <section id="prep">
+      <title>Tasks to be done by the project before the release can start</title>
+      <p>
+        There are a number of things to be done by the project before the
+        release will start. Don't leave these until the last minute. It is not
+        the Release Manager's job to fix bugs nor address blocker issues. The RM
+        job begins after the project is ready to do the release.
+      </p>
+      <ul>
+        <li>The project updates the Roadmap to schedule the realistic Issues.</li>
+        <li>The project made good progress towards fixing the Blockers and applying the outstanding patches.</li>
+        <li>The documentation content is ready.</li>
+        <li>Supporting products (e.g. Ant, Xerces) should have been updated well before this
+                stage. Do not attempt such upgrades too close to the release, as it
+                will distract attention from other issues and possibly introduce new problems.
+              </li>
+        <li>Add some issues to the Roadmap for the important general issues that need to
+                happen before the release.
+                Some examples from last time: FOR-911, FOR-868, FOR-865, FOR-855, FOR-644.
+              </li>
+        <li><p>
+            Relevant changes are listed in the site-author/status.xml and
+            contributers have been attributed. Other changes are listed in the
+            various plugins/status.xml files.
+          </p></li>
+        <li>Add relevant information to the
+                <a href="http://issues.apache.org/jira/browse/FOR-868">upgrading notes</a>.
+              </li>
+        <li><p>
+            Major changes are listed in the site-author/status.xml using the
+            "importance" attribute. This will be used to generate the list of
+            top changes for the Release Notes and Announcement text.
+          </p>
+          <p>
+            http://localhost:8888/releaseNotes_&dt;.html
+          </p></li>
+        <li>
+                Committers (as many as possible) have their up-to-date PGP keys
+                in the KEYS file in Forrest's root directory.
+                Instructions about how to add keys are included in that file.
+                See
+                <a href="http://www.apache.org/dev/release-signing.html#keys-policy">instructions</a>
+                about how to create and manage PGP keys, and see the notes about
+                encouraging a strong
+                <a href="http://www.apache.org/dev/release-signing.html#web-of-trust">web of trust</a>.
+              </li>
+      </ul>
+      <fixme author="open">
+        Decide the content of the release. Previously we just packed everything
+        in trunk (see the "release-dist" target) and included a built
+        forrest.jar file. Now there is extra stuff that should not be included.
+        See <a href="http://issues.apache.org/jira/browse/FOR-911">FOR-911</a>.
+      </fixme>
+    </section>
+    <section id="PrepProject">
+      <title>Preparing the project for the release</title>
+      <p>
+        In this step the Release Manager starts the process to finalise the
+        outstanding blocker issues.
+      </p>
+      <ol>
+        <li><p>
+            Ensure the above preconditions are met.
+          </p>
+          <p>
+            If not, then the project is not yet ready for release. Remember that
+            it is not the RM's job to do this.
+          </p>
+          <p>
+            If so, then send an email to get the project to decide what to do
+            with the remaining issues. Propose to delay some issues to a future
+            release, encourage people to fix others. See
+            <a
+                            href="http://issues.apache.org/jira/browse/FOR-853">FOR-853</a>.
+            Look at
+            <a
+                            href="http://www.mail-archive.com/dev@forrest.apache.org/msg02310.html">msg02310.html</a>
+            for an example of such a message.
+          </p></li>
+        <li><p>
+            Start discussion on Java-Version to use for compiling and testing
+            the release.
+          </p></li>
+      </ol>
+    </section>
+    <section id="PrepRM">
+      <title>Preparations for the Release Manager</title>
+      <p>
+        Particularly the Release Manager, but also anyone assisting, needs to be
+        familiar with standard procedures and Apache terminology. This is
+        crucial for a successful release.
+      </p>
+      <ol>
+        <li><p>
+            If you have never done a release before or need to refresh your
+            memory, read all about Apache releases in general at
+            <a href="http://www.apache.org/dev/#releases">http://www.apache.org/dev/#releases</a>
+            (note that these documents change often). Make sure any assistants
+            have read and understood this as well.
+          </p></li>
+        <li><p>
+            Be familiar with the process of signing releases and generating MD5
+            and PGP. Some more info is at
+            <a
+                            href="http://www.apache.org/dev/release-signing.html">Signing
+            Releases</a> and
+            <a
+                            href="http://forrest.apache.org/mirrors.cgi#verify"
+                            >http://forrest.apache.org/mirrors.cgi#verify</a>
+          </p></li>
+        <li>
+                  Make sure that the network connection is reliable and efficient.
+                </li>
+        <li><p>
+            Install the Java-Version that has been agreed for compiling the
+            release. Do this well ahead of time to avoid delays, and ensure that
+            Forrest works for you.
+          </p></li>
+      </ol>
+    </section>
+    <section id="PrepRelPlan">
+      <title>Preparing the Release Plan</title>
+      <p>
+        Prepare the Release Plan to define the corner stones of the coming
+        release. Deciding the dates and timing that suits everybody will be
+        difficult. However, try to be careful about holiday periods and try to
+        find timing that is good to attract the most people to help.
+      </p>
+      <ol>
+        <li>Java-Version to test this release</li>
+        <li>Start of code-freeze</li>
+        <li>Start of test-period</li>
+        <li>Vote on release candidate</li>
+        <li>Optional creation of release candidate #2 (when there are bugs)</li>
+        <li>Start of test-period #2</li>
+        <li>Vote on release candidate #2</li>
+        <li>Scheduled release Date</li>
+      </ol>
+      <p>
+        Use the email template
+        <a href="propose_release_plan.txt">propose_release_plan.txt</a> to write
+        and propose your plan, then call for a quick vote on the release plan on
+        the dev list.
+      </p>
+      <note>
+        There are various reasons for voting on the Release Plan, e.g. makes
+        people aware that a code-freeze is about to happen; encourage them to
+        get involved with the release; ensure that the date is suitable and
+        people will be around to test and then vote on the actual release. This
+        ensures that it is the PMC as a whole that prepares and issues the
+        release, rather than an individual. Such procedures give us the
+        protection accorded by the ASF being a corporation. See a good
+        discussion <a href="http://marc.theaimsgroup.com/?t=114296877800003">in
+        the archives</a>.
+      </note>
+    </section>
+    <section id="PrepCodeBase">
+      <title>Preparing the code base</title>
+      <p>
+        Anyone can help with this phase.
+      </p>
+      <ol>
+        <li><p>
+            Ensure that there are no license issues. The committers and PMC
+            would have been continually monitoring this. There are some tools to
+            assist with scanning for issues. See
+            <a href="../../roles.html#legal-monitor">further information</a>.
+          </p></li>
+        <li><p>
+            Ensure that the line-endings and svn:eol-style property are correct
+            for all files. See
+            <a href="../../roles.html#subversion-monitor">further
+            information</a>.
+          </p></li>
+        <li>
+                  Ensure that documentation structure and content is ready.
+                </li>
+        <li>Ensure that the documentation is building properly, do 'cd site-author; forrest'. Fix any linking errors.</li>
+        <li>
+                  Create a new file, etc/RELEASE-NOTES-&d;.txt, where x.y is the version currently being released.
+                  In this file, insert the list of important changes which is obtained by doing:
+                  http://localhost:8888/releaseNotes_&dt;.txt
+<fixme author="">
+            move this step to later, emphasise preparing it now, e.g. in today's
+            there are no "important" for "docs" category.
+          </fixme>
+          <fixme author="">
+            Needed to hand tweak some "Link:" ... some have local URLS. Manually
+            removed Table of Contents.
+          </fixme></li>
+        <li>
+                  Prepare the announcement text. Create a file admin/announcement-x.txt
+                  (by 'svn move' the old one) and list the major new features, e.g. locationmap.
+                  The admin directory is not included in the release package so editing can continue.
+                </li>
+        <li><p>
+            Ensure that each plugin that uses the locationmap has its "release
+            version" set to 0.8 or more.
+          </p>
+          <p>
+            If a plugin has a locationmap.xml file or uses "lm:" references in
+            its *.xmap, then it is using locationmap. See
+            <a href="site:buildPlugin">buildPlugin</a>.
+          </p></li>
+        <li>
+                  Ensure that plugins descriptors in both core and whiteboard are up-to-date.
+                </li>
+        <li><p>
+            Ensure that all relevant plugins have been deployed to plugins/&d;/
+            (see other notes at plugins/RELEASE_PROCESS.txt).
+          </p>
+          <fixme author="fso">
+            Check and integrate plugins/RELEASE_PROCESS.txt as a new document.
+          </fixme></li>
+      </ol>
+    </section>
+    <section id="PrepTrunk">
+      <title>Preparing your working copy of SVN trunk</title>
+      <fixme author="fso">
+        We need to discuss order from here on. My idea is to adjust docs before
+        we enter code freeze to save time later. But if the rc fails and release
+        is postponed might need to roll back changes easily and - if possible -
+        roll them forward later. So creating an svn branch for the rc seems to
+        make sense to me. Probably easiest would be to create an rc branch here
+        and co that. wdyt?
+      </fixme>
+      <p>
+        In this step you make absolutely sure that your working copy of SVN
+        trunk has no local modifications, or additional files that you have been
+        fiddling with, and especially files that might be hidden by svn:ignore
+        settings.
+      </p>
+      <p>
+        There are two ways to do this. Either do a complete new svn checkout, or
+        use the 'svn status --no-ignore' command on your existing working copy.
+      </p>
+      <ol>
+        <li><p>
+            In a new empty directory do <code>'svn co
+            https://svn.apache.org/repos/asf/forrest/trunk'</code>
+          </p></li>
+      </ol>
+      <p>
+        Alternative Approach
+      </p>
+      <ol>
+        <li> Do 'svn update -r HEAD' to ensure that you are up-to-date. </li>
+        <li> Run 'svn status --no-ignore' </li>
+        <li><p>
+            Delete any extra files you might have added/changed in your local
+            copy. Delete any "build" directories in plugins, etc. <strong>Extra
+            files must not be packed with the release.</strong> It must be a
+            pristine copy of the current trunk.
+          </p></li>
+      </ol>
+    </section>
+    <section id="PrepDistSvn">
+      <title>Preparing the "dist" SVN</title>
+      <p>
+        The SVN at
+        <a href="https://svn.apache.org/repos/asf/forrest/dist/">https://svn.apache.org/repos/asf/forrest/dist/</a>
+        holds some html files and other files that form the distribution
+        website. This is checked out on the server at
+        /www/www.apache.org/dist/forrest
+      </p>
+      <p>
+        Note that the actual release artefacts are not stored in SVN.
+      </p>
+      <p>
+        Ensure that the KEYS file is synchronised with the copy in Forrest svn
+        trunk and commit the changes. Do ssh to the server and 'svn up' in that
+        directory.
+      </p>
+    </section>
+    <section id="adjustDocs">
+      <title>Preparing docs for next release cycle</title>
+      <p>
+        In this phase we get the docs ready for the release. You will commit
+        these changes after the code-freeze, but do not publish to the website
+        until after the release.
+      </p>
+      <ol>
+        <li><p>
+            Edit "versions" entries in site.xml as follows:
+          </p>
+          <ol>
+            <li><p>
+                Move all version numbers one line down so that the existing:
+              </p>
+              <source>
+ &lt;versions tab="docs">
+    &lt;overview label="Overview" href="versions/index.html"/>
+    &lt;v&d; label="&dt;" href="site:index"/>
+    &lt;v&c; label="&c; (current)" href="site:v&cs;//index"/>
+    &lt;v&p; label="&p;" href="site:v&ps;//index"/>
+  &lt;versions></source>
+              <p>
+                becomes:
+              </p>
+              <source>
+ &lt;versions tab="docs">
+    &lt;overview label="Overview" href="versions/index.html"/>
+    &lt;v&n; label="&nt;" href="site:index"/>
+    &lt;v&d; label="&d; (current)" href="site:v&ds;//index"/>
+    &lt;v&c; label="&c;" href="site:v&cs;//index"/>
+  &lt;versions></source></li>
+          </ol></li>
+        <li>Similarly edit tabs.xml</li>
+        <li><p>
+            Remove the past versions (&p;) docs directory by doing 'svn rm
+            site-author/content/xdocs/&pd;
+          </p></li>
+        <li><p>
+            Edit site-author/conf/cli.xconf where it excludes old docs from
+            being generated (a trick to speed up). Adjust the version numbers.
+            Comment-out these exclusions until after the release.
+          </p></li>
+        <li>
+                  Change the "fixfor" attribute to the next version for the
+                  "project.issues-rss-url" RSS feed in the <code>site-author/forrest.properties</code> file.
+                  Find the version number via the "Road Map" link at our Jira front page.
+                  Verify localhost:8888/forrest-issues.html
+                </li>
+        <li><p>
+            Edit site-author/status.xml:
+          </p>
+          <ol>
+            <li><p>
+                Remove the -dev from the current &lt;release&gt; tag, and set
+                the release date.
+              </p></li>
+            <li><p>
+                Add a new <code>
+<![CDATA[<release>]]>
+                </code> section for development on the next version e.g. from:
+              </p>
+              <source>
+  &lt;release version="&dt;" date="not yet released">
+  ...</source>
+              <p>
+                to:
+              </p>
+              <source>
+  &lt;release version="&nt;" date="not yet released">
+  ...
+  &lt;release>
+  &lt;release version="&d;" date="&rdate;">
+  ...</source></li>
+          </ol></li>
+        <li>Temporarily remove the "dev" note from upgrading_xy.xml</li>
+        <li><p>
+            Edit the Forrest home page in the "News and events" section and add
+            a text like:
+          </p>
+          <source>
+ Apache Forrest &d; was released on &rdate;.
+ [### Add some important new features ###]</source></li>
+        <li>Ensure that the documentation is building properly, do 'cd site-author; forrest'. Fix any linking errors.</li>
+        <li><p>
+            Edit the forrest/site-author/content/xdocs/mirrors.html and adjust
+            all version-specific content.
+          </p></li>
+        <li>Commit all of the above changes after the code-freeze has started
+                  in the next section.</li>
+      </ol>
+      <fixme author="">
+        Not sure what will happen with the forrestbot on our zone during this
+        phase. If the steps in this Release Process are correct, then such users
+        of live trunk should get a smooth upgrade. We will see.
+      </fixme>
+    </section>
+    <section id="BuildDist">
+      <title>Building the release candidate packages</title>
+      <p>
+        In this phase the Release Manager builds the release candidate to be
+        tested.
+      </p>
+      <note>
+        You can practice the following steps (as far as creating the branch)
+        without committing anything even before code-freeze. This ensures a good
+        release candidate.
+      </note>
+      <ol>
+        <li>Announce that the code-freeze has now commenced.
+                  Use the template <a href="announce_code_freeze.txt">announce_code_freeze.txt</a>
+                  to send email to dev list.
+                  The meaning of "code-freeze" is defined in that template.
+                </li>
+        <li><p>
+            Update your SVN working copy to include any last minute changes.
+          </p></li>
+        <li>Do any final work, such as license header checks and xml code cleanup.
+                </li>
+        <li><p>
+            Ensure that your Java version is the lowest specified of our
+            supported versions.
+          </p>
+          <note>
+            Set the environment variable JAVA_HOME to the path of the Java
+            version. Note for Windows: If you change the setting in system
+            properties, you need to logout and login again for the changes to
+            become effective.
+          </note></li>
+        <li><p>
+            Run the following quick tests from the command line of your system
+            to ensure that all is well:
+          </p>
+          <ul>
+            <li><p>
+                Change to the main directory and run <code>build test</code>.
+                The build should conclude without errors.
+              </p></li>
+            <li><p>
+                Change to the site-author directory and run 'forrest'. The docs
+                should build without errors.
+              </p></li>
+          </ul>
+          <p>
+            If there are any problems, focus on problems that prevent building
+            and invite other commiters to help you solve the problems.
+          </p>
+          <note>
+            It is not your job to fix bugs and code freeze should not commence
+            with a broken trunk.
+          </note>
+          <p>
+            If there are bugs with the build system that cannot be easily fixed,
+            then call a halt to the release process and start a discussion on
+            rescheduling options on the dev-list with the template
+            <a
+                            href="rc_did_not_build_what_now.txt">rc_did_not_build_what_now.txt</a>
+          </p></li>
+        <li><p>
+            Remove the build directories from core and plugins. Do <code>svn st
+            --no-ignore</code> in the root directory of your release candidate
+            directory to be sure that all files created by the test build have
+            been removed and no other files have been changed. The status
+            command should report no changes.
+          </p></li>
+        <li><p>
+            Update the version numbers at various places:
+          </p>
+          <ol>
+            <li><p>
+                Edit main/build.xml and remove the "-dev" text around line 45:
+              </p>
+              <source>
+ &lt;property name="forrest.version" value="&dt;"/>
+to:
+ &lt;property name="forrest.version" value="&d;"/>
+                          </source></li>
+            <li>
+                          Similarly in main/forrest.build.xml around line 32.
+                        </li>
+            <li><p>
+                Edit plugins/build.xml and increase the docs version number to
+                the next major release. Around line 23:
+              </p>
+              <source>
+ &lt;property name="forrest.version" value="&d;"/>
+to:
+ &lt;property name="forrest.version" value="&n;"/>
+</source>
+              <note>
+                This is deliberately a major version up. It is assumed that
+                plugins will be developed against the next version of Forrest.
+                Individual plugins can override this property in their own build
+                files.
+              </note></li>
+          </ol>
+          <fixme author="">
+            There are probably other areas which have version numbers. How can
+            we improve this? Possibly with XML Entities, possibly with Ant
+            properties.
+          </fixme></li>
+        <li>
+                  Edit 4 files in tools/forrestbar to update the version number to match the new release:
+                  <source>
+xpi/install.rdf, line 24: &lt;em:version>&d;&lt;em:version>
+
+xpi/install.js, line 19: var err = initInstall("ForrestBar", "forrestbar", "&d;");
+
+xpi/chrome/content/contents.rdf, line 28: chrome:displayName="ForrestBar &d;"/> 
+
+xpi/chrome/content/forrestbarOverlay.xul, about line 40 edit the version number
+  as well as change the link to point to the new release's docs:
+    &lt;menuitem label="Current Docs (0.7)"
+       onclick="navigate('http://forrest.apache.org/docs_0_70/index.html');"/>
+                    </source></li>
+        <li>Build the forrestbar and replace site-author/content/xdocs/tools/forrestbar.xpi
+                </li>
+        <li>
+                  Update the etc/RELEASE-NOTES-&d;.txt as described above.
+                </li>
+        <li>Commit all of the above changes.</li>
+        <li><p>
+            Take note of the SVN revision number of your trunk by running
+            <code>svn info</code> from the command line in the Release
+            Candidate's root dir and look at the "Last Changed Rev: ######".
+            This will be used later for the svn log message when the branch is
+            created. Also it is helpful for ensuring that no new commits have
+            been made, i.e. people forgetting the code freeze. From here on
+            watch the svn@ list.
+          </p></li>
+        <li><p>
+            Now we will build the release candidate packages for Windows and
+            Unix.
+          </p>
+          <ul>
+            <li>
+                          Change to directory $FORREST_HOME/main and run <code>'build release-dist'</code>
+                          to generate the release candidate packages.
+                        </li>
+          </ul></li>
+        <li>Unpack and test the relevant archive in a fresh new directory.
+                  No point getting people to test if it is broken. You need this for your own testing and vote anyway.
+                  Be sure to set FORREST_HOME and PATH properly for this release candidate location
+                  i.e. ensure that you are not using your trunk working copy.
+                </li>
+        <li><p id="signing">
+            Sign the Release Candidate packages and create the *.asc and *.md5
+            files.
+          </p>
+          <p>
+            Here is one example when using gpg and openssl from the command
+            line.
+          </p>
+          <source>
+gpg --output apache-forrest-&d;.tar.gz.asc \
+  --detach-sig --armor apache-forrest-&d;.tar.gz
+
+gpg --verify apache-forrest-&d;.tar.gz.asc \
+  apache-forrest-&d;.tar.gz</source>
+          <p>
+            ... should say "Good signature from ..."
+          </p>
+          <source>
+openssl dgst -md5 -out apache-forrest-&d;.tar.gz.md5 \
+apache-forrest-&d;.tar.gz
+
+md5sum apache-forrest-&d;.tar.gz</source>
+          <p>
+            ... output should match that of the md5 file.
+          </p></li>
+        <li><p>
+            Create a maintenance branch in SVN. This command can be run from
+            anywhere because it uses full URLs.
+          </p>
+          <source>
+svn copy -r ##### -m "Create the ###xy### release branch from r#####" \
+    https://svn.apache.org/repos/asf/forrest/trunk \
+    https://svn.apache.org/repos/asf/forrest/branches/forrest_###xy###_branch
+
+where
+  'xy' is a compact form of the version (e.g. 04, 041, 05).
+  '#####' is the SVN revision number that the branch was created from,
+  which was the revision that the release candidate packages were generated from.
+  (Remember that you recorded this number earlier.)
+                  </source>
+          <p>
+            See
+            <a href="http://svn.apache.org/repos/asf/forrest/branches/">http://svn.apache.org/repos/asf/forrest/branches/</a>
+            for examples of past branches, e.g. forrest_07_branch
+          </p></li>
+      </ol>
+    </section>
+    <section id="vote">
+      <title>Testing the release candidate and voting</title>
+      <p>
+        Get Forrest developers to test the actual packges on various platforms.
+      </p>
+      <ol>
+        <li>
+                  Upload the release candidate packages and signatures to your committer's webspace.
+                </li>
+        <li><p>
+            Use template
+            <a href="test_and_vote_on_rel_cand.txt">test_and_vote_on_rel_cand.txt</a>
+            for an email to the dev-list asking all developers to test and vote.
+            Don't forget to modify the template, to specify the md5sums etc.
+            People need to tell you the md5sum to be sure that they have tested
+            and voted on the correct release candidate. This is especially
+            important if there has been more than one release candidate.
+          </p></li>
+        <li><p>
+            During this testing phase, the Release Manager should:
+          </p>
+          <ul>
+            <li>Make sure that people are reporting that the packages unpack on different systems without problems.</li>
+            <li>Make sure that people have followed the actual user instructions in the Forrest
+                            distribution at README.txt and index.html</li>
+            <li>Encourage people to build some difficult sites.</li>
+          </ul></li>
+        <li>If substantial problems are revealed (not just minor glitches) then co-ordinate their
+                  fixing by other developers. Doing the fixing of issues is not the Release Manager's job.
+                  Deciding what constitutes a "substantial" issue is entirely the RM's call.
+                  Remember that there is still a code freeze, so don't let people be tempted to fix other
+                  minor stuff or add some pet new feature that they have neglected. That can easily
+                  introduce new problems.
+                </li>
+        <li>If necessary start again with <a href="#BuildDist">Building the packages</a> and build another
+                    release candidate.</li>
+        <li>Tally the votes and report the result to the dev list.</li>
+      </ol>
+      <note>
+        It is vitally important that people review and vote against the actual
+        final release packages (and not just against their SVN working copy).
+      </note>
+    </section>
+    <section id="FinalRel">
+      <title>Finalizing the release</title>
+      <p>
+        When a good release candidate has been achieved and affirmed by the
+        vote, we'll finalize the release.
+      </p>
+      <ol>
+        <li><p>
+            If there have been changes to the trunk since the branch was
+            created, then merge trunk to branch.
+          </p>
+          <fixme author="fso">
+            What is the purpose of this step? It doesn't seem to be right
+            because trunk may already contain parts of the next version. What we
+            should do is do all fixing of RC-problems in the rc-branch (same as
+            changing docs) then, on release, merge branch back into trunk to
+            integrate fixes and doc-changes back into trunk. wdyt?
+          </fixme>
+          <fixme author="dc">
+            It should not contain new functionality because we are in a code
+            freeze
+          </fixme></li>
+        <li><p>
+            Tag SVN by doing:
+          </p>
+          <source>svn copy -m "Create tag forrest_###xy### from release branch" \
+  https://svn.apache.org/repos/asf/forrest/branches/forrest_###xy###_branch \
+  https://svn.apache.org/repos/asf/forrest/tags/forrest_###xy###</source>
+          <p>
+            where 'xy' is a compact (without the dots) form of the version
+            number (e.g. 04, 041, 05).
+          </p>
+          <p>
+            See
+            <a href="http://svn.apache.org/repos/asf/forrest/tags/">http://svn.apache.org/repos/asf/forrest/tags/</a>
+            for examples of past tags, e.g. forrest_07
+          </p>
+          <fixme author="fso">
+            If we change procedure to create an rc-branch this will become a
+            merge changes from trunk then rename rc-branch to final release
+            branch. right?
+          </fixme></li>
+        <li><p>
+            Tag the "site" SVN by doing:
+          </p>
+          <source>svn copy -m "Create tag forrest_###xy### release" \
+  https://svn.apache.org/repos/asf/forrest/site \
+  https://svn.apache.org/repos/asf/forrest/tags/forrest_###xy###</source>
+          <p>
+            where 'xy' is a compact (without the dots) form of the version
+            number (e.g. 04, 041, 05).
+          </p></li>
+        <li><p>
+            Announce the end of the code-freeze by sending the email-template
+            <a
+                            href="announce_end_of_code_freeze.txt">announce_end_of_code_freeze.txt</a>
+            to the dev list.
+          </p></li>
+      </ol>
+    </section>
+    <section id="UploadAndAnnounce">
+      <title>Upload and announcement</title>
+      <p>
+        In this phase we'll upload the new Release, wait for it to be available
+        on most mirror sites, then announce the new release.
+      </p>
+      <note>
+        During this phase there is a lot of waiting. While things are happening
+        you can be doing some of the other tasks in this Upload section and in
+        the <a
+                    href="#cleanup">Cleanup</a> section.
+      </note>
+      <ol>
+        <li><p>
+            Use scp to upload the release: the *.tar.gz, the *.zip, the *.asc
+            and *.md5 files, and the RELEASE-NOTES-&d;.txt to people.apache.org
+            at /www/www.apache.org/ dist/forrest/
+          </p>
+          <p>
+            Ensure correct file permissions by executing <code>'chgrp forrest
+            *'</code> then <code>'chmod 664 *'</code> in that directory.
+          </p>
+          <p>
+            Each PMC member has a server account and belongs to the forrest
+            group.
+          </p>
+          <p>
+            The process is documented at
+            <a href="http://people.apache.org/~bodewig/mirror.html"
+                            >http://www.apache.org/~bodewig/mirror.html</a>
+            and
+            <a
+                            href="http://www.apache.org/dev/#releases">http://www.apache.org/dev/#releases</a>
+          </p>
+          <p>
+            Leave the previous dist there as well as the new one, until after
+            the announcement (because mirrors.html cannot be updated until most
+            mirrors have received the release).
+          </p>
+          <note>
+            The other files there (HEADER.html README.html LICENSE.txt KEYS) are
+            all automatically updated from the SVN:forrest/dist/ repository
+            (<a href="#PrepDistSvn">explained</a> above).
+          </note></li>
+        <li><p>
+            Wait for the various mirrors to pick up the new files.
+          </p>
+          <p>
+            For some mirrors, this takes only a few hours. However others are
+            slow. How long to wait is a tradeoff, e.g. 8 hours.
+          </p>
+          <p>
+            See <a href="http://www.apache.org/mirrors/">Status of mirrors</a>.
+          </p>
+          <p>
+            Take note of the time that the eu.apache.org mirror is updated, then
+            compare each "mirror age" to that.
+          </p>
+          <p>
+            When you see that a good proportion of the mirrors have received the
+            release, then update the website, then send the announcement.
+          </p></li>
+        <li>Create a copy of current dev-docs in trunk for the next development phase.
+                    Do 'cd site-author/content/xdocs' and 'svn copy &dd; &nd;'
+                </li>
+        <li>Open site.xml and add a copy of the most current versioned section (e.g. &lt;v&ds;&gt;) above it.
+                    Increment the first decimal of the sections name to reflect the next planned release (e.g. &lt;v&ns;&gt;).
+                </li>
+        <li><p>
+            Update the .htaccess file to redirect /docs/dev/ to the next
+            version, and do other changes noted in the .htaccess file. See
+            site-author/content/.htaccess
+          </p>
+          <fixme author="fso">
+            Need to go through .htaccess and clean up.
+          </fixme></li>
+        <li>
+                  Update the release version number and release date in our DOAP file.
+                  See site-author/content/doap.xml
+                </li>
+        <li>Commit all of the above changes.</li>
+        <li><p>
+            Rebuild (Forrest site) and publish the Forrest website as normal. Be
+            sure to use the new version of trunk for building the docs. Refer to
+            <a href="site:howToPublishDocs">Publishing Forrest Documentation</a>
+            for details.
+          </p></li>
+        <li><p>
+            Update the xml.apache.org website (Forrest is part of the Apache XML
+            federation of projects). Edit
+            xml-site/src/documentation/content/xdocs/news.xml and record the
+            announcement, and then commit the new HTML to
+            xml-site/targets/forrest Note that they use forrest-0.7 to build
+            their website. See http://xml.apache.org/guidelines.html#website-top
+          </p></li>
+        <li><p>
+            Send <a href="announce_release.txt">announce_release.txt</a>as email
+            to 'dev@forrest.apache.org', 'user@forrest.apache.org',
+            'announce@apache.org', 'announcements@xml.apache.org'. Sign the
+            email (e.g. PGP).
+          </p>
+          <p>
+            See previous announcements for examples:
+          </p>
+          <ul>
+            <li><a href="http://marc.theaimsgroup.com/?l=xml-apache-announce&amp;m=103746673310573">0.2</a></li>
+            <li><a href="http://marc.theaimsgroup.com/?l=xml-apache-announce&amp;m=104399934113331">0.3 </a></li>
+            <li><a href="http://marc.theaimsgroup.com/?l=jakarta-announce&amp;m=104510734501302">0.4</a></li>
+            <li><a href="http://marc.theaimsgroup.com/?l=xml-apache-announce&amp;m=106352706005681">0.5</a></li>
+            <li><a href="http://marc.theaimsgroup.com/?l=xml-apache-announce&amp;m=106541447606765">0.5.1</a></li>
+            <li><a href="http://marc.theaimsgroup.com/?l=xml-apache-announce&amp;m=109784461425740">0.6</a></li>
+            <li><a href="http://marc.theaimsgroup.com/?l=xml-apache-announce&amp;m=111960678028211">0.7</a></li>
+          </ul></li>
+        <li><p>
+            Do the Freshmeat announcement:
+            <a href="http://freshmeat.net/projects/forrest/">http://freshmeat.net/projects/forrest/</a>
+          </p></li>
+        <li>
+                  Update the release information at our
+                  <a href="http://en.wikipedia.org/wiki/Apache_Forrest">Wikipedia</a> page.
+               </li>
+      </ol>
+    </section>
+    <section id="cleanup">
+      <title>Cleanup</title>
+      <ol>
+        <li><p>
+            Edit main/build.xml, increment the version and add a -dev tag:
+            around line 45: &lt;property name="version" value="&nt;"/>
+          </p></li>
+        <li><p>
+            Edit main/forrest.build.xml and update the version: around line 32:
+          </p>
+          <source>&lt;property name="version" value="&nt;"/></source></li>
+        <li>Return the "dev" note to upgrading_xy.xml</li>
+        <li>Edit site-author/conf/cli.xconf to exclude the old docs again.</li>
+        <li>Commit all of the above changes.</li>
+        <li>Remove the old generated docs from SVN forrest/site/&pd;
+                  which removes them from the website.
+                </li>
+        <li><p>
+            Remove old dist files from the /www/www.apache.org/dist/forrest/
+            directory. They have already been automatically archived at
+            archive.apache.org/dist/forrest/
+          </p></li>
+        <li>Create a new plugins directory in the forrest/site SVN for the
+                  next development phase:
+                  <source>
+svn mkdir https://svn.apache.org/repos/asf/forrest/site/plugins/&n;
+                  </source></li>
+        <li><p>
+            Do some Jira administration (need to be in the jira-administrators
+            group)
+          </p>
+          <ol>
+            <li><p>
+                Tweak the "release" versions via "admin" interface at our Jira.
+                Do this ...
+              </p></li>
+            <li><p>
+                Re-name the VersionIds using "Manage Versions" then "Edit
+                details": e.g. &dt; is renamed to &d; and &n; becomes &nt;
+              </p></li>
+            <li><p>
+                Mark &d; as released using "Manage Versions".
+              </p></li>
+            <li><p>
+                Review the Issues for the old version and move any Incomplete
+                ones up.
+              </p></li>
+          </ol></li>
+        <li><p>
+            Remove the release candidate packages from your public_html
+            directory.
+          </p></li>
+      </ol>
+    </section>
+    <section id="conclusion">
+      <title>Conclusion</title>
+      <p>
+        All done!
+      </p>
+      <p>
+        Or perhaps not.. if you think of anything, please refine these
+        instructions.
+      </p>
+    </section>
+  </body>
+</document>

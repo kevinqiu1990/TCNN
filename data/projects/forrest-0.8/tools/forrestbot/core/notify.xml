@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project name="notify">
+<!-- default values -->
+  <property name="notify.administrator"  value=""/>
+  <property name="notify.on.failure" value="true"/>
+  <property name="notify.on.success" value="true"/>
+<!-- set property defaults after other workstages have been run -->
+  <target name="notify.init">
+    <property name="notify.log" value="${build.logfile-stored}"/>
+    <property name="notify.deploy-location" value=""/>
+    <property name="notify.completion-status" value="- workstage should have set this -"/>
+    <if>
+      <isset property="build.failed"/>
+      <then>
+        <if>
+          <istrue value="${notify.on.failure}"/>
+          <then>
+            <property name="notify.do" value="true"/>
+          </then>
+        </if>
+      </then>
+      <else>
+        <if>
+          <istrue value="${notify.on.success}"/>
+          <then>
+            <property name="notify.do" value="true"/>
+          </then>
+        </if>
+      </else>
+    </if>
+  </target>
+  <target name="notify.local" depends="build, notify.init" if="notify.do" description="FB: Notify to the console">
+    <tstamp>
+      <format property="NOW" pattern="dd MMMM hh:mm aa"/>
+    </tstamp>
+    <echo>
+      ----------------------------------
+      Forrestbot build for ${ant.project.name} ${notify.completion-status}
+      Output in: ${notify.deploy-location}
+      Log in:    ${notify.log}
+
+      Time: ${NOW}
+      Using Forrest ${forrest.version}
+      ----------------------------------
+    </echo>
+  </target>
+<!-- default values -->
+  <property name="notify.email.host" value="localhost"/>
+  <property name="notify.email.to"   value="${user.name}@localhost"/>
+  <property name="notify.email.from"   value="Forrestbot"/>
+  <target name="notify.email" depends="build, notify.init" if="notify.do" description="FB: Notify by email">
+    <tstamp>
+      <format property="NOW" pattern="dd MMMM hh:mm aa"/>
+    </tstamp>
+    <mail from="${notify.email.from}"
+      mailhost="${notify.email.host}"
+      tolist="${notify.email.to}"
+      subject="ForrestBot build for ${ant.project.name} ${notify.completion-status}"
+      failonerror="false"
+      files="${build.logfile}"
+      messagefile="${bot.home}/core/emailtemplate.txt"
+      encoding="plain"
+    />
+  </target>
+</project>

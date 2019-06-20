@@ -1,0 +1,155 @@
+                       Release Notes for Forrest 0.8
+
+Apache Forrest is pleased to release the new version: apache-forrest-0.8
+========================================================================
+
+  It can be downloaded from one of the Apache Software Foundation mirror 
+  sites [Link: http://forrest.apache.org/mirrors.cgi]. 
+
+  Apache Forrest is a publishing framework that transforms input from 
+  various sources into a unified presentation in one or more output 
+  formats. The modular and extensible plugin architecture is based on 
+  Apache Cocoon and relevant standards, which separates presentation from 
+  content. Forrest can generate static documents, or be used as a dynamic 
+  server, or be deployed by its automated facility. 
+
+Requirements
+============
+
+  A Java Runtime Environment (1.4 or higher) installed. 
+
+  To build from source requires a Java Development Kit (1.4 or higher) 
+
+  Apache Ant is not required: Forrest uses its own version of Ant in 
+  tools/ant/ 
+
+  Apache Cocoon is not required: Forrest uses its own version. 
+
+Installing Apache Forrest
+=========================
+
+  The distribution contains all Forrest resources (skins, XSLTs, images, 
+  schemas), source code and Forrest's own website documentation. 
+
+  Copy somewhere permanent, like /usr/local/forrest or c:\forrest 
+  (Support for installation on Windows systems into directories 
+  containing spaces is very new, please report back on your success or 
+  failure.) 
+
+  Set FORREST_HOME environment variable to point to that top-level 
+  directory. 
+
+  Add to the system PATH environment variable,
+  i.e. $FORREST_HOME/bin (Unix) or %FORREST_HOME%\bin (Windows) 
+
+Getting Started
+===============
+
+  See the file index.html for the quick start tips. 
+
+Issue tracking
+==============
+
+  If you notice what appears to be a bug or wish to make a contribution, 
+  please report it via the Forrest issue tracker
+  [Link: http://forrest.apache.org/issues.html]. 
+
+Feedback
+========
+
+  Feedback, feature suggestions, contributions, bugs, and any other 
+  issues can be discussed on our mailing lists
+  [Link: http://forrest.apache.org/mail-lists.html]. 
+
+Major Changes in Version 0.8
+============================
+
+                                  ** Note **
+  This is not a complete list of changes, just some of the more important 
+  ones. A full list of changes in this release is available
+  [Link: http://forrest.apache.org/changes.html]. 
+  --------------------------------------------------------------------------
+
+  Changes to the Code Base
+  ------------------------
+
+    * [Icon: fix] Thanks to Gunther Sablon for reporting this issue. Plugins 
+      were not being deployed to a Webapp WAR file correctly. Committed by 
+      RDG. See Issue FOR-735 [Link: 
+      http://issues.apache.org/jira/browse/FOR-735].
+    * [Icon: update] Rename webapp build target to run-webapp to distinguish 
+      the resulting webapp from one suitable for deployment (use the war 
+      target for that) and provide a new xconf that is used in the war to 
+      ensure plugins can be found in war files Committed by RDG. See Issue 
+      FOR-735 [Link: http://issues.apache.org/jira/browse/FOR-735].
+    * [Icon: fix] Fix caching problem that made a restart neccessary after 
+      making a locationmap resource location change. Committed by TWW. See 
+      Issue FOR-732 [Link: http://issues.apache.org/jira/browse/FOR-732].
+    * [Icon: fix] After doing 'forrest clean' then Forrest could not be run 
+      without network access, due to not being able to retrieve plugin 
+      descriptor files. Committed by DC. See Issue FOR-927 [Link: 
+      http://issues.apache.org/jira/browse/FOR-927].
+    * [Icon: update] FOR-924 Readding the loading from 
+      (default-)forrest.properties which got removed in r430588 when closing 
+      FOR-916. Thanks Martin Stockhammer for pointing it out, providing us 
+      with a patch and for your contribution. Committed by TS. Thanks to 
+      Martin Stockhammer. See Issue FOR-924 [Link: 
+      http://issues.apache.org/jira/browse/FOR-924].
+    * [Icon: update] FOR-920 Merging the defaults and project modules to the 
+      new properties module. You can use it like {properties:forrest.home}, 
+      please refer to the update documentation [Link: 
+      docs_0_80/upgrading_08.html] how to change your {defaults:*} 
+      {project:*} and {forrest:*}. Committed by TS.
+    * [Icon: remove] Remove xconf support for plugins. Cocoon has moved away 
+      from this XConfToolTask xpatch technique. Diff [Link: 
+      http://svn.apache.org/viewvc?rev=354749&view=rev] Committed by RDG.
+    * [Icon: add] Added new "clean" targets. Doing 'forrest clean-site' will 
+      remove the contents of the project's generated documents directory. 
+      Doing 'forrest clean-work' will remove the project's work directories 
+      (usually build/tmp and build/webapp which include the Cocoon cache and 
+      the Cocoon logs). Doing 'forrest clean' will remove both sections. 
+      Committed by DC.
+    * [Icon: add] The broken-links file is now copied into to the site root 
+      as "broken-links.xml" so that when building with Forrestbot you can 
+      easily view it. Committed by RDG.
+    * [Icon: add] Reviewed all sitemaps to use locationmap references (lm:). 
+      At the same time we changed filenames of core stylesheets to follow a 
+      filename convention (e.g. html2document.xsl => html-to-document.xsl) 
+      which enables automated locationmap matches. Thanks to the many people 
+      who were involved with addressing this issue. See the commit logs 
+      associated with FOR-200. Committed by RDG. Thanks to Community. See 
+      Issue FOR-200 [Link: http://issues.apache.org/jira/browse/FOR-200].
+    * [Icon: add] Prototype of new xml-based properties system. Projects and
+      plugins can use a forrest.properties.xml file. At this stage, it
+      supplements the existing forrest.properties file. See the projectInfo
+      plugin for an example of its use.
+    * [Icon: add] Add notes about naming convention for locationmap 
+      references. Gathered from a ForrestFriday IRC session (thanks to Tim 
+      Williams for writing them up). See locationmap docs [Link: 
+      docs_0_80/locationmap.html]. Committed by RDG. Thanks to Community. See 
+      Issue FOR-200 [Link: http://issues.apache.org/jira/browse/FOR-200].
+    * [Icon: add] Added support for Locationmaps. This enables content to be 
+      retrieved from a location that is defined in a locationmap file. A 
+      project-based file can be located at 
+      PROJECT_HOME/src/documentation/content/locationmap.xml while core 
+      locationmaps are at $FORREST_HOME/main/webapp/locationmap-*.xml 
+      files.The advantage of this is that the URL seen by the user need bear 
+      no relation to the location of the source document, thus Forrest can 
+      separate the client URL space from the source document URL space. Thus, 
+      using the locationmap it is possible to pull together documents from 
+      many different locations into a single uniform site.In addition, since 
+      the user URL space is now unconnected to the source URL space it is 
+      possible to move source documents without breaking any existing user 
+      links.See locationmap docs [Link: docs_0_80/locationmap.html] for more 
+      information. Thanks to Unico Hommes for the original locationmap 
+      implementation which was added to Forrest long ago. Committed by RDG.
+
+  Changes to Documentation
+  ------------------------
+
+    * [Icon: add] Added document to facilitate upgrading to v0.8
+      Committed by DC.
+      [Link: http://forrest.apache.org/docs/upgrading_08.html]
+
+    * There are many more documentation changes.
+      [Link: http://forrest.apache.org/changes.html]

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project name="build">
+  <property name="build.work-dir"         location="work/${ant.project.name}"/>
+  <property name="build.site-dir"         location="build/${ant.project.name}"/>
+  <tstamp>
+    <format property="logtime" pattern="yyyyMMddHHmmss"/>
+  </tstamp>
+  <property name="build.log-dir" location="logs"/>
+  <mkdir dir="${build.log-dir}"/>
+  <property name="build.logfile" location="${build.log-dir}/${ant.project.name}.log"/>
+  <property name="build.logfile-stored" location="${build.log-dir}/${ant.project.name}-${logtime}.log"/>
+  <target name="build.forrest" depends="getsrc">
+<!-- defining this inside the target instead of at the top of the file
+         so that getsrc.local can override -->
+    <property name="build.home-dir"         location="${build.work-dir}" />
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+      <classpath>
+        <pathelement location="${bot.home}/lib/ant-contrib-0.5.jar"/>
+      </classpath>
+    </taskdef>
+    <trycatch property="errmsg" reference="exception">
+      <try>
+        <record name="${build.logfile}" action="start"/>
+        <tstamp>
+          <format property="time.start" pattern="yyyy-MM-dd hh:mm:ss"/>
+        </tstamp>
+        <echo>
+          ....... Forrest render START ${time.start}
+          ... Rendering docs in ${build.work-dir}
+        </echo>
+        <antcall target="site" inheritAll="false">
+          <param name="project.home" value="${build.home-dir}"/>
+          <param name="project.build-dir" value="${build.work-dir}"/>
+          <param name="project.site-dir" value="${build.site-dir}"/>
+        </antcall>
+        <echo>
+          ....... Forrest render Succeeded
+        </echo>
+        <record name="${build.logfile}" action="stop"/>
+        <property name="notify.completion-status" value="succeeded" />
+      </try>
+      <catch>
+        <echo>Oops, something broke</echo>
+        <record name="${build.logfile}" action="stop"/>
+        <property name="notify.completion-status" value="FAILED" />
+        <property name="build.failed" value="true"/>
+      </catch>
+    </trycatch>
+    <copy file="${build.logfile}" tofile="${build.logfile-stored}"/>
+  </target>
+</project>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE howto PUBLIC "-//APACHE//DTD How-to V2.0//EN" "http://forrest.apache.org/dtd/howto-v20.dtd">
+<howto>
+  <header>
+    <title>How to customize Forrest CSS 
+      WYSIWYG-style</title>
+    <abstract>
+      This How-To shows how to use Mozilla Firefox and the free EditCSS-Plugin
+      to customize your Forrest design in a WYSIWYG-way.
+    </abstract>
+    <last-modified-content-date date="2004-11-05"/>
+  </header>
+  <audience title="Intended Audience">
+    <p>
+      Users who want to customize the Forrest look and feel or simply experiment
+      with changing certain CSS-styles settings to see what happens.
+    </p>
+  </audience>
+  <purpose title="Purpose">
+    <p>
+      A major part of Forrest's look and feel is controlled by a few CSS style
+      sheets. Since Forrest allows you to override these settings, changing the
+      CSS is a quick and easy alternative to creating (and maintaining) a whole
+      new skin.
+    </p>
+    <p>
+      You'll learn how to use free tools to change and experiment with styles in
+      a WYSIWYG way, so that you can immediately see what effect changing a CSS
+      property will have on the look and feel of your Forrest.
+    </p>
+  </purpose>
+  <prerequisites title="Prerequisites">
+    <p>
+      To follow these instructions you will need:
+    </p>
+    <ol>
+      <li>Browser-access to the Forrest-site you want 
+        to experiment with. Starting with a new 'forrest seed' site is
+        good for your first attempt.
+        <note>
+          You can even experiment with Forrest's core skins CSS. Please send
+          patches if you enhance something.
+        </note></li>
+      <li>The current version of the free Mozilla 
+        Firefox-Browser installed on your system. 
+        If you don't already use it, you can 
+        download it from <a 
+        href="http://www.mozilla.org/products/firefox/">http://www.mozilla.org/products/firefox/</a></li>
+      <li>The Firefox-PlugIn EditCSS. It downloads 
+        and installs in just a few seconds from the 
+        Install-Link at <a 
+        href="http://editcss.mozdev.org/">http://editcss.mozdev.org/</a>
+        <note>
+          With standard security settings in place, Firefox will pop up a line
+          at the top of the window because this site has by default no
+          permission to install plugins on your computer. Click "Edit Options"
+          and then "Allow" to change that, then click on the Install-link again.
+          Don't forget to close and restart Firebird when the installation is
+          finished.
+        </note></li>
+      <li>A basic understanding of CSS and access to 
+        a good CSS-reference. Tutorials and 
+        Reference can be found at <a 
+        href="http://www.htmlhelp.com/reference/css/">http://www.htmlhelp.com/reference/css/</a>.</li>
+    </ol>
+  </prerequisites>
+  <steps title="Steps">
+    <section id="openForrest">
+      <title>Open your Forrest</title>
+      <p class="instruction">
+        Start your Firefox Browser and open the Forrest you'd like to work
+        on/play with.
+      </p>
+      <p>
+        The page you have pointed to will show up in Firefox's main window.
+      </p>
+    </section>
+    <section id="OpenEditCSS">
+      <title>Open the EditCSS-Sidebar</title>
+      <p class="instruction">
+        Select View-Sidebar-EditCSS from Firefox's main menu to open the EditCSS
+        sidebar.
+      </p>
+      <p>
+        The EditCSS sidebar will show next to the main window and load all the
+        styles from the main page.
+      </p>
+    </section>
+    <section id="changeCSS">
+      <title>Change any CSS</title>
+      <p class="instruction">
+        Change any style you'd like to experiment with or add new settings and
+        styles of your choice by simply editing the text of the sidebar.
+      </p>
+      <p>
+        EditCSS pushes any change you make in the sidebar right back into the
+        style-settings of the main window, so that effects will show right away.
+      </p>
+      <note>
+        On slow systems or when inserting big changes it might be a good idea to
+        paste these from the clipboard to avoid a zillion updates to the main
+        windows for every character you type.
+      </note>
+    </section>
+    <section id="saveChanges">
+      <title>How to save changes?</title>
+      <p>
+        Since it takes a few explanations to apply the changes to your Forrest,
+        I've made this the topic of yet another HowTo called "Howto change and
+        extend Forrest-CSS"
+      </p>
+    </section>
+  </steps>
+  <feedback 
+    title="Feedback and further development of this How-To">
+    <p>
+      Please provide feedback about this document via the
+      <a href="site:mail-lists">mailing lists</a>.
+    </p>
+  </feedback>
+</howto>

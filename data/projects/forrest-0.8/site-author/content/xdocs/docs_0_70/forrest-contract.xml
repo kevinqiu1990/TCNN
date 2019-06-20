@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Our Contract</title>
+    <notice>The legal tone of this document is just a gimmick, this is not a
+      legal document in any sense. At all times: since this is open source: the real
+      contract is described in the implementation details of the full distribution.
+      This tries to list (not explain) what the ins and outs of using Forrest is
+      about. Please let the forrest-dev
+      <link href="site:mail-lists">mail list</link> know if
+      any of the bullets listed here are out of sync with the real
+      implementation.</notice>
+    <abstract>
+      This document describes, in a very techy bullet-style way, how to use
+      Forrest.
+    </abstract>
+  </header>
+  <body>
+    <note>
+      This document describes the formal contract between the <strong>Forrest
+      distribution code</strong>, hereafter referred as "Forrest", and the
+      <strong>Project (team)</strong> that is using it for generating its
+      documentation and web-site, hereafter referred to as "TheProject".
+    </note>
+    <note>
+      Some terminology will assist: <code>{docroot}</code> is the location
+      inside TheProject's file hierarchy where all documentation related
+      resources are stored. Usually <code>{docroot}</code> equals to
+      <code>{projecthome}/src/documentation</code>
+    </note>
+    <section id="forrest-will">
+      <title>Forrest will:</title>
+      <p>
+        Provide infrastructure ...
+      </p>
+      <ul>
+        <li>Provide document type definitions (DTDs), skins, default sitemaps,
+         Cocoon pipelines.
+        </li>
+        <li>Provide a willing team of supporting developers at the forrest-dev
+          <link href="site:mail-lists">mail list</link>.
+        </li>
+        <li>Use Cocoon to generate the HTML and PDF documentation for
+          TheProject.</li>
+      </ul>
+    </section>
+    <section id="project-must">
+      <title>TheProject must:</title>
+      <p>
+        Provide content and configuration ...
+      </p>
+      <ul>
+        <li>Provide XML content in <code>{docroot}/content/xdocs</code>
+          according to the Forrest DTDs or one of the other input formats.
+        </li>
+        <li>Provide navigation metadata using the configuration files
+          <code>site.xml</code> and <code>tabs.xml</code></li>
+        <li>Provide the skin configuation file in
+          <code>{projecthome}/skinconf.xml</code></li>
+      </ul>
+    </section>
+    <section id="project-can">
+      <title>TheProject can:</title>
+      <p>
+        Add extra abilities ...
+      </p>
+      <ul>
+        <li>Provide its own skin in
+          <code>{docroot}/skins/{your-skin-name}</code> (Check the current
+          Forrest skins and the related pipelines to see what they are doing.
+          Bear in mind that the provided skins are able to be configured and
+          may already meet your needs.)</li>
+        <li>Provide own DTDs to handle other specialised document types in
+          <code>{docroot}/resources/schema/dtd</code>
+          <ul>
+            <li>and extra stylesheets to convert own grammar to the
+              intermediate 'document' structure.</li>
+            <li>and declare those extra DTDs in
+              <code>{docroot}/resources/schema/catalog.xcat</code></li>
+          </ul></li>
+        <li>Provide its own overwriting versions of sitemaps
+          (<code>{docroot}/sitemap.xmap</code> and other *.xmap files)
+          ... (be sure you know what you are doing since you are then leaving
+          the area where other Forresters can help you out.
+        </li>
+      </ul>
+    </section>
+  </body>
+</document>

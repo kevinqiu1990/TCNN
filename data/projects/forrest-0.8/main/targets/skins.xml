@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project basedir="." name="skins">
+<!-- public targets -->
+  <target name="available-skins"
+          depends="init-props, skin-unavailable, fetch-skins-descriptors"
+          description="What skins are available?">
+    <for param="skin-descriptor-file">
+      <path>
+        <fileset dir="${forrest.skins-dir}" includes="skins-*.xml"/>
+      </path>
+      <sequential>
+        <xslt in="@{skin-descriptor-file}" 
+          out="${project.temp-dir}/skinlist2echobuild.xml"
+          style="${forrest.core}/var/skinlist2echo.xsl"/>
+        <ant antfile="${project.temp-dir}/skinlist2echobuild.xml"/>
+      </sequential>
+    </for>
+  </target>
+  <target name="package-skin" description="Make a package of an existing skin" depends="init-props">
+    <input message="Which skin do you want to package?"
+           addproperty="skin-name"/>
+    <zip destfile="${forrest.skins-dir}/${skin-name}-${forrest.version}.zip"
+       basedir="${forrest.skins-dir}/"
+       includes="${skin-name}/**"/>
+  </target>
+  <target name="install-skin" 
+          depends = "init-skins"
+          description="Install the needed skin from the remote repository"/>
+<!-- private -->
+  <target name="init-skins" depends="init-props, check-skin, fetch-skin, unpack-skins"/>
+  <target name="skin-unavailable">
+    <property name="skin.unavailable" value="true"/>
+  </target>
+  <target name="check-skin">
+    <condition property="skin.unavailable">
+      <and>
+        <not>
+          <available type="dir" file="${forrest.skins-dir}/${project.skin}"/>
+        </not>
+        <not>
+          <available type="file" file="${forrest.skins-dir}/${project.skin}.zip"/>
+        </not>
+        <not>
+          <available type="dir" file="${skins-dir}/${project.skin}"/>
+        </not>
+      </and>
+    </condition>
+  </target>
+  <target name="unpack-skins"
+          depends="init-props">
+    <unzip dest="${forrest.skins-dir}/">
+      <fileset dir="${forrest.skins-dir}/">
+        <include name="*.zip"/>
+      </fileset>
+    </unzip>
+    <delete>
+      <fileset dir="${forrest.skins-dir}/">
+        <include name="*.zip"/>
+      </fileset>
+    </delete>
+  </target>
+  <target name="fetch-skins-descriptors" if="skin.unavailable" depends="init-proxy">
+    <delete>
+      <fileset dir="${forrest.skins-dir}" includes="skins-*.xml"/>
+    </delete>
+    <var name="skin-counter" value="1"/>
+    <for list="${forrest.skins.descriptors}" param="url">
+      <sequential>
+        <echo>fetching descriptor: @{url}</echo>
+        <get src="@{url}" 
+           dest="${forrest.skins-dir}/skins-${skin-counter}.xml"
+           verbose="true" usetimestamp="true" ignoreerrors="true"/>
+        <if>
+          <not>
+            <available file="${forrest.skins-dir}/skins-${skin-counter}.xml"/>
+          </not>
+          <then>
+            <fail>Stopped...
+ERROR
+=====
+       
+Unable to retrieve the skins descriptors at @{url}.
+There may be more information about the reason for this in ouput
+above. The usual cause is that Forrest has been unable to download
+the file. If you are behind a firewall then set the proxy.host 
+and proxy.port values in the forrest.properties file.
+       </fail>
+          </then>
+        </if>
+        <math result="skin-counter" operand1="${skin-counter}" operation="+" operand2="1" datatype="int"/>
+      </sequential>
+    </for>
+  </target>
+  <target name="fetch-skin" 
+          if = "skin.unavailable"
+          depends="init-props, fetch-skins-descriptors">
+    <for param="skin-descriptor-file">
+      <path>
+        <fileset dir="${forrest.skins-dir}" includes="skins-*.xml"/>
+      </path>
+      <sequential>
+        <xslt in="@{skin-descriptor-file}" 
+          out="${project.temp-dir}/skinlist2fetchbuild.xml"
+          style="${forrest.core}/var/skinlist2fetch.xsl"
+          force="true">
+          <param name="skin-name" expression="${project.skin}"/>
+          <param name="forrest-version" expression="${forrest.version}"/>
+        </xslt>
+        <ant antfile="${project.temp-dir}/skinlist2fetchbuild.xml"/>
+      </sequential>
+    </for>
+  </target>
+</project>

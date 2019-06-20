@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE catalog PUBLIC "-//OASIS//DTD Entity Resolution XML Catalog V1.0//EN"
+"http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd">
+<!-- OASIS XML Catalog for W3C stuff like XHTML and SVG -->
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog"
+         prefer="public">
+
+<!-- Extensible HTML 1.0 -->
+<public publicId="-//W3C//DTD XHTML 1.0 Strict//EN"
+        uri="xhtml1-strict.dtd"/>
+<public publicId="-//W3C//DTD XHTML 1.0 Transitional//EN"
+        uri="xhtml1-transitional.dtd"/>
+<public publicId="-//W3C//DTD XHTML 1.0 Frameset//EN"
+        uri="xhtml1-frameset.dtd"/>
+
+<!-- ISO latin 1 entity set for Extensible HTML (XML 1.0 format) -->
+<public publicId="-//W3C//ENTITIES Latin 1 for XHTML//EN"
+        uri="xhtml-lat1.ent"/>
+<public publicId="-//W3C//ENTITIES Symbols for XHTML//EN"
+        uri="xhtml-symbol.ent"/>
+<public publicId="-//W3C//ENTITIES Special for XHTML//EN"
+        uri="xhtml-special.ent"/>
+
+<!-- FIXME: What it is the purpose in the Forrest and Cocoon context -->
+<!--
+<sgmldecl uri="xhtml1.dcl"/>
+-->
+
+<!-- Scalable Vector Graphics and Styleable SVG -->
+<public publicId="-//W3C//DTD SVG 20000303 Stylable//EN"
+        uri="svg-20000303-stylable.dtd"/>
+<public publicId="-//W3C//DTD SVG 20000303 Shared//EN"
+        uri="svg-20000303-shared.dtd"/>
+<public publicId="-//W3C//DTD SVG 20000303 Exchange//EN"
+        uri="svg-20000303-exchange.dtd"/>
+<public publicId="-//W3C//DTD SVG 1.0//EN"
+        uri="svg10.dtd"/>
+
+</catalog>

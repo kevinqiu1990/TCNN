@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--*** This is a generated file.  Do not edit.  ***-->
+<link rel="stylesheet" href="../skin/tigris.css" type="text/css">
+<link rel="stylesheet" href="../skin/mysite.css" type="text/css">
+<link rel="stylesheet" href="../skin/site.css" type="text/css">
+<link media="print" rel="stylesheet" href="../skin/print.css" type="text/css">
+<title>Jakarta POI - HWPF - Java API to Handle Microsoft Word Files</title>
+</head>
+<body bgcolor="white" class="composite">
+<!--================= start Banner ==================-->
+<div id="banner">
+<table width="100%" cellpadding="8" cellspacing="0" summary="banner" border="0">
+<tbody>
+<tr>
+<!--================= start Group Logo ==================-->
+<td align="left">
+<div class="groupLogo">
+<a href="http://jakarta.apache.org"><img border="0" class="logoImage" alt="Jakarta" src="../resources/images/group-logo.gif"></a>
+</div>
+</td>
+<!--================= end Group Logo ==================-->
+<!--================= start Project Logo ==================--><td align="right">
+<div class="projectLogo">
+<a href="http://jakarta.apache.org/poi/"><img border="0" class="logoImage" alt="POI" src="../resources/images/project-logo.gif"></a>
+</div>
+</td>
+<!--================= end Project Logo ==================-->
+</tr>
+</tbody>
+</table>
+</div>
+<!--================= end Banner ==================-->
+<!--================= start Main ==================-->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" summary="nav" id="breadcrumbs">
+<tbody>
+<!--================= start Status ==================-->
+<tr class="status">
+<td>
+<!--================= start BreadCrumb ==================--><a href="http://www.apache.org/">Apache</a> | <a href="http://jakarta.apache.org/">Jakarta</a> | <a href="http://jakarta.apache.org/poi/">POI</a>
+<!--================= end BreadCrumb ==================--></td><td id="tabs">
+<!--================= start Tabs ==================-->
+<div class="tab">
+<span class="selectedTab"><a class="base-selected" href="../index.html">Home</a></span> | <script language="Javascript" type="text/javascript">
+function printit() {  
+if (window.print) {
+    window.print() ;  
+} else {
+    var WebBrowser = '<OBJECT ID="WebBrowser1" WIDTH="0" HEIGHT="0" CLASSID="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2"></OBJECT>';
+document.body.insertAdjacentHTML('beforeEnd', WebBrowser);
+    WebBrowser1.ExecWB(6, 2);//Use a 1 vs. a 2 for a prompting dialog box    WebBrowser1.outerHTML = "";  
+}
+}
+</script><script language="Javascript" type="text/javascript">
+var NS = (navigator.appName == "Netscape");
+var VERSION = parseInt(navigator.appVersion);
+if (VERSION > 3) {
+    document.write('  <a title="PRINT this page OUT" href="javascript:printit()">PRINT</a>');
+}
+</script> | <a title="PDF file of this page" href="index.pdf">PDF</a>
+</div>
+<!--================= end Tabs ==================-->
+</td>
+</tr>
+</tbody>
+</table>
+<!--================= end Status ==================-->
+<table id="main" width="100%" cellpadding="8" cellspacing="0" summary="" border="0">
+<tbody>
+<tr valign="top">
+<!--================= start Menu ==================-->
+<td id="leftcol">
+<div id="navcolumn">
+<div class="menuBar">
+<div class="menu">
+<span class="menuLabel">Jakarta POI</span>
+<div class="menuItem">
+<a href="../index.html">Top</a>
+</div>
+</div>
+<div class="menu">
+<span class="menuLabel">HWPF</span>
+<div class="menuItem">
+<span class="menuSelected">Overview</span>
+</div>
+<div class="menuItem">
+<a href="quick-guide.html">Quick Guide</a>
+</div>
+<div class="menuItem">
+<a href="docoverview.html">HWPF Format</a>
+</div>
+<div class="menuItem">
+<a href="projectplan.html">HWPF Project plan</a>
+</div>
+</div>
+</div>
+</div>
+<form target="_blank" action="http://www.google.com/search" method="get">
+<table summary="search" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td><img height="1" width="1" alt="" src="../skin/images/spacer.gif" class="spacer"></td><td nowrap="nowrap"><input value="jakarta.apache.org" name="sitesearch" type="hidden"><input size="10" name="q" id="query" type="text"><img height="1" width="5" alt="" src="../skin/images/spacer.gif" class="spacer"><input name="Search" value="GO" type="submit">
+<br>
+                          Search jakarta</td><td><img height="1" width="1" alt="" src="../skin/images/spacer.gif" class="spacer"></td>
+</tr>
+<tr>
+<td colspan="3"><img height="7" width="1" alt="" src="../skin/images/spacer.gif" class="spacer"></td>
+</tr>
+<tr>
+<td class="bottom-left-thick"></td><td bgcolor="#a5b6c6"><img height="1" width="1" alt="" src="../skin/images/spacer.gif" class="spacer"></td><td class="bottom-right-thick"></td>
+</tr>
+</table>
+</form>
+</td>
+<!--================= end Menu ==================-->
+<!--================= start Content ==================--><td>
+<div id="bodycol">
+<div class="app">
+<div align="center">
+<h1>Jakarta POI - HWPF - Java API to Handle Microsoft Word Files</h1>
+</div>
+<div class="h3">
+ 
+
+ 
+ 
+<div class="h3">
+<h3>Overview</h3>
+</div>
+
+  
+<p>HWPF is the name of our port of the Microsoft Word 97(-2002) file format
+    to pure Java.</p>
+
+  
+<p>HWPF is still in early development. It is in the <a href="http://svn.apache.org/viewcvs.cgi/jakarta/poi/trunk/src/scratchpad/">
+     scratchpad section of the SVN.</a> You will need to ensure you
+     either have a recent SVN checkout, or a recent SVN nightly build
+     (including the scratchpad jar!)</p>
+
+  
+<p>Source in the
+     <em>org.apache.poi.hwpf.model</em> tree is the old legacy code refactored
+     into an object model. Source code in the
+     <em>org.apache.poi.hwpf.extractor</em> tree is a wrapper of this to
+     facilitate easy extraction of interesting things (eg the Text). 
+     Source code in the <em>org.apache.poi.hdf</em> tree is the old legacy
+     code.
+   </p>
+
+   
+<div class="h4">
+<h4>HWPF Pointman Needed!</h4>
+</div>
+    
+
+    
+<p>At the moment we unfortunately do not have someone taking care for HWPF
+     and fostering its development. What we need is someone to stand up, take
+     this thing under his hood as his baby and push it forward. Ryan Ackley,
+     who put a lot of effort into HWPF, is no longer on board, so HWPF is an
+     orphan child waiting to be adopted.</p>
+
+    
+<p>If <strong>you</strong> are interested in becoming the new HWPF
+     pointman, you should look into the Microsoft Word internals. A good
+     starting point seems to be Ryan Ackley's  <a href="docoverview.html">overview</a>. This document contains a link to
+     a detailled Word format description you can find somewhere at
+     <a href="http://www.wotsit.org/">http://www.wotsit.org/</a>. Please
+     do not contact Ryan Ackley directly, because he is working for a company
+     now that signed a NDA with Microsoft and thus he will be no longer able to
+     answer questions.</p>
+
+    
+<p>As a first step you should familiarize yourself with the source code,
+     examples, test cases, and the HWPF patches available at <a href="http://issues.apache.org/">Bugzilla</a> (if any). Then you
+     should compile an overview of</p>
+
+    
+<ul>
+     
+<li>the current HWPF status,</li>
+     
+<li>the patches in <a href="http://issues.apache.org/bugzilla/">Bugzilla</a> to be checked
+      in (and those that should better be ditched),</li>
+     
+<li>the available test cases and the test cases still to be written,</li>
+     
+<li>the available documentation and the docs to be written,</li>
+     
+<li>anything else that seems reasonable</li>
+    
+</ul>
+
+    
+<p>When you start start coding, you will not yet have write access to the
+     CVS repository. Please submit your patches to <a href="http://issues.apache.org/">Bugzilla</a> and nag <a href="mailto:klute.at.apache.org">Rainer Klute</a> until he commits
+     them. Besides the actual checking in of HWPF patches Rainer will also do
+     some minor reviews now and then of your source code patches, test cases
+     and documentation to help ensure software quality. But most of the time
+     you will be on your own.</p>
+
+    
+<p>Please do not forget to write <a href="http://www.junit.org/">JUnit</a> test cases and documentation!
+     We won't accept code that doesn't come with test cases. And please
+     consider that other contributors should be able to understand your source
+     code easily. If you need any help getting started with JUnit test cases
+     for HWPF, please ask on the developers' mailing list! If you show that you
+     are prepared to stick at it you will most likely be given CVS commit
+     access.</p>
+
+    
+<p>
+<strong>Important:</strong> It is legally vital for POI that you have
+     never seen any documentation or specification from Microsoft that required
+     you or your employer to sign an NDA to get it. Please do read the <a href="../getinvolved/index.html">"Contribution to POI" page</a> for
+     details! This page also contains further information for you to start POI
+     development.</p>
+
+    
+<p>Of course we will help you as best as we can. However, presently there
+     is no committer who is really familiar with the Word format, so you'll be
+     mostly on your own. We are looking forward for you and your contributions!
+     Honor and glory of becoming a POI committer are waiting!</p>
+   
+  
+ 
+
+<div id="authors" align="right">by&nbsp;Nicola Ken Barozzi,&nbsp;Andrew C. Oliver,&nbsp;Ryan Ackley,&nbsp;Rainer Klute</div>
+</div>
+</div>
+</div>
+</td>
+<!--================= end Content ==================-->
+</tr>
+</tbody>
+</table>
+<!--================= end Main ==================-->
+<!--================= start Footer ==================-->
+<div id="footer">
+<table summary="footer" cellspacing="0" cellpadding="4" width="100%" border="0">
+<tbody>
+<tr>
+<!--================= start Copyright ==================-->
+<td colspan="2">
+<div align="center">
+<div class="copyright">
+              Copyright &copy; 2002-2006&nbsp;The Apache Software Foundation. All rights reserved.
+            </div>
+</div>
+</td>
+<!--================= end Copyright ==================-->
+</tr>
+<tr>
+<td align="left">
+<!--================= start Host ==================-->
+<!--================= end Host ==================--></td><td align="right">
+<!--================= start Credits ==================-->
+<div align="right">
+<div class="credit">
+<a href="http://validator.w3.org/check/referer"><img width="88" height="31" alt="Valid HTML 4.01!" src="../skin/images/valid-html401.png" class="logoImage"></a><a href="http://jigsaw.w3.org/css-validator/"><img width="88" height="31" alt="Valid CSS!" src="../skin/images/vcss.png" class="logoImage"></a><a href="http://xml.apache.org/forrest/"><img border="0" class="logoImage" alt="Built with Apache Forrest" src="../images/built-with-forrest-button.png" width="88" height="31"></a>
+</div>
+</div>
+<!--================= end Credits ==================-->
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!--================= end Footer ==================-->
+</body>
+</html>

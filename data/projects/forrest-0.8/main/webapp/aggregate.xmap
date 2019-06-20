@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- ===============================================
+Pipeline to generate an aggregated view of all the site's docs.
+
+This subsitemap defines both a source (*.xml) matcher, and a
+linkmap (linkmap-*) matcher to redefine the internal links.
+
+It works by taking site.xml, transforming each page node into a
+CInclude command, and using the CInclude transformer to create
+the aggregated XML.  Some cleverness required to prevent
+duplicate 'id' attributes.
+
+Generates  :  Source XML, Linkmap
+Example URL:  Typically http://localhost:8888/wholesite.pdf
+Used by    :  sitemap.xmap, which binds the URL to this pipeline
+Uses       :  cocoon://abs-linkmap, in linkmap.xmap
+
+$Revision: 1.2 $
+==================================================== -->
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  <map:components>
+    <map:generators default="file"/>
+    <map:serializers default="html"/>
+    <map:transformers default="xslt">
+      <map:transformer name="cinclude" src="org.apache.cocoon.transformation.CIncludeTransformer"/>
+    </map:transformers>
+    <map:matchers default="wildcard"/>
+  </map:components>
+  <map:pipelines>
+    <map:pipeline>
+<!-- Aggregation of all XML in the site -->
+      <map:match pattern="*.xml">
+        <map:generate src="cocoon://abs-linkmap"/>
+        <map:transform src="{lm:transform.site.book}" />
+        <map:transform src="{lm:transform-aggregate.book.cinclude}">
+          <map:parameter name="ignore" value="{1}"/>
+          <map:parameter name="title" value="{conf:project-name}"/>
+        </map:transform>
+        <map:transform type="cinclude"/>
+        <map:transform src="{lm:transform-aggregate.doc.doc-uniqueids}"/>
+        <map:transform src="{lm:transform-aggregate.docs.document}"/>
+        <map:serialize type="xml"/>
+      </map:match>
+<!-- Special linkmap for pages containing aggregated content.  Links to aggregated content should be internal
+      (fragment identifiers), and other links should be regular hrefs.  The 'split' between these two types is decided
+      by the stylesheet. -->
+      <map:match pattern="linkmap-*.*">
+        <map:generate src="cocoon://abs-linkmap" />
+        <map:transform src="{lm:transform-aggregate.linkmap.relativized-linkmap}">
+          <map:parameter name="path" value="{1}.{2}" />
+        </map:transform>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+  </map:pipelines>
+</map:sitemap>

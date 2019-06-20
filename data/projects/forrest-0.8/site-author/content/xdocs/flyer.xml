@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Apache Forrest: documentation framework</title>
+  </header>
+  <body>
+    <p>
+      Apache Forrest (<a href="site:forrest">forrest.apache.org</a>) is a
+      publishing framework that transforms input from various sources into a
+      unified presentation in one or more output formats. The modular and
+      extensible plugin architecture is based on Apache Cocoon and relevant
+      standards, which separates presentation from content. Forrest can generate
+      static documents, or be used as a dynamic server, or be deployed by its
+      automated facility.
+    </p>
+    <p>
+      By <strong>separating content from presentation</strong>, providing
+      <strong>content templates</strong> and <strong>pre-written skins</strong>,
+      Forrest is unequalled at enabling content producers to get their message
+      out fast. This separation of concerns makes Forrest excellent to publish
+      <strong>project documentation</strong> (notably software projects),
+      <strong>intranets</strong>, and <strong>home pages</strong>.
+    </p>
+    <p>
+      Forrest is built on one of the world's leading XML application frameworks,
+      <a href="ext:cocoon">Apache Cocoon</a>, which provides advanced users with
+      extremely powerful publishing capabilities.
+    </p>
+    <ul>
+      <li>Multiple task-specific source XML formats can be used
+          (<a href="site:write-howto">How-To</a>,
+        <a href="site:faq">
+        <acronym title="Frequently Asked
+            Questions">FAQ</acronym></a>,
+        <a href="site:v0.70//changes">changelogs</a> and
+        <a href="site:todo">todo lists</a> supported natively).
+        Source formats include: Apache xdocs xml format, plain html
+        documents, some Wiki formats, a subset of DocBook, ...
+      </li>
+      <li>Multiple output formats supported, for example HTML and PDF (using
+        <a href="ext:fop">Apache FOP</a>).
+      </li>
+      <li>SVG to PNG rendering (using <a href="ext:batik">Apache
+        Batik</a>). Simply drop the SVG in the appropriate directory
+        and it will be rendered as PNG.</li>
+      <li>
+        Transparent inclusion and aggregation of external content, like
+        <a href="site:v0.70//changes-rss">RSS feeds</a>.
+      </li>
+      <li>
+        Anything else possible with the
+        <a href="ext:cocoon/sitemap">Cocoon sitemap</a>.  Using database
+        queries, <a href="ext:apache-stats">charting</a>, web services
+        integration; the possibilities are constantly growing as Cocoon grows.
+        See the <a href="ext:cocoon/features">Cocoon Features</a> list
+        for the full suite of capabilities.
+      </li>
+      <li>
+        Based on Java, Forrest is platform-independent, making for a
+        documentation system that is just as portable as the XML data it
+        processes.
+      </li>
+      <li>
+        Your development team does not need Java experience, or even XML
+        skills, to use Forrest. The framework lets you concentrate on
+        content and design.
+      </li>
+    </ul>
+    <p>
+      Unique amongst comparable documentation tools, Forrest generates sites
+      that can run both <strong>interactively</strong> as a dynamic web
+      application, or as statically rendered pages. Running as a webapp has a
+      major advantage during development: content can be written, and then the
+      rendered output viewed almost instantly in a web browser. This
+      <a href="site:v0.70//your-project/webapp">webapp technique</a> enables the
+      edit/review cycle to be faster than command-line transformation tools.
+    </p>
+  </body>
+</document>

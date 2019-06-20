@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE howto PUBLIC "-//APACHE//DTD How-to V2.0//EN" "http://forrest.apache.org/dtd/howto-v20.dtd">
+<howto>
+  <header>
+    <title>How to Build a Plugin</title>
+    <version>0.3.0</version>
+    <abstract>
+      This How-To describes the steps necessary to build a plugin for Forrest.
+      Forrest uses plugins to add new input formats, output formats and to
+      change its default behaviour. Since plugins are downloaded when needed and
+      can be hosted at any location, plugin code can be developed independently
+      of Apache Forrest. This how-to describes each of the major steps in
+      creating a plugin and then works through some examples of plugin creation
+      in order to illustrate the materials.
+    </abstract>
+    <last-modified-content-date date="2006-04-23" />
+  </header>
+  <audience title="Intended Audience">
+    <p>
+      Users needing to add additional input formats or output formats or to
+      change the operation of the Forrest internals.
+    </p>
+    <warning>
+      Please make sure that you are using forrest 0.8 or above if you want use
+      plugins. Forrest 0.6 will not work!!!
+    </warning>
+  </audience>
+  <purpose title="Purpose">
+    <p>
+      This How-To will illustrate how to build a plugin, publish a plugin and
+      configure a Forrest project to use their plugin.
+    </p>
+  </purpose>
+  <prerequisites title="Prerequisites">
+    <p>
+      Plugin developers should have:
+    </p>
+    <ul>
+      <li>a basic knowledge of XML, XSLT and Cocoon pipelines</li>
+      <li>a clear use-case for extending Forrest</li>
+      <li>read
+        <a href="site:plugins/infrastructure">Plugin Infrastructure</a></li>
+      <li>verified with the Apache Forrest developer community that the
+      required functionality does not already exist</li>
+    </ul>
+  </prerequisites>
+  <steps title="Steps">
+    <p>
+      Here is how to proceed.
+    </p>
+    <section id="typeOfPlugin">
+      <title>Type of Plugin</title>
+      <p>
+        There are three types of plugin, each with a clear purpose, you must
+        first decide which <a href="site:plugins/infrastructure">type of
+        plugin</a> you need to build.
+      </p>
+    </section>
+    <section id="ant">
+      <title>Make ant available on the command-line</title>
+      <p>
+        The following instructions rely heavily on
+        <a href="http://ant.apache.org/">Apache Ant</a> to automate some steps
+        in the process. Since ant is distributed as part of Forrest, all you
+        need to do is add Forrest's 'ant' executable directory to your system
+        path. The name of this directory is <code>tools/ant/bin</code> in your
+        Forrest program directory. Alternatively you can prefix all calls to ant
+        in the following instructions with the full path of the ant binary
+        directory, i.e. $FORREST_HOME/tools/ant/bin/ant
+      </p>
+      <p>
+        If instead you really want to use your own version of Ant, then you will
+        need to copy forrest/lib/core/xml-commons-resolver.jar to $ANT_HOME/lib
+        directory, otherwise the building of your plugins will go across the
+        network to get the DTDs on every xml parse. Be aware that Forrest might
+        be relying on some Ant features in its version.
+      </p>
+    </section>
+    <section id="seed">
+      <title>Seed a New Plugin</title>
+      <p>
+        Regardless of the type of plugin you are building, the directory
+        structure is almost identical, as are most of the required configuration
+        files. In this How-To we will assume that you are creating a plugin in
+        the Forrest source tree. All plugins are developed in the
+        <code>forrest/plugins</code> directory or the
+        <code>forrest/whiteboard/plugins</code> directory.
+      </p>
+      <p class="instruction">
+        Run the following set of commands:
+      </p>
+      <source>
+      cd [path_to_forrest]/whiteboard/plugins
+      ant seedPlugin
+      </source>
+      <p>
+        The above ant target will ask you the name of the plugin and some
+        additional information such as a brief description and will build a
+        minimal plugin directory structure and configuration. You will need to
+        customise these files to build your plugin.
+      </p>
+      <note>
+        Although you can name your project anything you like we do have some
+        <a href="site:plugins/infrastructure">naming conventions</a> that we
+        recommend you follow. Plugins intended to be held at forrest.apache.org
+        must follow the naming convention.
+      </note>
+      <p>
+        You can also build your plugins from a location outside of the Forrest
+        directory structure, for example from within your own project. If you
+        don't already have one, create a plugins directory, for example:
+      </p>
+      <source>
+      cd $PROJECT_HOME
+      mkdir plugins
+      </source>
+      <p>
+        Then copy $FORREST_HOME/whiteboard/plugins/build.xml to
+        $PROJECT_HOME/plugins. There are a couple of changes you now need to
+        make to the newly copied build.xml file. Open up 'build.xml' for
+        editing. You can change the project name value to something more
+        suitable.Find the property name for forrest.plugins.dir and change the
+        location to read
+      </p>
+      <source>location="."</source>
+      <p class="instruction">
+        So, revised commands for $PROJECT_HOME/plugins:
+      </p>
+      <source>
+      cd [path_to_project_home]/plugins
+      ant seedPlugin
+      </source>
+      <p>
+        See <a href="site:plugins/infrastructure">Plugin Infrastructure</a> for
+        more information about the plugin directory structure and configuration
+        files.
+      </p>
+      <section id="edit-template">
+        <title>Edit the Plugin Template</title>
+        <p>
+          You now have a skeleton plugin project. However, it doesn't do
+          anything useful yet. Now is a good time to edit some of the files
+          provided.
+        </p>
+        <p>
+          Here are some general notes:
+        </p>
+        <section id="status">
+          <title>status.xml</title>
+          <p>
+            This file is used to track changes to the plugin project and to
+            manage lists of things that still need to be done. At this stage you
+            should correct the <code>person</code> entry near the top of the
+            file. It is also a good idea to add a few key milestones in the task
+            list towards the bottom of the file.
+          </p>
+          <p>
+            As you work on the plugin you should record all major changes in
+            this file so that it can then be used as a changelog for your
+            plugin.
+          </p>
+        </section>
+        <section id="forrest-properties">
+          <title>forrest.properties</title>
+          <p>
+            This file defines many configuration parameters for Forrest. It does
+            not need to be customised in most cases. However, see for more
+            details.
+          </p>
+        </section>
+        <section id="skinconf">
+          <title>src/documentation/skinconf.xml</title>
+          <p>
+            This configures the skin for your plugins documentation. There are
+            some items that need to be configured in here, for example, the
+            copyright information. The file is heavily commented so probably
+            best to read through it, changing what you need to.
+          </p>
+        </section>
+        <section id="doc">
+          <title>Documentation</title>
+          <p>
+            It is also a good idea to start writing the documentation at this
+            stage. The above process created a very simple plugin documentation
+            site for you. All you have to do is add the content.
+          </p>
+        </section>
+        <section id="hosted">
+          <title>Style notes for plugins hosted at forrest.apache.org</title>
+          <p>
+            After seeding a new plugin, copy the configuration from an existing
+            plugin (e.g. org.apache.forrest.plugin.input.projectInfo). Copy
+            src/documentation/skinconf.xml (and edit to suit) and
+            src/documentation/content/xdocs/images/project-logo.gif
+          </p>
+        </section>
+      </section>
+    </section>
+    <section id="edit-sitemap">
+      <title>Edit the Plugin sitemap file(s)</title>
+      <p>
+        The plugin <code>xmap</code> file is a Cocoon sitemap that is mounted at
+        a strategic place in the Forrest pipeline. It is in this file that you
+        will instruct Forrest how to operate. An input plugin must provide a
+        <code>input.xmap</code> file, an output plugin must provide a
+        <code>output.xmap</code> file, whilst an internal plugin provides a
+        <code>internal.xmap</code> file. In addition, an input plugin may
+        provide a <code>resources.xmap</code> file to allow the plugin to handle
+        items such as JavaScript files.
+      </p>
+      <note>
+        All input plugins should allow the original source to be retrieved by
+        requesting the document with a <code>*.source.xml</code> extension. So
+        you should ensure that you provide such a match.
+      </note>
+      <p>
+        It is beyond the scope of this How-To to give details about how to build
+        your plugins XMap. See the <a href="site:sitemap-ref">Sitemap
+        Reference</a> for general information. See also
+        <a href="site:plugins/infrastructure">Plugin Infrastructure</a> for some
+        hints and tips on creating plugin sitemaps. In addition, as with all
+        development work on Forrest, you will find the
+        <a href="site:mail-lists/forrest-dev">developer mailing list</a> a very
+        good resource (check the archives before posting, please).
+      </p>
+      <section id="components">
+        <title>Components, Actions and Resources</title>
+        <p>
+          If your plugin uses any components (i.e. generators, transformers or
+          serializers), actions or resources they must be defined in either the
+          xmap for this plugin or one of its parents. The parents of an
+          <code>input.xmap</code> are <code>sitemap.xmap</code> and
+          <code>forrest.xmap</code>, whilst the parent of both
+          <code>output.xmap</code> and <code>internal.xmap</code> are
+          <code>sitemap.xmap</code>
+        </p>
+        <p>
+          If you want to use the realpath where the sitemap.xmap of your plugin
+          resides then you need to use
+          <code>{forrest:forrest.plugins}/PLUGIN_NAME</code> instead of
+          <code>{realpath:/}</code>.
+        </p>
+        <p>
+          See the examples below for more details.
+        </p>
+      </section>
+    </section>
+    <section id="resources">
+      <title>Create the Necessary Resource Files</title>
+      <fixme author="open">
+        Discuss the XSL files and other such resources
+      </fixme>
+      <section id="dtd-catalog">
+        <title>Entity catalog for DTDs and other resources</title>
+        <p>
+          If the plugin uses non-core DTDs and other entities, then add them to
+          the <code>resources/schema</code> directory and configure a
+          catalog.xcat file. The best way to do this is to copy an example from
+          another plugin (e.g. "listLocations" has a simple example; "glossary"
+          has a more complex example) and edit it to suit.
+        </p>
+      </section>
+    </section>
+    <section id="samples">
+      <title>Create Samples in the Documentation</title>
+      <p>
+        Plugin documentation should provide (as a minimum) an index page that
+        provides an overview and a set of samples that demonstrate the
+        functionality of the plugin. Typically these samples will be provided in
+        a <code>samples</code> subdirectory in the plugin documentation and will
+        be referenced from both <code>site.xml</code> and <code>tabs.xml</code>
+        configuration files.
+      </p>
+      <p>
+        Try to provide a sample for all the major functions of your plugin and
+        document any configuration that is available.
+      </p>
+    </section>
+    <section id="test">
+      <title>Testing a Plugin</title>
+      <p>
+        Since your documentation for the plugin illustrates all of its
+        functionality, you can use that site for testing the plugin. However,
+        you must first deploy in your local install of Forrest. Each plugin
+        contains a buildfile that includes a <code>test</code> target. This
+        target, by default, builds the documentation for your plugin.
+      </p>
+      <p class="instruction">
+        Run the command <code>ant test</code> in the plugins directory.
+      </p>
+      <p>
+        Of course, the build should complete without errors.
+      </p>
+      <note>
+        You can also use <code>forrest run</code> to interactively examine your
+        documentation (point your browser at
+        <a href="http://localhost:8888">http://localhost:8888</a>).
+      </note>
+      <p>
+        It is also a really good idea to build proper tests for your plugins
+        using a suitable testing framework, for example,
+        <a href="http://webtest.canoo.com/">WebTest</a>. We recommend that you
+        extend the <code>test</code> target in your plugins build file because
+        this target is also used when performing integration tests on Forrest.
+        In addition, we recommend that you use the samples in your documentation
+        for your tests, this way you are documenting your plugin at the same
+        time as writing your tests.
+      </p>
+      <p>
+        Ensure that your sitemaps are robust and handle matches for files in
+        sub-directories, as well as those at the root level.
+      </p>
+      <section>
+        <title>Testing During Development</title>
+        <p>
+          In the current plugin system plugins are not used from their src
+          directories, they must first be deployed locally. To do this run the
+          command <code>$FORREST_HOME/tools/ant/bin/ant local-deploy</code>
+        </p>
+        <note>
+          The "test" target will do this deployment automatically for you. You
+          need only run it manually if you wish to test the plugin whilst
+          editing content in a live Forrest instance.
+        </note>
+        <p>
+          When you make changes to the plugin while doing its development, then
+          you need to do the local-deploy again for those changes to have
+          effect.
+        </p>
+        <p>
+          In most cases you can locally deploy a plugin without having to
+          restart Forrest. However, if your plugin changes any configuration
+          files in the <code>conf</code> directory you will, most likely, have
+          to restart Forrest to see these changes.
+        </p>
+      </section>
+    </section>
+    <section id="release">
+      <title>Releasing a Plugin</title>
+      <section id="register">
+        <title>Register the Plugin with Apache Forrest</title>
+        <fixme author="rdg">
+          Describe making a request of Forrest devs for inclusion
+        </fixme>
+      </section>
+      <section id="deploy">
+        <title>Deploying the Plugin</title>
+        <p>
+          To deploy the plugin so that others can use it, it must be made
+          available as a zip from the URL indicated in the
+          <code>plugins.xml</code> file. The plugins build file provides targets
+          to assist with this task.
+        </p>
+        <p class="instruction">
+          To deploy a plugin simply run the command <code>ant deploy</code> from
+          within the plugin directory.
+        </p>
+        <p>
+          This command will, by default, deploy to the Apache Forrest web site.
+          In order to do this you need commit access to Forrest. If you want to
+          deploy your plugin to a different location you can build the zip of
+          your plugin with <code>ant dist</code> and then copy the zip file from
+          <code>build/dist</code> to wherever you intend to host the plugin.
+        </p>
+        <note>
+          Running this command on any plugin will also deploy any changes to the
+          <code>plugins.xml</code> file. If you are deploying to your own
+          website you will have to request changes to the
+          <code>plugins.xml</code> and ask the Forrest committers to publish the
+          new document.
+        </note>
+        <warning>
+          Running the <code>deploy</code> or <code>dist</code> targets will
+          always run the <code>test</code> target first. This is to ensure that
+          you only deploy working plugins. This adds a little time to the deploy
+          cycle, but we feel the peace of mind is worth it.
+        </warning>
+      </section>
+      <section id="descriptor">
+        <title>Managing the plugins descriptors</title>
+        <p>
+          The files plugins/plugins.xml and whiteboard/plugins/plugins.xml are
+          the "Plugins Descriptor" files. Each plugin is described with its
+          name, purpose, location, and version information. These descriptors
+          are deployed to the forrest website.
+        </p>
+        <p>
+          Each plugin has a build.xml file which defines its version
+          information. Please keep that synchronised with the plugins.xml files.
+          Later
+          <a href="http://issues.apache.org/jira/browse/FOR-533">FOR-533</a>
+          will generate this from the various build.xml files.
+        </p>
+        <p>
+          The Apache Forrest committers manage these files in SVN and publish
+          them as needed. Here are some notes.
+        </p>
+        <p>
+          When a plugin gains new functionality, then it will be dependent on a
+          more recent version of Forrest. Deploy the plugin one final time
+          before implementing the new work. For example, if current release is
+          0.7 then ...
+        </p>
+        <ul>
+          <li>Review the docs and ensure any version numbers in text are "0.7"</li>
+          <li>Edit the skinconf.xml to ensure that all version numbers are "0.7", e.g. the MOTD.</li>
+          <li>Edit the plugin's descriptors to ensure that the "forrestVersion" is 0.7 and that the "version" is appropriate. </li>
+          <li>Ensure that the "website" parameter includes "pluginDocs/plugins_0_70"</li>
+          <li>Edit status.xml to set the release date. Ensure that the changes notes are complete.</li>
+        </ul>
+        <p>
+          Now the plugin gains functionality that binds it to 0.8-dev (e.g.
+          converted to use locationmap) so ...
+        </p>
+        <ul>
+          <li>Review the docs and ensure any version numbers in text are
+             "0.8"</li>
+          <li>Edit the skinconf.xml to ensure that all version numbers are
+             "0.8-dev", e.g. the MOTD.</li>
+          <li>Edit the plugin's descriptors to ensure that the "forrestVersion" is
+             0.8 and that the "version" is incremented. </li>
+          <li>Ensure that the "website" parameter includes "pluginDocs/plugins_0_80"</li>
+          <li>Edit status.xml to add a new section and set the release date.
+             Start adding changes notes.</li>
+        </ul>
+      </section>
+    </section>
+    <section id="experimental">
+      <title>Experimental Functionality</title>
+      <warning>
+        This section describes functionality that is considered experimental.
+        This functionality may be defective and is not part of the official
+        release at this time, use at your own risk. If you do choose to use this
+        functionality then we recomend that you join the Forrest dev list in
+        order to keep abreast of the changes as they occur.
+      </warning>
+      <note>
+        For an example of each of these features in use see the
+        <code>org.apache.forrest.internal.NoteTaking</code> plugin.
+      </note>
+      <section>
+        <title>Locationmap</title>
+        <p>
+          Plugins can use the Forrest locationmap to expose resources to your
+          project and other plgins. To use this functionality add your
+          <code>locationmap.xml</code> file to the root of the plugin directory.
+        </p>
+        <p>
+          We have an
+          <a href="http://issues.apache.org/jira/browse/FOR-200">issue</a> for
+          the status of locationmap development.
+        </p>
+      </section>
+      <section>
+        <title>Dispatcher</title>
+        <p>
+          Dispatcher (previous codename Forrest Views) is the collective name
+          for the various pieces of functionality that are intended to replace
+          skins in the future. They allow for a much more configurable system of
+          defining the contents and look and feel of a site.
+        </p>
+        <p>
+          Plugins can expose contracts, resources and tiles for use in
+          structurer files used within Dispatcher-based sites. In order to do
+          this you should develop your contracts as normal and place them in
+          <code>PLUGIN_HOME/resources/themes</code>. However, this, by itself,
+          is not sufficient to export your contracts. You will also need to add
+          the following match to your plugin's <code>locationmap.xml</code>
+          file:
+        </p>
+        <source>
+<![CDATA[
+    <match pattern="resolvePluginContract.*.**">
+      <select type="exists">
+        <location src="{forrest:forrest.plugins}/PLUGIN_NAME/resources/themes/{properties:dispatcher.theme}/{1}/{2}.ft" />
+        <location src="{forrest:forrest.plugins}/PLUGIN_NAME/resources/themes/{properties:dispatcher.fallback.theme}/{1}/{2}.ft" />
+      </select>
+    </match>
+    <match pattern="resolvePluginThemes.*.**">
+      <select type="exists">
+        <location src="{forrest:forrest.plugins}/PLUGIN_NAME/resources/themes/{properties:dispatcher.theme}/{1}/{2}.{1}" />
+        <location src="{forrest:forrest.plugins}/PLUGIN_NAME/resources/themes/{properties:dispatcher.fallback.theme}/{1}/{2}.{1}" />
+      </select>
+    </match>
+    <match pattern="resolvePluginTiles.**">
+      <select type="exists">
+        <location src="{forrest:forrest.plugins}/PLUGIN_NAME/resources/themes/{properties:dispatcher.theme}/html/{1}.vt.xml" />
+        <location src="{forrest:forrest.plugins}/PLUGIN_NAME/resources/themes/{properties:dispatcher.fallback.theme}/html/{1}.vt.xml" />
+      </select>
+    </match>]]>
+        </source>
+        <p>
+          Of course, you should replace <code>PLUGIN_NAME</code> with the name
+          of your plugin.
+        </p>
+        <p>
+          Once Dispatcher becomes stable we will add this matches to the default
+          locationmap which is generated when you seed a new plugin, but for now
+          it must be done manually.
+        </p>
+      </section>
+      <section>
+        <title>Plugin Properties</title>
+        <p>
+          Plugins can define properties that each project can over-ride. For
+          more information see the issue below.
+        </p>
+        <p>
+          We have an
+          <a href="http://issues.apache.org/jira/browse/FOR-588">issue</a> for
+          the status of this new configuration system.
+        </p>
+      </section>
+    </section>
+    <section id="examples">
+      <title>Examples</title>
+      <p>
+        This section will provide some example plugins to help illustrate the
+        steps discussed above.
+      </p>
+      <section id="input">
+        <title>Input Plugin</title>
+        <fixme author="RDG">
+          Discuss OpenOffice.org plugin here
+        </fixme>
+      </section>
+      <section id="output">
+        <title>Output Plugin</title>
+        <fixme author="RDG">
+          Discuss s5 plugin here
+        </fixme>
+      </section>
+      <section id="internal">
+        <title>Internal Plugin</title>
+        <fixme author="RDG">
+          Discuss IMSManifest plugin here
+        </fixme>
+      </section>
+    </section>
+    <section id="extension">
+      <title>Further Reading</title>
+      <ul>
+        <li><a href="site:plugins/infrastructure">Plugin Infrastructure Documentation</a> for Developers</li>
+        <li><a href="site:plugins">Plugins Documentation</a> for users</li>
+      </ul>
+    </section>
+    <section id="summarise">
+      <title>Summarise the Entire Process</title>
+      <fixme author="open">
+        In a few sentences, remind the reader what they have just learned. This
+        helps to reinforce the main points of your How-To.
+      </fixme>
+    </section>
+  </steps>
+</howto>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- Default Forrest locationmap for transformations -->
+<locationmap xmlns="http://apache.org/forrest/locationmap/1.0">
+  <components>
+    <matchers default="lm">
+      <matcher 
+        name="lm" 
+        src="org.apache.forrest.locationmap.WildcardLocationMapHintMatcher"/>
+    </matchers>
+    <selectors default="exists">
+      <selector name="exists" logger="sitemap.selector.exists"  
+                    src="org.apache.forrest.sourceexists.SourceExistsSelector" />
+    </selectors>
+  </components>
+  <locator>
+<!-- ================================== -->
+<!-- skin transforms                    -->
+<!-- ================================== -->
+    <match pattern="transform.*.fo">
+      <select>
+        <location src="{properties:skins-dir}{forrest:forrest.skin}/xslt/fo/{1}-to-fo.xsl" />
+        <location src="{forrest:forrest.context}/skins/{forrest:forrest.skin}/xslt/fo/{1}-to-fo.xsl"/>
+        <location src="{forrest:forrest.context}/skins/common/xslt/fo/{1}-to-fo.xsl"/>
+      </select>
+    </match>
+    <match pattern="transform.xdoc.html">
+      <select>
+        <location src="{properties:skins-dir}{forrest:forrest.skin}/xslt/html/document-to-html.xsl" />
+        <location src="{forrest:forrest.context}/skins/{forrest:forrest.skin}/xslt/html/document-to-html.xsl"/>
+        <location src="{forrest:forrest.context}/skins/common/xslt/html/document-to-html.xsl"/>
+      </select>
+    </match>
+<!-- ================================== -->
+<!-- utility transforms                 -->
+<!-- ================================== -->
+    <match pattern="transform.xml.xml-doctype-stripped">
+      <location src="{forrest:forrest.stylesheets}/strip-doctype.xsl" />
+    </match>
+    <match pattern="transform.linkmap.linkmap-absolutized">
+      <location src="{forrest:forrest.stylesheets}/absolutize-linkmap.xsl" />
+    </match>
+    <match pattern="transform.linkmap.linkmap-normalizedtabs">
+      <location src="{forrest:forrest.stylesheets}/site-to-site-normalizetabs.xsl" />
+    </match>
+    <match pattern="transform.xml.xml-normalizedhrefs">
+      <location src="{forrest:forrest.stylesheets}/normalizehrefs.xsl" />
+    </match>
+    <match pattern="transform.xml.dotdots">
+      <location src="{forrest:forrest.stylesheets}/dotdots.xsl" />
+    </match>
+    <match pattern="transform.xml.pathutils">
+      <location src="{forrest:forrest.stylesheets}/pathutils.xsl" />
+    </match>
+    <match pattern="transform.xml.copyover.helper">
+      <location src="{forrest:forrest.stylesheets}/copyover.xsl" />
+    </match>
+    <match pattern="transform.xml.generateId">
+      <location src="{forrest:forrest.stylesheets}/generateId.xsl" />
+    </match>
+    <match pattern="transform.xml.replaceCharsInString">
+      <location src="{forrest:forrest.stylesheets}/replaceCharsInString.xsl" />
+    </match>
+    <match pattern="transform.xml.extracted-svg">
+      <location src="{forrest:forrest.stylesheets}/extract-svg.xsl" />
+    </match>
+    <match pattern="transform.linkmap.linkmap-selectnode">
+      <location src="{forrest:forrest.stylesheets}/site-to-site-selectnode.xsl" />
+    </match>
+    <match pattern="transform.linkmap.linkmap-relativized">
+      <location src="{forrest:forrest.stylesheets}/relativize-linkmap.xsl" />
+    </match>
+<!--
+      FIXME: strip remaining i18n elements and attributes.
+      workaround for http://issues.apache.org/jira/browse/FOR-592
+    -->
+    <match pattern="transform.xml.xml-i18n-stripped">
+      <location src="{forrest:forrest.stylesheets}/strip-i18n-remains.xsl" />
+    </match>
+<!--
+      FIXME: strip_namespace is because this bug: http://issues.apache.org/bugzilla/show_bug.cgi?id=35348
+    -->
+    <match pattern="transform.xml.xml-namespace-stripped">
+      <location src="{forrest:forrest.context}/skins/common/xslt/html/strip_namespaces.xsl" />
+    </match>
+    <match pattern="transform.html.broken-links">
+      <location src="{forrest:forrest.stylesheets}/declare-broken-site-links.xsl" />
+    </match>
+<!-- ================================== -->
+<!-- aggregate transforms                 -->
+<!-- ================================== -->
+    <match pattern="transform-aggregate.*.*">
+      <location src="{forrest:forrest.stylesheets}/aggregates/{1}-to-{2}.xsl" />
+    </match>
+    <match pattern="transform-aggregate.linkmap.relativized-linkmap">
+      <location src="{forrest:forrest.stylesheets}/aggregates/relativize-split-linkmap.xsl" />
+    </match>
+    <match pattern="transform.old-skinconf.new-skinconf">
+      <location src="{forrest:forrest.stylesheets}/upgrade-skinconf.xsl" />
+    </match>
+<!-- All core other transforms -->
+    <match pattern="transform.*.*">
+      <select>
+        <location src="{properties:skins-dir}{forrest:forrest.skin}/xslt/html/{1}-to-{2}.xsl" />
+        <location
+          src="{forrest:forrest.context}/skins/{forrest:forrest.skin}/xslt/html/{1}-to-{2}.xsl"/>
+        <location src="{forrest:forrest.context}/skins/common/xslt/html/{1}-to-{2}.xsl"/>
+        <location src="{forrest:forrest.stylesheets}/{1}-to-{2}.xsl"/>
+      </select>
+    </match>
+  </locator>
+</locationmap>

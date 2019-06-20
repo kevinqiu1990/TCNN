@@ -1,0 +1,113 @@
+#!/bin/sh
+
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# set the current working dir as the PROJECT_HOME variable 
+
+cygwin=false;
+darwin=false;
+case `uname` in
+  CYGWIN*) cygwin=true ;;
+  Darwin*) darwin=true
+           if [ -z "$JAVA_HOME" ] ; then
+             JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home   
+           fi
+           ;;
+esac
+
+if [ "$cygwin" = "true" ] ; then
+  PROJECT_HOME=`cygpath -w "$PWD"`
+else
+  PROJECT_HOME=`pwd`
+fi
+
+if [ -z "$FORREST_HOME" ] ; then
+  # use the location of this script to infer $FORREST_HOME
+
+  thisprg="$0"
+
+  # Resolve links - $thisprg may be a symbolic link
+
+  while [ -h "$thisprg" ] ; do
+    ls=`ls -ld "$thisprg"`
+    link=`expr "$ls" : '.*-> \(.*\)$'`
+
+    if expr "$link" : '/.*' > /dev/null; then
+      thisprg="$link"
+    else
+      thisprg=`dirname "$thisprg"`/"$link"
+    fi
+  done
+
+  FORREST_HOME=`dirname "$thisprg"`/..
+
+  # Make it fully qualified
+
+  FORREST_HOME=`cd "$FORREST_HOME" && pwd`
+fi
+
+# Save old ANT_HOME
+OLD_ANT_HOME="$ANT_HOME"
+unset ANT_HOME
+ANT_HOME="$FORREST_HOME/tools/ant"
+
+# ----- Set Up The Runtime Classpath ------------------------------------------
+
+if [ "$cygwin" = "true" ] ; then
+  S=';'
+  FORREST_DOT_HOME=`cygpath -w "$FORREST_HOME"`
+else
+  S=':'
+  FORREST_DOT_HOME=$FORREST_HOME
+fi
+
+# set the ant file to use
+ANTFILE="$FORREST_DOT_HOME/main/forrest.build.xml"
+
+CP="$CLASSPATH"
+export CP
+unset CLASSPATH
+
+for i in $FORREST_HOME/lib/endorsed/*.jar; do
+  if [ "$cygwin" = "true" ] ; then
+    LIB=`cygpath -w $i`
+  else
+    LIB=$i
+  fi
+
+  CLASSPATH=$CLASSPATH$S$LIB
+done
+
+export CLASSPATH
+
+echo "Apache Forrest.  Run 'forrest -projecthelp' to list options"
+echo
+export FORREST_HOME
+"$ANT_HOME/bin/ant" --noconfig -buildfile "$ANTFILE" -Dbasedir="$PROJECT_HOME" -emacs "$@"
+RESULT=$?
+
+# ---- Restore Classpath
+unset CLASSPATH
+CLASSPATH=$CP
+export CLASSPATH
+
+# ---- Restore ANT_HOME
+# Restore old ANT_HOME
+ANT_HOME="$OLD_ANT_HOME"
+export ANT_HOME
+
+exit $RESULT

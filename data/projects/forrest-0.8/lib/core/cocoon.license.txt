@@ -1,0 +1,2 @@
+The cocoon-*-x.y.jar are from the Apache Cocoon project
+and are licensed as Apache License 2.0 (See ../LICENSE.txt).

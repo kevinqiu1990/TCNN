@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN"
+  "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Project roles</title>
+  </header>
+  <body>
+    <section id="overview">
+      <title>Overview</title>
+      <p>
+        There are many tasks that need to be done to keep the project flowing.
+        With the tasks being well-defined, the hope is that various people will
+        be able to assist to carry out the role and so not rely on a couple of
+        individuals to do all the work.
+      </p>
+      <p>
+        There are no roles for "leadership" of technical areas. We don't have
+        the concept of leadership at the ASF. Rather these are "functional
+        roles".
+      </p>
+      <p>
+        This is not intended to put pressure on people to force them to do work
+        nor "pull their weight". If they do not manage to do a task, then
+        someone else will be able to do it. Of course, shared load means a
+        healthy project.
+      </p>
+      <p>
+        Most roles have minimal tasks and are not too onerous. For example, for
+        the "Documentation Coordinator", the only job might be to publish the
+        documentation every Friday. Sure it can be done at other times and other
+        people can do it too, but at least it gets done once per week.
+      </p>
+      <p>
+        Having a person doing a role does not mean that everyone can leave it to
+        them and rely on them. Anyone else can dive in and do the job (for
+        example, publish the docs twice per week). The more people who are
+        familiar with the role, the better. Perhaps the person who is primarily
+        doing that role will notice that there can be improvements to how they
+        are doing it.
+      </p>
+      <p>
+        If a person is dissatisfied with the way a particular role is being done
+        then find a way to offer constructive criticism, perhaps by assisting or
+        by enhancing the role documentation.
+      </p>
+      <p>
+        Most of the roles (except of course the Developer role) can only be
+        carried out by PMC members because commit access is required.
+      </p>
+    </section>
+    <section id="roles">
+      <title>The roles</title>
+      <p>
+        These are the main roles, including the obvious ones. There are probably
+        other roles that need to be defined also. Each role should have some
+        continually enhanced documentation about it, so that any person can do
+        the tasks.
+      </p>
+      <section id="pmc-member">
+        <title>PMC Member</title>
+        <p>
+          This is well-defined in our <a href="site:guidelines">project
+          guidelines</a> and in the top-level ASF docs.
+        </p>
+      </section>
+      <section id="pmc-chair">
+        <title>PMC Chair</title>
+        <p>
+          This is well-defined in our <a href="site:guidelines">project
+          guidelines</a> and in the top-level ASF docs.
+        </p>
+      </section>
+      <section id="release-manager">
+        <title>Release Manager</title>
+        <p>
+          Tasks are defined in <a href="site:howToRelease">How to Release
+          Forrest</a>
+        </p>
+        <p>
+          Only one person can do this role, although other people can assist.
+          There is a lot of knowledge invested in this role. Document it as much
+          as possible.
+        </p>
+      </section>
+      <section id="forrest-friday-coordinator">
+        <title>ForrestFriday Coordinator</title>
+        <p>
+          The tasks are defined in
+          <a href="site:forrest-friday">ForrestFriday</a>.
+        </p>
+        <p>
+          Each month someone needs to co-ordinate the IRC session and be the
+          main channel operator, maintain the logfile and commit it to the
+          events SVN.
+        </p>
+        <p>
+          Ensure that the session is summarised.
+        </p>
+        <p>
+          This role can possibly be done by someone who is not a committer.
+          However, a logfile and summary need to be committed to SVN.
+        </p>
+      </section>
+      <section id="issue-tracker-coordinator">
+        <title>Issue Tracker Coordinator</title>
+        <p>
+          Add new Components, e.g. for each new plugin.
+        </p>
+        <p>
+          Other general Admin tasks.
+        </p>
+        <p>
+          Add new committers to the forrest-administrators group.
+        </p>
+        <p>
+          Add/enhance <a href="site:bugs">Filters</a>.
+        </p>
+        <p>
+          Review issues to ensure that they are properly categorised. This is
+          best done as soon as a new issue comes in.
+        </p>
+        <p>
+          Review the list of unscheduled issues.
+        </p>
+        <p>
+          Each month get the project to review the outstanding major issues that
+          are scheduled for the upcoming release.
+        </p>
+      </section>
+      <section id="documentation-coordinator">
+        <title>Documentation Coordinator</title>
+        <p>
+          Publish the documentation at least once per week.
+        </p>
+        <p>
+          Various people make edits to the source files, but often the
+          documentation is not generated and published. Also people add new
+          entries to site-author/status.xml but the changes.html needs to be
+          regularly generated from it.
+        </p>
+        <p>
+          This role is not actually about doing the documentation. That should
+          be up to everyone.
+        </p>
+        <p>
+          Generating and publishing the main docs is very easy using a local
+          forrestbot: See <a href="site:howToPublishDocs">How to publish Forrest
+          documentation</a>.
+        </p>
+      </section>
+      <section id="subversion-monitor">
+        <title>Subversion Monitor</title>
+        <p>
+          Ensure that svn:eol-style settings are "native" for all text files.
+        </p>
+        <p>
+          Ensure no line-endings issues.
+        </p>
+        <p>
+          Regularly run xml-tidy. (Not yet ready.)
+        </p>
+        <p>
+          Regularly run java-tidy. (Not yet ready.)
+        </p>
+        <p>
+          There are already some Perl scripts and other tools in the
+          "<a href="https://svn.apache.org/repos/private/committers">committers</a>"
+          SVN in the "tools" directory.
+        </p>
+      </section>
+      <section id="legal-monitor">
+        <title>Legal Monitor</title>
+        <p>
+          Regularly run a script which verifies and inserts missing license
+          headers to source files.
+        </p>
+        <p>
+          Regularly ensure that there are appropriate matching licenses to
+          accompany each supporting product that we redistribute.
+        </p>
+        <p>
+          This should have continual oversight by the PMC as a whole, but the
+          monitoring is something that needs to be done regularly, and
+          definitely prior to each release.
+        </p>
+        <p>
+          There are already some Perl scripts and other tools in the
+          "<a href="https://svn.apache.org/repos/private/committers">committers</a>"
+          SVN in the "tools" and "relicense/src/perl" directories.
+        </p>
+      </section>
+      <section id="developer">
+        <title>Developer</title>
+        <p>
+          The above roles are only for PMC Members. How can the Developers be
+          involved? That is easy: do the Developer Role.
+        </p>
+        <p>
+          Help out with commenting on the Issue Tracker, fixing the issues,
+          contributing to discussion, contributing patches, turning discussion
+          into clear documentation.
+        </p>
+        <p>
+          This is incredibly valuable and will enable the project to grow. After
+          time, you will probably be elected as Committer/PMC Member and when
+          comfortable, can take on one of the Project Management Roles.
+        </p>
+      </section>
+    </section>
+  </body>
+</document>

@@ -1,0 +1,15 @@
+Apache Forrest
+Copyright 2002-2007 The Apache Software Foundation.
+
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+
+See also the file LICENSE.txt
+
+------------------------------------------------------------------------
+The purpose of this NOTICE.txt file is to contain notices that are
+required by the copyright owner and their license. Some of the
+accompanying products have an attribution requirement, so see below.
+Other accompanying products do not require attribution, so are not listed.
+
+------------------------------------------------------------------------

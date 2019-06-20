@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN" "http://my.netscape.com/publish/formats/rss-0.91.dtd">
+<rss version="0.91"><channel><title>POI Changes</title><link>http://jakarta.apache.org/poi//changes.html</link><description>POI Changes</description><language>en-us</language><item><title> add</title><link>http://jakarta.apache.org/poi//changes.html</link><description> add
+              by 
+              POI-DEVELOPERS
+              :
+              HSSF Formula support</description></item><item><title> add</title><link>http://jakarta.apache.org/poi//changes.html</link><description> add
+              by 
+              POI-DEVELOPERS
+              :
+              Additional HSLF support for PowerPoint</description></item><item><title> fix</title><link>http://jakarta.apache.org/poi//changes.html</link><description> fix
+              by 
+              POI-DEVELOPERS
+              :
+              39389 - [PATCH] Extended Ascii support for WingDings</description></item></channel></rss>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project default="docs" basedir="." name="Forrest @plugin-name@ build file">
+  <property name="plugin-name" value="@plugin-name@"/>
+  <property name="forrest.version" value="@forrest-version@"/>
+  <property name="type" value="@plugin-type@"/>
+  <property name="plugin-version" value="0.1"/>
+  <property name="description" value="@plugin-desc@"/>
+  <property name="author" value="Apache Forrest Project"/>
+  <property name="websiteURL" value="@plugin-docServer@/@plugin-docPath@/@plugin-name@"/>
+  <property name="downloadURL" value="@plugin-downloadServer@/@plugin-downloadPath@/"/>
+<!-- The plugin will only appear in the plugins list if pulish = true
+    <property name="publish" value="true"/> -->
+  <import file="../build.xml"/>
+<!-- Add any additional installation work here in the build target, for example:
+  <target name="build"
+          description="Extract the tools">
+     <unzip dest="${plugins.localDeploy-dir}/${plugin-name}/resources">
+       <fileset dir="tools">
+          <include name="pluginBionaryTools.zip"/>
+        </fileset>
+     </unzip>   
+  </target>
+  -->
+</project>

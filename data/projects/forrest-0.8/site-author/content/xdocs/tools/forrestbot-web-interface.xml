@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN"
+"document-v12.dtd">
+<document>
+  <header>
+    <title>Forrestbot Web Interface</title>
+  </header>
+  <body>
+    <p>
+      This webapp implements a website staging application for sites built with
+      Apache Forrest. The webapp hosts HTML for a number of managed websites.
+      The user can regenerate these sites at will. Once the user is satisfied
+      with the site, they may 'deploy' the site, making it live.
+    </p>
+    <section>
+      <title>Build</title>
+      <p>
+        To build the webapp from source, you need
+        <link
+      href="http://maven.apache.org/">Apache Maven</link>
+        installed. From a command prompt, go to the
+        <code>forrest/tools/forrestbot/webapp</code> directory and execute
+        "<code>maven war</code>".
+      </p>
+    </section>
+    <section>
+      <title>Requirements</title>
+      <ul>
+        <li>Forrest</li>
+        <li>A servlet container such as <link
+        href="http://jakarta.apache.org/tomcat">Apache Tomcat</link></li>
+        <li>Directories for:</li>
+        <ul>
+          <li>forrestbot buildfiles</li>
+          <li>source and working files</li>
+          <li>log files</li>
+          <li>built websites (this is not their deployed location)</li>
+        </ul>
+        <li>A webserver to view the sites in the build directory</li>
+      </ul>
+      <p>
+        The server does not need local access to the sites' source nor final
+        deployed location. The buildfiles configure the transfer of those files.
+      </p>
+    </section>
+    <section>
+      <title>Installation</title>
+      <note>
+        Most of this configuration is related to the
+        <link
+      href="http://www.opensymphony.com/osuser/">OpenSymphony
+        OSUser</link> authentication layer.
+      </note>
+      <ol>
+        <li>Extract the war to an empty directory</li>
+        <li>Modify welcome.local.html</li>
+        <li>Modify WEB-INF/classes/osuser.xml if you want to use an
+        authenticator other than XML files</li>
+        <li>Modify projects.xml, groups.xml, and users.xml (all in
+        WEB-INF/classes) according to your needs</li>
+        <li>Optionally modify logging via WEB-INF/classes/log4j.properties</li>
+        <li>Modify WEB-INF/classes/settings.properties according to the server's
+        specific setup</li>
+        <li>Deploy the webapp in Tomcat or some other servlet container (you may
+        want to repackage the war file)</li>
+        <li>Make sure tomcat has permissions to write in forrestbot's build,
+        work, and log directories.</li>
+      </ol>
+      <p>
+        Optional: set up "cron jobs" to execute forrestbot. This is completely
+        independent of the forrestbot web interface, but is often useful. A
+        suggested practice is to build the sites regularly and deploy them as
+        desired through the web interface.
+      </p>
+    </section>
+    <section>
+      <title>FAQ</title>
+      <section>
+        <title>The build and/or deploy commands don't seem to work</title>
+        <warning>
+          The only environment variable available is FORREST_HOME, which is set
+          by forrest-home in the settings.properties file. Use a wrapper script
+          (see below) if you need other environment variables.
+        </warning>
+        <p>
+          Currently forrestbot only logs the forrest part of it's execution, not
+          the whole thing. And the web interface starts a forrestbot process and
+          doesn't watch it's progress directly.
+        </p>
+        <p>
+          Set debug-exec=true in settings.properties and make sure
+          log4j.properties logs at the DEBUG level. This will log all the thread
+          output.
+        </p>
+        <p>
+          Then look at the debugging output for the command executed and the
+          working directory used. Log into the server as the use the Tomcat
+          server uses and cd to the working directory and then execute the
+          command. This will fairly accurately simulate what the web interface
+          does.
+        </p>
+      </section>
+      <section>
+        <title>Can I do anything with this besides just running the
+        forrestbot?</title>
+        <p>
+          Sure. Create a wrapper script and specify it as forrest-exec in
+          settings.properties. Here's an example:
+        </p>
+        <source>#!/bin/bash
+
+# get env vars
+. /home/user/.profile
+
+# group writable for easier sharing of files with others who run forrestbot
+umask g+w
+
+# you can preprocess something here
+xmlfile=$2
+if [ "${xmlfile##*.}" = "xml" ]                # everything after last .
+then
+    target=$3
+    if [ "$target" != "deploy" ]                # don't run preprocess task on a deploy
+    then
+        projectTarget=${xmlfile%.*}               # everything before last .
+        # do something special for $projectTarget here
+    fi
+else
+        echo "Syntax: forrest_wrapper.sh -f myapp.xml [build|deploy|...]"
+        exit
+fi
+
+# run forrest(bot) with all the parameters
+forrest $*
+
+# you can postprocess something here</source>
+      </section>
+    </section>
+    <section>
+      <title>TODO Wishlist</title>
+      <ul>
+        <li>seperate authorization of 'build' and 'deploy'</li>
+        <li>log everything, not just the build</li>
+        <li>view old log files</li>
+        <li>ability to reload all config files on the fly</li>
+        <li>put date at top of viewlog_body page</li>
+      </ul>
+    </section>
+  </body>
+</document>

@@ -1,0 +1,34 @@
+      ------------------------------------------------
+      | Forrest template run.
+      | Running from $${forrest.home} = ${forrest.home}
+      | Working on   $${project.home} = ${project.home}
+      ------------------------------------------------
+      | //where to put the result
+      | project.site-dir    = ${project.site-dir} 
+      | //uri to start crawling/generation process
+      | project.start-uri   = ${project.start-uri}
+      | //cocoon cli.xconf location
+      | project.configfile  = ${project.configfile}
+      | //logkit.xconf location
+      | project.logkitfile  = ${project.logkitfile}
+      | //temp dir to throw stuff in (i.e. work and ctxt)
+      | project.temp-dir    = ${project.temp-dir} 
+      | //temp working directory for generation process
+      | project.cocoon-work-dir    = ${project.cocoon-work-dir} 
+      | //temp context directory for generation process
+      | project.webapp    = ${project.webapp} 
+      | //debuglevel for logging (DEBUG, INFO, WARN, ERROR, FATAL_ERROR)
+      | project.debuglevel  = ${project.debuglevel}
+      | //file for list of broken links
+      | project.brokenlinkfile = ${project.brokenlinkfile}
+      | //check if you have tools.jar installed
+      | tools.jar.present   = ${tools.jar.present} 
+      | //views
+      | project.view-defaultView = ${project.view-defaultView}
+      ------------------------------------------------
+      | The following properties could be removed from future builds:
+      | //which skin to apply
+      | project.skin        = ${project.skin} 
+      | //where your documentation xml is
+      | project.content-dir = ${content-dir} 
+      ------------------------------------------------

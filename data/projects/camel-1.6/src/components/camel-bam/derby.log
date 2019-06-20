@@ -1,0 +1,6 @@
+----------------------------------------------------------------
+2009-02-12 04:45:04.534 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance a816c00e-011f-68cd-6184-00000002e658
+on database directory /w1/apache/release/camel/components/camel-bam/target/test/database  
+
+Database Class Loader started - derby.database.classpath=''

@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project default="run-webapp" basedir="." name="run-webapp">
+  <target name="project.webapp.defined" unless="project.webapp">
+    <fail>
+      ------------------------------------------------
+      Error: $${project.webapp} variable has not been set. This is where the
+      webapp will be assembled. Please define it in the calling script.
+      ------------------------------------------------
+    </fail>
+  </target>
+<!-- ===============================================================
+       Builds a cocoon webapp for local execution.
+       Note, this webapp is not suitable for deploying remotely as it
+       is configured to allow editing of files in the ${project.home} 
+       directory.
+       param: location to put generated webapp ${project.webapp}
+       =============================================================== -->
+  <target name="webapp-local" depends="init, validate, project.webapp.defined, ensure-content, prepare-context,
+         load-project-props"
+   description="Generates a dynamic servlet-based website (an unpackaged webapp).  Note this webapp is suitable for local execution only, use the 'war' or 'webapp' target if you wish to deploy remotely.">
+<!-- this will need revisions in the case of the siteplan
+    extra project-custom classes then will need to be warred in as well. -->
+<!--  should be already there
+    <mkdir dir="${project.webapp}/WEB-INF"/>
+    <copy file="${forrest.core.webapp}/WEB-INF/web.xml" filtering="true" 
+      todir="${project.webapp}/WEB-INF"/>
+-->
+<!-- Prepare the Lucene search index -->
+    <condition property="use-lucene-indexer">
+      <equals arg1="${skinconfig.search.provider}" arg2="lucene"/>
+    </condition>
+    <antcall target="lucene-index" />
+    <available file="${content-dir}/jettyconf.xml" 
+      property="custom_jetty_config"/>
+    <loadfile  property="webapp-local-generated-message" srcFile="${forrest.core}/var/webapp-local-generated-message.txt">
+      <filterchain>
+        <expandproperties/>
+      </filterchain>
+    </loadfile>
+    <echo>${webapp-local-generated-message}</echo>
+  </target>
+<!-- ===============================================================
+       Builds a cocoon webapp of your project for remote deployment.
+       param: location to put generated webapp ${project.webapp}
+       =============================================================== -->
+  <target name="run-webapp" depends="webapp-local, copy-xdocs, copy-content"
+   description="Generates a dynamic servlet-based website (an unpackaged webapp).">
+<!--
+     Copy libs
+   -->
+    <copy toDir="${project.webapp}/WEB-INF/lib" 
+      overwrite="true" failonerror="false">
+      <fileset dir="${lib-dir}"/>
+    </copy>
+    <copy toDir="${project.webapp}/WEB-INF/classes" 
+      overwrite="true" failonerror="false">
+      <fileset dir="${classes-dir}"/>
+    </copy>
+    <copy todir="${project.webapp}/WEB-INF/lib">
+<!-- Note: no overwriting, so user's libs and classes get preference -->
+      <fileset dir="${forrest.core.lib-dir}">
+        <include name="**.jar"/>
+      </fileset>
+      <fileset dir="${forrest.optional.lib-dir}">
+        <include name="**.jar"/>
+      </fileset>
+      <fileset dir="${forrest.endorsed.lib-dir}">
+        <include name="**.jar"/>
+      </fileset>
+    </copy>
+    <copy todir="${project.webapp}/WEB-INF/lib">
+      <fileset dir="${forrest.build.lib-dir}">
+        <include name="**.jar"/>
+      </fileset>
+    </copy>
+    <copy toDir="${project.webapp}/WEB-INF/classes">
+      <fileset dir="${forrest.core.webapp}/WEB-INF/classes"/>
+    </copy>
+<!-- Copy XML jars if not running JDK 1.4 (where they're built-in) -->
+    <available property="jdk1.4+" classname="java.lang.CharSequence"/>
+    <copy todir="${project.webapp}/WEB-INF/lib">
+      <fileset dir="${forrest.endorsed.lib-dir}">
+        <include name="*jar" unless="jdk1.4+"/>
+      </fileset>
+    </copy>
+<!-- Copy custom plugin jars -->
+    <for list="${project.required.plugins}" param="name">
+      <sequential>
+        <copy file="${forrest.plugins-dir}/lib/@{name}.jar"
+	        todir="${project.webapp}/WEB-INF/lib"
+	        failonerror="false"/>
+      </sequential>
+    </for>
+<!-- 
+    | Copy all non-xdocs content across to the webapp
+   -->
+    <mkdir dir="${project.webapp}/project"/>
+    <copy toDir="${project.webapp}/project" overwrite="true" failonerror="false">
+      <fileset dir="${project.home}">
+        <include name="forrest.properties"/>
+        <include name="${project.status}"/>
+        <include name="${project.content-dir}/**"/>
+      </fileset>
+    </copy>
+<!-- Copy the file which contains the build information -->
+    <copy toDir="${project.webapp}/project/build/tmp"
+      file="${project.temp-dir}/build-info.xml"/>
+<!-- Copy the generated locationmap for plugins -->
+    <copy toDir="${project.webapp}/project/build/tmp"
+      file="${project.temp-dir}/locationmap.xml"/>
+<!-- Grab the plugin xmaps as these are no longer in the
+         plugins-dir.
+
+         During the build, the plugin information is copied during the
+         init-plugins task.  However, those are not sufficient when
+         creating a deployable war file.  That is because the
+         properties used for "project.webapp", "project.home" etc.
+         have different values when being built and when being run as
+         a war file.
+
+         The value of "todir" below corresponds to 
+         {properties:temp-dir} when running as a web application. -->
+    <copy todir="${project.webapp}/project/build/tmp">
+      <fileset dir="${project.temp-dir}">
+        <include name="*.xmap"/>
+      </fileset>
+    </copy>
+    <loadfile  property="webapp-generated-message" 
+      srcFile="${forrest.core}/var/webapp-generated-message.txt">
+      <filterchain>
+        <expandproperties/>
+      </filterchain>
+    </loadfile>
+    <echo>${webapp-generated-message}</echo>
+  </target>
+  <target name="copy-xdocs" if="xdocs.present"></target>
+  <target name="copy-content" if="raw-content.present"></target>
+<!-- ===============================================================
+       Builds a cocoon .war for your project based on the siteplan.
+       param: location to put generated war ${project.war}
+       =============================================================== -->
+  <target name="war" depends="run-webapp"
+   description="* Generates a dynamic servlet-based website (a packaged .war file)">
+    <move file="${project.webapp}/WEB-INF/xconf/forrest-core-webapp.xconf" tofile="${project.webapp}/WEB-INF/xconf/forrest-core.xconf"/>
+    <jar destfile="${project.war}">
+      <fileset dir="${project.webapp}"/>
+      <fileset dir="${forrest.home}">
+        <include name="${build.plugins-dir}/**"/>
+      </fileset>
+    </jar>
+    <echo>
+---------------------------------
+Webapp .war file generated:
+${project.war}
+---------------------------------
+   </echo>
+  </target>
+</project>

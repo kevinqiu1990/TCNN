@@ -1,0 +1,88 @@
+<!ENTITY % entities 'internalEntityDecl|externalEntityDecl|unparsedEntityDecl'>
+<!ENTITY % decls 'elementDecl|contentModel|attlist|notationDecl|%entities;'>
+<!ENTITY % markup 'comment|processingInstruction|%decls;'>
+<!ENTITY % cmodel 'any|empty|group'>
+
+<!ENTITY % uri 'CDATA'>
+<!ENTITY % pubid 'CDATA'>
+<!ENTITY % boolean '(true|false)'>
+<!ENTITY % token 'NMTOKEN'>
+<!ENTITY % string 'CDATA'>
+<!ENTITY % septype 'CDATA'> <!-- values: { ',' or '|' } -->
+<!ENTITY % occurtype 'CDATA'> <!-- values: { '?' or '*' or '+' } -->
+
+<!ELEMENT dtd ((parameterEntity|%markup;)*,externalSubset?)>
+<!ATTLIST dtd sysid %uri; #IMPLIED>
+
+<!ELEMENT externalSubset (parameterEntity|%markup;)*>
+<!ATTLIST externalSubset sysid %uri; #IMPLIED>
+
+<!ELEMENT internalEntityDecl EMPTY>
+<!ATTLIST internalEntityDecl name  %token;  #REQUIRED
+                             value %string; #REQUIRED>
+<!ELEMENT externalEntityDecl EMPTY>
+<!ATTLIST externalEntityDecl name  %token; #REQUIRED
+                             pubid %pubid; #IMPLIED
+                             sysid %uri;   #REQUIRED>
+<!ELEMENT unparsedEntityDecl EMPTY>
+<!ATTLIST unparsedEntityDecl name     %token; #REQUIRED
+                             pubid    %pubid; #IMPLIED
+                             sysid    %uri;   #IMPLIED
+                             notation %token; #REQUIRED>
+
+<!ELEMENT elementDecl EMPTY>
+<!ATTLIST elementDecl ename   %token;  #REQUIRED
+                      content %string; #REQUIRED>
+
+<!ELEMENT contentModel (parameterEntity|%cmodel;)>
+
+<!ELEMENT any EMPTY/>
+
+<!ELEMENT empty EMPTY/>
+
+<!ELEMENT group ((parameterEntity|(pcdata,separator))?,(parameterEntity|group|element|separator|occurrence)*>
+
+<!ELEMENT pcdata EMPTY>
+
+<!ELEMENT element EMPTY>
+<!ATTLIST element name %token; #REQUIRED>
+
+<!ELEMENT separator EMPTY>
+<!ATTLIST separator type %septype; #REQUIRED>
+
+<!ELEMENT occurrence EMPTY>
+<!ATTLIST occurrence type %occurtype; #IMPLIED>
+
+<!ELEMENT attlist (parameterEntity|attributeDecl)+>
+<!ATTLIST attlist ename %token; #REQUIRED>
+
+<!ELEMENT attributeDecl (parameterEntity|enumeration)*>
+<!ATTLIST attributeDecl ename    %token;   #REQUIRED
+                        aname    %token;   #REQUIRED
+                        atype    %string;  #REQUIRED
+                        required %boolean; #IMPLIED
+                        fixed    %boolean; #IMPLIED
+                        default  %string;  #IMPLIED>
+
+<!ELEMENT enumeration EMPTY>
+<!ATTLIST enumeration value %string; #REQUIRED>
+
+<!ELEMENT notationDecl EMPTY>
+<!ATTLIST notationDecl name  %token; #REQUIRED
+                       pubid %pubid; #IMPLIED
+                       sysid %uri;   #REQUIRED>
+
+<!ELEMENT parameterEntity ANY>
+<!ATTLIST parameterEntity name  %token; #REQUIRED
+                          pubid %pubid; #IMPLIED
+                          sysid %uri;   #REQUIRED>
+
+<!ELEMENT textDecl EMPTY>
+<!ATTLIST textDecl version  %string; #IMPLIED
+                   encoding %string; #REQUIRED>
+
+<!ELEMENT comment (#PCDATA)>
+
+<!ELEMENT processingInstruction EMPTY>
+<!ATTLIST processingInstruction target %token;  #REQUIRED
+                                data   %string; #IMPLIED>

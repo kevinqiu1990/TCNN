@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "http://forrest.apache.org/dtd/document-v12.dtd">
+<document>
+  <header>
+    <title>Mailing Lists</title>
+  </header>
+  <body>
+    <section>
+      <title>Important Notices</title>
+      <p>
+        Before posting a question or problem to any mailing list, please first
+        look at the following resources:
+      </p>
+      <ul>
+        <li><link href="site:documentation/faq">Forrest FAQs</link></li>
+        <li><link href="site:index">Forrest documentation</link></li>
+        <li><link href="http://cocoon.apache.org/link/">Cocoon Links</link>
+          (section: Related Topics)
+          for pointers to general XML and XSL and Java related resources.
+          Please do not ask such questions here unless they are related to Forrest.</li>
+        <li>Mailing list <link href="#Lists">archives</link>
+          - a veritable goldmine of Forrest-specific information.</li>
+        <li>Contribution <link href="contrib.html#tips">notes and tips</link>
+        (e.g. a clear subject heading; being patient).</li>
+      </ul>
+      <p>
+        If you are posting about a problem that you are having, it will aid in
+        finding a speedy resolution if you provide full configuration details,
+        including the version number of Forrest, your operating system, JDK
+        version, and servlet engine, and full details of any errors encountered
+        including full error messages and stack traces.
+      </p>
+      <note>
+        Please use our Jira <link href="site:bugs">issue tracker</link> to
+        submit attachments, rather than the mailing list. Create a new issue, if
+        necessary.
+      </note>
+      <p>
+        Please do not send emails directly to individual developers asking for
+        free support. We are non-paid volunteers who help out with the project
+        and we do not necessarily have the time or energy to help people on an
+        individual basis. Instead, we have these mailing lists which contain
+        many individuals who will help to answer. There are numerous benefits of
+        using mailing lists over private communication. It is a shared resource
+        where others can also learn from common mistakes and as a community we
+        all grow together. This discussion also builds a searchable
+        knowledge-base. Doing off-list discussion is not efficient: only one
+        person hears the answers and it will cause the volunteers to become
+        burnt out. See FAQ about <link href="site:faq/jobs">job offers</link>.
+      </p>
+    </section>
+    <section>
+      <title>Lists</title>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Archives</th>
+          <th>Purpose</th>
+          <th>Notes</th>
+          <th>Subscription Management</th>
+        </tr>
+        <tr>
+          <td>
+            <anchor id="forrest-user"/><strong>user@forrest</strong>
+          </td>
+          <td><link href="http://mail-archives.apache.org/mod_mbox/forrest-user">mod_mbox
+          at mail-archives.apache.org</link>
+            <br/>
+            <br/><link href="http://www.mail-archive.com/user@forrest.apache.org/">mail-archive.com</link>
+            <br/>
+            <br/><link href="http://dir.gmane.org/gmane.text.xml.forrest.user">Gmane</link>
+          </td>
+          <td>Any general issue related to the day-to-day use of Forrest.</td>
+          <td>This is a subscriber-only list (in an effort to stop spam), so you must join before you can post.</td>
+          <td>
+          user-subscribe&lt;at&gt;forrest.apache.org<br/>
+          user-unsubscribe&lt;at&gt;forrest.apache.org<br/>
+          user-help&lt;at&gt;forrest.apache.org
+        </td>
+        </tr>
+        <tr>
+          <td>
+            <anchor id="forrest-dev"/><strong>dev@forrest</strong>
+          </td>
+          <td><link href="http://marc.theaimsgroup.com/?l=forrest-dev"> MARC: Mailing list ARChives at AIMS</link>
+            <br/>
+            <br/><link href="http://mail-archives.apache.org/mod_mbox/forrest-dev">mod_mbox
+          at mail-archives.apache.org</link>
+            <br/>
+            <br/><link href="http://www.mail-archive.com/dev@forrest.apache.org/">mail-archive.com</link>
+            <br/>
+            <br/><link href="http://dir.gmane.org/gmane.text.xml.forrest.devel">Gmane</link>
+          </td>
+          <td>Any issue related to development and enhancement.</td>
+          <td>Postings from non-subscribers are moderated.
+              <br/>Read-only NNTP access to forrest-dev is available through the
+              <link href="news://news.gmane.org:119/gmane.text.xml.forrest.devel">gmane.text.xml.forrest.devel  newsgroup</link>
+          </td>
+          <td>
+          dev-subscribe&lt;at&gt;forrest.apache.org<br/>
+          dev-unsubscribe&lt;at&gt;forrest.apache.org<br/>
+          dev-help&lt;at&gt;forrest.apache.org
+        </td>
+        </tr>
+        <tr>
+          <td>
+            <anchor id="forrest-svn"/><strong>svn@forrest</strong>
+          </td>
+          <td><link href="http://mail-archives.apache.org/mod_mbox/forrest-svn">mod_mbox
+        at mail-archives.apache.org</link>
+            <br/>
+            <br/><link href="http://www.mail-archive.com/svn@forrest.apache.org/">mail-archive.com</link>
+            <br/>
+            <br/><link href="http://dir.gmane.org/gmane.text.xml.forrest.cvs">Gmane</link>
+          </td>
+          <td>Receive notifications on changes in the Forrest codebase in the SVN repository.</td>
+          <td>Replies go to dev@forrest</td>
+          <td>
+          svn-subscribe&lt;at&gt;forrest.apache.org<br/>
+          svn-unsubscribe&lt;at&gt;forrest.apache.org<br/>
+          svn-help&lt;at&gt;forrest.apache.org
+        </td>
+        </tr>
+        <tr>
+          <td>
+            <anchor id="forrest-site-svn"/><strong>site-svn@forrest</strong>
+          </td>
+          <td><link href="http://mail-archives.apache.org/mod_mbox/forrest-site-svn">mod_mbox
+        at mail-archives.apache.org</link>
+            <br/>
+            <br/><link href="http://www.mail-archive.com/site-svn@forrest.apache.org/">mail-archive.com</link>
+          </td>
+          <td>Receive notifications on changes to the generated Forrest site SVN.</td>
+          <td>Replies go to dev@forrest</td>
+          <td>
+          site-svn-subscribe&lt;at&gt;forrest.apache.org<br/>
+          site-svn-unsubscribe&lt;at&gt;forrest.apache.org<br/>
+          site-svn-help&lt;at&gt;forrest.apache.org
+        </td>
+        </tr>
+      </table>
+    </section>
+    <section>
+      <title>Mailing list in mbox-format</title>
+      <p>
+        These are Gzipped monthly archives which you can import into your local
+        mail client.
+      </p>
+      <ul>
+        <li><link href="http://forrest.apache.org/mail/user/">user</link> - Since May 2004</li>
+        <li><link href="http://forrest.apache.org/mail/dev/">dev</link> - Since February 2002</li>
+        <li><link href="http://forrest.apache.org/mail/svn/">svn</link> - Since June 2004</li>
+      </ul>
+    </section>
+    <section>
+      <title>Related Mailing Lists</title>
+      <ul>
+        <li><link href="http://xml.apache.org/mail.html">XML Apache Projects</link>
+- list of mailing lists for all xml.apache.org projects
+</li>
+        <li>Especially
+<link href="http://cocoon.apache.org/mail-lists.html">Apache Cocoon</link></li>
+        <li>All Apache Software Foundation <link href="http://www.apache.org/foundation/mailinglists.html">lists</link>.
+</li>
+      </ul>
+    </section>
+  </body>
+</document>

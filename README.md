@@ -22,7 +22,7 @@ After environment building, please run following file:
 
 3. runDBN.m is used for DBN/DPDBN performing.
 
-4. unTCNN.m is used for TCNN/DPTCNN performing.
+4. runTCNN.m is used for TCNN/DPTCNN performing.
 
 Contacts
 =================

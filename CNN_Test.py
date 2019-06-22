@@ -4,7 +4,7 @@ import numpy as np
 from torch import Tensor
 
 
-def CNN_train_test(model_name, model, train_ast, test_ast, train_label, test_label, train_hand_craft, test_hand_craft, acc, auc, f1, mcc):
+def CNN_test(model_name, model, train_ast, test_ast, train_label, test_label, train_hand_craft, test_hand_craft, acc, auc, f1, mcc):
 
     _, _, train_x = model(train_ast)
     _, _, test_x = model(test_ast)

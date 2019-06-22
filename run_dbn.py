@@ -6,7 +6,7 @@ import models.DBN as DBN
 from sklearn.preprocessing import minmax_scale
 from tool.imblearn.over_sampling import RandomOverSampler
 from ParsingSource import *
-from DBN_TrainAndTest import *
+from DBN_Test import *
 from Tools import *
 
 # -------Auxiliary method--------start
@@ -169,13 +169,13 @@ for path in path_train_and_test:
 
             # DBN
             model_name = 'DBN'
-            DBN_acc, DBN_auc, DBN_f1, DBN_mcc = DBN_train_test(model_name, c_train_x, c_test_x, train_label, test_label,
-                                                               train_hand_craft, test_hand_craft, DBN_acc, DBN_auc, DBN_f1, DBN_mcc)
+            DBN_acc, DBN_auc, DBN_f1, DBN_mcc = DBN_test(model_name, c_train_x, c_test_x, train_label, test_label,
+                                                         train_hand_craft, test_hand_craft, DBN_acc, DBN_auc, DBN_f1, DBN_mcc)
 
             # DPDBN
             model_name = 'DPDBN'
-            DPDBN_acc, DPDBN_auc, DPDBN_f1, DPDBN_mcc = DBN_train_test(model_name, c_train_x, c_test_x, train_label, test_label, train_hand_craft,
-                                                                    test_hand_craft, DPDBN_acc, DPDBN_auc, DPDBN_f1, DPDBN_mcc)
+            DPDBN_acc, DPDBN_auc, DPDBN_f1, DPDBN_mcc = DBN_test(model_name, c_train_x, c_test_x, train_label, test_label, train_hand_craft,
+                                                                 test_hand_craft, DPDBN_acc, DPDBN_auc, DPDBN_f1, DPDBN_mcc)
 
     # The result is calculated and stored in the file
     calculate_save_data('DBN', path[0], path[1], dbn_params, LOOP_SIZE, DBN_acc, DBN_auc, DBN_f1, DBN_mcc)

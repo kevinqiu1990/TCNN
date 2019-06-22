@@ -3,7 +3,7 @@ from sklearn.linear_model import LogisticRegression
 import numpy as np
 
 
-def DBN_train_test(model_name, train_x, test_x, train_label, test_label, train_hand_craft, test_hand_craft, acc, auc, f1, mcc):
+def DBN_test(model_name, train_x, test_x, train_label, test_label, train_hand_craft, test_hand_craft, acc, auc, f1, mcc):
     print(model_name + '------------ ')
     if model_name.startswith('DP'):
         print('做的DP')

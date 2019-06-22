@@ -8,7 +8,7 @@ import torch.nn as nn
 import MMD
 
 from tool.imblearn.over_sampling import RandomOverSampler
-from TCNN_TrainAndTest import *
+from TCNN_Test import *
 from ParsingSource import *
 from Tools import *
 
@@ -247,13 +247,13 @@ for path in path_train_and_test:
 
                 # TCNN
                 model_name = 'TCNN'
-                TCNN_acc, TCNN_auc, TCNN_f1, TCNN_mcc = TCNN_train_test(model_name, model, train_ast, test_ast, train_label, test_label, train_hand_craft,
-                                                                       test_hand_craft, TCNN_acc, TCNN_auc, TCNN_f1, TCNN_mcc)
+                TCNN_acc, TCNN_auc, TCNN_f1, TCNN_mcc = TCNN_test(model_name, model, train_ast, test_ast, train_label, test_label, train_hand_craft,
+                                                                  test_hand_craft, TCNN_acc, TCNN_auc, TCNN_f1, TCNN_mcc)
 
                 # DPTCNN
                 model_name = 'DPTCNN'
-                DPTCNN_acc, DPTCNN_auc, DPTCNN_f1, DPTCNN_mcc = TCNN_train_test(model_name, model, train_ast, test_ast, train_label, test_label, train_hand_craft,
-                                                                       test_hand_craft, DPTCNN_acc, DPTCNN_auc, DPTCNN_f1, DPTCNN_mcc)
+                DPTCNN_acc, DPTCNN_auc, DPTCNN_f1, DPTCNN_mcc = TCNN_test(model_name, model, train_ast, test_ast, train_label, test_label, train_hand_craft,
+                                                                          test_hand_craft, DPTCNN_acc, DPTCNN_auc, DPTCNN_f1, DPTCNN_mcc)
 
             # The result is calculated and stored in the file
             calculate_save_data('TCNN', path[0], path[1], nn_params, mmd_params, LOOP_SIZE, TCNN_acc, TCNN_auc, TCNN_f1, TCNN_mcc)

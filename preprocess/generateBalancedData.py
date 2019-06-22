@@ -1,4 +1,4 @@
-from CNN_TrainAndTest import *
+from CNN_Test import *
 from tool.imblearn.over_sampling import RandomOverSampler
 import time
 from Tools import *

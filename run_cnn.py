@@ -7,7 +7,7 @@ import models.CNN as CNN
 import torch.nn as nn
 
 from tool.imblearn.over_sampling import RandomOverSampler
-from CNN_TrainAndTest import *
+from CNN_Test import *
 from ParsingSource import *
 from Tools import *
 
@@ -222,13 +222,13 @@ for path in path_train_and_test:
 
                 # CNN
                 model_name = 'CNN'
-                CNN_acc, CNN_auc, CNN_f1, CNN_mcc = CNN_train_test(model_name, model, train_ast, test_ast, train_label, test_label, train_hand_craft,
-                                                                       test_hand_craft, CNN_acc, CNN_auc, CNN_f1, CNN_mcc)
+                CNN_acc, CNN_auc, CNN_f1, CNN_mcc = CNN_test(model_name, model, train_ast, test_ast, train_label, test_label, train_hand_craft,
+                                                             test_hand_craft, CNN_acc, CNN_auc, CNN_f1, CNN_mcc)
 
                 # DPCNN
                 model_name = 'DPCNN'
-                DPCNN_acc, DPCNN_auc, DPCNN_f1, DPCNN_mcc = CNN_train_test(model_name, model, train_ast, test_ast, train_label, test_label, train_hand_craft,
-                                                                       test_hand_craft, DPCNN_acc, DPCNN_auc, DPCNN_f1, DPCNN_mcc)
+                DPCNN_acc, DPCNN_auc, DPCNN_f1, DPCNN_mcc = CNN_test(model_name, model, train_ast, test_ast, train_label, test_label, train_hand_craft,
+                                                                     test_hand_craft, DPCNN_acc, DPCNN_auc, DPCNN_f1, DPCNN_mcc)
 
             # The result is calculated and stored in the file
             calculate_save_data('CNN', path[0], path[1], nn_params, LOOP_SIZE, CNN_acc, CNN_auc, CNN_f1, CNN_mcc)

@@ -7,9 +7,12 @@ import TCA
 
 
 def TCNN_train_test(model_name, model, train_ast, test_ast, train_label, test_label, train_hand_craft, test_hand_craft, acc, auc, f1, mcc):
-
     _, _, train_x, _, _ = model(train_ast, train_ast, train_ast)
     _, _, test_x, _, _ = model(test_ast, train_ast, train_ast)
+
+    import sys
+    print(sys.getsizeof(train_x))
+    print(sys.getsizeof(test_x))
 
     if type(train_x) is Tensor:
         train_x = train_x.data.cpu().numpy()

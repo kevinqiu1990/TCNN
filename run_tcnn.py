@@ -7,7 +7,7 @@ import models.TCNN as TCNN
 import torch.nn as nn
 import MMD
 
-from imblearn.over_sampling import RandomOverSampler
+from tool.imblearn.over_sampling import RandomOverSampler
 from TCNN_TrainAndTest import *
 from ParsingSource import *
 from Tools import *
@@ -230,7 +230,8 @@ for path in path_train_and_test:
                         criterion = nn.BCELoss().to(DEVICE)
                         batch_y = batch_y.float()
                         loss_c = criterion(y_score, batch_y)
-                        loss_mmd = MMD.mmd_loss(x_src_mmd, x_tar_mmd, mmd_params['MMD_GAMMA'])
+                        with torch.no_grad():
+                            loss_mmd = MMD.mmd_loss(x_src_mmd, x_tar_mmd, mmd_params['MMD_GAMMA'])
 
                         # Loss
                         loss = loss_c + mmd_params['MMD_LAMBDA'] * loss_mmd

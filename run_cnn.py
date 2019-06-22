@@ -6,7 +6,7 @@ import torch
 import models.CNN as CNN
 import torch.nn as nn
 
-from imblearn.over_sampling import RandomOverSampler
+from tool.imblearn.over_sampling import RandomOverSampler
 from CNN_TrainAndTest import *
 from ParsingSource import *
 from Tools import *

@@ -1169,7 +1169,7 @@
         <java-cup.version>0.0</java-cup.version>
         <JLex.version>0.0</JLex.version>
         <!-- misc -->
-        <junit.version>3.8.2</junit.version>
+        <junit.version>4.13.1</junit.version>
         <log4j.version>1.2.13</log4j.version>
         <xmlunit.version>1.1</xmlunit.version>
         <derby.version>10.1.1.0</derby.version>

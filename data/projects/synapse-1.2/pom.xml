@@ -1146,7 +1146,7 @@
         <backport_util_concurrent.version>2.2</backport_util_concurrent.version>
 
         <!-- addressing, rampart, neethi -->
-        <addressing.version>1.4</addressing.version>
+        <addressing.version>1.41</addressing.version>
         <rampart.version>1.4</rampart.version>
         <mercury.version>0.91</mercury.version>
         <neethi.version>2.0.4</neethi.version>
@@ -1236,7 +1236,7 @@
             <name>Davanum Srinivas</name>
             <id>dims</id>
             <email>davanum@gmail.com</email>
-            <organization></organization>
+            <organization/>
         </developer>
         <developer>
             <name>Sanjiva Weerawarana</name>

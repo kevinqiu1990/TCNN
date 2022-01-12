@@ -72,7 +72,7 @@
     <dependency>
       <groupId>org.igniterealtime.smack</groupId>
       <artifactId>smackx</artifactId>
-      <version>3.0.4</version>
+      <version>3.2.1</version>
     </dependency>
     <!-- to allow Spring annotations (jmx) to be tested -->
     <dependency>

@@ -1155,7 +1155,7 @@
         <xmlsec.version>1.4.0</xmlsec.version>
         <bcprov.jdk15.version>132</bcprov.jdk15.version>
 
-        <xerces.version>2.8.1</xerces.version>
+        <xerces.version>2.12.2</xerces.version>
         <xalan.version>2.7.0</xalan.version>
         <js.version>1.6R5</js.version>
 

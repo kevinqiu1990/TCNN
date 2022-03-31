@@ -1181,7 +1181,7 @@
         <wso2commons.version>1.2</wso2commons.version>
         <wso2caching.version>1.6.1</wso2caching.version>
         <wso2throttle.version>1.6</wso2throttle.version>
-        <spring.version>1.2.8</spring.version>
+        <spring.version>5.3.18</spring.version>
         <springws.version>1.0.3</springws.version>
         <xbean.version>2.2.0</xbean.version>
         <bsf.version>3.0-beta2</bsf.version>

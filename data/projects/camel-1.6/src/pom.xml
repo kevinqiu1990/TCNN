@@ -65,7 +65,7 @@
     <commons-collections-version>3.2.1</commons-collections-version>
     <commons-pool-version>1.4</commons-pool-version>
     <commons-dbcp-version>1.2.2</commons-dbcp-version>
-    <derby-version>10.4.2.0</derby-version>
+    <derby-version>10.14.2.0</derby-version>
     <easymock-version>2.4</easymock-version>
     <hamcrest-version>1.2-dev1</hamcrest-version>
     <hibernate-version>3.2.6.ga</hibernate-version>

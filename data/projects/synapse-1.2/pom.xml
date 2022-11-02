@@ -1182,7 +1182,7 @@
         <wso2caching.version>1.6.1</wso2caching.version>
         <wso2throttle.version>1.6</wso2throttle.version>
         <spring.version>1.2.8</spring.version>
-        <springws.version>1.0.3</springws.version>
+        <springws.version>3.1.4</springws.version>
         <xbean.version>2.2.0</xbean.version>
         <bsf.version>3.0-beta2</bsf.version>
         <groovy.version>1.0</groovy.version>
@@ -1236,7 +1236,7 @@
             <name>Davanum Srinivas</name>
             <id>dims</id>
             <email>davanum@gmail.com</email>
-            <organization></organization>
+            <organization/>
         </developer>
         <developer>
             <name>Sanjiva Weerawarana</name>

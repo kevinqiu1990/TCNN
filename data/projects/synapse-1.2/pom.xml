@@ -1164,7 +1164,7 @@
         <quartz.version>1.6.0</quartz.version>
 
         <!-- xalan xsltc  -->
-        <bcel.version>5.2</bcel.version>
+        <bcel.version>6.6.0</bcel.version>
         <regexp.version>1.4</regexp.version>
         <java-cup.version>0.0</java-cup.version>
         <JLex.version>0.0</JLex.version>
@@ -1236,7 +1236,7 @@
             <name>Davanum Srinivas</name>
             <id>dims</id>
             <email>davanum@gmail.com</email>
-            <organization></organization>
+            <organization/>
         </developer>
         <developer>
             <name>Sanjiva Weerawarana</name>
